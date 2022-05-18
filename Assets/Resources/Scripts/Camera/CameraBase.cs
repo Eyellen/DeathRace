@@ -8,12 +8,11 @@ public class CameraBase : MonoBehaviour
 
     [SerializeField] private Transform _target;
     [SerializeField] private Vector3 _cameraOffset;
-    [SerializeField] float _distanceToTarget;
     [SerializeField] private Vector2 _sensitivity;
 
+    private Vector3 _currentCameraOffset;
     private float _xRotation;
     private float _yRotation;
-    private Transform _cameraAnchor;
 
     private void Awake()
     {
@@ -22,13 +21,14 @@ public class CameraBase : MonoBehaviour
 
     private void Start()
     {
-        InitializeCamera();
+
     }
 
     private void LateUpdate()
     {
-        HandleFollowing();
         HandleRotation();
+        HandleFollowing();
+        Debug.DrawLine(_target.position, _target.position + _currentCameraOffset);
     }
 
     private void HandleRotation()
@@ -39,19 +39,12 @@ public class CameraBase : MonoBehaviour
         _yRotation = Mathf.Clamp(_yRotation, -90f, 90f);
         Quaternion rotation = Quaternion.Euler(-_yRotation, _xRotation, 0);
 
-        _cameraAnchor.rotation = rotation;
+        _camera.rotation = rotation;
+        _currentCameraOffset = rotation * _cameraOffset;
     }
 
     private void HandleFollowing()
     {
-        //_camera.position = _target.position + _cameraOffset;
-        _cameraAnchor.position = _target.position;
-    }
-
-    private void InitializeCamera()
-    {
-        _cameraAnchor = new GameObject("CameraAnchor").transform;
-        _camera.parent = _cameraAnchor;
-        _camera.localPosition = _cameraOffset;
+        _camera.position = _target.position + _currentCameraOffset;
     }
 }
