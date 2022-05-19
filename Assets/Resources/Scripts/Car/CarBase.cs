@@ -31,7 +31,7 @@ public class CarBase : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         //_rigidbody.centerOfMass = _centreOfMass.localPosition;
-        _input = GetComponent<PlayerInput>();
+        _input = PlayerInput.Instance;
     }
 
     void Start()

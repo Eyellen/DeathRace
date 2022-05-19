@@ -4,17 +4,26 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
+    public static PlayerInput Instance { get; private set; }
+
     // Bool
     public bool IsForwardPressed { get; private set; }
     public bool IsBackwardPressed { get; private set; }
     public bool IsRightPressed { get; private set; }
     public bool IsLeftPressed { get; private set; }
     public bool IsSpacePressed { get; private set; }
+    public bool IsRightActionPressed { get; private set; }
+    public bool IsLeftActionPressed { get; private set; }
 
     // Float
     public float HorizontalAxis { get; private set; }
     public float VerticalAxis { get; private set; }
     public float Brake { get; private set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     void Update()
     {
@@ -23,34 +32,16 @@ public class PlayerInput : MonoBehaviour
 
     private void HandleInput()
     {
-        // Zeroing values
-        IsForwardPressed = false;
-        IsBackwardPressed = false;
-        IsRightPressed = false;
-        IsLeftPressed = false;
-        IsSpacePressed = false;
-
         // Input
-        if (Input.GetKey(KeyCode.W))
-        {
-            IsForwardPressed = true;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            IsBackwardPressed = true;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            IsRightPressed = true;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            IsLeftPressed = true;
-        }
-        if (Input.GetKey(KeyCode.Space))
-        {
-            IsSpacePressed = true;
-        }
+        IsForwardPressed = Input.GetKey(KeyCode.W);
+        IsBackwardPressed = Input.GetKey(KeyCode.S);
+        IsRightPressed = Input.GetKey(KeyCode.D);
+        IsLeftPressed = Input.GetKey(KeyCode.A);
+        IsSpacePressed = Input.GetKey(KeyCode.Space);
+
+        IsRightActionPressed = Input.GetMouseButton(1);
+        IsLeftActionPressed = Input.GetMouseButton(0);
+
         HorizontalAxis = Input.GetAxisRaw("Horizontal");
         VerticalAxis = Input.GetAxisRaw("Vertical");
         Brake = Input.GetAxisRaw("Brake");
