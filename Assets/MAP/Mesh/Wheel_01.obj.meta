@@ -1,9 +1,24 @@
 fileFormatVersion: 2
-guid: 2153d314aba95b14e8eb550bbe11d3e1
+guid: a7c877ed3bd5c1447805227f110a61b9
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cylinder.015_Cylinder.020_Metalik.003Mat
+    second: {fileID: 2100000, guid: bb557b274b9356647ac233a58a2ae11c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cylinder.015_Cylinder.020_metalik_2.003Mat
+    second: {fileID: 2100000, guid: 103fca21176cb1f4d9a2fb23625616e0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cylinder.015_Cylinder.020_tire.003Mat
+    second: {fileID: 2100000, guid: 82663ae64ebc88b4f89bd7f36a0eb976, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
