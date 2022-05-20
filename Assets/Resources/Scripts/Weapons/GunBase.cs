@@ -52,7 +52,10 @@ public class GunBase : MonoBehaviour
         _audioSource.clip = _shootSound;
         _audioSource.Play();
 
-        if (!Physics.Raycast(_shotPoint.position, _thisTransform.forward, out RaycastHit hitInfo, _shotDistance)) return;
+        Vector3 shootSpread = new Vector3(Random.Range(-1f, 1f) * _spread, Random.Range(-1f, 1f) * _spread, 0);
+        Ray ray = new Ray(_shotPoint.position, _thisTransform.forward + shootSpread / 100);
+        Debug.DrawRay(ray.origin, ray.direction * _shotDistance, Color.blue, 0.1f);
+        if (!Physics.Raycast(ray, out RaycastHit hitInfo, _shotDistance)) return;
 
         Debug.Log(hitInfo.transform.name);//
         if (!hitInfo.transform.TryGetComponent<IDamageable>(out IDamageable target)) return;
