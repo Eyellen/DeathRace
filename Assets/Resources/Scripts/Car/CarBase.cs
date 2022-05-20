@@ -41,7 +41,7 @@ public class CarBase : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        //_rigidbody.centerOfMass = _centreOfMass.localPosition;
+        _rigidbody.centerOfMass = _centreOfMass.localPosition;
         _input = PlayerInput.Instance;
     }
 
