@@ -38,6 +38,12 @@ public class CarBase : MonoBehaviour
     [Header("Wheels")]
     [SerializeField] protected Axel[] _axels;
 
+    public delegate void EngineWorkEvent(float rpm);
+    public event EngineWorkEvent OnEngineWork;
+
+    public delegate void WheelSlipEvent(WheelHit hitInfo);
+    public event WheelSlipEvent OnWheelSlip;
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -49,6 +55,9 @@ public class CarBase : MonoBehaviour
     {
         HandleInput();
         UpdateWheelVisuals();
+        CarEventHandler();
+
+        //Debug.Log(_axels[0].RightWheel.Collider.rpm);
     }
 
     private void HandleInput()
@@ -58,6 +67,7 @@ public class CarBase : MonoBehaviour
 
         // Braking
         HandleBrake(_input.Brake * _brakeForce);
+        ApplyEngineBraking((Mathf.Abs(_input.VerticalAxis) >= 0.1f), (Mathf.Abs(_input.Brake) >= 0.1f));
 
         // Steering
         HandleSteering(_input.HorizontalAxis * _maxSteerAngle);
@@ -88,6 +98,15 @@ public class CarBase : MonoBehaviour
         }
     }
 
+    private void ApplyEngineBraking(bool isRavs, bool isBraking)
+    {
+        //if (isRavs) return;
+        //if (isBraking) return;
+
+        //_rigidbody.velocity = _rigidbody.velocity.normalized * Mathf.Lerp(0, _rigidbody.velocity.magnitude, 0.99f);
+        //Debug.Log("Engine Braking is being applied !");
+    }
+
     private void HandleSteering(float steer)
     {
         foreach (var axel in _axels)
@@ -108,6 +127,7 @@ public class CarBase : MonoBehaviour
             UpdateSingleWheel(axel.LeftWheel.Collider, axel.LeftWheel.Transform);
         }
     }
+
     private void UpdateSingleWheel(WheelCollider wheelCollider, Transform wheel)
     {
         Vector3 position;
@@ -115,5 +135,18 @@ public class CarBase : MonoBehaviour
         wheelCollider.GetWorldPose(out position, out rotation);
         wheel.position = position;
         wheel.rotation = rotation;
+    }
+
+    private void CarEventHandler()
+    {
+        foreach (var axel in _axels)
+        {
+            OnEngineWork?.Invoke(axel.RightWheel.Collider.rpm);
+            WheelHit hitInfo;
+            if (axel.RightWheel.Collider.GetGroundHit(out hitInfo) || axel.LeftWheel.Collider.GetGroundHit(out hitInfo))
+            {
+                OnWheelSlip?.Invoke(hitInfo);
+            }
+        }
     }
 }

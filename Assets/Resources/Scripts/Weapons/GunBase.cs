@@ -15,19 +15,16 @@ public class GunBase : MonoBehaviour
     [SerializeField] protected float _timeBetweenShots;
     [SerializeField] protected float _reloadTime;
     [SerializeField] protected int _magazineSize;
+    [SerializeField] protected int _maxAmmoSupply;
 
-    protected AudioSource _audioSource;
-    [SerializeField] protected AudioClip _shootSound;
-    [SerializeField] protected AudioClip _reloadSound;
-
-    protected int _currentBulletsCount;
     protected float _lastShotTime;
+    protected int _currentBulletsCount;
+    protected int _currentAmmoSupply;
 
     private void Awake()
     {
         _thisTransform = GetComponent<Transform>();
         _input = PlayerInput.Instance;
-        _audioSource = GetComponent<AudioSource>();
     }
 
     protected void Start()
@@ -46,20 +43,27 @@ public class GunBase : MonoBehaviour
 
     protected void Shoot()
     {
+        if(_currentBulletsCount <= 0)
+        {
+            Reload();
+        }
+
         if (Time.time <= _lastShotTime + _timeBetweenShots) return;
         _lastShotTime = Time.time;
-
-        _audioSource.clip = _shootSound;
-        _audioSource.Play();
 
         Vector3 shootSpread = new Vector3(Random.Range(-1f, 1f) * _spread, Random.Range(-1f, 1f) * _spread, 0);
         Ray ray = new Ray(_shotPoint.position, _thisTransform.forward + shootSpread / 100);
         Debug.DrawRay(ray.origin, ray.direction * _shotDistance, Color.blue, 0.1f);
         if (!Physics.Raycast(ray, out RaycastHit hitInfo, _shotDistance)) return;
 
-        Debug.Log(hitInfo.transform.name);//
+        //Debug.Log(hitInfo.transform.name);//
         if (!hitInfo.transform.TryGetComponent<IDamageable>(out IDamageable target)) return;
 
         target.Damage(_damage);
+    }
+
+    protected void Reload()
+    {
+
     }
 }
