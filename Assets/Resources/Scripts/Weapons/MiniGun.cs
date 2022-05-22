@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MiniGun : MonoBehaviour
+public class Minigun : MonoBehaviour
 {
     private Transform _thisTransform;
     private PlayerInput _input;
@@ -15,71 +15,87 @@ public class MiniGun : MonoBehaviour
     [SerializeField] private float _shotDistance;
     [SerializeField] private float _spread;
     [SerializeField] private float _timeBetweenShots;
-    [SerializeField] private float _barrelsSpinningTime;
-    [SerializeField] private int _maxAmmoSupply;
-
     private float _lastShotTime;
+    [SerializeField] private float _barrelsSpinningTime;
+    private float _spinningTimePassed;
+    private bool _isSpinning;
+    [SerializeField] private float _maxSpinningSpeed;
+    private float _currentSpinningSpeed;
+    [SerializeField] private int _maxAmmoSupply;
     private int _currentAmmoSupply;
 
-    private float _spinningStartTime;
-    private bool _isSpinning;
-
-    private float _currentSpinningSpeed;
-    private float _currentSpinningSpeedTarget;
-    [SerializeField] private float _maxSpinningSpeed;
-
-    [SerializeField] private bool RotateBarrels;
+    #region Properties
+    public bool IsSpinning { get => _isSpinning; }
+    public bool IsShooting { get; private set; }
+    #endregion
 
     private void Awake()
     {
         _thisTransform = GetComponent<Transform>();
         _input = PlayerInput.Instance;
+
+        _currentAmmoSupply = _maxAmmoSupply;
     }
 
     private void Update()
     {
-        //BarrelsSpinning(_input.IsLeftActionPressed);
-        SpinBarrels(RotateBarrels);
+        SpinBarrels(_input.IsLeftActionPressed);
         Debug.DrawRay(_shotPoint.position, _thisTransform.forward * _shotDistance, Color.red);
     }
 
     private void SpinBarrels(bool isActionOccurs)
     {
-        _currentSpinningSpeed = Mathf.Lerp(_currentSpinningSpeed, _currentSpinningSpeedTarget, 0.5f * Time.deltaTime);
+        IsShooting = false;
+        _currentSpinningSpeed = Mathf.Lerp(0, _maxSpinningSpeed, _spinningTimePassed / _barrelsSpinningTime);
         _minigun.Rotate(Vector3.forward, _currentSpinningSpeed * Time.deltaTime);
+        //Debug.Log(_spinningTimePassed);
+        //Debug.Log(_currentSpinningSpeed);
 
         if (!isActionOccurs)
         {
             _isSpinning = false;
-            _currentSpinningSpeedTarget = 0;
+            _spinningTimePassed = Mathf.Clamp(_spinningTimePassed - Time.deltaTime, 0, _barrelsSpinningTime);
             return;
         }
 
         if(!_isSpinning)
         {
             _isSpinning = true;
-            _spinningStartTime = Time.time;
-            _currentSpinningSpeedTarget = _maxSpinningSpeed;
         }
+        _spinningTimePassed = Mathf.Clamp(_spinningTimePassed + Time.deltaTime, 0, _barrelsSpinningTime);
 
-        if (Time.time <= _spinningStartTime + _barrelsSpinningTime) return;
+        if (_currentSpinningSpeed != _maxSpinningSpeed) return;
 
         Shoot();
     }
 
     private void Shoot()
     {
+        IsShooting = true;
+        if (_currentAmmoSupply <= 0)
+        {
+            IsShooting = false;
+            return;
+        }
+
         if (Time.time <= _lastShotTime + _timeBetweenShots) return;
         _lastShotTime = Time.time;
+        _currentAmmoSupply--;
 
-        Vector3 shootSpread = new Vector3(Random.Range(-1f, 1f) * _spread, Random.Range(-1f, 1f) * _spread, 0);
-        Ray ray = new Ray(_shotPoint.position, _thisTransform.forward + shootSpread / 100);
+        Ray ray = new Ray(_shotPoint.position, _thisTransform.forward);
+        ray = AddSpread(ray, _spread);
         Debug.DrawRay(ray.origin, ray.direction * _shotDistance, Color.blue, 0.1f);
         if (!Physics.Raycast(ray, out RaycastHit hitInfo, _shotDistance)) return;
 
-        Debug.Log(hitInfo.transform.name);//
         if (!hitInfo.transform.TryGetComponent<IDamageable>(out IDamageable target)) return;
 
         target.Damage(_damage);
+    }
+
+    private Ray AddSpread(Ray ray, float spreadValue)
+    {
+        Vector3 spread = new Vector3(Random.Range(-1f, 1f) * spreadValue, Random.Range(-1f, 1f) * spreadValue, 0);
+        ray.direction += spread / 100;
+        return ray;
     }
 }

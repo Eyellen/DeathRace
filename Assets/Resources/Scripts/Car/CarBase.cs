@@ -12,7 +12,7 @@ public class CarBase : MonoBehaviour
         public WheelCollider Collider;
     }
     public enum AxelLocation
-    { 
+    {
         Front,
         Rear
     }
@@ -38,11 +38,81 @@ public class CarBase : MonoBehaviour
     [Header("Wheels")]
     [SerializeField] protected Axel[] _axels;
 
-    public delegate void EngineWorkEvent(float rpm);
-    public event EngineWorkEvent OnEngineWork;
+    #region Properties
+    public bool IsGrounded
+    {
+        get
+        {
+            foreach (var axel in _axels)
+            {
+                if (axel.RightWheel.Collider.isGrounded || axel.LeftWheel.Collider.isGrounded) return true;
+            }
+            return false;
+        }
+    }
+    public float Rpm
+    {
+        get
+        {
+            float rpm = 0;
+            int wheelsSchecked = 0;
+            foreach (var axel in _axels)
+            {
+                rpm += axel.RightWheel.Collider.rpm + axel.LeftWheel.Collider.rpm;
+                wheelsSchecked += 2;
+            }
+            return rpm / wheelsSchecked;
+        }
+    }
+    public float SidewaysSlip
+    {
+        get
+        {
+            float slip = 0;
+            int wheelsChecked = 0;
 
-    public delegate void WheelSlipEvent(WheelHit hitInfo);
-    public event WheelSlipEvent OnWheelSlip;
+            WheelHit hitInfo;
+            foreach (var axel in _axels)
+            {
+                if (axel.RightWheel.Collider.GetGroundHit(out hitInfo))
+                {
+                    slip += hitInfo.sidewaysSlip;
+                    wheelsChecked++;
+                }
+                if (axel.LeftWheel.Collider.GetGroundHit(out hitInfo))
+                {
+                    slip += hitInfo.sidewaysSlip;
+                    wheelsChecked++;
+                }
+            }
+            return slip / wheelsChecked;
+        }
+    }
+    public float ForwardSlip
+    {
+        get
+        {
+            float slip = 0;
+            int wheelsChecked = 0;
+
+            WheelHit hitInfo;
+            foreach (var axel in _axels)
+            {
+                if (axel.RightWheel.Collider.GetGroundHit(out hitInfo))
+                {
+                    slip += hitInfo.forwardSlip;
+                    wheelsChecked++;
+                }
+                if (axel.LeftWheel.Collider.GetGroundHit(out hitInfo))
+                {
+                    slip += hitInfo.forwardSlip;
+                    wheelsChecked++;
+                }
+            }
+            return slip / wheelsChecked;
+        }
+    }
+    #endregion
 
     private void Awake()
     {
@@ -55,9 +125,8 @@ public class CarBase : MonoBehaviour
     {
         HandleInput();
         UpdateWheelVisuals();
-        CarEventHandler();
 
-        //Debug.Log(_axels[0].RightWheel.Collider.rpm);
+        Debug.Log(Rpm);
     }
 
     private void HandleInput()
@@ -135,18 +204,5 @@ public class CarBase : MonoBehaviour
         wheelCollider.GetWorldPose(out position, out rotation);
         wheel.position = position;
         wheel.rotation = rotation;
-    }
-
-    private void CarEventHandler()
-    {
-        foreach (var axel in _axels)
-        {
-            OnEngineWork?.Invoke(axel.RightWheel.Collider.rpm);
-            WheelHit hitInfo;
-            if (axel.RightWheel.Collider.GetGroundHit(out hitInfo) || axel.LeftWheel.Collider.GetGroundHit(out hitInfo))
-            {
-                OnWheelSlip?.Invoke(hitInfo);
-            }
-        }
     }
 }
