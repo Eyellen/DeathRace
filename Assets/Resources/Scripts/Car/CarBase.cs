@@ -5,27 +5,6 @@ using UnityEngine;
 
 public class CarBase : MonoBehaviour
 {
-    [Serializable]
-    public class Wheel
-    {
-        public Transform Transform;
-        public WheelCollider Collider;
-    }
-    public enum AxelLocation
-    {
-        Front,
-        Rear
-    }
-    [Serializable]
-    public class Axel
-    {
-        public AxelLocation AxelLocation;
-        public bool IsDriveWheel;
-        [Range(0, 1)] public float BrakesInfluence;
-        public Wheel RightWheel;
-        public Wheel LeftWheel;
-    }
-
     private Rigidbody _rigidbody;
     private PlayerInput _input;
 
@@ -124,9 +103,6 @@ public class CarBase : MonoBehaviour
     private void FixedUpdate()
     {
         HandleInput();
-        UpdateWheelVisuals();
-
-        Debug.Log(Rpm);
     }
 
     private void HandleInput()
@@ -136,7 +112,6 @@ public class CarBase : MonoBehaviour
 
         // Braking
         HandleBrake(_input.Brake * _brakeForce);
-        ApplyEngineBraking((Mathf.Abs(_input.VerticalAxis) >= 0.1f), (Mathf.Abs(_input.Brake) >= 0.1f));
 
         // Steering
         HandleSteering(_input.HorizontalAxis * _maxSteerAngle);
@@ -186,23 +161,5 @@ public class CarBase : MonoBehaviour
                 axel.LeftWheel.Collider.steerAngle = Mathf.Lerp(axel.LeftWheel.Collider.steerAngle, steer, 0.5f);
             }
         }
-    }
-
-    private void UpdateWheelVisuals()
-    {
-        foreach (var axel in _axels)
-        {
-            UpdateSingleWheel(axel.RightWheel.Collider, axel.RightWheel.Transform);
-            UpdateSingleWheel(axel.LeftWheel.Collider, axel.LeftWheel.Transform);
-        }
-    }
-
-    private void UpdateSingleWheel(WheelCollider wheelCollider, Transform wheel)
-    {
-        Vector3 position;
-        Quaternion rotation;
-        wheelCollider.GetWorldPose(out position, out rotation);
-        wheel.position = position;
-        wheel.rotation = rotation;
     }
 }
