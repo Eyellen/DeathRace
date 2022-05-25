@@ -43,50 +43,34 @@ public class CarBase : MonoBehaviour
             return rpm / wheelsSchecked;
         }
     }
-    public float SidewaysSlip
+    public float MeanSidewaysSlip
     {
         get
         {
             float slip = 0;
             int wheelsChecked = 0;
 
-            WheelHit hitInfo;
             foreach (var axel in _axels)
             {
-                if (axel.RightWheel.Collider.GetGroundHit(out hitInfo))
-                {
-                    slip += hitInfo.sidewaysSlip;
-                    wheelsChecked++;
-                }
-                if (axel.LeftWheel.Collider.GetGroundHit(out hitInfo))
-                {
-                    slip += hitInfo.sidewaysSlip;
-                    wheelsChecked++;
-                }
+                slip += axel.RightWheel.SidewaysSlip;
+                slip += axel.LeftWheel.SidewaysSlip;
+                wheelsChecked += 2;
             }
             return slip / wheelsChecked;
         }
     }
-    public float ForwardSlip
+    public float MeanForwardSlip
     {
         get
         {
             float slip = 0;
             int wheelsChecked = 0;
 
-            WheelHit hitInfo;
             foreach (var axel in _axels)
             {
-                if (axel.RightWheel.Collider.GetGroundHit(out hitInfo))
-                {
-                    slip += hitInfo.forwardSlip;
-                    wheelsChecked++;
-                }
-                if (axel.LeftWheel.Collider.GetGroundHit(out hitInfo))
-                {
-                    slip += hitInfo.forwardSlip;
-                    wheelsChecked++;
-                }
+                slip += axel.RightWheel.ForwardSlip;
+                slip += axel.LeftWheel.ForwardSlip;
+                wheelsChecked += 2;
             }
             return slip / wheelsChecked;
         }
