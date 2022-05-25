@@ -51,7 +51,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 82663ae64ebc88b4f89bd7f36a0eb976, type: 2}
+  - {fileID: 2100000, guid: 5faa1bced84ee7c48b496319baf78af8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -221,7 +221,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44fbe33ab6cd1794587ed1686a6f4d06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _wheel: {fileID: 4296532620773524900}
   _tireMark: {fileID: 7079242167102268336}
   _forwardSlipThreshold: 0.5
   _sidewaysSlipThreshold: 0.5

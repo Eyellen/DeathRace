@@ -9,7 +9,7 @@ public class MinigunEffects : MonoBehaviour
 
     [Header("Shotfire particles")]
     [SerializeField] private ParticleSystem[] _shorfireParticles;
-    private bool _isEShotfiremitting;
+    private bool _isShotfirEmitting;
 
     [Header("Bullet cartridge particles")]
     [SerializeField] private GameObject _bulletCartridgeParticlesPrefab;
@@ -19,6 +19,9 @@ public class MinigunEffects : MonoBehaviour
 
     [Header("Bullet tracer effect")]
     [SerializeField] private GameObject _bulletTracerPrefab;
+
+    [Header("Hit impact")]
+    [SerializeField] private GameObject _hitImpactPrefab;
 
     void Start()
     {
@@ -35,9 +38,9 @@ public class MinigunEffects : MonoBehaviour
 
     private void ShootEffect()
     {
-        if(_minigun.IsShooting && !_isEShotfiremitting)
+        if(_minigun.IsShooting && !_isShotfirEmitting)
         {
-            _isEShotfiremitting = true;
+            _isShotfirEmitting = true;
             foreach (var particle in _shorfireParticles)
             {
                 var emission = particle.emission;
@@ -45,9 +48,9 @@ public class MinigunEffects : MonoBehaviour
             }
         }
 
-        if(!_minigun.IsShooting && _isEShotfiremitting)
+        if(!_minigun.IsShooting && _isShotfirEmitting)
         {
-            _isEShotfiremitting = false;
+            _isShotfirEmitting = false;
             foreach (var particle in _shorfireParticles)
             {
                 var emission = particle.emission;
@@ -70,9 +73,17 @@ public class MinigunEffects : MonoBehaviour
     {
         if(Physics.Linecast(shotPoint, destination, out RaycastHit hitInfo))
         {
+            SpawnHitParticles(hitInfo);
+
             destination = hitInfo.point;
         }
         GameObject tracer = Instantiate(_bulletTracerPrefab, shotPoint, Quaternion.identity);
         tracer.GetComponent<BulletTracer>().Destination = destination;
+    }
+
+    private void SpawnHitParticles(RaycastHit hitInfo)
+    {
+        var hitParticle = Instantiate(_hitImpactPrefab, hitInfo.point, Quaternion.identity);
+        hitParticle.transform.LookAt(hitInfo.point + hitInfo.normal);
     }
 }
