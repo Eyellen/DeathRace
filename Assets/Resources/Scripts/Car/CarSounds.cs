@@ -19,7 +19,7 @@ public class CarSounds : MonoBehaviour
     void Update()
     {
         EngineSound(_car.Rpm);
-        WheelSlipSound(_car.ForwardSlip, _car.SidewaysSlip);
+        WheelSlipSound(_car.MeanForwardSlip, _car.MeanSidewaysSlip);
     }
 
     private void EngineSound(float rpm)

@@ -1,23 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CarDamageable : MonoBehaviour, IDamageable
 {
     [SerializeField] private int _health;
+    [SerializeField] private GameObject _destroyedCar;
 
     public void Damage(int damage)
     {
-        _health = (_health - damage >= 0) ? _health - damage : 0;
+        if (_health <= 0) return;
 
-        if (_health <= 0) Die();
+        _health -= damage;
 
-        Debug.Log(transform.name + " damaged by " + damage.ToString());
-        Debug.Log("current health is " + _health.ToString());
+        if (_health > 0) return;
+
+        Destruct();
     }
 
-    private void Die()
+    private void Destruct()
     {
+        var destroyedCar = Instantiate(_destroyedCar, transform.position, transform.rotation);
+        destroyedCar.GetComponent<Rigidbody>().velocity = gameObject.GetComponent<Rigidbody>().velocity;
         Destroy(gameObject);
     }
 }

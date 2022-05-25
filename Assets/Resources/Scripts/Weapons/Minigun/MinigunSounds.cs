@@ -23,15 +23,11 @@ public class MinigunSounds : MonoBehaviour
 
     [Header("Shooting sounds")]
     [SerializeField] private AudioSource _minigunShootSource;
-    private ClipStates _shootState;
-    [SerializeField] private AudioClip _startShoot;
     [SerializeField] private AudioClip _shootLoop;
-    [SerializeField] private AudioClip _stopShoot;
 
     void Start()
     {
         _spinState = ClipStates.None;
-        _shootState = ClipStates.None;
     }
 
 
