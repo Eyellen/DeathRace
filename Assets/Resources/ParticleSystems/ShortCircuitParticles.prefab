@@ -56,6 +56,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1141391362293187853, guid: 419d391c94f21dc40acf29d764b73cd9, type: 3}
+      propertyPath: LightsModule.maxLights
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1141391362293187853, guid: 419d391c94f21dc40acf29d764b73cd9, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].probability
       value: 0.5
       objectReference: {fileID: 0}

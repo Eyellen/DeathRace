@@ -5,6 +5,7 @@ using UnityEngine;
 public class DestroyedCar : MonoBehaviour
 {
     private Rigidbody _rigidbody;
+    private GameObject _backPlate;
 
     [SerializeField] private List<Wheel> _wheels;
 
@@ -39,11 +40,5 @@ public class DestroyedCar : MonoBehaviour
         int z = Random.Range(-1, 1);
         Vector3 impactPoint = transform.position + new Vector3(x, 0, z);
         _rigidbody.AddForceAtPosition(Vector3.up * _explosionForce, impactPoint, ForceMode.VelocityChange);
-        PeelOffWheels();
-    }
-
-    private void PeelOffWheels()
-    {
-
     }
 }

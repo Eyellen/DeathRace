@@ -1,9 +1,12 @@
 using UnityEngine;
 
-public class CarDamageable : MonoBehaviour, IDamageable
+public class CarDamageable : MonoBehaviour, IDamageable<int>
 {
     [SerializeField] private int _health;
-    [SerializeField] private GameObject _destroyedCar;
+    [SerializeField] private GameObject _currentCar;
+    [SerializeField] private GameObject _destroyedCarPrefab;
+
+    public int Health { get => _health; }
 
     public void Damage(int damage)
     {
@@ -18,8 +21,8 @@ public class CarDamageable : MonoBehaviour, IDamageable
 
     private void Destruct()
     {
-        var destroyedCar = Instantiate(_destroyedCar, transform.position, transform.rotation);
-        destroyedCar.GetComponent<Rigidbody>().velocity = gameObject.GetComponent<Rigidbody>().velocity;
-        Destroy(gameObject);
+        var destroyedCar = Instantiate(_destroyedCarPrefab, transform.position, transform.rotation);
+        destroyedCar.GetComponent<Rigidbody>().velocity = _currentCar.GetComponent<Rigidbody>().velocity;
+        Destroy(_currentCar);
     }
 }

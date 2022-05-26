@@ -91,7 +91,7 @@ public class Minigun : MonoBehaviour
         Debug.DrawRay(ray.origin, ray.direction * _shotDistance, Color.blue, 0.1f);
         if (!Physics.Raycast(ray, out RaycastHit hitInfo, _shotDistance)) return;
 
-        if (!hitInfo.transform.TryGetComponent<IDamageable>(out IDamageable target)) return;
+        if (!hitInfo.collider.TryGetComponent(out IDamageable<int> target)) return;
 
         target.Damage(_damage);
     }

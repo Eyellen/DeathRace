@@ -179,6 +179,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 215061806860539703, guid: c7a2a7a9f9f9fc24aad6c6a69744301a, type: 3}
+      propertyPath: _plateMass
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 268290747069979850, guid: c7a2a7a9f9f9fc24aad6c6a69744301a, type: 3}
       propertyPath: _minigun
       value: 
@@ -287,6 +291,7 @@ PrefabInstance:
     - {fileID: 6163176469997286611, guid: c7a2a7a9f9f9fc24aad6c6a69744301a, type: 3}
     - {fileID: 274753051490174542, guid: c7a2a7a9f9f9fc24aad6c6a69744301a, type: 3}
     - {fileID: 3149288177890521120, guid: c7a2a7a9f9f9fc24aad6c6a69744301a, type: 3}
+    - {fileID: 8732295925541083336, guid: c7a2a7a9f9f9fc24aad6c6a69744301a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c7a2a7a9f9f9fc24aad6c6a69744301a, type: 3}
 --- !u!1 &8680945509905380589 stripped
 GameObject:
