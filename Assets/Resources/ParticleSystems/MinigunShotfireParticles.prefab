@@ -41,11 +41,19 @@ PrefabInstance:
     m_TransformParent: {fileID: 7261668132239437172}
     m_Modifications:
     - target: {fileID: 1698790174557280480, guid: cd9a42b7cab03dd4d9542bd495873339, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1698790174557280480, guid: cd9a42b7cab03dd4d9542bd495873339, type: 3}
       propertyPath: ShapeModule.type
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1698790174557280480, guid: cd9a42b7cab03dd4d9542bd495873339, type: 3}
       propertyPath: ShapeModule.arc.mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1698790174557280480, guid: cd9a42b7cab03dd4d9542bd495873339, type: 3}
+      propertyPath: EmissionModule.enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1698790174557280480, guid: cd9a42b7cab03dd4d9542bd495873339, type: 3}
@@ -335,11 +343,19 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1698790174557280480, guid: cd9a42b7cab03dd4d9542bd495873339, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1698790174557280480, guid: cd9a42b7cab03dd4d9542bd495873339, type: 3}
       propertyPath: ShapeModule.type
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1698790174557280480, guid: cd9a42b7cab03dd4d9542bd495873339, type: 3}
       propertyPath: ShapeModule.arc.mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1698790174557280480, guid: cd9a42b7cab03dd4d9542bd495873339, type: 3}
+      propertyPath: EmissionModule.enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1698790174557280480, guid: cd9a42b7cab03dd4d9542bd495873339, type: 3}
@@ -629,11 +645,19 @@ PrefabInstance:
     m_TransformParent: {fileID: 7261668132239437172}
     m_Modifications:
     - target: {fileID: 1698790174557280480, guid: cd9a42b7cab03dd4d9542bd495873339, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1698790174557280480, guid: cd9a42b7cab03dd4d9542bd495873339, type: 3}
       propertyPath: ShapeModule.type
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1698790174557280480, guid: cd9a42b7cab03dd4d9542bd495873339, type: 3}
       propertyPath: ShapeModule.arc.mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1698790174557280480, guid: cd9a42b7cab03dd4d9542bd495873339, type: 3}
+      propertyPath: EmissionModule.enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1698790174557280480, guid: cd9a42b7cab03dd4d9542bd495873339, type: 3}
