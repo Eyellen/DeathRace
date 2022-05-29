@@ -5,6 +5,7 @@ using UnityEngine;
 public class Rocket : MonoBehaviour
 {
     private Transform _thisTransform;
+    private Rigidbody _rigidbody;
     
     [Header("Rocket settings")]
     [SerializeField] private float _speed;
@@ -12,6 +13,7 @@ public class Rocket : MonoBehaviour
     [SerializeField] private float _minDamage;
     [SerializeField] private int _maxDamage;
     [SerializeField] private float _maxTravelDistance;
+    [SerializeField] private float _explosionForce;
 
     private Collider _directHit;
     private Vector3 _startPosition;
@@ -23,6 +25,7 @@ public class Rocket : MonoBehaviour
     void Start()
     {
         _thisTransform = GetComponent<Transform>();
+        _rigidbody = GetComponent<Rigidbody>();
         _startPosition = transform.position;
     }
 
@@ -70,6 +73,7 @@ public class Rocket : MonoBehaviour
         if (_directHit) return;
 
         _directHit = collider;
+        _rigidbody.AddExplosionForce(_explosionForce, _rigidbody.position, _impactRadius);
 
         if (!collider.TryGetComponent(out IDamageable<int> damageable)) return;
 

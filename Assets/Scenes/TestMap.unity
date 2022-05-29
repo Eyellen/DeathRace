@@ -3318,7 +3318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 1293196226}
-  _cameraOffset: {x: 0, y: 2, z: -8}
+  _cameraOffset: {x: 0, y: 2, z: -5}
   _sensitivity: {x: 3, y: 3}
 --- !u!1001 &654380953
 PrefabInstance:
