@@ -57,7 +57,7 @@ public class GunBase : MonoBehaviour
         if (!Physics.Raycast(ray, out RaycastHit hitInfo, _shotDistance)) return;
 
         //Debug.Log(hitInfo.transform.name);//
-        if (!hitInfo.transform.TryGetComponent<IDamageable>(out IDamageable target)) return;
+        if (!hitInfo.transform.TryGetComponent(out IDamageable<int> target)) return;
 
         target.Damage(_damage);
     }

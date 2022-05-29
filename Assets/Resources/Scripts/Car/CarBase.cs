@@ -1,51 +1,31 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CarBase : MonoBehaviour
 {
-    [Serializable]
-    public class Wheel
-    {
-        public Transform Transform;
-        public WheelCollider Collider;
-    }
-    public enum AxelLocation
-    {
-        Front,
-        Rear
-    }
-    [Serializable]
-    public class Axel
-    {
-        public AxelLocation AxelLocation;
-        public bool IsDriveWheel;
-        [Range(0, 1)] public float BrakesInfluence;
-        public Wheel RightWheel;
-        public Wheel LeftWheel;
-    }
-
-    private Rigidbody _rigidbody;
-    private PlayerInput _input;
+    protected Transform _thisTransform;
+    protected Rigidbody _rigidbody;
+    protected PlayerInput _input;
 
     [Header("Car settings")]
     [SerializeField] protected float _motorForce;
+    [SerializeField] protected float _speedLimit;
     [SerializeField] protected float _brakeForce;
     [SerializeField] protected float _maxSteerAngle;
     [SerializeField] protected Transform _centreOfMass;
 
     [Header("Wheels")]
-    [SerializeField] protected Axel[] _axels;
+    [SerializeField] protected Axle[] _axles;
 
     #region Properties
     public bool IsGrounded
     {
         get
         {
-            foreach (var axel in _axels)
+            foreach (var axle in _axles)
             {
-                if (axel.RightWheel.Collider.isGrounded || axel.LeftWheel.Collider.isGrounded) return true;
+                if (axle.RightWheel.Collider.isGrounded || axle.LeftWheel.Collider.isGrounded) return true;
             }
             return false;
         }
@@ -56,58 +36,42 @@ public class CarBase : MonoBehaviour
         {
             float rpm = 0;
             int wheelsSchecked = 0;
-            foreach (var axel in _axels)
+            foreach (var axle in _axles)
             {
-                rpm += axel.RightWheel.Collider.rpm + axel.LeftWheel.Collider.rpm;
+                rpm += axle.RightWheel.Collider.rpm + axle.LeftWheel.Collider.rpm;
                 wheelsSchecked += 2;
             }
             return rpm / wheelsSchecked;
         }
     }
-    public float SidewaysSlip
+    public float MeanSidewaysSlip
     {
         get
         {
             float slip = 0;
             int wheelsChecked = 0;
 
-            WheelHit hitInfo;
-            foreach (var axel in _axels)
+            foreach (var axle in _axles)
             {
-                if (axel.RightWheel.Collider.GetGroundHit(out hitInfo))
-                {
-                    slip += hitInfo.sidewaysSlip;
-                    wheelsChecked++;
-                }
-                if (axel.LeftWheel.Collider.GetGroundHit(out hitInfo))
-                {
-                    slip += hitInfo.sidewaysSlip;
-                    wheelsChecked++;
-                }
+                slip += axle.RightWheel.SidewaysSlip;
+                slip += axle.LeftWheel.SidewaysSlip;
+                wheelsChecked += 2;
             }
             return slip / wheelsChecked;
         }
     }
-    public float ForwardSlip
+    public float MeanForwardSlip
     {
         get
         {
             float slip = 0;
             int wheelsChecked = 0;
 
-            WheelHit hitInfo;
-            foreach (var axel in _axels)
+            foreach (var axle in _axles)
             {
-                if (axel.RightWheel.Collider.GetGroundHit(out hitInfo))
-                {
-                    slip += hitInfo.forwardSlip;
-                    wheelsChecked++;
-                }
-                if (axel.LeftWheel.Collider.GetGroundHit(out hitInfo))
-                {
-                    slip += hitInfo.forwardSlip;
-                    wheelsChecked++;
-                }
+                slip += axle.RightWheel.ForwardSlip;
+                slip += axle.LeftWheel.ForwardSlip;
+                wheelsChecked += 2;
             }
             return slip / wheelsChecked;
         }
@@ -116,6 +80,7 @@ public class CarBase : MonoBehaviour
 
     private void Awake()
     {
+        _thisTransform = GetComponent<Transform>();
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.centerOfMass = _centreOfMass.localPosition;
         _input = PlayerInput.Instance;
@@ -124,9 +89,6 @@ public class CarBase : MonoBehaviour
     private void FixedUpdate()
     {
         HandleInput();
-        UpdateWheelVisuals();
-
-        Debug.Log(Rpm);
     }
 
     private void HandleInput()
@@ -136,7 +98,6 @@ public class CarBase : MonoBehaviour
 
         // Braking
         HandleBrake(_input.Brake * _brakeForce);
-        ApplyEngineBraking((Mathf.Abs(_input.VerticalAxis) >= 0.1f), (Mathf.Abs(_input.Brake) >= 0.1f));
 
         // Steering
         HandleSteering(_input.HorizontalAxis * _maxSteerAngle);
@@ -144,13 +105,17 @@ public class CarBase : MonoBehaviour
 
     private void HandleGas(float force)
     {
-        foreach (var axel in _axels)
+        foreach (var axle in _axles)
         {
-            if(axel.IsDriveWheel)
-            {
-                axel.RightWheel.Collider.motorTorque = force;
-                axel.LeftWheel.Collider.motorTorque = force;
-            }
+            if (!axle.IsDriveAxle) continue;
+
+            axle.RightWheel.Collider.motorTorque = force;
+            axle.LeftWheel.Collider.motorTorque = force;
+        }
+
+        if (_rigidbody.velocity.magnitude > _speedLimit)
+        {
+            _rigidbody.velocity = Vector3.ClampMagnitude(_rigidbody.velocity, _speedLimit);
         }
     }
 
@@ -160,49 +125,21 @@ public class CarBase : MonoBehaviour
         {
             _rigidbody.velocity = _rigidbody.velocity.normalized * Mathf.Lerp(_rigidbody.velocity.magnitude, 0f, 0.007f);
         }
-        foreach (var axel in _axels)
+        foreach (var axle in _axles)
         {
-            axel.RightWheel.Collider.brakeTorque = force * axel.BrakesInfluence;
-            axel.LeftWheel.Collider.brakeTorque = force * axel.BrakesInfluence;
+            axle.RightWheel.Collider.brakeTorque = force * axle.BrakesInfluence;
+            axle.LeftWheel.Collider.brakeTorque = force * axle.BrakesInfluence;
         }
-    }
-
-    private void ApplyEngineBraking(bool isRavs, bool isBraking)
-    {
-        //if (isRavs) return;
-        //if (isBraking) return;
-
-        //_rigidbody.velocity = _rigidbody.velocity.normalized * Mathf.Lerp(0, _rigidbody.velocity.magnitude, 0.99f);
-        //Debug.Log("Engine Braking is being applied !");
     }
 
     private void HandleSteering(float steer)
     {
-        foreach (var axel in _axels)
+        foreach (var axle in _axles)
         {
-            if(axel.AxelLocation == AxelLocation.Front)
-            {
-                axel.RightWheel.Collider.steerAngle = Mathf.Lerp(axel.RightWheel.Collider.steerAngle, steer, 0.5f);
-                axel.LeftWheel.Collider.steerAngle = Mathf.Lerp(axel.LeftWheel.Collider.steerAngle, steer, 0.5f);
-            }
-        }
-    }
+            if (axle.AxleLocation != AxleLocation.Front) continue;
 
-    private void UpdateWheelVisuals()
-    {
-        foreach (var axel in _axels)
-        {
-            UpdateSingleWheel(axel.RightWheel.Collider, axel.RightWheel.Transform);
-            UpdateSingleWheel(axel.LeftWheel.Collider, axel.LeftWheel.Transform);
+            axle.RightWheel.Collider.steerAngle = Mathf.Lerp(axle.RightWheel.Collider.steerAngle, steer, 0.5f);
+            axle.LeftWheel.Collider.steerAngle = Mathf.Lerp(axle.LeftWheel.Collider.steerAngle, steer, 0.5f);
         }
-    }
-
-    private void UpdateSingleWheel(WheelCollider wheelCollider, Transform wheel)
-    {
-        Vector3 position;
-        Quaternion rotation;
-        wheelCollider.GetWorldPose(out position, out rotation);
-        wheel.position = position;
-        wheel.rotation = rotation;
     }
 }

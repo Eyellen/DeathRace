@@ -29,6 +29,9 @@ public class Minigun : MonoBehaviour
     public bool IsShooting { get; private set; }
     #endregion
 
+    public delegate void ShootEvent(Vector3 shotPoint, Vector3 destination);
+    public event ShootEvent OnShoot;
+
     private void Awake()
     {
         _thisTransform = GetComponent<Transform>();
@@ -84,10 +87,11 @@ public class Minigun : MonoBehaviour
 
         Ray ray = new Ray(_shotPoint.position, _thisTransform.forward);
         ray = AddSpread(ray, _spread);
+        OnShoot?.Invoke(ray.origin, ray.origin + ray.direction * _shotDistance);
         Debug.DrawRay(ray.origin, ray.direction * _shotDistance, Color.blue, 0.1f);
         if (!Physics.Raycast(ray, out RaycastHit hitInfo, _shotDistance)) return;
 
-        if (!hitInfo.transform.TryGetComponent<IDamageable>(out IDamageable target)) return;
+        if (!hitInfo.collider.TryGetComponent(out IDamageable<int> target)) return;
 
         target.Damage(_damage);
     }
