@@ -3,7 +3,12 @@ guid: 8689b34c99a4866458cc60da1efbe1da
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plane_Plane.090_MetalikMat
+    second: {fileID: 2100000, guid: 103fca21176cb1f4d9a2fb23625616e0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
