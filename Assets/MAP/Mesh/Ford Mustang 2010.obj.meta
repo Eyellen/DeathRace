@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5aa5e4bbe77e6744e9131349261f387d
+guid: 25ac81c735d8209408ea65a7e9d81997
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -7,8 +7,63 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Plane.021_Plane.054_Metalik.014Mat
+      name: Cube.049_Cube.336_Black.017Mat
+    second: {fileID: 2100000, guid: 82663ae64ebc88b4f89bd7f36a0eb976, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cube.049_Cube.336_Car_headlights.016Mat
+    second: {fileID: 2100000, guid: 489e190f074253a4b9b65298e162f566, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cube.049_Cube.336_Glass.015Mat
+    second: {fileID: 2100000, guid: b107bffd6c43b544bb0576362915b2c8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cube.049_Cube.336_Glass.016Mat
+    second: {fileID: 2100000, guid: b107bffd6c43b544bb0576362915b2c8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cube.049_Cube.336_Lattice.015Mat
+    second: {fileID: 2100000, guid: 103fca21176cb1f4d9a2fb23625616e0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cube.049_Cube.336_Lattice.016Mat
+    second: {fileID: 2100000, guid: 103fca21176cb1f4d9a2fb23625616e0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cube.049_Cube.336_Metalik.027Mat
     second: {fileID: 2100000, guid: bb557b274b9356647ac233a58a2ae11c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cube.049_Cube.336_Metalik.028Mat
+    second: {fileID: 2100000, guid: bb557b274b9356647ac233a58a2ae11c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cube.049_Cube.336_bumper.016Mat
+    second: {fileID: 2100000, guid: 103fca21176cb1f4d9a2fb23625616e0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cube.049_Cube.336_metalik_2.017Mat
+    second: {fileID: 2100000, guid: 103fca21176cb1f4d9a2fb23625616e0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cube.049_Cube.336_metalik_2.018Mat
+    second: {fileID: 2100000, guid: 103fca21176cb1f4d9a2fb23625616e0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cube.049_Cube.336_metalik_2.019Mat
+    second: {fileID: 2100000, guid: 103fca21176cb1f4d9a2fb23625616e0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
