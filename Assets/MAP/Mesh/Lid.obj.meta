@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Plane.021_Plane.054_Metalik.014Mat
-    second: {fileID: 2100000, guid: bb557b274b9356647ac233a58a2ae11c, type: 2}
+      name: Plane.013_Plane.018_Metalik.003Mat
+    second: {fileID: 2100000, guid: 103fca21176cb1f4d9a2fb23625616e0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
