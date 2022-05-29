@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102241583187138350}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.0659, y: -0.2759, z: 0}
+  m_LocalPosition: {x: -0.0758, y: -0.2759, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5930013375949878044}
@@ -171,7 +171,7 @@ WheelCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7454103176961662988}
-  m_Center: {x: -0.12, y: 0.15, z: 0}
+  m_Center: {x: -0.08, y: 0.15, z: 0}
   m_Radius: 0.28
   m_SuspensionSpring:
     spring: 35000
@@ -237,7 +237,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a7c877ed3bd5c1447805227f110a61b9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.08500028
+      value: -0.095
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a7c877ed3bd5c1447805227f110a61b9, type: 3}
       propertyPath: m_LocalPosition.y
