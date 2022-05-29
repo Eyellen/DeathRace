@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5aa5e4bbe77e6744e9131349261f387d
+guid: f25bd59d539a1994dacbaed2e260aefe
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -7,8 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Plane.021_Plane.054_Metalik.014Mat
-    second: {fileID: 2100000, guid: bb557b274b9356647ac233a58a2ae11c, type: 2}
+      name: Cylinder.007_Cylinder.073_BlackMat
+    second: {fileID: 2100000, guid: 103fca21176cb1f4d9a2fb23625616e0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cylinder.007_Cylinder.073_metalik_2Mat
+    second: {fileID: 2100000, guid: aef2acb1c3bbe9f4a8f9ea809926dd74, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

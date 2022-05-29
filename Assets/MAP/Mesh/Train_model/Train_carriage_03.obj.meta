@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5aa5e4bbe77e6744e9131349261f387d
+guid: 85c24d8e5f69883449bd898da578e562
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -7,8 +7,48 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Plane.021_Plane.054_Metalik.014Mat
+      name: Chassis_00_Cube.002_BasisMat
+    second: {fileID: 2100000, guid: 97feb732d06f71b43b65cd03d3fc9993, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TrainHook_B_Cube.047_HookMat
     second: {fileID: 2100000, guid: bb557b274b9356647ac233a58a2ae11c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TrainHook_S_Cube.041_HookMat
+    second: {fileID: 2100000, guid: bb557b274b9356647ac233a58a2ae11c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Train_Wheel_01.005_Cube.081_mehanicMat
+    second: {fileID: 2100000, guid: 103fca21176cb1f4d9a2fb23625616e0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Train_Wheel_01.005_Cube.081_wheelMat
+    second: {fileID: 2100000, guid: bb557b274b9356647ac233a58a2ae11c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Train_Wheel_01_Cube.028_mehanicMat
+    second: {fileID: 2100000, guid: 103fca21176cb1f4d9a2fb23625616e0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Train_Wheel_01_Cube.028_wheelMat
+    second: {fileID: 2100000, guid: bb557b274b9356647ac233a58a2ae11c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Train_carriage_01.001_Cube.068_CarriageMat
+    second: {fileID: 2100000, guid: c66ccabfd5ab1bd4fb5ae5dd6ba5515d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Train_carriage_01.002_Cube.069_BlackMat
+    second: {fileID: 2100000, guid: 82663ae64ebc88b4f89bd7f36a0eb976, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
