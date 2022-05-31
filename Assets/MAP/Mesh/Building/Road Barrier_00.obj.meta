@@ -1,29 +1,9 @@
 fileFormatVersion: 2
-guid: 3118a3f3e5bc69c4484cbfd3e1bfc6c0
+guid: f40af5f5a2d24a74ab7c2df81883a8d1
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: ISO_container_LOD0_Cube.020_ContainerMat
-    second: {fileID: 2100000, guid: a6933d564b8e96b42a23c58ec232f357, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: ISO_container_LOD0_Cube.020_MetalikMat
-    second: {fileID: 2100000, guid: bb557b274b9356647ac233a58a2ae11c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: ISO_container_LOD1_Cube.009_ContainerMat
-    second: {fileID: 2100000, guid: a6933d564b8e96b42a23c58ec232f357, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: ISO_container_LOD1_Cube.009_MetalikMat
-    second: {fileID: 2100000, guid: bb557b274b9356647ac233a58a2ae11c, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -53,9 +33,7 @@ ModelImporter:
     clipAnimations: []
     isReadable: 0
   meshes:
-    lODScreenPercentages:
-    - 0.25
-    - 0.01
+    lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
     addColliders: 0

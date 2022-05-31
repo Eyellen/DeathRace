@@ -7,32 +7,32 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Cube.040_Cube.079_mehanicMat
-    second: {fileID: 2100000, guid: 48e40e1fec2dd604e9ff930ed93fc68a, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Cube.044_Cube.083_mehanicMat
-    second: {fileID: 2100000, guid: 48e40e1fec2dd604e9ff930ed93fc68a, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Cube.045_Cube.084_mehanicMat
-    second: {fileID: 2100000, guid: 48e40e1fec2dd604e9ff930ed93fc68a, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Cube.046_Cube.087_LatticeMat
+      name: Cube.013_Cube.041_NoneMat
     second: {fileID: 2100000, guid: e61601fb4d4bd524ba9b22a56e8fd8a9, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Cylinder.005_Cylinder.007_mehanicMat
+      name: Cube.014_Cube.042_NoneMat
     second: {fileID: 2100000, guid: 48e40e1fec2dd604e9ff930ed93fc68a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Cylinder.006_Cylinder.008_mehanicMat
+      name: Cube.015_Cube.043_NoneMat
+    second: {fileID: 2100000, guid: 48e40e1fec2dd604e9ff930ed93fc68a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cube.019_Cube.049_NoneMat
+    second: {fileID: 2100000, guid: 48e40e1fec2dd604e9ff930ed93fc68a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cylinder.003_Cylinder.005_NoneMat
+    second: {fileID: 2100000, guid: 48e40e1fec2dd604e9ff930ed93fc68a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cylinder.004_Cylinder.006_NoneMat
     second: {fileID: 2100000, guid: 48e40e1fec2dd604e9ff930ed93fc68a, type: 2}
   materials:
     materialImportMode: 2

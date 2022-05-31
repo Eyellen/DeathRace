@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3118a3f3e5bc69c4484cbfd3e1bfc6c0
+guid: 51c31cb60dafc934b9427c462136943d
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -7,23 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: ISO_container_LOD0_Cube.020_ContainerMat
-    second: {fileID: 2100000, guid: a6933d564b8e96b42a23c58ec232f357, type: 2}
+      name: Wall_LOD0_Cube.011_NoneMat
+    second: {fileID: 2100000, guid: e0949bd6fb5be924b9aa5a1a93d20d32, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: ISO_container_LOD0_Cube.020_MetalikMat
-    second: {fileID: 2100000, guid: bb557b274b9356647ac233a58a2ae11c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: ISO_container_LOD1_Cube.009_ContainerMat
-    second: {fileID: 2100000, guid: a6933d564b8e96b42a23c58ec232f357, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: ISO_container_LOD1_Cube.009_MetalikMat
-    second: {fileID: 2100000, guid: bb557b274b9356647ac233a58a2ae11c, type: 2}
+      name: Wall_LOD1_Cube.003_NoneMat
+    second: {fileID: 2100000, guid: e0949bd6fb5be924b9aa5a1a93d20d32, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

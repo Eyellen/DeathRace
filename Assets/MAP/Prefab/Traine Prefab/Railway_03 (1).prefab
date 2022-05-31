@@ -172,7 +172,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3183620610693059779}
   - component: {fileID: 2095901079667239026}
-  - component: {fileID: 5636717902924550614}
+  - component: {fileID: 8273351182928588441}
+  - component: {fileID: 5548643225148267314}
   m_Layer: 0
   m_Name: Railway_03 (1)
   m_TagString: Untagged
@@ -210,8 +211,8 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8542123476442587452, guid: 68260880f509b2146a317a252daacbb8, type: 3}
---- !u!64 &5636717902924550614
-MeshCollider:
+--- !u!65 &8273351182928588441
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -220,7 +221,19 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -3502734327366230669, guid: 68260880f509b2146a317a252daacbb8, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.1549679, y: 0.27584743, z: 2.0071416}
+  m_Center: {x: 0.6322338, y: 0.82609653, z: 0.000012576586}
+--- !u!65 &5548643225148267314
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2838867277456641657}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1549679, y: 0.27584743, z: 2.0071182}
+  m_Center: {x: -0.63574994, y: 0.82609653, z: 0.000002920631}

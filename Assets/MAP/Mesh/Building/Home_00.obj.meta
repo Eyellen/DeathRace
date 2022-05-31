@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3118a3f3e5bc69c4484cbfd3e1bfc6c0
+guid: 670a16f275060ff4bb6d897f8f599f41
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -7,23 +7,53 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: ISO_container_LOD0_Cube.020_ContainerMat
-    second: {fileID: 2100000, guid: a6933d564b8e96b42a23c58ec232f357, type: 2}
+      name: Cube.001_Cube_LatticeMat
+    second: {fileID: 2100000, guid: e0949bd6fb5be924b9aa5a1a93d20d32, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: ISO_container_LOD0_Cube.020_MetalikMat
+      name: Cube.003_Cube.004_LatticeMat
+    second: {fileID: 2100000, guid: 82663ae64ebc88b4f89bd7f36a0eb976, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cube.004_Cube.005_MetalikMat
     second: {fileID: 2100000, guid: bb557b274b9356647ac233a58a2ae11c, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: ISO_container_LOD1_Cube.009_ContainerMat
-    second: {fileID: 2100000, guid: a6933d564b8e96b42a23c58ec232f357, type: 2}
+      name: Cube.004_Cube.005_metalik_2Mat
+    second: {fileID: 2100000, guid: 103fca21176cb1f4d9a2fb23625616e0, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: ISO_container_LOD1_Cube.009_MetalikMat
+      name: Cube.005_Cube.006_MetalikMat
+    second: {fileID: 2100000, guid: 103fca21176cb1f4d9a2fb23625616e0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cube.005_Cube.006_metalik_2Mat
     second: {fileID: 2100000, guid: bb557b274b9356647ac233a58a2ae11c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cube.006_Cube.007_LatticeMat
+    second: {fileID: 2100000, guid: 82663ae64ebc88b4f89bd7f36a0eb976, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cube.007_Cube.008_GlassMat
+    second: {fileID: 2100000, guid: b107bffd6c43b544bb0576362915b2c8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cube.007_Cube.008_LatticeMat
+    second: {fileID: 2100000, guid: e0949bd6fb5be924b9aa5a1a93d20d32, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cube.008_Cube.019_LatticeMat
+    second: {fileID: 2100000, guid: e0949bd6fb5be924b9aa5a1a93d20d32, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -53,9 +83,7 @@ ModelImporter:
     clipAnimations: []
     isReadable: 0
   meshes:
-    lODScreenPercentages:
-    - 0.25
-    - 0.01
+    lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
     addColliders: 0
