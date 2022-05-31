@@ -21,7 +21,7 @@ public class CarDamageable : MonoBehaviour, IDamageable<int>
 
     private void Destruct()
     {
-        var destroyedCar = Instantiate(_destroyedCarPrefab, transform.position, transform.rotation);
+        var destroyedCar = Instantiate(_destroyedCarPrefab, _currentCar.transform.position, _currentCar.transform.rotation);
         destroyedCar.GetComponent<Rigidbody>().velocity = _currentCar.GetComponent<Rigidbody>().velocity;
         Destroy(_currentCar);
     }

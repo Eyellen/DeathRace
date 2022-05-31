@@ -5,19 +5,19 @@ using UnityEngine;
 public class Rocket : MonoBehaviour
 {
     private Transform _thisTransform;
-    private Rigidbody _rigidbody;
-    
+    [SerializeField] private GameObject _explosionPrefab;
+
     [Header("Rocket settings")]
     [SerializeField] private float _speed;
+    [SerializeField] private float _maxTravelDistance;
     [SerializeField] private float _impactRadius;
+    [SerializeField] private float _explosionForce;
     [SerializeField] private float _minDamage;
     [SerializeField] private int _maxDamage;
-    [SerializeField] private float _maxTravelDistance;
-    [SerializeField] private float _explosionForce;
-
+    
     private Collider _directHit;
     private Vector3 _startPosition;
-    private bool _exploded;
+    private bool _isExploded;
 
     public delegate void RocketExplodeEvent();
     public event RocketExplodeEvent OnRocketExplode;
@@ -25,7 +25,6 @@ public class Rocket : MonoBehaviour
     void Start()
     {
         _thisTransform = GetComponent<Transform>();
-        _rigidbody = GetComponent<Rigidbody>();
         _startPosition = transform.position;
     }
 
@@ -37,10 +36,7 @@ public class Rocket : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (_exploded) return;
-
         HandleDirectHit(other);
-        HandleImpact();
         Explode();
     }
 
@@ -63,7 +59,11 @@ public class Rocket : MonoBehaviour
 
     private void Explode()
     {
-        _exploded = true;
+        if (_isExploded) return;
+        _isExploded = true;
+
+        InitializeExplosion();
+
         OnRocketExplode?.Invoke();
         Destroy(gameObject);
     }
@@ -73,26 +73,20 @@ public class Rocket : MonoBehaviour
         if (_directHit) return;
 
         _directHit = collider;
-        _rigidbody.AddExplosionForce(_explosionForce, _rigidbody.position, _impactRadius);
 
         if (!collider.TryGetComponent(out IDamageable<int> damageable)) return;
 
         damageable.Damage(_maxDamage);
     }
 
-    private void HandleImpact()
+    private void InitializeExplosion()
     {
-        Collider[] objectsInRadius = Physics.OverlapSphere(_thisTransform.position, _impactRadius);
-
-        foreach (Collider collider in objectsInRadius)
-        {
-            if (collider == _directHit) continue;
-            if (!collider.TryGetComponent(out IDamageable<int> damageable)) continue;
-
-            float distanceToObject = Vector3.Distance(_thisTransform.position, collider.transform.position);
-            float coefficient = 1 - distanceToObject / _impactRadius;
-            coefficient = Mathf.Clamp(coefficient, 0.2f, 1f);
-            damageable.Damage((int)(_maxDamage * coefficient));
-        }
+        GameObject explosionPrefab = Instantiate(_explosionPrefab, transform.position, transform.rotation);
+        Explosion explosion = explosionPrefab.GetComponent<Explosion>();
+        explosion.ExplosionRadius = _impactRadius;
+        explosion.ExplosionForce = _explosionForce;
+        explosion.MinDamage = _minDamage;
+        explosion.MaxDamage = _maxDamage;
+        explosion.ExceptionObject = _directHit;
     }
 }
