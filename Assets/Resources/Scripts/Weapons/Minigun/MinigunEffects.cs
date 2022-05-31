@@ -11,12 +11,6 @@ public class MinigunEffects : MonoBehaviour
     [SerializeField] private ParticleSystem[] _shorfireParticles;
     private bool _isShotfirEmitting;
 
-    [Header("Bullet cartridge particles")]
-    [SerializeField] private GameObject _bulletCartridgeParticlesPrefab;
-    [SerializeField] private Transform _cartridgeSpawnPoint;
-    [SerializeField] private float _delayBetweenCartridges;
-    private float _timeSinceLastCartridgeSpawned;
-
     [Header("Bullet tracer effect")]
     [SerializeField] private GameObject _bulletTracerPrefab;
 
@@ -29,11 +23,9 @@ public class MinigunEffects : MonoBehaviour
         _minigun.OnShoot += SpawnBulletTracer;
     }
 
-
     void Update()
     {
         ShootEffect();
-        BulletCartridgeEffect();
     }
 
     private void ShootEffect()
@@ -57,16 +49,6 @@ public class MinigunEffects : MonoBehaviour
                 emission.enabled = false;
             }
         }
-    }
-
-    private void BulletCartridgeEffect()
-    {
-        if (Time.time <= _timeSinceLastCartridgeSpawned + _delayBetweenCartridges) return;
-
-        if (!_minigun.IsShooting) return;
-
-        _timeSinceLastCartridgeSpawned = Time.time;
-        Instantiate(_bulletCartridgeParticlesPrefab, _cartridgeSpawnPoint);
     }
 
     private void SpawnBulletTracer(Vector3 shotPoint, Vector3 destination)
