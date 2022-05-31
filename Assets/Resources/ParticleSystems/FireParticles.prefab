@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1334182278218836550}
   m_Layer: 0
-  m_Name: FireEffect
+  m_Name: FireParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

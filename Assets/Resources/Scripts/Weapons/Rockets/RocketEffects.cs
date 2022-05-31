@@ -10,9 +10,6 @@ public class RocketEffects : MonoBehaviour
     [Header("Smoke effect")]
     [SerializeField] private Transform _smokeEffectTransform;
 
-    [Header("Explosion effect")]
-    [SerializeField] private GameObject _explosionParticlesPrefab;
-
     private void Awake()
     {
         _rocket = GetComponent<Rocket>();
@@ -33,12 +30,5 @@ public class RocketEffects : MonoBehaviour
             var main = particle.main;
             main.loop = false;
         }
-
-        SpawnExplosionEffect();
-    }
-
-    private void SpawnExplosionEffect()
-    {
-        Instantiate(_explosionParticlesPrefab, transform.position, Quaternion.identity);
     }
 }
