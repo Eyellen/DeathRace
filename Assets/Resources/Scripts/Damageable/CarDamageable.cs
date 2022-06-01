@@ -21,8 +21,20 @@ public class CarDamageable : MonoBehaviour, IDamageable<int>
 
     private void Destruct()
     {
-        var destroyedCar = Instantiate(_destroyedCarPrefab, _currentCar.transform.position, _currentCar.transform.rotation);
-        destroyedCar.GetComponent<Rigidbody>().velocity = _currentCar.GetComponent<Rigidbody>().velocity;
+        GameObject destroyedCar = Instantiate(_destroyedCarPrefab, _currentCar.transform.position, _currentCar.transform.rotation);
+        InitializeDestroyedCar(destroyedCar);
         Destroy(_currentCar);
+    }
+
+    private void InitializeDestroyedCar(GameObject destroyedCar)
+    {
+        // Speed inheritance
+        destroyedCar.GetComponent<Rigidbody>().velocity = _currentCar.GetComponent<Rigidbody>().velocity;
+
+        destroyedCar.GetComponent<DestroyedCar>().CarFrame = gameObject;
+
+        // Disabling BackPlate
+        GameObject backPlate = _currentCar.transform.Find("Body/BackPlate")?.gameObject;
+        backPlate?.SetActive(false);
     }
 }
