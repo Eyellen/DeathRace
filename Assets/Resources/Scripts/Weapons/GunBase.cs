@@ -4,66 +4,104 @@ using UnityEngine;
 
 public class GunBase : MonoBehaviour
 {
-    protected Transform _thisTransform;
     protected PlayerInput _input;
-    [SerializeField] protected Transform _shotPoint;
+    [SerializeField] private Transform _shotPoint;
 
     [Header("Gun settings")]
-    [SerializeField] protected int _damage;
-    [SerializeField] protected float _shotDistance;
-    [SerializeField] protected float _spread;
-    [SerializeField] protected float _timeBetweenShots;
-    [SerializeField] protected float _reloadTime;
-    [SerializeField] protected int _magazineSize;
-    [SerializeField] protected int _maxAmmoSupply;
+    [SerializeField] private int _damage;
+    [SerializeField] private float _shotDistance;
+    [SerializeField] private float _maxSpreadMagnitude;
+    [SerializeField] private float _timeBetweenShots;
+    [SerializeField] private int _maxAmmoSupply;
 
-    protected float _lastShotTime;
-    protected int _currentBulletsCount;
-    protected int _currentAmmoSupply;
+    private float _lastShotTime;
+    private int _currentBulletsCount;
 
-    private void Awake()
+    #region Properties
+    private bool IsAmmoRunOut
     {
-        _thisTransform = GetComponent<Transform>();
+        get
+        {
+            return _currentBulletsCount <= 0;
+        }
+    }
+    private bool IsTimeBetweenShotsPassed
+    {
+        get
+        {
+            return Time.time > (_lastShotTime + _timeBetweenShots);
+        }
+    }
+    public bool IsShooting { get; protected set; }
+    #endregion
+
+    public delegate void GunShootEvent(Ray shotRay, float length);
+    public event GunShootEvent OnGunShoot;
+
+    protected virtual void Awake()
+    {
+        InitializeGunBase();
+    }
+
+    protected virtual void Update()
+    {
+        HandleInput();
+        Debug.DrawRay(_shotPoint.position, _shotPoint.forward * _shotDistance, Color.red);
+    }
+
+    private void InitializeGunBase()
+    {
         _input = PlayerInput.Instance;
+        _currentBulletsCount = _maxAmmoSupply;
     }
 
-    protected void Start()
+    protected virtual void HandleInput()
     {
+        Shoot(_input.IsLeftActionPressed);
+    }
+
+    protected void SingleShot()
+    {
+        if (IsAmmoRunOut) return;
         
-    }
-
-    protected void Update()
-    {
-        if(_input.IsLeftActionPressed)
-        {
-            Shoot();
-        }
-        Debug.DrawRay(_shotPoint.position, _thisTransform.forward * _shotDistance, Color.red);
-    }
-
-    protected void Shoot()
-    {
-        if(_currentBulletsCount <= 0)
-        {
-            Reload();
-        }
-
-        if (Time.time <= _lastShotTime + _timeBetweenShots) return;
+        if (!IsTimeBetweenShotsPassed) return;
         _lastShotTime = Time.time;
 
-        Vector3 shootSpread = new Vector3(Random.Range(-1f, 1f) * _spread, Random.Range(-1f, 1f) * _spread, 0);
-        Ray ray = new Ray(_shotPoint.position, _thisTransform.forward + shootSpread / 100);
-        Debug.DrawRay(ray.origin, ray.direction * _shotDistance, Color.blue, 0.1f);
-        if (!Physics.Raycast(ray, out RaycastHit hitInfo, _shotDistance)) return;
+        _currentBulletsCount--;
 
-        //Debug.Log(hitInfo.transform.name);//
-        if (!hitInfo.transform.TryGetComponent(out IDamageable<int> target)) return;
+        InitializeShotRay(out Ray shotRay);
+        OnGunShoot?.Invoke(shotRay, _shotDistance);
+        Debug.DrawRay(shotRay.origin, shotRay.direction * _shotDistance, Color.blue, 0.5f);
+        if (!Physics.Raycast(shotRay, out RaycastHit hitInfo, _shotDistance)) return;
 
-        target.Damage(_damage);
+        if (!hitInfo.collider.TryGetComponent(out IDamageable<int> damageable)) return;
+
+        damageable.Damage(_damage);
     }
 
-    protected void Reload()
+    private void AddSpread(ref Ray shotRay)
     {
+        Vector3 xSpread = _shotPoint.right * Random.Range(-1f, 1f) * _maxSpreadMagnitude;
+        Vector3 ySpread = _shotPoint.up * Random.Range(-1f, 1f) * _maxSpreadMagnitude;
 
+        Vector3 spread = xSpread + ySpread;
+        spread = spread.magnitude > _maxSpreadMagnitude ? spread.normalized * _maxSpreadMagnitude : spread;
+
+        shotRay.direction += spread / 100;
+    }
+
+    private void InitializeShotRay(out Ray shotRay)
+    {
+        shotRay = new Ray(_shotPoint.position, _shotPoint.forward);
+        AddSpread(ref shotRay);
+    }
+
+    protected virtual void Shoot(bool isActionOccurs)
+    {
+        IsShooting = isActionOccurs;
+        if(isActionOccurs)
+        {
+            SingleShot();
+        }
     }
 }

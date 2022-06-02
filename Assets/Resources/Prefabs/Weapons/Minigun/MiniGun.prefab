@@ -48,15 +48,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e366e08e92433e74a82a2949cb67d7fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minigun: {fileID: 1801653374189365504}
   _shotPoint: {fileID: 6740435417063793444}
   _damage: 5
   _shotDistance: 100
-  _spread: 4
+  _maxSpreadMagnitude: 5
   _timeBetweenShots: 0.05
+  _maxAmmoSupply: 500
+  _minigun: {fileID: 1801653374189365504}
   _barrelsSpinningTime: 2
   _maxSpinningSpeed: 1000
-  _maxAmmoSupply: 500
 --- !u!114 &7187299551496955583
 MonoBehaviour:
   m_ObjectHideFlags: 0
