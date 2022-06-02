@@ -18,20 +18,21 @@ public class GunBase : MonoBehaviour
     private int _currentBulletsCount;
 
     #region Properties
-    protected bool IsAmmoRunOut
+    private bool IsAmmoRunOut
     {
         get
         {
             return _currentBulletsCount <= 0;
         }
     }
-    protected bool IsTimeBetweenShotsPassed
+    private bool IsTimeBetweenShotsPassed
     {
         get
         {
             return Time.time > (_lastShotTime + _timeBetweenShots);
         }
     }
+    public bool IsShooting { get; protected set; }
     #endregion
 
     public delegate void GunShootEvent();
@@ -56,16 +57,13 @@ public class GunBase : MonoBehaviour
 
     protected virtual void HandleInput()
     {
-        if (_input.IsLeftActionPressed)
-        {
-            Shoot();
-        }
+        Shoot(_input.IsLeftActionPressed);
     }
 
     protected void SingleShot()
     {
         if (IsAmmoRunOut) return;
-
+        
         if (!IsTimeBetweenShotsPassed) return;
         _lastShotTime = Time.time;
 
@@ -98,8 +96,12 @@ public class GunBase : MonoBehaviour
         AddSpread(ref shotRay);
     }
 
-    protected virtual void Shoot()
+    protected virtual void Shoot(bool isActionOccurs)
     {
-        SingleShot();
+        IsShooting = isActionOccurs;
+        if(isActionOccurs)
+        {
+            SingleShot();
+        }
     }
 }
