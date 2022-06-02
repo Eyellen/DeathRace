@@ -98,7 +98,12 @@ public class Minigun : MonoBehaviour
 
     private Ray AddSpread(Ray ray, float spreadValue)
     {
-        Vector3 spread = new Vector3(Random.Range(-1f, 1f) * spreadValue, Random.Range(-1f, 1f) * spreadValue, 0);
+        Vector3 xSpread = _shotPoint.right * Random.Range(-1f, 1f) * spreadValue;
+        Vector3 ySpread = _shotPoint.up * Random.Range(-1f, 1f) * spreadValue;
+
+        Vector3 spread = xSpread + ySpread;
+        spread = spread.magnitude > spreadValue ? spread.normalized * spreadValue : spread;
+
         ray.direction += spread / 100;
         return ray;
     }
