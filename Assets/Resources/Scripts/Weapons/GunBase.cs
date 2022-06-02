@@ -35,7 +35,7 @@ public class GunBase : MonoBehaviour
     public bool IsShooting { get; protected set; }
     #endregion
 
-    public delegate void GunShootEvent();
+    public delegate void GunShootEvent(Ray shotRay, float length);
     public event GunShootEvent OnGunShoot;
 
     protected virtual void Awake()
@@ -68,9 +68,9 @@ public class GunBase : MonoBehaviour
         _lastShotTime = Time.time;
 
         _currentBulletsCount--;
-        OnGunShoot?.Invoke();
 
         InitializeShotRay(out Ray shotRay);
+        OnGunShoot?.Invoke(shotRay, _shotDistance);
         Debug.DrawRay(shotRay.origin, shotRay.direction * _shotDistance, Color.blue, 0.5f);
         if (!Physics.Raycast(shotRay, out RaycastHit hitInfo, _shotDistance)) return;
 

@@ -20,7 +20,7 @@ public class MinigunEffects : MonoBehaviour
     void Start()
     {
         _minigun = GetComponent<Minigun>();
-        _minigun.OnShoot += SpawnBulletTracer;
+        _minigun.OnGunShoot += SpawnBulletTracer;
     }
 
     void Update()
@@ -51,15 +51,16 @@ public class MinigunEffects : MonoBehaviour
         }
     }
 
-    private void SpawnBulletTracer(Vector3 shotPoint, Vector3 destination)
+    private void SpawnBulletTracer(Ray shotRay, float length)
     {
-        if(Physics.Linecast(shotPoint, destination, out RaycastHit hitInfo))
+        Vector3 destination = shotRay.origin + shotRay.direction * length;
+        if(Physics.Raycast(shotRay, out RaycastHit hitInfo))
         {
             SpawnHitParticles(hitInfo);
 
             destination = hitInfo.point;
         }
-        GameObject tracer = Instantiate(_bulletTracerPrefab, shotPoint, Quaternion.identity);
+        GameObject tracer = Instantiate(_bulletTracerPrefab, shotRay.origin, Quaternion.identity);
         tracer.GetComponent<BulletTracer>().Destination = destination;
     }
 

@@ -17,9 +17,6 @@ public class Minigun : GunBase
     public bool IsSpinning { get => _isSpinning; }
     #endregion
 
-    public delegate void ShootEvent(Vector3 shotPoint, Vector3 destination);
-    public event ShootEvent OnShoot;
-
     protected override void HandleInput()
     {
         SpinBarrels(_input.IsLeftActionPressed);
