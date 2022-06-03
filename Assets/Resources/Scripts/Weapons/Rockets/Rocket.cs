@@ -9,29 +9,32 @@ public class Rocket : MonoBehaviour
 
     [Header("Rocket settings")]
     [SerializeField] private float _speed;
-    [SerializeField] private float _maxTravelDistance;
+    [SerializeField] private float _maxTravelTime;
     [SerializeField] private float _impactRadius;
     [SerializeField] private float _explosionForce;
     [SerializeField] private float _minDamage;
     [SerializeField] private int _maxDamage;
-    
+
     private Collider _directHit;
-    private Vector3 _startPosition;
     private bool _isExploded;
+
+    #region Properties
+    public float Speed { get { return _speed; } set { _speed = value; } }
+    #endregion
 
     public delegate void RocketExplodeEvent();
     public event RocketExplodeEvent OnRocketExplode;
 
-    void Start()
+    private void Start()
     {
         _thisTransform = GetComponent<Transform>();
-        _startPosition = transform.position;
+
+        StartCoroutine(HandleTravelLimit(_maxTravelTime));
     }
 
-    void Update()
+    private void FixedUpdate()
     {
         HandleFly();
-        HandleTravelLimit();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -50,9 +53,9 @@ public class Rocket : MonoBehaviour
         _thisTransform.Translate(_thisTransform.forward * _speed * Time.deltaTime, Space.World);
     }
 
-    private void HandleTravelLimit()
+    private IEnumerator HandleTravelLimit(float seconds)
     {
-        if (Vector3.Distance(_startPosition, _thisTransform.position) < _maxTravelDistance) return;
+        yield return new WaitForSeconds(seconds);
 
         Explode();
     }
