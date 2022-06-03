@@ -19,16 +19,20 @@ public class Rocket : MonoBehaviour
     private Vector3 _startPosition;
     private bool _isExploded;
 
+    #region Properties
+    public float Speed { get { return _speed; } set { _speed = value; } }
+    #endregion
+
     public delegate void RocketExplodeEvent();
     public event RocketExplodeEvent OnRocketExplode;
 
-    void Start()
+    private void Start()
     {
         _thisTransform = GetComponent<Transform>();
         _startPosition = transform.position;
     }
 
-    void Update()
+    private void FixedUpdate()
     {
         HandleFly();
         HandleTravelLimit();
