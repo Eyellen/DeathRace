@@ -220,7 +220,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8409905588059370686}
   - component: {fileID: 189813307247387232}
-  - component: {fileID: 6599259533015790684}
   m_Layer: 0
   m_Name: Frame
   m_TagString: Untagged
@@ -257,21 +256,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -8923898537461648023, guid: 25ac81c735d8209408ea65a7e9d81997, type: 3}
---- !u!114 &6599259533015790684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1357344519359766417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ea2b2695fec92947ada520d70ae2dd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _health: 100
-  _currentCar: {fileID: 8710441997657214208}
-  _destroyedCarPrefab: {fileID: 8680945509905380589, guid: 12fadfd35e3cfc14bb96768fb40b257e, type: 3}
 --- !u!1 &1545420633342126322
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,7 +710,7 @@ GameObject:
   m_Component:
   - component: {fileID: 766121666310866614}
   m_Layer: 0
-  m_Name: FrontAxel
+  m_Name: FrontAxle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -915,7 +899,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8203857987966799025}
   m_Layer: 0
-  m_Name: RearAxel
+  m_Name: RearAxle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -947,7 +931,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3870913511480822674}
   - component: {fileID: 3851690779528490049}
-  - component: {fileID: 215061806860539703}
   m_Layer: 0
   m_Name: BackPlate
   m_TagString: Untagged
@@ -984,20 +967,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 6935586166458634741, guid: 5aa5e4bbe77e6744e9131349261f387d, type: 3}
---- !u!114 &215061806860539703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8615722416840560894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ddc44b8232ba5041944ccea1b154d2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _health: 100
-  _plateMass: 100
 --- !u!1 &8710441997218079913
 GameObject:
   m_ObjectHideFlags: 0
@@ -1074,6 +1043,8 @@ GameObject:
   - component: {fileID: 8710441997657214209}
   - component: {fileID: 1174287626905872349}
   - component: {fileID: 7249023584502999386}
+  - component: {fileID: 8545858804678180482}
+  - component: {fileID: 5970717486918369808}
   m_Layer: 0
   m_Name: Ford Mustang Shelby
   m_TagString: Untagged
@@ -1146,6 +1117,36 @@ MonoBehaviour:
     BrakesInfluence: 0.6
     RightWheel: {fileID: 49758009391174908}
     LeftWheel: {fileID: 8493766015488580498}
+--- !u!114 &8545858804678180482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8710441997657214208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ea2b2695fec92947ada520d70ae2dd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 100
+  _carCollider: {fileID: 0}
+  _destroyedCarPrefab: {fileID: 8680945509905380589, guid: 12fadfd35e3cfc14bb96768fb40b257e, type: 3}
+--- !u!114 &5970717486918369808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8710441997657214208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ddc44b8232ba5041944ccea1b154d2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 100
+  _backPlateCollider: {fileID: 3851690779528490049}
+  _plateMass: 100
 --- !u!1001 &2439235977430828167
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1427,6 +1428,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0dd30860ac722643a2717d684baf037, type: 3}
+--- !u!4 &7591728383531606596 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5930013375949878044, guid: c0dd30860ac722643a2717d684baf037, type: 3}
+  m_PrefabInstance: {fileID: 4256076482182926680}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &49758009391174908 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4296532620773524900, guid: c0dd30860ac722643a2717d684baf037, type: 3}
@@ -1438,11 +1444,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41bd45bc6f7ffad4eab092196210daa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &7591728383531606596 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5930013375949878044, guid: c0dd30860ac722643a2717d684baf037, type: 3}
-  m_PrefabInstance: {fileID: 4256076482182926680}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5555325729858498287
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1581,6 +1582,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0dd30860ac722643a2717d684baf037, type: 3}
+--- !u!4 &2032268198830697770 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5930013375949878044, guid: c0dd30860ac722643a2717d684baf037, type: 3}
+  m_PrefabInstance: {fileID: 5656436022862339638}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8493766015488580498 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4296532620773524900, guid: c0dd30860ac722643a2717d684baf037, type: 3}
@@ -1592,11 +1598,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41bd45bc6f7ffad4eab092196210daa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &2032268198830697770 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5930013375949878044, guid: c0dd30860ac722643a2717d684baf037, type: 3}
-  m_PrefabInstance: {fileID: 5656436022862339638}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6540544107104421835
 PrefabInstance:
   m_ObjectHideFlags: 0

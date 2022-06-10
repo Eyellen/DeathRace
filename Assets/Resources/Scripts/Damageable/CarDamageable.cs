@@ -3,13 +3,22 @@ using UnityEngine;
 public class CarDamageable : MonoBehaviour, IDamageable<int>
 {
     [SerializeField] private int _health;
-    [SerializeField] private GameObject _currentCar;
+    private Collider _carCollider;
+    private GameObject _currentCar;
     [SerializeField] private GameObject _destroyedCarPrefab;
 
     public int Health { get => _health; }
 
-    public void Damage(int damage)
+    private void Start()
     {
+        _currentCar = gameObject;
+        _carCollider = transform.Find("Body/Frame").GetComponent<Collider>();
+    }
+
+    public void Damage(int damage, Collider collider)
+    {
+        if (collider != _carCollider) return;
+
         if (_health <= 0) return;
 
         _health -= damage;
@@ -31,7 +40,7 @@ public class CarDamageable : MonoBehaviour, IDamageable<int>
         // Speed inheritance
         destroyedCar.GetComponent<Rigidbody>().velocity = _currentCar.GetComponent<Rigidbody>().velocity;
 
-        destroyedCar.GetComponent<DestroyedCar>().CarFrame = gameObject;
+        destroyedCar.GetComponent<DestroyedCar>().Car = _currentCar;
 
         // Disabling BackPlate
         GameObject backPlate = _currentCar.transform.Find("Body/BackPlate")?.gameObject;

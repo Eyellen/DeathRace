@@ -74,9 +74,17 @@ public class GunBase : MonoBehaviour
         Debug.DrawRay(shotRay.origin, shotRay.direction * _shotDistance, Color.blue, 0.5f);
         if (!Physics.Raycast(shotRay, out RaycastHit hitInfo, _shotDistance)) return;
 
-        if (!hitInfo.collider.TryGetComponent(out IDamageable<int> damageable)) return;
+        IDamageable<int>[] damageables = hitInfo.transform.GetComponents<IDamageable<int>>();
+        if (damageables.Length <= 0) return;
 
-        damageable.Damage(_damage);
+        foreach (IDamageable<int> damageable in damageables)
+        {
+            damageable.Damage(_damage, hitInfo.collider);
+        }
+
+        //if (!hitInfo.transform.TryGetComponent(out IDamageable<int> damageable)) return;
+
+        //damageable.Damage(_damage, hitInfo.collider);
     }
 
     private void AddSpread(ref Ray shotRay)

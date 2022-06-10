@@ -43,11 +43,18 @@ public class Explosion : MonoBehaviour
     private void ApplyDamage(Collider collider)
     {
         if (collider == ExceptionObject) return;
-        if (!collider.TryGetComponent(out IDamageable<int> damageable)) return;
+        //if (!collider.transform.root.TryGetComponent(out IDamageable<int> damageable)) return;
+
+        IDamageable<int>[] damageables = collider.transform.root.GetComponents<IDamageable<int>>();
+        if (damageables.Length <= 0) return;
 
         float distanceToObject = Vector3.Distance(transform.position, collider.transform.position);
         float coefficient = 1 - distanceToObject / _explosionRadius;
         coefficient = Mathf.Clamp(coefficient, 0.2f, 1f);
-        damageable.Damage((int)(_maxDamage * coefficient));
+
+        foreach (IDamageable<int> damageable in damageables)
+        {
+            damageable.Damage((int)(_maxDamage * coefficient), collider);
+        }
     }
 }

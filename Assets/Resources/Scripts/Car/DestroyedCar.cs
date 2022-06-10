@@ -12,7 +12,7 @@ public class DestroyedCar : MonoBehaviour
 
     #region Properties
     public Rigidbody Rigidbody { get => _rigidbody; }
-    public GameObject CarFrame { get; set; }
+    public GameObject Car { get; set; }
     #endregion
 
     private void Awake()
@@ -36,15 +36,8 @@ public class DestroyedCar : MonoBehaviour
 
     private void CheckIfBackPlateBroken()
     {
-        // Looking for Car's origin transform
-        Transform car = CarFrame.transform;
-        while (car.parent)
-        {
-            car = car.parent;
-        }
-
         // Looking for Car's BackPlate
-        Transform backPlate = car.Find("Body/BackPlate");
+        Transform backPlate = Car.transform.Find("Body/BackPlate");
 
         // Destroying DestroyedCar's BackPlate if Car's BackPlate has been destroyed
         if(!backPlate)

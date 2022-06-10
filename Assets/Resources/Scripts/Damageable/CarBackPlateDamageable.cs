@@ -5,12 +5,20 @@ using UnityEngine;
 public class CarBackPlateDamageable : MonoBehaviour, IDamageable<int>
 {
     [SerializeField] private int _health;
+    private Collider _backPlateCollider;
     [SerializeField] private float _plateMass;
 
     public int Health { get => _health; }
 
-    public void Damage(int damage)
+    private void Start()
     {
+        _backPlateCollider = transform.Find("Body/BackPlate").GetComponent<Collider>();
+    }
+
+    public void Damage(int damage, Collider collider)
+    {
+        if (collider != _backPlateCollider) return;
+
         if (_health <= 0) return;
 
         _health -= damage;
@@ -22,8 +30,8 @@ public class CarBackPlateDamageable : MonoBehaviour, IDamageable<int>
 
     private void Destruct()
     {
-        transform.parent = null;
-        var rigidbody = gameObject.AddComponent<Rigidbody>();
+        _backPlateCollider.transform.parent = null;
+        var rigidbody = _backPlateCollider.gameObject.AddComponent<Rigidbody>();
         rigidbody.mass = 100f;
     }
 }
