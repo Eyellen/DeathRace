@@ -585,7 +585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6aec4e0067cc943ba86ec4c16f84e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minigun: {fileID: 6163176469997286611}
+  _minigun: {fileID: 3645296388141432345}
   _barrelSpinSource: {fileID: 137991899983414285}
   _barrelsStartSpin: {fileID: 8300000, guid: 39330a4f9197d8b4d9fe85879268396b, type: 3}
   _barrelsSpinLoop: {fileID: 8300000, guid: b404eb834eda4ae41aea63cac8bd032b, type: 3}
@@ -666,7 +666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bbb27458f4e3ab4c952c813ce582eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minigun: {fileID: 6163176469997286611}
+  _minigun: {fileID: 3645296388141432345}
   _bulletCartridgeParticlesPrefab: {fileID: 197616237585275508, guid: c5035ca4ad6c4ce498ccd314ed2772dc, type: 3}
   _cartridgeSpawnPoint: {fileID: 8098090778906192470}
   _delayBetweenCartridges: 0.1
@@ -755,8 +755,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7446687902727115443}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.377182, y: 0.23299679, z: 1.2637644}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8710441997657214209}
@@ -1045,6 +1045,8 @@ GameObject:
   - component: {fileID: 7249023584502999386}
   - component: {fileID: 8545858804678180482}
   - component: {fileID: 5970717486918369808}
+  - component: {fileID: 3645296388141432345}
+  - component: {fileID: 3122427687694954833}
   m_Layer: 0
   m_Name: Ford Mustang Shelby
   m_TagString: Untagged
@@ -1130,7 +1132,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 100
-  _carCollider: {fileID: 0}
   _destroyedCarPrefab: {fileID: 8680945509905380589, guid: 12fadfd35e3cfc14bb96768fb40b257e, type: 3}
 --- !u!114 &5970717486918369808
 MonoBehaviour:
@@ -1145,8 +1146,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 100
-  _backPlateCollider: {fileID: 3851690779528490049}
   _plateMass: 100
+--- !u!114 &3645296388141432345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8710441997657214208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e366e08e92433e74a82a2949cb67d7fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _debug: 1
+  _shotPoint: {fileID: 7908847414749662255}
+  _damage: 5
+  _shotDistance: 100
+  _maxSpreadMagnitude: 5
+  _timeBetweenShots: 0.05
+  _maxAmmoSupply: 500
+  _minigunBarrels: {fileID: 2975694820159768075}
+  _barrelsSpinningTime: 2
+  _maxSpinningSpeed: 1000
+--- !u!114 &3122427687694954833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8710441997657214208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e366e08e92433e74a82a2949cb67d7fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _debug: 1
+  _shotPoint: {fileID: 526490675659105519}
+  _damage: 5
+  _shotDistance: 100
+  _maxSpreadMagnitude: 5
+  _timeBetweenShots: 0.05
+  _maxAmmoSupply: 500
+  _minigunBarrels: {fileID: 4883146662782643915}
+  _barrelsSpinningTime: 2
+  _maxSpinningSpeed: 1000
 --- !u!1001 &2439235977430828167
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1274,6 +1318,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0dd30860ac722643a2717d684baf037, type: 3}
+--- !u!4 &9149598132969814081 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5930013375949878044, guid: c0dd30860ac722643a2717d684baf037, type: 3}
+  m_PrefabInstance: {fileID: 3220712246157019997}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1662423230778248953 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4296532620773524900, guid: c0dd30860ac722643a2717d684baf037, type: 3}
@@ -1285,11 +1334,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41bd45bc6f7ffad4eab092196210daa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &9149598132969814081 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5930013375949878044, guid: c0dd30860ac722643a2717d684baf037, type: 3}
-  m_PrefabInstance: {fileID: 3220712246157019997}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3479884614110490379
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1345,19 +1389,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7187299551496955583, guid: bf570713f33d295448145514c7159e4b, type: 3}
+      propertyPath: _minigun
+      value: 
+      objectReference: {fileID: 3645296388141432345}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf570713f33d295448145514c7159e4b, type: 3}
---- !u!114 &6163176469997286611 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7332714269036567512, guid: bf570713f33d295448145514c7159e4b, type: 3}
+--- !u!4 &7908847414749662255 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6740435417063793444, guid: bf570713f33d295448145514c7159e4b, type: 3}
   m_PrefabInstance: {fileID: 3479884614110490379}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e366e08e92433e74a82a2949cb67d7fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+--- !u!4 &2975694820159768075 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1801653374189365504, guid: bf570713f33d295448145514c7159e4b, type: 3}
+  m_PrefabInstance: {fileID: 3479884614110490379}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9018516356017341055 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5576367049758862708, guid: bf570713f33d295448145514c7159e4b, type: 3}
@@ -1653,11 +1700,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7187299551496955583, guid: bf570713f33d295448145514c7159e4b, type: 3}
+      propertyPath: _minigun
+      value: 
+      objectReference: {fileID: 3122427687694954833}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf570713f33d295448145514c7159e4b, type: 3}
+--- !u!4 &4883146662782643915 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1801653374189365504, guid: bf570713f33d295448145514c7159e4b, type: 3}
+  m_PrefabInstance: {fileID: 6540544107104421835}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1704492059209640639 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5576367049758862708, guid: bf570713f33d295448145514c7159e4b, type: 3}
+  m_PrefabInstance: {fileID: 6540544107104421835}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &526490675659105519 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6740435417063793444, guid: bf570713f33d295448145514c7159e4b, type: 3}
   m_PrefabInstance: {fileID: 6540544107104421835}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6653598727767817253

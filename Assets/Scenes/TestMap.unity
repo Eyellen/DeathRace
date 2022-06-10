@@ -2278,6 +2278,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3122427687694954833, guid: c7a2a7a9f9f9fc24aad6c6a69744301a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3645296388141432345, guid: c7a2a7a9f9f9fc24aad6c6a69744301a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4541782301916732435, guid: c7a2a7a9f9f9fc24aad6c6a69744301a, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -2296,7 +2304,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8710441997657214209, guid: c7a2a7a9f9f9fc24aad6c6a69744301a, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8710441997657214209, guid: c7a2a7a9f9f9fc24aad6c6a69744301a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4875,8 +4883,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5146e1e25397bef429bf2f334ab65e13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 1715438261}
-  _cameraOffset: {x: 0, y: 1, z: -8}
+  _target: {fileID: 1755727127}
+  _cameraOffset: {x: 0, y: 1, z: -5}
   _sensitivity: {x: 3, y: 3}
 --- !u!81 &844778149
 AudioListener:
@@ -5348,13 +5356,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3122427687694954833, guid: c7a2a7a9f9f9fc24aad6c6a69744301a, type: 3}
+      propertyPath: _debug
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3645296388141432345, guid: c7a2a7a9f9f9fc24aad6c6a69744301a, type: 3}
+      propertyPath: _debug
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8710441997657214208, guid: c7a2a7a9f9f9fc24aad6c6a69744301a, type: 3}
       propertyPath: m_Name
       value: Ford Mustang Shelby
       objectReference: {fileID: 0}
     - target: {fileID: 8710441997657214209, guid: c7a2a7a9f9f9fc24aad6c6a69744301a, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8710441997657214209, guid: c7a2a7a9f9f9fc24aad6c6a69744301a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8315,11 +8331,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1683166897}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1715438261 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8710441997657214209, guid: c7a2a7a9f9f9fc24aad6c6a69744301a, type: 3}
-  m_PrefabInstance: {fileID: 985198865}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1728121654
 GameObject:
   m_ObjectHideFlags: 0
@@ -8525,6 +8536,11 @@ Transform:
   m_Father: {fileID: 1182243639}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1755727127 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6648461120887458738, guid: c7a2a7a9f9f9fc24aad6c6a69744301a, type: 3}
+  m_PrefabInstance: {fileID: 985198865}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1775222438
 GameObject:
   m_ObjectHideFlags: 0

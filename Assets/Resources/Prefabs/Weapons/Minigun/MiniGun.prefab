@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5576367049758862708}
-  - component: {fileID: 7332714269036567512}
   - component: {fileID: 7187299551496955583}
   m_Layer: 0
   m_Name: MiniGun
@@ -36,27 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7332714269036567512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 860878727297938523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e366e08e92433e74a82a2949cb67d7fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _shotPoint: {fileID: 6740435417063793444}
-  _damage: 5
-  _shotDistance: 100
-  _maxSpreadMagnitude: 5
-  _timeBetweenShots: 0.05
-  _maxAmmoSupply: 500
-  _minigun: {fileID: 1801653374189365504}
-  _barrelsSpinningTime: 2
-  _maxSpinningSpeed: 1000
 --- !u!114 &7187299551496955583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5078c46a1236cde4e9fa261e8d336b88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _minigun: {fileID: 0}
   _shorfireParticles:
   - {fileID: 8146295114423202791}
   - {fileID: 6161382921474954833}
@@ -251,7 +230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 503ee3b582f10294a8ae7ca7d9054498, type: 3}
       propertyPath: m_Name
-      value: MiniGan1
+      value: MiniGunBarrels
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 503ee3b582f10294a8ae7ca7d9054498, type: 3}

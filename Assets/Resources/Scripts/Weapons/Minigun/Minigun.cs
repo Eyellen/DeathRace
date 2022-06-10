@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Minigun : GunBase
 {
-    [SerializeField] private Transform _minigun;
+    [Header("Minigun")]
+    [SerializeField] private Transform _minigunBarrels;
 
     [Header("Minigun settings")]
     [SerializeField] private float _barrelsSpinningTime;
@@ -27,7 +28,7 @@ public class Minigun : GunBase
         IsShooting = false;
 
         _currentSpinningSpeed = Mathf.Lerp(0, _maxSpinningSpeed, _spinningTimePassed / _barrelsSpinningTime);
-        _minigun.Rotate(Vector3.forward, _currentSpinningSpeed * Time.deltaTime);
+        _minigunBarrels.Rotate(Vector3.forward, _currentSpinningSpeed * Time.deltaTime);
         //Debug.Log(_spinningTimePassed);
         //Debug.Log(_currentSpinningSpeed);
 

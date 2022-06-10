@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Minigun))]
 public class MinigunEffects : MonoBehaviour
 {
-    private Minigun _minigun;
+    [SerializeField] private Minigun _minigun;
 
     [Header("Shotfire particles")]
     [SerializeField] private ParticleSystem[] _shorfireParticles;
@@ -19,7 +18,6 @@ public class MinigunEffects : MonoBehaviour
 
     void Start()
     {
-        _minigun = GetComponent<Minigun>();
         _minigun.OnGunShoot += SpawnBulletTracer;
     }
 

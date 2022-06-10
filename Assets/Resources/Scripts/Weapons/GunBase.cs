@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class GunBase : MonoBehaviour
 {
+#if UNITY_EDITOR
+    [Header("Debugging")]
+    [SerializeField] private bool _debug;
+#endif
+
     protected PlayerInput _input;
+    [Header("Gun")]
     [SerializeField] private Transform _shotPoint;
 
     [Header("Gun settings")]
@@ -46,7 +52,13 @@ public class GunBase : MonoBehaviour
     protected virtual void Update()
     {
         HandleInput();
-        Debug.DrawRay(_shotPoint.position, _shotPoint.forward * _shotDistance, Color.red);
+
+#if UNITY_EDITOR
+        if (_debug)
+        {
+            Debug.DrawRay(_shotPoint.position, _shotPoint.forward * _shotDistance, Color.red);
+        }
+#endif
     }
 
     private void InitializeGunBase()
@@ -71,7 +83,14 @@ public class GunBase : MonoBehaviour
 
         InitializeShotRay(out Ray shotRay);
         OnGunShoot?.Invoke(shotRay, _shotDistance);
-        Debug.DrawRay(shotRay.origin, shotRay.direction * _shotDistance, Color.blue, 0.5f);
+
+#if UNITY_EDITOR
+        if (_debug)
+        {
+            Debug.DrawRay(shotRay.origin, shotRay.direction * _shotDistance, Color.blue, 0.5f);
+        }
+#endif
+
         if (!Physics.Raycast(shotRay, out RaycastHit hitInfo, _shotDistance)) return;
 
         IDamageable<int>[] damageables = hitInfo.transform.GetComponents<IDamageable<int>>();
