@@ -10,6 +10,8 @@ public class Wheel : MonoBehaviour
     public Transform TireMarkPoint;
 
     #region Properties
+    public bool ToggleUpdateWheels { get; set; } = true;
+
     public float ForwardSlip
     {
         get
@@ -33,7 +35,7 @@ public class Wheel : MonoBehaviour
 
     private void Update()
     {
-        UpdateWheel();
+        if (ToggleUpdateWheels) UpdateWheel();
         UpdateTrailMarkPoint();
     }
 
