@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
 
-public class CarBase : NetworkBehaviour
+public class CarBase : MonoBehaviour
 {
     protected Transform _thisTransform;
     protected Rigidbody _rigidbody;
@@ -89,8 +88,6 @@ public class CarBase : NetworkBehaviour
 
     private void FixedUpdate()
     {
-        if (!isLocalPlayer) return;
-
         HandleInput();
     }
 

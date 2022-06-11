@@ -1,9 +1,10 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
 
-public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
+public class CarBackPlateDamageable : MonoBehaviour, IDamageable<int>
 {
-    [SyncVar] [SerializeField] private int _health;
+    [SerializeField] private int _health;
     private Collider _backPlateCollider;
     [SerializeField] private float _plateMass;
 
@@ -26,7 +27,7 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
 
         Destruct();
     }
-    
+
     private void Destruct()
     {
         _backPlateCollider.transform.parent = null;

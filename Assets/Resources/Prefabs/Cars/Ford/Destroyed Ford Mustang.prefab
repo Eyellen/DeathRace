@@ -100,10 +100,6 @@ PrefabInstance:
       propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6847228327552428920, guid: c7a2a7a9f9f9fc24aad6c6a69744301a, type: 3}
-      propertyPath: m_AssetId
-      value: 12fadfd35e3cfc14bb96768fb40b257e
-      objectReference: {fileID: 0}
     - target: {fileID: 7446687902727115443, guid: c7a2a7a9f9f9fc24aad6c6a69744301a, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -333,8 +329,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExplosionEffect
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6192348340029992626, guid: df4176b9d3b2ed344941e0eb2d253829, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df4176b9d3b2ed344941e0eb2d253829, type: 3}
 --- !u!1001 &5204331713091172692
 PrefabInstance:
