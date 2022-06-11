@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class GunBase : MonoBehaviour
+public class GunBase : NetworkBehaviour
 {
 #if UNITY_EDITOR
     [Header("Debugging")]
@@ -51,6 +52,8 @@ public class GunBase : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (!isLocalPlayer) return;
+
         HandleInput();
 
 #if UNITY_EDITOR
@@ -72,7 +75,8 @@ public class GunBase : MonoBehaviour
         Shoot(_input.IsLeftActionPressed);
     }
 
-    protected void SingleShot()
+    [Command]
+    protected void CmdSingleShot()
     {
         if (IsAmmoRunOut) return;
         
@@ -128,7 +132,7 @@ public class GunBase : MonoBehaviour
         IsShooting = isActionOccurs;
         if(isActionOccurs)
         {
-            SingleShot();
+            CmdSingleShot();
         }
     }
 }

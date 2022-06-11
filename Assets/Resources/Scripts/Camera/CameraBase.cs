@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class CameraBase : MonoBehaviour
+public class CameraBase : NetworkBehaviour
 {
     private Transform _camera;
 
@@ -21,7 +22,7 @@ public class CameraBase : MonoBehaviour
 
     private void Start()
     {
-
+        StartCoroutine(FindTarget());
     }
 
     private void LateUpdate()
@@ -46,5 +47,25 @@ public class CameraBase : MonoBehaviour
     private void HandleFollowing()
     {
         _camera.position = _target.position + _currentCameraOffset;
+    }
+
+    private IEnumerator FindTarget()
+    {
+        while(!_target)
+        {
+            Debug.Log("Method FindPlayer() started");
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            foreach (var player in players)
+            {
+                if (player.GetComponent<CarBase>().isLocalPlayer)
+                {
+                    Debug.Log(player.transform.name + " is local player");
+                    _target = player.transform;
+                    break;
+                }
+            }
+
+            yield return new WaitForEndOfFrame();
+        }
     }
 }

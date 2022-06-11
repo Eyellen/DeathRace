@@ -1,6 +1,7 @@
 using UnityEngine;
+using Mirror;
 
-public class CarDamageable : MonoBehaviour, IDamageable<int>
+public class CarDamageable : NetworkBehaviour, IDamageable<int>
 {
     [SerializeField] private int _health;
     private Collider _carCollider;
