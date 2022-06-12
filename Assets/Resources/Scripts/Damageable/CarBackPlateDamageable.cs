@@ -1,12 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class CarBackPlateDamageable : MonoBehaviour, IDamageable<int>
+public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
 {
-    [SerializeField] private int _health;
+    [SyncVar]
+    [SerializeField]
+    private int _health;
+
+    [SyncVar(hook = nameof(Destruct))]
+    private bool _isBroken;
+
     private Collider _backPlateCollider;
-    [SerializeField] private float _plateMass;
+
+    [SerializeField]
+    private float _plateMass;
 
     public int Health { get => _health; }
 
@@ -19,16 +28,30 @@ public class CarBackPlateDamageable : MonoBehaviour, IDamageable<int>
     {
         if (collider != _backPlateCollider) return;
 
-        if (_health <= 0) return;
+        if (_health <= 0 && _isBroken) return;
 
-        _health -= damage;
+        CmdSetDamage(damage);
 
         if (_health > 0) return;
 
-        Destruct();
+        if (_isBroken) return;
+
+        CmdSetBroken(true);
     }
 
-    private void Destruct()
+    [Command(requiresAuthority = false)]
+    private void CmdSetDamage(int damage)
+    {
+        _health -= damage;
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdSetBroken(bool isBroken)
+    {
+        _isBroken = isBroken;
+    }
+
+    private void Destruct(bool oldValue, bool newValue)
     {
         _backPlateCollider.transform.parent = null;
         var rigidbody = _backPlateCollider.gameObject.AddComponent<Rigidbody>();
