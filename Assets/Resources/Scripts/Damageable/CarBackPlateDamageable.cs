@@ -34,8 +34,6 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
 
         if (_health > 0) return;
 
-        if (_isBroken) return;
-
         CmdSetBroken(true);
     }
 
