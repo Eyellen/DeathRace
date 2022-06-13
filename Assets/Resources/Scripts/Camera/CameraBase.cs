@@ -20,18 +20,13 @@ public class CameraBase : NetworkBehaviour
         _camera = GetComponent<Transform>();
     }
 
-    private void Start()
-    {
-
-    }
-
     private void LateUpdate()
     {
         StartCoroutine(FindTarget());
 
         HandleRotation();
-        HandleFollowing();
-        Debug.DrawLine(_target.position, _target.position + _currentCameraOffset);
+
+        HandleFollowing();   
     }
 
     private void HandleRotation()
@@ -48,7 +43,20 @@ public class CameraBase : NetworkBehaviour
 
     private void HandleFollowing()
     {
+#if UNITY_EDITOR
+        if (!_target)
+        {
+            Debug.LogWarning("Camera doesn't have target." +
+                $"\n{nameof(CameraBase)}.{nameof(HandleFollowing)}()");
+            return;
+        }
+#endif
+
         _camera.position = _target.position + _currentCameraOffset;
+
+#if UNITY_EDITOR
+        Debug.DrawLine(_target.position, _target.position + _currentCameraOffset);
+#endif
     }
 
     private IEnumerator FindTarget()
