@@ -1,8 +1,16 @@
+using System.Collections;
 using UnityEngine;
+using Mirror;
 
-public class CarDamageable : MonoBehaviour, IDamageable<int>
+public class CarDamageable : NetworkBehaviour, IDamageable<int>
 {
-    [SerializeField] private int _health;
+    [SyncVar]
+    [SerializeField]
+    private int _health;
+
+    [SyncVar]
+    private bool _isDestructed;
+
     private Collider _carCollider;
     private GameObject _currentCar;
     [SerializeField] private GameObject _destroyedCarPrefab;
@@ -19,20 +27,36 @@ public class CarDamageable : MonoBehaviour, IDamageable<int>
     {
         if (collider != _carCollider) return;
 
-        if (_health <= 0) return;
+        if (_health <= 0 && _isDestructed) return;
 
-        _health -= damage;
+        CmdSetDamage(damage);
 
         if (_health > 0) return;
 
-        Destruct();
+        CmdSetDestructed();
+        CmdDestruct();
     }
 
-    private void Destruct()
+    [Command(requiresAuthority = false)]
+    private void CmdSetDamage(int damage)
+    {
+        _health -= damage;
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdSetDestructed()
+    {
+        _isDestructed = true;
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdDestruct()
     {
         GameObject destroyedCar = Instantiate(_destroyedCarPrefab, _currentCar.transform.position, _currentCar.transform.rotation);
         InitializeDestroyedCar(destroyedCar);
-        Destroy(_currentCar);
+        NetworkServer.Spawn(destroyedCar);
+
+        NetworkServer.Destroy(_currentCar);
     }
 
     private void InitializeDestroyedCar(GameObject destroyedCar)
