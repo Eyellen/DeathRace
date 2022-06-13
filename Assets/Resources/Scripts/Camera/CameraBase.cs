@@ -5,6 +5,10 @@ using Mirror;
 
 public class CameraBase : NetworkBehaviour
 {
+#if UNITY_EDITOR
+    [SerializeField] private bool _debugging = false;
+#endif
+
     private Transform _camera;
 
     [SerializeField] private Transform _target;
@@ -46,8 +50,11 @@ public class CameraBase : NetworkBehaviour
 #if UNITY_EDITOR
         if (!_target)
         {
-            Debug.LogWarning("Camera doesn't have target." +
+            if (_debugging)
+            {
+                Debug.LogWarning("Camera doesn't have target." +
                 $"\n{nameof(CameraBase)}.{nameof(HandleFollowing)}()");
+            }
             return;
         }
 #endif

@@ -33,11 +33,12 @@ public class DestroyedCar : NetworkBehaviour
         _rigidbody.AddForceAtPosition(Vector3.up * _explosionForce, impactPoint, ForceMode.VelocityChange);
     }
 
-    [Server]
     private void CheckIfBackPlateBroken()
     {
+        if (isClient) return;
+
 #if UNITY_EDITOR
-        if(!Car)
+        if (!Car)
         {
             Debug.LogError("Car is not set for DestroyedCar. Can't check if back plate is broken." +
                 $"\n{nameof(DestroyedCar)}.{nameof(CheckIfBackPlateBroken)}()");
