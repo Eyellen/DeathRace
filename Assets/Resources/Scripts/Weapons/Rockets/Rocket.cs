@@ -114,6 +114,6 @@ public class Rocket : MonoBehaviour
         explosion.ExplosionForce = _explosionForce;
         explosion.MinDamage = _minDamage;
         explosion.MaxDamage = _maxDamage;
-        explosion.ExceptionObject = _directHit;
+        explosion.ExceptionObjectCollider = _directHit;
     }
 }
