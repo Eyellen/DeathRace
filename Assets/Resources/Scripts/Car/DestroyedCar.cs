@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class DestroyedCar : MonoBehaviour
+public class DestroyedCar : NetworkBehaviour
 {
     private Rigidbody _rigidbody;
-
-    [SerializeField] private List<Wheel> _wheels;
 
     [SerializeField] private float _explosionForce;
 
@@ -34,8 +33,18 @@ public class DestroyedCar : MonoBehaviour
         _rigidbody.AddForceAtPosition(Vector3.up * _explosionForce, impactPoint, ForceMode.VelocityChange);
     }
 
+    [Server]
     private void CheckIfBackPlateBroken()
     {
+#if UNITY_EDITOR
+        if(!Car)
+        {
+            Debug.LogError("Car is not set for DestroyedCar. Can't check if back plate is broken." +
+                $"\n{nameof(DestroyedCar)}.{nameof(CheckIfBackPlateBroken)}()");
+            return;
+        }
+#endif
+
         // Looking for Car's BackPlate
         Transform backPlate = Car.transform.Find("Body/BackPlate");
 
