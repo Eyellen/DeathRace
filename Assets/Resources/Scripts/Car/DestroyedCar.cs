@@ -40,8 +40,7 @@ public class DestroyedCar : NetworkBehaviour
 #if UNITY_EDITOR
         if (!Car)
         {
-            Debug.LogError("Car is not set for DestroyedCar. Can't check if back plate is broken." +
-                $"\n{nameof(DestroyedCar)}.{nameof(CheckIfBackPlateBroken)}()");
+            Debug.LogError("Car is not set for DestroyedCar. Can't check if back plate is broken.");
             return;
         }
 #endif

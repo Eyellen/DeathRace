@@ -52,8 +52,7 @@ public class CameraBase : NetworkBehaviour
         {
             if (_debugging)
             {
-                Debug.LogWarning("Camera doesn't have target." +
-                $"\n{nameof(CameraBase)}.{nameof(HandleFollowing)}()");
+                Debug.LogWarning("Camera doesn't have target.");
             }
             return;
         }

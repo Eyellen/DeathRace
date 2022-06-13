@@ -363,6 +363,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExplosionEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 390734475171696009, guid: df4176b9d3b2ed344941e0eb2d253829, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 905550113245200499, guid: df4176b9d3b2ed344941e0eb2d253829, type: 3}
       propertyPath: <ExceptionObject>k__BackingField
       value: 
