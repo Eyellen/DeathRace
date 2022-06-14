@@ -47,14 +47,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5078c46a1236cde4e9fa261e8d336b88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minigun: {fileID: 0}
+  _minigunScript: {fileID: 0}
   _shotPoint: {fileID: 6740435417063793444}
   _shorfireParticles:
   - {fileID: 8146295114423202791}
   - {fileID: 6161382921474954833}
   - {fileID: 6161382920721943742}
   _bulletTracerPrefab: {fileID: 4671762997982137765, guid: cdc0810c1b79f7544a0220c368c4962d, type: 3}
-  _hitImpactPrefab: {fileID: 5190881665862391171, guid: 4275513d38e427f4892f31c8b78d4061, type: 3}
+  _bulletHitEffectPrefab: {fileID: 8727484934170051341, guid: b3cdbeee282f12d4fb619bda0c0fb072, type: 3}
 --- !u!1 &2439263790725017268
 GameObject:
   m_ObjectHideFlags: 0

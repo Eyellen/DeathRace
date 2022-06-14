@@ -15,7 +15,7 @@ public class MinigunEffects : MonoBehaviour
     [SerializeField] private GameObject _bulletTracerPrefab;
 
     [Header("Hit impact")]
-    [SerializeField] private GameObject _hitImpactPrefab;
+    [SerializeField] private GameObject _bulletHitEffectPrefab;
 
     void Start()
     {
@@ -66,7 +66,7 @@ public class MinigunEffects : MonoBehaviour
 
     private void SpawnHitParticles(RaycastHit hitInfo)
     {
-        var hitParticle = Instantiate(_hitImpactPrefab, hitInfo.point, Quaternion.identity);
+        var hitParticle = Instantiate(_bulletHitEffectPrefab, hitInfo.point, Quaternion.identity);
         hitParticle.transform.LookAt(hitInfo.point + hitInfo.normal);
     }
 }

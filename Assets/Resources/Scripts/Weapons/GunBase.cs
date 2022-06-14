@@ -80,7 +80,11 @@ public class GunBase : NetworkBehaviour
 
     protected void SingleShot()
     {
-        if (IsAmmoRunOut) return;
+        if (IsAmmoRunOut)
+        {
+            CmdSetShooting(false);
+            return;
+        }
         
         if (!IsTimeBetweenShotsPassed) return;
         _lastShotTime = Time.time;
