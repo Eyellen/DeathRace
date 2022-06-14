@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _minigun: {fileID: 0}
+  _shotPoint: {fileID: 6740435417063793444}
   _shorfireParticles:
   - {fileID: 8146295114423202791}
   - {fileID: 6161382921474954833}
@@ -95,7 +96,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6740435417063793444}
   m_Layer: 0
-  m_Name: ShotPoint1
+  m_Name: ShotPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

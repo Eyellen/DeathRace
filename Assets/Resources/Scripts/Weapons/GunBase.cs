@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class GunBase : MonoBehaviour
+public class GunBase : NetworkBehaviour
 {
 #if UNITY_EDITOR
     [Header("Debugging")]
@@ -38,11 +39,14 @@ public class GunBase : MonoBehaviour
             return Time.time > (_lastShotTime + _timeBetweenShots);
         }
     }
-    public bool IsShooting { get; protected set; }
+    [field: SyncVar] public bool IsShooting { get; protected set; }
     #endregion
 
-    public delegate void GunShootEvent(Ray shotRay, float length);
+    public delegate void GunShootEvent(Vector3 direction, float length);
     public event GunShootEvent OnGunShoot;
+
+    [SyncVar(hook = nameof(HookOnGunShoot))] 
+    private Vector3 _gunShootEventDirection;
 
     protected virtual void Awake()
     {
@@ -51,6 +55,8 @@ public class GunBase : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (!isLocalPlayer) return;
+
         HandleInput();
 
 #if UNITY_EDITOR
@@ -82,12 +88,13 @@ public class GunBase : MonoBehaviour
         _currentBulletsCount--;
 
         InitializeShotRay(out Ray shotRay);
-        OnGunShoot?.Invoke(shotRay, _shotDistance);
+        //OnGunShoot?.Invoke(shotRay.direction, _shotDistance);
+        CmdSetGunShootEventDirection(shotRay.direction);
 
 #if UNITY_EDITOR
         if (_debug)
         {
-            Debug.DrawRay(shotRay.origin, shotRay.direction * _shotDistance, Color.blue, 0.5f);
+            Debug.DrawRay(shotRay.origin, shotRay.direction * _shotDistance, Color.green, 0.5f);
         }
 #endif
 
@@ -104,6 +111,17 @@ public class GunBase : MonoBehaviour
         //if (!hitInfo.transform.TryGetComponent(out IDamageable<int> damageable)) return;
 
         //damageable.Damage(_damage, hitInfo.collider);
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdSetGunShootEventDirection(Vector3 direction)
+    {
+        _gunShootEventDirection = direction;
+    }
+
+    private void HookOnGunShoot(Vector3 oldValue, Vector3 newValue)
+    {
+        OnGunShoot?.Invoke(newValue, _shotDistance);
     }
 
     private void AddSpread(ref Ray shotRay)
@@ -125,10 +143,16 @@ public class GunBase : MonoBehaviour
 
     protected virtual void Shoot(bool isActionOccurs)
     {
-        IsShooting = isActionOccurs;
+        CmdSetShooting(isActionOccurs);
         if(isActionOccurs)
         {
             SingleShot();
         }
+    }
+
+    [Command(requiresAuthority = false)]
+    protected void CmdSetShooting(bool isShooting)
+    {
+        IsShooting = isShooting;
     }
 }

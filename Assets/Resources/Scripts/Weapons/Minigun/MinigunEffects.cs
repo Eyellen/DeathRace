@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class MinigunEffects : MonoBehaviour
 {
-    [SerializeField] private Minigun _minigun;
+    [SerializeField] private Minigun _minigunScript;
+    [SerializeField] private Transform _shotPoint;
 
     [Header("Shotfire particles")]
     [SerializeField] private ParticleSystem[] _shorfireParticles;
-    private bool _isShotfirEmitting;
+    private bool _isShotfireEmitting;
 
     [Header("Bullet tracer effect")]
     [SerializeField] private GameObject _bulletTracerPrefab;
@@ -18,7 +19,7 @@ public class MinigunEffects : MonoBehaviour
 
     void Start()
     {
-        _minigun.OnGunShoot += SpawnBulletTracer;
+        _minigunScript.OnGunShoot += SpawnBulletTracer;
     }
 
     void Update()
@@ -28,9 +29,9 @@ public class MinigunEffects : MonoBehaviour
 
     private void ShootEffect()
     {
-        if(_minigun.IsShooting && !_isShotfirEmitting)
+        if(_minigunScript.IsShooting && !_isShotfireEmitting)
         {
-            _isShotfirEmitting = true;
+            _isShotfireEmitting = true;
             foreach (var particle in _shorfireParticles)
             {
                 var emission = particle.emission;
@@ -38,9 +39,9 @@ public class MinigunEffects : MonoBehaviour
             }
         }
 
-        if(!_minigun.IsShooting && _isShotfirEmitting)
+        if(!_minigunScript.IsShooting && _isShotfireEmitting)
         {
-            _isShotfirEmitting = false;
+            _isShotfireEmitting = false;
             foreach (var particle in _shorfireParticles)
             {
                 var emission = particle.emission;
@@ -49,10 +50,11 @@ public class MinigunEffects : MonoBehaviour
         }
     }
 
-    private void SpawnBulletTracer(Ray shotRay, float length)
+    private void SpawnBulletTracer(Vector3 direction, float length)
     {
+        Ray shotRay = new Ray(_shotPoint.position, direction.normalized * length);
         Vector3 destination = shotRay.origin + shotRay.direction * length;
-        if(Physics.Raycast(shotRay, out RaycastHit hitInfo))
+        if (Physics.Raycast(shotRay, out RaycastHit hitInfo))
         {
             SpawnHitParticles(hitInfo);
 

@@ -1140,6 +1140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ea2b2695fec92947ada520d70ae2dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   _health: 100
   _destroyedCarPrefab: {fileID: 8680945509905380589, guid: 12fadfd35e3cfc14bb96768fb40b257e, type: 3}
 --- !u!114 &5970717486918369808
@@ -1154,6 +1156,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ddc44b8232ba5041944ccea1b154d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   _health: 100
   _plateMass: 100
 --- !u!114 &3645296388141432345
@@ -1168,6 +1172,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e366e08e92433e74a82a2949cb67d7fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   _debug: 1
   _shotPoint: {fileID: 7908847414749662255}
   _damage: 5
@@ -1190,6 +1196,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e366e08e92433e74a82a2949cb67d7fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   _debug: 1
   _shotPoint: {fileID: 526490675659105519}
   _damage: 5
@@ -1617,6 +1625,10 @@ PrefabInstance:
       propertyPath: _minigun
       value: 
       objectReference: {fileID: 3645296388141432345}
+    - target: {fileID: 7187299551496955583, guid: bf570713f33d295448145514c7159e4b, type: 3}
+      propertyPath: _minigunScript
+      value: 
+      objectReference: {fileID: 3645296388141432345}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf570713f33d295448145514c7159e4b, type: 3}
 --- !u!4 &2975694820159768075 stripped
@@ -1941,6 +1953,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187299551496955583, guid: bf570713f33d295448145514c7159e4b, type: 3}
       propertyPath: _minigun
+      value: 
+      objectReference: {fileID: 3122427687694954833}
+    - target: {fileID: 7187299551496955583, guid: bf570713f33d295448145514c7159e4b, type: 3}
+      propertyPath: _minigunScript
       value: 
       objectReference: {fileID: 3122427687694954833}
     m_RemovedComponents: []
