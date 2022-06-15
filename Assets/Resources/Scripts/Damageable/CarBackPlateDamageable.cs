@@ -18,6 +18,7 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
     private float _plateMass;
 
     public int Health { get => _health; }
+    public bool IsBroken { get => _isBroken; }
 
     private void Start()
     {
@@ -30,7 +31,7 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
 
         if (_health <= 0 && _isBroken) return;
 
-        CmdSetDamage(damage);
+        CmdSetHealth(_health - damage);
 
         if (_health > 0) return;
 
@@ -38,9 +39,9 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
     }
 
     [Command(requiresAuthority = false)]
-    private void CmdSetDamage(int damage)
+    private void CmdSetHealth(int health)
     {
-        _health -= damage;
+        _health = health;
     }
 
     [Command(requiresAuthority = false)]
@@ -51,8 +52,20 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
 
     private void Destruct(bool oldValue, bool newValue)
     {
+        if (newValue == false) return;
+
         _backPlateCollider.transform.parent = null;
         var rigidbody = _backPlateCollider.gameObject.AddComponent<Rigidbody>();
         rigidbody.mass = 100f;
+    }
+
+    public void Initialize(CarBackPlateDamageable other)
+    {
+        this._health = other._health;
+        this._isBroken = other._isBroken;
+        this._plateMass = other._plateMass;
+
+        CmdSetHealth(other._health);
+        CmdSetBroken(other._isBroken);
     }
 }
