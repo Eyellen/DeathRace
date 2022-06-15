@@ -9,7 +9,7 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
     [SerializeField]
     private int _health;
 
-    [SyncVar(hook = nameof(Destruct))]
+    [SyncVar]
     private bool _isBroken;
 
     private Collider _backPlateCollider;
@@ -35,7 +35,9 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
 
         if (_health > 0) return;
 
+        _isBroken = true; // To prevent errors on Client while _isBroken getting synced on Server and other Clients
         CmdSetBroken(true);
+        CmdDestruct();
     }
 
     [Command(requiresAuthority = false)]
@@ -50,10 +52,22 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
         _isBroken = isBroken;
     }
 
-    private void Destruct(bool oldValue, bool newValue)
+    [Command(requiresAuthority = false)]
+    private void CmdDestruct()
     {
-        if (newValue == false) return;
+        Debug.Log("CmdDestruct has been called");
+        RpcDestruct();
+    }
 
+    [ClientRpc]
+    private void RpcDestruct()
+    {
+        Debug.Log("RpcDestruct has been called");
+        Destruct();
+    }
+
+    private void Destruct()
+    {
         _backPlateCollider.transform.parent = null;
         var rigidbody = _backPlateCollider.gameObject.AddComponent<Rigidbody>();
         rigidbody.mass = 100f;
