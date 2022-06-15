@@ -6,6 +6,10 @@ using Mirror;
 public class DestroyedCar : NetworkBehaviour
 {
     private Rigidbody _rigidbody;
+    private CarBackPlateDamageable _backPlateDamageable;
+
+    [SyncVar(hook = nameof(DestroyBackPlate))]
+    private bool _isBackPlateBroken;
 
     [SerializeField] private float _explosionForce;
 
@@ -17,12 +21,18 @@ public class DestroyedCar : NetworkBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _backPlateDamageable = GetComponent<CarBackPlateDamageable>();
     }
 
     void Start()
     {
+        if (isServer)
+        {
+            Explode();
+            InitializeBackPlate();
+        }
+
         CheckIfBackPlateBroken();
-        Explode();
     }
 
     private void Explode()
@@ -33,26 +43,43 @@ public class DestroyedCar : NetworkBehaviour
         _rigidbody.AddForceAtPosition(Vector3.up * _explosionForce, impactPoint, ForceMode.VelocityChange);
     }
 
-    private void CheckIfBackPlateBroken()
+    private void InitializeBackPlate()
     {
-        if (isClient) return;
-
 #if UNITY_EDITOR
         if (!Car)
         {
-            Debug.LogError("Car is not set for DestroyedCar. Can't check if back plate is broken.");
+            Debug.LogError("Car is not set for DestroyedCar. Can't initialize BackPlate.");
+            return;
+        }
+        if (!Car.GetComponent<CarBackPlateDamageable>())
+        {
+            Debug.LogError($"Car wasn't set correct or Car doesn't have {nameof(CarBackPlateDamageable)} script. Can't initialize BackPlate");
             return;
         }
 #endif
+        _backPlateDamageable.Initialize(Car.GetComponent<CarBackPlateDamageable>());
+    }
 
-        // Looking for Car's BackPlate
-        Transform backPlate = Car.transform.Find("Body/BackPlate");
-
-        // Destroying DestroyedCar's BackPlate if Car's BackPlate has been destroyed
-        if(!backPlate)
+    private void CheckIfBackPlateBroken()
+    {
+        if(_backPlateDamageable.IsBroken)
         {
-            Transform currentBackPlate = transform.Find("Body/BackPlate");
-            Destroy(currentBackPlate.gameObject);
+            CmdSetIsBackPlateBroken(true);
         }
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdSetIsBackPlateBroken(bool isBackPlateBroken)
+    {
+        _isBackPlateBroken = isBackPlateBroken;
+    }
+
+    private void DestroyBackPlate(bool oldValue, bool newValue)
+    {
+        GameObject currentBackPlate = transform.Find("Body/BackPlate")?.gameObject;
+
+        if (!currentBackPlate) return;
+
+        Destroy(currentBackPlate);
     }
 }
