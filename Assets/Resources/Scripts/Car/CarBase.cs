@@ -96,6 +96,12 @@ public class CarBase : NetworkBehaviour
 
     private void HandleInput()
     {
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            _rigidbody.velocity = Vector3.zero;
+            _thisTransform.position = new Vector3(10f, 1f, 10f);
+        }
+
         // Gas input
         HandleGas(_input.VerticalAxis * _motorForce);
 
@@ -116,7 +122,7 @@ public class CarBase : NetworkBehaviour
             axle.LeftWheel.Collider.motorTorque = force;
         }
 
-        if (_rigidbody.velocity.magnitude > _speedLimit)
+        if (Mathf.Abs(_rigidbody.velocity.magnitude) > _speedLimit)
         {
             _rigidbody.velocity = Vector3.ClampMagnitude(_rigidbody.velocity, _speedLimit);
         }
