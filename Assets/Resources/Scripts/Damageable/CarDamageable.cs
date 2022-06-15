@@ -33,7 +33,7 @@ public class CarDamageable : NetworkBehaviour, IDamageable<int>
 
         if (_health > 0) return;
 
-        CmdSetDestructed();
+        CmdSetDestructed(true);
         CmdDestruct();
     }
 
@@ -44,9 +44,9 @@ public class CarDamageable : NetworkBehaviour, IDamageable<int>
     }
 
     [Command(requiresAuthority = false)]
-    private void CmdSetDestructed()
+    private void CmdSetDestructed(bool isDestructed)
     {
-        _isDestructed = true;
+        _isDestructed = isDestructed;
     }
 
     [Command(requiresAuthority = false)]
