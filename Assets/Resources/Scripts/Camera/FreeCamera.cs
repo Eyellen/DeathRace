@@ -7,7 +7,7 @@ public class FreeCamera : CameraBase
     private PlayerInput _input;
 
     [SerializeField]
-    private float _movementSpeed;
+    private float _movementSpeed = 20;
 
     protected override void Awake()
     {

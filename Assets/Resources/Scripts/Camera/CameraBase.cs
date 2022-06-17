@@ -13,7 +13,7 @@ public class CameraBase : NetworkBehaviour
     protected Transform _cameraTransform;
 
     [SerializeField]
-    protected Vector2 _sensitivity;
+    protected Vector2 _sensitivity = new Vector2(3, 3);
 
     private float _xRotation;
     private float _yRotation;

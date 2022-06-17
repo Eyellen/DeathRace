@@ -8,7 +8,7 @@ public class CarCamera : CameraBase
     private Transform _target;
 
     [SerializeField]
-    private Vector3 _cameraOffset;
+    private Vector3 _cameraOffset = new Vector3(0, 1, -5);
 
     private Vector3 _currentCameraOffset;
 
