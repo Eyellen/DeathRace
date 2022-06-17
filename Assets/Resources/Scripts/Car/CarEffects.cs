@@ -7,10 +7,8 @@ public class CarEffects : MonoBehaviour
     [SerializeField] private Minigun _minigun;
 
     [Header("Bullet cartridge particles")]
-    [SerializeField] private GameObject _bulletCartridgeParticlesPrefab;
-    [SerializeField] private Transform _cartridgeSpawnPoint;
-    [SerializeField] private float _delayBetweenCartridges;
-    private float _timeSinceLastCartridgeSpawned;
+    [SerializeField] private ParticleSystem _bulletCartridgeParticles;
+    private bool _isBulletCartridgeParticlesPlaying;
 
     void Update()
     {
@@ -19,11 +17,15 @@ public class CarEffects : MonoBehaviour
 
     private void BulletCartridgeEffect()
     {
-        if (Time.time <= _timeSinceLastCartridgeSpawned + _delayBetweenCartridges) return;
-
-        if (!_minigun.IsShooting) return;
-
-        _timeSinceLastCartridgeSpawned = Time.time;
-        Instantiate(_bulletCartridgeParticlesPrefab, _cartridgeSpawnPoint);
+        if(_minigun.IsShooting && !_isBulletCartridgeParticlesPlaying)
+        {
+            _isBulletCartridgeParticlesPlaying = true;
+            _bulletCartridgeParticles.Play();
+        }
+        if (!_minigun.IsShooting && _isBulletCartridgeParticlesPlaying)
+        {
+            _isBulletCartridgeParticlesPlaying = false;
+            _bulletCartridgeParticles.Stop();
+        }
     }
 }
