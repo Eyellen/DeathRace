@@ -47,6 +47,7 @@ public class CameraBase : NetworkBehaviour
 
     private void HandleFollowing()
     {
+        
 #if UNITY_EDITOR
         if (!_target)
         {
@@ -56,6 +57,8 @@ public class CameraBase : NetworkBehaviour
             }
             return;
         }
+#else
+        if (!_target) return;
 #endif
 
         _camera.position = _target.position + _currentCameraOffset;
