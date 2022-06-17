@@ -21,7 +21,7 @@ namespace DebugStuff
 
         public void Log(string logString, string stackTrace, LogType type)
         {
-            output = logString;
+            output = $"[{type}] " + logString;
             stack = stackTrace;
             myLog = output + "\n" + myLog;
             if (myLog.Length > 5000)
