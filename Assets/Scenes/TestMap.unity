@@ -4917,8 +4917,8 @@ GameObject:
   - component: {fileID: 844778151}
   - component: {fileID: 844778150}
   - component: {fileID: 844778149}
-  - component: {fileID: 844778148}
   - component: {fileID: 844778152}
+  - component: {fileID: 844778148}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -4935,15 +4935,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 844778147}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5146e1e25397bef429bf2f334ab65e13, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f12c2dba2165164faf17b5dfaa0cd84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
   _debugging: 0
+  _sensitivity: {x: 3, y: 3}
   _target: {fileID: 0}
   _cameraOffset: {x: 0, y: 1, z: -5}
-  _sensitivity: {x: 3, y: 3}
 --- !u!81 &844778149
 AudioListener:
   m_ObjectHideFlags: 0
@@ -5003,7 +5003,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 844778147}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.12, y: 2.97, z: 0.56}
+  m_LocalPosition: {x: 16.12, y: 2.97, z: 1.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
