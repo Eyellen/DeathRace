@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,12 +27,8 @@ public class CameraManager : MonoBehaviour
     private void Awake()
     {
         _camera = gameObject;
-        
-        if(!TryGetComponent(out _currentCameraScript))
-        {
-            _currentCameraScript = gameObject.AddComponent<FreeCamera>();
-            _cameraMode = CameraMode.Free;
-        }
+
+        Initialize();
     }
 
     private void Update()
@@ -60,6 +57,33 @@ public class CameraManager : MonoBehaviour
                 {
                     Destroy(_currentCameraScript);
                     _currentCameraScript = _camera.AddComponent<CarCamera>();
+                    break;
+                }
+            default:
+                {
+                    break;
+                }
+        }
+    }
+
+    private void Initialize()
+    {
+        if (!TryGetComponent(out _currentCameraScript))
+        {
+            _currentCameraScript = gameObject.AddComponent<FreeCamera>();
+            _cameraMode = CameraMode.Free;
+        }
+
+        switch (_currentCameraScript)
+        {
+            case FreeCamera freeCamera:
+                {
+                    _cameraMode = CameraMode.Free;
+                    break;
+                }
+            case CarCamera carCamera:
+                {
+                    _cameraMode = CameraMode.ThirdPerson;
                     break;
                 }
             default:
