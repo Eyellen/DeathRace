@@ -23,11 +23,11 @@ namespace DebugStuff
         {
             output = $"[{type}] " + logString;
             stack = stackTrace;
-            myLog = output + "\n" + myLog;
-            if (myLog.Length > 5000)
-            {
-                myLog = myLog.Substring(0, 4000);
-            }
+            myLog = output + "\n" + stack + "\n" + myLog;
+            //if (myLog.Length > 5000)
+            //{
+            //    myLog = myLog.Substring(0, 4000);
+            //}
         }
 
         void OnGUI()
