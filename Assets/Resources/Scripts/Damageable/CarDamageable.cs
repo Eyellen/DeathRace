@@ -17,6 +17,9 @@ public class CarDamageable : NetworkBehaviour, IDamageable<int>
 
     public int Health { get => _health; }
 
+    public delegate void CarDestroyedEvent();
+    public event CarDestroyedEvent OnCarDestroyed;
+
     private void Start()
     {
         _currentCar = gameObject;
@@ -35,6 +38,7 @@ public class CarDamageable : NetworkBehaviour, IDamageable<int>
 
         CmdSetDestructed(true);
         CmdDestruct();
+        OnCarDestroyed?.Invoke();
     }
 
     [Command(requiresAuthority = false)]
