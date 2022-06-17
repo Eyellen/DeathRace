@@ -50,7 +50,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -4828,7 +4828,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1698790174557280480, guid: cd9a42b7cab03dd4d9542bd495873339, type: 3}
       propertyPath: playOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1698790174557280480, guid: cd9a42b7cab03dd4d9542bd495873339, type: 3}
       propertyPath: ShapeModule.type
@@ -5130,7 +5130,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1698790174557280480, guid: cd9a42b7cab03dd4d9542bd495873339, type: 3}
       propertyPath: playOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1698790174557280480, guid: cd9a42b7cab03dd4d9542bd495873339, type: 3}
       propertyPath: ShapeModule.type

@@ -8,8 +8,8 @@ public class MinigunEffects : MonoBehaviour
     [SerializeField] private Transform _shotPoint;
 
     [Header("Shotfire particles")]
-    [SerializeField] private ParticleSystem[] _shorfireParticles;
-    private bool _isShotfireEmitting;
+    [SerializeField] private ParticleSystem _shotfireParticles;
+    private bool _isShotfirePlaying;
 
     [Header("Bullet tracer effect")]
     [SerializeField] private GameObject _bulletTracerPrefab;
@@ -29,24 +29,15 @@ public class MinigunEffects : MonoBehaviour
 
     private void ShootEffect()
     {
-        if(_minigunScript.IsShooting && !_isShotfireEmitting)
+        if (_minigunScript.IsShooting && !_isShotfirePlaying)
         {
-            _isShotfireEmitting = true;
-            foreach (var particle in _shorfireParticles)
-            {
-                var emission = particle.emission;
-                emission.enabled = true;
-            }
+            _isShotfirePlaying = true;
+            _shotfireParticles.Play();
         }
-
-        if(!_minigunScript.IsShooting && _isShotfireEmitting)
+        if (!_minigunScript.IsShooting && _isShotfirePlaying)
         {
-            _isShotfireEmitting = false;
-            foreach (var particle in _shorfireParticles)
-            {
-                var emission = particle.emission;
-                emission.enabled = false;
-            }
+            _isShotfirePlaying = false;
+            _shotfireParticles.Stop();
         }
     }
 
