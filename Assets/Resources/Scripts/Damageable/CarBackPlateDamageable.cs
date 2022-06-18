@@ -68,6 +68,7 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
         Destruct();
     }
 
+    [ClientCallback]
     private void Destruct()
     {
         _backPlateCollider.transform.parent = null;
