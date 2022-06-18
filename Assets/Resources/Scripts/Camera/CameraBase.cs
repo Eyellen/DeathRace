@@ -1,37 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class CameraBase : MonoBehaviour
+public class CameraBase : NetworkBehaviour
 {
-    private Transform _camera;
+#if UNITY_EDITOR
+    [SerializeField]
+    protected bool _debugging = false;
+#endif
 
-    [SerializeField] private Transform _target;
-    [SerializeField] private Vector3 _cameraOffset;
-    [SerializeField] private Vector2 _sensitivity;
+    protected Transform _cameraTransform;
 
-    private Vector3 _currentCameraOffset;
+    [SerializeField]
+    protected Vector2 _sensitivity = new Vector2(3, 3);
+
     private float _xRotation;
     private float _yRotation;
 
-    private void Awake()
+    protected virtual void Awake()
     {
-        _camera = GetComponent<Transform>();
+        _cameraTransform = GetComponent<Transform>();
     }
 
-    private void Start()
-    {
-
-    }
-
-    private void LateUpdate()
+    protected virtual void LateUpdate()
     {
         HandleRotation();
-        HandleFollowing();
-        Debug.DrawLine(_target.position, _target.position + _currentCameraOffset);
     }
 
-    private void HandleRotation()
+    protected virtual void HandleRotation()
     {
         _xRotation += Input.GetAxis("Mouse X") * _sensitivity.x;
         _yRotation += Input.GetAxis("Mouse Y") * _sensitivity.y;
@@ -39,12 +36,6 @@ public class CameraBase : MonoBehaviour
         _yRotation = Mathf.Clamp(_yRotation, -90f, 90f);
         Quaternion rotation = Quaternion.Euler(-_yRotation, _xRotation, 0);
 
-        _camera.rotation = rotation;
-        _currentCameraOffset = rotation * _cameraOffset;
-    }
-
-    private void HandleFollowing()
-    {
-        _camera.position = _target.position + _currentCameraOffset;
+        _cameraTransform.rotation = rotation;
     }
 }

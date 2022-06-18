@@ -1,29 +1,66 @@
+using System.Collections;
 using UnityEngine;
+using Mirror;
 
-public class CarDamageable : MonoBehaviour, IDamageable<int>
+public class CarDamageable : NetworkBehaviour, IDamageable<int>
 {
-    [SerializeField] private int _health;
-    [SerializeField] private GameObject _currentCar;
+    [SyncVar]
+    [SerializeField]
+    private int _health;
+
+    [SyncVar]
+    private bool _isDestructed;
+
+    private Collider _carCollider;
+    private GameObject _currentCar;
     [SerializeField] private GameObject _destroyedCarPrefab;
 
     public int Health { get => _health; }
 
-    public void Damage(int damage)
-    {
-        if (_health <= 0) return;
+    public delegate void CarDestroyedEvent();
+    public event CarDestroyedEvent OnCarDestroyed;
 
-        _health -= damage;
+    private void Start()
+    {
+        _currentCar = gameObject;
+        _carCollider = transform.Find("Body/Frame").GetComponent<Collider>();
+    }
+
+    public void Damage(int damage, Collider collider)
+    {
+        if (collider != _carCollider) return;
+
+        if (_health <= 0 && _isDestructed) return;
+
+        CmdSetDamage(damage);
 
         if (_health > 0) return;
 
-        Destruct();
+        CmdSetDestructed(true);
+        CmdDestruct();
+        OnCarDestroyed?.Invoke();
     }
 
-    private void Destruct()
+    [Command(requiresAuthority = false)]
+    private void CmdSetDamage(int damage)
+    {
+        _health -= damage;
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdSetDestructed(bool isDestructed)
+    {
+        _isDestructed = isDestructed;
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdDestruct()
     {
         GameObject destroyedCar = Instantiate(_destroyedCarPrefab, _currentCar.transform.position, _currentCar.transform.rotation);
         InitializeDestroyedCar(destroyedCar);
-        Destroy(_currentCar);
+        NetworkServer.Spawn(destroyedCar);
+
+        NetworkServer.Destroy(_currentCar);
     }
 
     private void InitializeDestroyedCar(GameObject destroyedCar)
@@ -31,7 +68,7 @@ public class CarDamageable : MonoBehaviour, IDamageable<int>
         // Speed inheritance
         destroyedCar.GetComponent<Rigidbody>().velocity = _currentCar.GetComponent<Rigidbody>().velocity;
 
-        destroyedCar.GetComponent<DestroyedCar>().CarFrame = gameObject;
+        destroyedCar.GetComponent<DestroyedCar>().Car = _currentCar;
 
         // Disabling BackPlate
         GameObject backPlate = _currentCar.transform.Find("Body/BackPlate")?.gameObject;

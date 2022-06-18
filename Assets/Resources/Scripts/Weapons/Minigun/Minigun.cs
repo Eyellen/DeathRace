@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 public class Minigun : GunBase
 {
-    [SerializeField] private Transform _minigun;
+    [Header("Minigun")]
+    [SerializeField] private Transform _minigunBarrels;
 
     [Header("Minigun settings")]
     [SerializeField] private float _barrelsSpinningTime;
     private float _spinningTimePassed;
-    private bool _isSpinning;
+    [SyncVar] private bool _isSpinning;
     [SerializeField] private float _maxSpinningSpeed;
     private float _currentSpinningSpeed;
 
@@ -24,28 +26,34 @@ public class Minigun : GunBase
 
     private void SpinBarrels(bool isActionOccurs)
     {
-        IsShooting = false;
+        CmdSetShooting(false);
 
         _currentSpinningSpeed = Mathf.Lerp(0, _maxSpinningSpeed, _spinningTimePassed / _barrelsSpinningTime);
-        _minigun.Rotate(Vector3.forward, _currentSpinningSpeed * Time.deltaTime);
+        _minigunBarrels.Rotate(Vector3.forward, _currentSpinningSpeed * Time.deltaTime);
         //Debug.Log(_spinningTimePassed);
         //Debug.Log(_currentSpinningSpeed);
 
         if (!isActionOccurs)
         {
-            _isSpinning = false;
+            CmdSetIsSpinning(false);
             _spinningTimePassed = Mathf.Clamp(_spinningTimePassed - Time.deltaTime, 0, _barrelsSpinningTime);
             return;
         }
 
         if(!_isSpinning)
         {
-            _isSpinning = true;
+            CmdSetIsSpinning(true);
         }
         _spinningTimePassed = Mathf.Clamp(_spinningTimePassed + Time.deltaTime, 0, _barrelsSpinningTime);
 
         if (_currentSpinningSpeed != _maxSpinningSpeed) return;
 
         Shoot(isActionOccurs);
+    }
+
+    [Command]
+    private void CmdSetIsSpinning(bool isSpinning)
+    {
+        _isSpinning = isSpinning;
     }
 }
