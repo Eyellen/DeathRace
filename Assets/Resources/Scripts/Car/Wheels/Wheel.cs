@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Wheel : MonoBehaviour
 {
-    public Transform Transform;
+    public Transform MeshTransform;
     public WheelCollider Collider;
     public Transform TireMarkPoint;
 
@@ -44,8 +44,8 @@ public class Wheel : MonoBehaviour
         Vector3 position;
         Quaternion rotation;
         Collider.GetWorldPose(out position, out rotation);
-        Transform.position = position;
-        Transform.rotation = rotation;
+        MeshTransform.position = position;
+        MeshTransform.rotation = rotation;
     }
 
     private void UpdateTrailMarkPoint()
