@@ -499,6 +499,42 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 40294703710993746, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: _wheels.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 40294703710993746, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: _wheels.Array.data[0]
+      value: 
+      objectReference: {fileID: 6385941699824898660}
+    - target: {fileID: 40294703710993746, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: _wheels.Array.data[1]
+      value: 
+      objectReference: {fileID: 1022332207407070121}
+    - target: {fileID: 40294703710993746, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: _wheels.Array.data[2]
+      value: 
+      objectReference: {fileID: 2422972753569461590}
+    - target: {fileID: 40294703710993746, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: _wheels.Array.data[3]
+      value: 
+      objectReference: {fileID: 8146766734841761115}
+    - target: {fileID: 40294703710993746, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: _wheels.Array.data[4]
+      value: 
+      objectReference: {fileID: 8146766734841761115}
+    - target: {fileID: 40294703710993746, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: _wheels.Array.data[5]
+      value: 
+      objectReference: {fileID: 8146766734841761115}
+    - target: {fileID: 40294703710993746, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: _wheels.Array.data[6]
+      value: 
+      objectReference: {fileID: 8146766734841761115}
+    - target: {fileID: 40294703710993746, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: _wheels.Array.data[7]
+      value: 
+      objectReference: {fileID: 8146766734841761115}
     - target: {fileID: 291192481012067170, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -559,6 +595,10 @@ PrefabInstance:
       propertyPath: m_AssetId
       value: 59d4776c426fcb84bb3cafb705ad7a79
       objectReference: {fileID: 0}
+    - target: {fileID: 8083998131863091072, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: _destroyedCarPrefab
+      value: 
+      objectReference: {fileID: 545901098036113822, guid: bbd61356fac13a344b9bff9ecca110d8, type: 3}
     - target: {fileID: 8606705896235550131, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: m_LocalPosition.z
       value: -1.1
@@ -674,69 +714,6 @@ MonoBehaviour:
   _maxSpreadMagnitude: 10
   _timeBetweenShots: 0.2
   _maxAmmoSupply: 300
---- !u!114 &6791669694278889450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5718376995903775604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad2f5acc9ef28d64085198f21c8cf43e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  _debug: 1
-  _shotPoint: {fileID: 6748882020592643538}
-  _damage: 5
-  _shotDistance: 100
-  _maxSpreadMagnitude: 10
-  _timeBetweenShots: 0.2
-  _maxAmmoSupply: 300
---- !u!114 &7020047711162771264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5718376995903775604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad2f5acc9ef28d64085198f21c8cf43e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  _debug: 1
-  _shotPoint: {fileID: 4197269126861042901}
-  _damage: 5
-  _shotDistance: 100
-  _maxSpreadMagnitude: 10
-  _timeBetweenShots: 0.2
-  _maxAmmoSupply: 300
---- !u!114 &8525131627691136552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5718376995903775604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad2f5acc9ef28d64085198f21c8cf43e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  _debug: 1
-  _shotPoint: {fileID: 3328419183762512835}
-  _damage: 5
-  _shotDistance: 100
-  _maxSpreadMagnitude: 10
-  _timeBetweenShots: 0.2
-  _maxAmmoSupply: 300
 --- !u!114 &2523432765899949166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -753,27 +730,6 @@ MonoBehaviour:
   syncInterval: 0.1
   _debug: 1
   _shotPoint: {fileID: 8865804888858473810}
-  _damage: 5
-  _shotDistance: 100
-  _maxSpreadMagnitude: 10
-  _timeBetweenShots: 0.2
-  _maxAmmoSupply: 300
---- !u!114 &6841959474314269356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5718376995903775604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad2f5acc9ef28d64085198f21c8cf43e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  _debug: 1
-  _shotPoint: {fileID: 8334459125360406744}
   _damage: 5
   _shotDistance: 100
   _maxSpreadMagnitude: 10
@@ -800,6 +756,69 @@ MonoBehaviour:
   _maxSpreadMagnitude: 10
   _timeBetweenShots: 0.2
   _maxAmmoSupply: 300
+--- !u!114 &6791669694278889450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5718376995903775604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad2f5acc9ef28d64085198f21c8cf43e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  _debug: 1
+  _shotPoint: {fileID: 6748882020592643538}
+  _damage: 5
+  _shotDistance: 100
+  _maxSpreadMagnitude: 10
+  _timeBetweenShots: 0.2
+  _maxAmmoSupply: 300
+--- !u!114 &6841959474314269356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5718376995903775604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad2f5acc9ef28d64085198f21c8cf43e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  _debug: 1
+  _shotPoint: {fileID: 8334459125360406744}
+  _damage: 5
+  _shotDistance: 100
+  _maxSpreadMagnitude: 10
+  _timeBetweenShots: 0.2
+  _maxAmmoSupply: 300
+--- !u!114 &7020047711162771264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5718376995903775604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad2f5acc9ef28d64085198f21c8cf43e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  _debug: 1
+  _shotPoint: {fileID: 4197269126861042901}
+  _damage: 5
+  _shotDistance: 100
+  _maxSpreadMagnitude: 10
+  _timeBetweenShots: 0.2
+  _maxAmmoSupply: 300
 --- !u!114 &8330576934981538040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -816,6 +835,27 @@ MonoBehaviour:
   syncInterval: 0.1
   _debug: 1
   _shotPoint: {fileID: 7022386662305398058}
+  _damage: 5
+  _shotDistance: 100
+  _maxSpreadMagnitude: 10
+  _timeBetweenShots: 0.2
+  _maxAmmoSupply: 300
+--- !u!114 &8525131627691136552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5718376995903775604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad2f5acc9ef28d64085198f21c8cf43e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  _debug: 1
+  _shotPoint: {fileID: 3328419183762512835}
   _damage: 5
   _shotDistance: 100
   _maxSpreadMagnitude: 10

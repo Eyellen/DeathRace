@@ -20,7 +20,7 @@ public class PlayerInput : MonoBehaviour
     public float VerticalAxis { get; private set; }
     public float Brake { get; private set; }
 
-    private void Awake()
+    private void Start()
     {
         if (Instance == null)
         {

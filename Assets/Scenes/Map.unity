@@ -32463,10 +32463,12 @@ MonoBehaviour:
   networkAddress: localhost
   maxConnections: 10
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 1991797751086903928, guid: c92edc376df199a42b8533a71797fde1, type: 3}
+  playerPrefab: {fileID: 5718376995903775604, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 1
-  spawnPrefabs: []
+  spawnPrefabs:
+  - {fileID: 3664917185779700594, guid: 49a2ef4e7b1027e40a878b2d4b283071, type: 3}
+  - {fileID: 545901098036113822, guid: bbd61356fac13a344b9bff9ecca110d8, type: 3}
 --- !u!4 &821053589 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5139278447045255769, guid: 78b947030099396459ba336f65b30213, type: 3}
