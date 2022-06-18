@@ -839,7 +839,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   _motorForce: 1000
-  _speedLimit: 40
+  _speedLimit: 25
   _brakeForce: 10000
   _maxSteerAngle: 40
   _centreOfMass: {fileID: 2791432954134695550}
