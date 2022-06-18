@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MinigunEffects : MonoBehaviour
+public class GunBaseEffects : MonoBehaviour
 {
-    [SerializeField] private Minigun _minigunScript;
+    [SerializeField] private GunBase _gunScript;
     [SerializeField] private Transform _shotPoint;
 
     [Header("Shotfire particles")]
@@ -19,7 +19,7 @@ public class MinigunEffects : MonoBehaviour
 
     void Start()
     {
-        _minigunScript.OnGunShoot += SpawnBulletTracer;
+        _gunScript.OnGunShoot += SpawnBulletTracer;
     }
 
     void Update()
@@ -29,12 +29,12 @@ public class MinigunEffects : MonoBehaviour
 
     private void ShootEffect()
     {
-        if (_minigunScript.IsShooting && !_isShotfirePlaying)
+        if (_gunScript.IsShooting && !_isShotfirePlaying)
         {
             _isShotfirePlaying = true;
             _shotfireParticles.Play();
         }
-        if (!_minigunScript.IsShooting && _isShotfirePlaying)
+        if (!_gunScript.IsShooting && _isShotfirePlaying)
         {
             _isShotfirePlaying = false;
             _shotfireParticles.Stop();
