@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fed75674cad26634bbfdb551a0980e6c
+guid: a219541f7bb75514a943f58d3c03f0eb
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -7,28 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Cube.012_Cube.016_GreenMat
-    second: {fileID: 2100000, guid: aef2acb1c3bbe9f4a8f9ea809926dd74, type: 2}
+      name: Cube.050_Cube.026_MetalikMat
+    second: {fileID: 2100000, guid: bb557b274b9356647ac233a58a2ae11c, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Cube.032_Cube.017_GreenMat
-    second: {fileID: 2100000, guid: aef2acb1c3bbe9f4a8f9ea809926dd74, type: 2}
+      name: Cube.051_Cube.027_ContainerMat
+    second: {fileID: 2100000, guid: 46dd0fa12ae4e294ba43c4983673322f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Cube.033_Cube.024_GreenMat
-    second: {fileID: 2100000, guid: aef2acb1c3bbe9f4a8f9ea809926dd74, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Cube.048_Cube.025_GreenMat
-    second: {fileID: 2100000, guid: aef2acb1c3bbe9f4a8f9ea809926dd74, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Cube.052_Cube.029_GreenMat
-    second: {fileID: 2100000, guid: aef2acb1c3bbe9f4a8f9ea809926dd74, type: 2}
+      name: Cube.051_Cube.027_RoofMat
+    second: {fileID: 2100000, guid: 6f7aa522dccc98a4aa3db5dc8fcfee8a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
