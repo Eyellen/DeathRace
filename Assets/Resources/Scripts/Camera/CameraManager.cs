@@ -56,7 +56,7 @@ public class CameraManager : MonoBehaviour
             case CameraMode.ThirdPerson:
                 {
                     Destroy(_currentCameraScript);
-                    _currentCameraScript = _camera.AddComponent<CarCamera>();
+                    _currentCameraScript = _camera.AddComponent<ThirdPersonCamera>();
                     break;
                 }
             default:
@@ -81,7 +81,7 @@ public class CameraManager : MonoBehaviour
                     _cameraMode = CameraMode.Free;
                     break;
                 }
-            case CarCamera carCamera:
+            case ThirdPersonCamera carCamera:
                 {
                     _cameraMode = CameraMode.ThirdPerson;
                     break;
