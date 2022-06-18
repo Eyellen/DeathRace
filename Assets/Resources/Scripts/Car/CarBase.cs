@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class CarBase : MonoBehaviour
+public class CarBase : NetworkBehaviour
 {
     protected Transform _thisTransform;
     protected Rigidbody _rigidbody;
@@ -88,11 +89,19 @@ public class CarBase : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!isLocalPlayer) return;
+
         HandleInput();
     }
 
     private void HandleInput()
     {
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            _rigidbody.velocity = Vector3.zero;
+            _thisTransform.position = new Vector3(10f, 1f, 10f);
+        }
+
         // Gas input
         HandleGas(_input.VerticalAxis * _motorForce);
 
@@ -113,7 +122,7 @@ public class CarBase : MonoBehaviour
             axle.LeftWheel.Collider.motorTorque = force;
         }
 
-        if (_rigidbody.velocity.magnitude > _speedLimit)
+        if (Mathf.Abs(_rigidbody.velocity.magnitude) > _speedLimit)
         {
             _rigidbody.velocity = Vector3.ClampMagnitude(_rigidbody.velocity, _speedLimit);
         }

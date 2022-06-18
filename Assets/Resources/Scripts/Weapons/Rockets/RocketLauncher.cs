@@ -5,21 +5,39 @@ using UnityEngine;
 public class RocketLauncher : MonoBehaviour
 {
     private PlayerInput _input;
+    private Transform _thisTransform;
 
     [SerializeField] private GameObject[] _rockets;
     [SerializeField] private GameObject _launchedRocketPrefab;
     [SerializeField] private float _timeBetweenLaunches;
     private float _lastLaunchTime;
 
+    private Vector3 _previousPosition;
+    private Vector3 _currentPosition;
+    private float _currentMovingSpeed;
+
     void Start()
     {
         _input = PlayerInput.Instance;
+        _thisTransform = GetComponent<Transform>();
     }
-
 
     void Update()
     {
         HandleInput();
+    }
+
+    private void FixedUpdate()
+    {
+        MeasureSpeed();
+    }
+
+    private void MeasureSpeed()
+    {
+        _previousPosition = _currentPosition;
+        _currentPosition = _thisTransform.position;
+
+        _currentMovingSpeed = (_currentPosition - _previousPosition).magnitude / Time.deltaTime;
     }
 
     private void HandleInput()
@@ -36,7 +54,9 @@ public class RocketLauncher : MonoBehaviour
         {
             if (!rocket) continue;
 
-            Instantiate(_launchedRocketPrefab, rocket.transform.position, rocket.transform.rotation);
+            GameObject launchedRocket = Instantiate(_launchedRocketPrefab, rocket.transform.position, rocket.transform.rotation);
+            launchedRocket.GetComponent<Rocket>().Speed += _currentMovingSpeed;
+
             Destroy(rocket);
 
             return;

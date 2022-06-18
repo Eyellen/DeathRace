@@ -1,105 +1,59 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class Minigun : MonoBehaviour
+public class Minigun : GunBase
 {
-    private Transform _thisTransform;
-    private PlayerInput _input;
+    [Header("Minigun")]
+    [SerializeField] private Transform _minigunBarrels;
 
-    [SerializeField] private Transform _minigun;
-    [SerializeField] private Transform _shotPoint;
-
-    [Header("Gun settings")]
-    [SerializeField] private int _damage;
-    [SerializeField] private float _shotDistance;
-    [SerializeField] private float _spread;
-    [SerializeField] private float _timeBetweenShots;
-    private float _lastShotTime;
+    [Header("Minigun settings")]
     [SerializeField] private float _barrelsSpinningTime;
     private float _spinningTimePassed;
-    private bool _isSpinning;
+    [SyncVar] private bool _isSpinning;
     [SerializeField] private float _maxSpinningSpeed;
     private float _currentSpinningSpeed;
-    [SerializeField] private int _maxAmmoSupply;
-    private int _currentAmmoSupply;
 
     #region Properties
     public bool IsSpinning { get => _isSpinning; }
-    public bool IsShooting { get; private set; }
     #endregion
 
-    public delegate void ShootEvent(Vector3 shotPoint, Vector3 destination);
-    public event ShootEvent OnShoot;
-
-    private void Awake()
-    {
-        _thisTransform = GetComponent<Transform>();
-        _input = PlayerInput.Instance;
-
-        _currentAmmoSupply = _maxAmmoSupply;
-    }
-
-    private void Update()
+    protected override void HandleInput()
     {
         SpinBarrels(_input.IsLeftActionPressed);
-        Debug.DrawRay(_shotPoint.position, _thisTransform.forward * _shotDistance, Color.red);
     }
 
     private void SpinBarrels(bool isActionOccurs)
     {
-        IsShooting = false;
+        CmdSetShooting(false);
+
         _currentSpinningSpeed = Mathf.Lerp(0, _maxSpinningSpeed, _spinningTimePassed / _barrelsSpinningTime);
-        _minigun.Rotate(Vector3.forward, _currentSpinningSpeed * Time.deltaTime);
+        _minigunBarrels.Rotate(Vector3.forward, _currentSpinningSpeed * Time.deltaTime);
         //Debug.Log(_spinningTimePassed);
         //Debug.Log(_currentSpinningSpeed);
 
         if (!isActionOccurs)
         {
-            _isSpinning = false;
+            CmdSetIsSpinning(false);
             _spinningTimePassed = Mathf.Clamp(_spinningTimePassed - Time.deltaTime, 0, _barrelsSpinningTime);
             return;
         }
 
         if(!_isSpinning)
         {
-            _isSpinning = true;
+            CmdSetIsSpinning(true);
         }
         _spinningTimePassed = Mathf.Clamp(_spinningTimePassed + Time.deltaTime, 0, _barrelsSpinningTime);
 
         if (_currentSpinningSpeed != _maxSpinningSpeed) return;
 
-        Shoot();
+        Shoot(isActionOccurs);
     }
 
-    private void Shoot()
+    [Command]
+    private void CmdSetIsSpinning(bool isSpinning)
     {
-        IsShooting = true;
-        if (_currentAmmoSupply <= 0)
-        {
-            IsShooting = false;
-            return;
-        }
-
-        if (Time.time <= _lastShotTime + _timeBetweenShots) return;
-        _lastShotTime = Time.time;
-        _currentAmmoSupply--;
-
-        Ray ray = new Ray(_shotPoint.position, _thisTransform.forward);
-        ray = AddSpread(ray, _spread);
-        OnShoot?.Invoke(ray.origin, ray.origin + ray.direction * _shotDistance);
-        Debug.DrawRay(ray.origin, ray.direction * _shotDistance, Color.blue, 0.1f);
-        if (!Physics.Raycast(ray, out RaycastHit hitInfo, _shotDistance)) return;
-
-        if (!hitInfo.collider.TryGetComponent(out IDamageable<int> target)) return;
-
-        target.Damage(_damage);
-    }
-
-    private Ray AddSpread(Ray ray, float spreadValue)
-    {
-        Vector3 spread = new Vector3(Random.Range(-1f, 1f) * spreadValue, Random.Range(-1f, 1f) * spreadValue, 0);
-        ray.direction += spread / 100;
-        return ray;
+        _isSpinning = isSpinning;
     }
 }
