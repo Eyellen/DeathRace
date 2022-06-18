@@ -30,7 +30,6 @@ public class ThirdPersonCamera : CameraBase
 
     private void HandleFollowing()
     {
-
 #if UNITY_EDITOR
         if (!_target)
         {
