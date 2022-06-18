@@ -32463,11 +32463,10 @@ MonoBehaviour:
   networkAddress: localhost
   maxConnections: 10
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 1991797751086903928, guid: c92edc376df199a42b8533a71797fde1, type: 3}
+  playerPrefab: {fileID: 5718376995903775604, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 1
   spawnPrefabs: []
-<<<<<<< HEAD
 --- !u!4 &821053589 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5139278447045255769, guid: 78b947030099396459ba336f65b30213, type: 3}
@@ -32535,7 +32534,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5139278447045255769, guid: 78b947030099396459ba336f65b30213, type: 3}
   m_PrefabInstance: {fileID: 821181861}
   m_PrefabAsset: {fileID: 0}
->>>>>>> parent of 29130b6 (Merge pull request #38 from Eyellen/Multiplayer)
 --- !u!1001 &821604735
 PrefabInstance:
   m_ObjectHideFlags: 0
