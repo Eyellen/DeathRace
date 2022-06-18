@@ -14,7 +14,7 @@ public class Explosion : MonoBehaviour
     public float ExplosionForce { get { return _explosionForce; } set { _explosionForce = value; } }
     public float MinDamage { get { return _minDamage; } set { _minDamage = value; } }
     public float MaxDamage { get { return _maxDamage; } set { _maxDamage = value; } }
-    public Collider ExceptionObject { get; set; }
+    [field: SerializeField] public Collider ExceptionObjectCollider { get; set; }
     #endregion
 
     private void Start()
@@ -42,12 +42,19 @@ public class Explosion : MonoBehaviour
 
     private void ApplyDamage(Collider collider)
     {
-        if (collider == ExceptionObject) return;
-        if (!collider.TryGetComponent(out IDamageable<int> damageable)) return;
+        if (collider == ExceptionObjectCollider) return;
+        //if (!collider.transform.root.TryGetComponent(out IDamageable<int> damageable)) return;
+
+        IDamageable<int>[] damageables = collider.transform.root.GetComponents<IDamageable<int>>();
+        if (damageables.Length <= 0) return;
 
         float distanceToObject = Vector3.Distance(transform.position, collider.transform.position);
         float coefficient = 1 - distanceToObject / _explosionRadius;
         coefficient = Mathf.Clamp(coefficient, 0.2f, 1f);
-        damageable.Damage((int)(_maxDamage * coefficient));
+
+        foreach (IDamageable<int> damageable in damageables)
+        {
+            damageable.Damage((int)(_maxDamage * coefficient), collider);
+        }
     }
 }

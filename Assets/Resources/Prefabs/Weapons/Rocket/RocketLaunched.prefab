@@ -82,6 +82,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 0}
     - {fileID: 0}
+    - {fileID: 1498149377622078159, guid: e45ea974aea7cd24b933dd594aec01d7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e45ea974aea7cd24b933dd594aec01d7, type: 3}
 --- !u!1 &6217664448292820736 stripped
 GameObject:
@@ -141,6 +142,7 @@ MonoBehaviour:
   _explosionForce: 100000
   _minDamage: 0
   _maxDamage: 100
+  _debug: 0
 --- !u!1001 &4019387373510732620
 PrefabInstance:
   m_ObjectHideFlags: 0

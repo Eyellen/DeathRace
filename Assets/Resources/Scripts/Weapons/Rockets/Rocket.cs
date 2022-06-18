@@ -25,6 +25,11 @@ public class Rocket : MonoBehaviour
     public delegate void RocketExplodeEvent();
     public event RocketExplodeEvent OnRocketExplode;
 
+#if UNITY_EDITOR
+    [Header("Debugging")]
+    [SerializeField] private bool _debug;
+#endif
+
     private void Start()
     {
         _thisTransform = GetComponent<Transform>();
@@ -35,11 +40,22 @@ public class Rocket : MonoBehaviour
     private void FixedUpdate()
     {
         HandleFly();
+        CheckHit();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void CheckHit()
     {
-        HandleDirectHit(other);
+        Ray direction = new Ray(_thisTransform.position, _thisTransform.forward);
+        if (!Physics.SphereCast(direction, 0.03f, out RaycastHit hitInfo, _speed * Time.deltaTime)) return;
+
+#if UNITY_EDITOR
+        if(_debug)
+        {
+            Debug.Log("Rocket hitted " + hitInfo.transform.name);
+        }
+#endif
+
+        HandleDirectHit(hitInfo);
         Explode();
     }
 
@@ -71,15 +87,23 @@ public class Rocket : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void HandleDirectHit(Collider collider)
+    private void HandleDirectHit(RaycastHit hitInfo)
     {
         if (_directHit) return;
 
-        _directHit = collider;
+        _directHit = hitInfo.collider;
 
-        if (!collider.TryGetComponent(out IDamageable<int> damageable)) return;
+        IDamageable<int>[] damageables = hitInfo.transform.GetComponents<IDamageable<int>>();
+        if (damageables.Length <= 0) return;
 
-        damageable.Damage(_maxDamage);
+        foreach (IDamageable<int> damageable in damageables)
+        {
+            damageable.Damage(_maxDamage, hitInfo.collider);
+        }
+
+        //if (!hitInfo.transform.TryGetComponent(out IDamageable<int> damageable)) return;
+
+        //damageable.Damage(_maxDamage, hitInfo.collider);
     }
 
     private void InitializeExplosion()
@@ -90,6 +114,6 @@ public class Rocket : MonoBehaviour
         explosion.ExplosionForce = _explosionForce;
         explosion.MinDamage = _minDamage;
         explosion.MaxDamage = _maxDamage;
-        explosion.ExceptionObject = _directHit;
+        explosion.ExceptionObjectCollider = _directHit;
     }
 }

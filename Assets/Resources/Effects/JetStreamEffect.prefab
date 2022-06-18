@@ -19,6 +19,10 @@ PrefabInstance:
       propertyPath: OutputAudioMixerGroup
       value: 
       objectReference: {fileID: 24300002, guid: 39d27344d840a5344aebbe310d24ccf1, type: 2}
+    - target: {fileID: 4320682932359231474, guid: 83e032cfe22fa7d4aa8e3910f6781db6, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7669536054983103542, guid: 83e032cfe22fa7d4aa8e3910f6781db6, type: 3}
       propertyPath: m_Name
       value: JetStreamEffect
