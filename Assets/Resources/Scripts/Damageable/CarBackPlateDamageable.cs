@@ -23,6 +23,8 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
     private void Start()
     {
         _backPlateCollider = transform.Find("Body/BackPlate").GetComponent<Collider>();
+        
+        CheckIfBackPlateBroken();
     }
 
     public void Damage(int damage, Collider collider)
@@ -81,5 +83,13 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
 
         CmdSetHealth(other._health);
         CmdSetBroken(other._isBroken);
+    }
+
+    [ClientCallback]
+    private void CheckIfBackPlateBroken()
+    {
+        if (!_isBroken) return;
+
+        Destroy(_backPlateCollider.gameObject);
     }
 }
