@@ -12,14 +12,11 @@ public class ThirdPersonCamera : CameraBase
 
     private Vector3 _currentCameraOffset;
 
-    private void Start()
-    {
-        //FindTarget();
-    }
-
     protected override void LateUpdate()
     {
         base.LateUpdate();
+
+        StartCoroutine(FindTarget());
 
         HandleFollowing();
     }
@@ -57,7 +54,7 @@ public class ThirdPersonCamera : CameraBase
 #endif
     }
 
-    private void FindTarget()
+    private IEnumerator FindTarget()
     {
         while (!_target)
         {
@@ -70,6 +67,8 @@ public class ThirdPersonCamera : CameraBase
                 _target = player.transform;
                 break;
             }
+
+            yield return new WaitForEndOfFrame();
         }
     }
 }
