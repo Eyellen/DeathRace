@@ -537,6 +537,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7187299551496955583, guid: bf570713f33d295448145514c7159e4b, type: 3}
+      propertyPath: _gunScript
+      value: 
+      objectReference: {fileID: 2097122378246942681}
+    - target: {fileID: 7187299551496955583, guid: bf570713f33d295448145514c7159e4b, type: 3}
       propertyPath: _minigunScript
       value: 
       objectReference: {fileID: 2097122378246942681}
@@ -607,6 +611,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7187299551496955583, guid: bf570713f33d295448145514c7159e4b, type: 3}
+      propertyPath: _gunScript
+      value: 
+      objectReference: {fileID: 2256794112815817674}
     - target: {fileID: 7187299551496955583, guid: bf570713f33d295448145514c7159e4b, type: 3}
       propertyPath: _minigunScript
       value: 
@@ -872,6 +880,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8222764389388500412, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
   m_PrefabInstance: {fileID: 7344563327887357562}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &453498502163773279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991797751086903928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ddc44b8232ba5041944ccea1b154d2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  _health: 100
+  _plateMass: 100
 --- !u!114 &2097122378246942681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -920,22 +944,6 @@ MonoBehaviour:
   _minigunBarrels: {fileID: 5150976368125004047}
   _barrelsSpinningTime: 2
   _maxSpinningSpeed: 1000
---- !u!114 &453498502163773279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1991797751086903928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ddc44b8232ba5041944ccea1b154d2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  _health: 100
-  _plateMass: 100
 --- !u!114 &2139003209260957289
 MonoBehaviour:
   m_ObjectHideFlags: 0
