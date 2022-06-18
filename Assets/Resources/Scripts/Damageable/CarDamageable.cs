@@ -69,5 +69,8 @@ public class CarDamageable : NetworkBehaviour, IDamageable<int>
         destroyedCar.GetComponent<Rigidbody>().velocity = _currentCar.GetComponent<Rigidbody>().velocity;
 
         destroyedCar.GetComponent<DestroyedCar>().Car = _currentCar;
+
+        if (!destroyedCar.TryGetComponent(out CarBackPlateDamageable backPlateDamageable)) return;
+        backPlateDamageable.Initialize(gameObject.GetComponent<CarBackPlateDamageable>());
     }
 }

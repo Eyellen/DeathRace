@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: _gunScript
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 453657781038680451, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
+      propertyPath: clientAuthority
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 897334213702169893, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
       propertyPath: _gunScript
       value: 
