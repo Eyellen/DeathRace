@@ -171,7 +171,7 @@ WheelCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5389828293984222920}
-  m_Center: {x: -0.08, y: 0.15, z: 0}
+  m_Center: {x: 0, y: 0.15, z: 0}
   m_Radius: 0.28
   m_SuspensionSpring:
     spring: 35000

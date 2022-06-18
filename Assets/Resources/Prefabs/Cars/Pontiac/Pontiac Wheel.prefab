@@ -1,19 +1,15 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4237087588138139510
+--- !u!1001 &1616672951849603927
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1176696275860986545, guid: 7fde08c602717d94b8af6964dd9d419e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5389828293984222920, guid: 7fde08c602717d94b8af6964dd9d419e, type: 3}
       propertyPath: m_Name
-      value: FordWheel
+      value: Pontiac Wheel
       objectReference: {fileID: 0}
     - target: {fileID: 9220395252473458136, guid: 7fde08c602717d94b8af6964dd9d419e, type: 3}
       propertyPath: m_RootOrder
@@ -61,65 +57,65 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fde08c602717d94b8af6964dd9d419e, type: 3}
---- !u!4 &3069589835213219271 stripped
+--- !u!4 &449203812297755110 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1176696275860986545, guid: 7fde08c602717d94b8af6964dd9d419e, type: 3}
-  m_PrefabInstance: {fileID: 4237087588138139510}
+  m_PrefabInstance: {fileID: 1616672951849603927}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &5428709031123216824
+--- !u!1001 &3137958504326481613
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 3069589835213219271}
+    m_TransformParent: {fileID: 449203812297755110}
     m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: a7c877ed3bd5c1447805227f110a61b9, type: 3}
+    - target: {fileID: -8679921383154817045, guid: ef5293a157e7a50469267f072ed9b2b5, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a7c877ed3bd5c1447805227f110a61b9, type: 3}
+    - target: {fileID: -8679921383154817045, guid: ef5293a157e7a50469267f072ed9b2b5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.02
+      value: -0.018
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a7c877ed3bd5c1447805227f110a61b9, type: 3}
+    - target: {fileID: -8679921383154817045, guid: ef5293a157e7a50469267f072ed9b2b5, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a7c877ed3bd5c1447805227f110a61b9, type: 3}
+    - target: {fileID: -8679921383154817045, guid: ef5293a157e7a50469267f072ed9b2b5, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a7c877ed3bd5c1447805227f110a61b9, type: 3}
+    - target: {fileID: -8679921383154817045, guid: ef5293a157e7a50469267f072ed9b2b5, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a7c877ed3bd5c1447805227f110a61b9, type: 3}
+    - target: {fileID: -8679921383154817045, guid: ef5293a157e7a50469267f072ed9b2b5, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a7c877ed3bd5c1447805227f110a61b9, type: 3}
+    - target: {fileID: -8679921383154817045, guid: ef5293a157e7a50469267f072ed9b2b5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.7071068
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a7c877ed3bd5c1447805227f110a61b9, type: 3}
+    - target: {fileID: -8679921383154817045, guid: ef5293a157e7a50469267f072ed9b2b5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a7c877ed3bd5c1447805227f110a61b9, type: 3}
+    - target: {fileID: -8679921383154817045, guid: ef5293a157e7a50469267f072ed9b2b5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a7c877ed3bd5c1447805227f110a61b9, type: 3}
+    - target: {fileID: -8679921383154817045, guid: ef5293a157e7a50469267f072ed9b2b5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a7c877ed3bd5c1447805227f110a61b9, type: 3}
+    - target: {fileID: -8679921383154817045, guid: ef5293a157e7a50469267f072ed9b2b5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: a7c877ed3bd5c1447805227f110a61b9, type: 3}
+    - target: {fileID: 919132149155446097, guid: ef5293a157e7a50469267f072ed9b2b5, type: 3}
       propertyPath: m_Name
-      value: Wheel_01
+      value: Wheel_For_Pontiac_00
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a7c877ed3bd5c1447805227f110a61b9, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: ef5293a157e7a50469267f072ed9b2b5, type: 3}

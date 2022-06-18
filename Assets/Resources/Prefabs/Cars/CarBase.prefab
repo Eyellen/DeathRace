@@ -700,51 +700,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1 &8158813701672311292
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3679690906412335760}
-  - component: {fileID: 3736624764946687299}
-  m_Layer: 0
-  m_Name: BackPlate
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3679690906412335760
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8158813701672311292}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 0, y: 0.422, z: -1.979}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 9099919897771748776}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
---- !u!64 &3736624764946687299
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8158813701672311292}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!1 &8413943187918104856
 GameObject:
   m_ObjectHideFlags: 0
@@ -819,7 +774,6 @@ GameObject:
   - component: {fileID: 1649219433698045663}
   - component: {fileID: 7075551651831521368}
   - component: {fileID: 8083998131863091072}
-  - component: {fileID: 6085739538202348306}
   - component: {fileID: 7658570909016649496}
   - component: {fileID: 3988252081224543989}
   - component: {fileID: 40294703710993746}
@@ -885,7 +839,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   _motorForce: 1000
-  _speedLimit: 60
+  _speedLimit: 40
   _brakeForce: 10000
   _maxSteerAngle: 40
   _centreOfMass: {fileID: 2791432954134695550}
@@ -916,22 +870,6 @@ MonoBehaviour:
   syncInterval: 0.1
   _health: 100
   _destroyedCarPrefab: {fileID: 0}
---- !u!114 &6085739538202348306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9099919895988192258}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ddc44b8232ba5041944ccea1b154d2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  _health: 100
-  _plateMass: 100
 --- !u!114 &7658570909016649496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1171,7 +1109,6 @@ Transform:
   m_Children:
   - {fileID: 8222764389388500412}
   - {fileID: 2974427048378616844}
-  - {fileID: 3679690906412335760}
   m_Father: {fileID: 9099919895988192259}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
