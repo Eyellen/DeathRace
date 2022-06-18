@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarCamera : CameraBase
+public class ThirdPersonCamera : CameraBase
 {
     [SerializeField]
     private Transform _target;
@@ -12,11 +12,14 @@ public class CarCamera : CameraBase
 
     private Vector3 _currentCameraOffset;
 
+    private void Start()
+    {
+        //FindTarget();
+    }
+
     protected override void LateUpdate()
     {
         base.LateUpdate();
-
-        StartCoroutine(FindTarget());
 
         HandleFollowing();
     }
@@ -54,7 +57,7 @@ public class CarCamera : CameraBase
 #endif
     }
 
-    private IEnumerator FindTarget()
+    private void FindTarget()
     {
         while (!_target)
         {
@@ -67,8 +70,6 @@ public class CarCamera : CameraBase
                 _target = player.transform;
                 break;
             }
-
-            yield return new WaitForEndOfFrame();
         }
     }
 }
