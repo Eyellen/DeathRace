@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6a7ef9ee37ad7034cbf23894d1a1bc9b
+guid: 717bd09007020254caac93d41090d093
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -7,17 +7,47 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Cube.039_Cube.004_Lattice.015Mat
+      name: Cube.047_Cube.014_Black.001Mat
     second: {fileID: 2100000, guid: 82663ae64ebc88b4f89bd7f36a0eb976, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Cube.039_Cube.004_Metalik.028Mat
+      name: Cube.047_Cube.014_Glass.001Mat
+    second: {fileID: 2100000, guid: b107bffd6c43b544bb0576362915b2c8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cube.047_Cube.014_Roof.001Mat
+    second: {fileID: 2100000, guid: 6f7aa522dccc98a4aa3db5dc8fcfee8a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cube.053_Cube.051_Black.001Mat
+    second: {fileID: 2100000, guid: 82663ae64ebc88b4f89bd7f36a0eb976, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cube.054_Cube.031_BlackMat
+    second: {fileID: 2100000, guid: 82663ae64ebc88b4f89bd7f36a0eb976, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cube.056_Cube.052_Metalik.002Mat
     second: {fileID: 2100000, guid: bb557b274b9356647ac233a58a2ae11c, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Cube.039_Cube.004_metalik_2.019Mat
+      name: Cube.056_Cube.052_metalik_2.002Mat
+    second: {fileID: 2100000, guid: 103fca21176cb1f4d9a2fb23625616e0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cube.057_Cube.053_Metalik.002Mat
+    second: {fileID: 2100000, guid: bb557b274b9356647ac233a58a2ae11c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cube.057_Cube.053_metalik_2.002Mat
     second: {fileID: 2100000, guid: 103fca21176cb1f4d9a2fb23625616e0, type: 2}
   materials:
     materialImportMode: 2
