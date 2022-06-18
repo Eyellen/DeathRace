@@ -124,9 +124,17 @@ PrefabInstance:
       propertyPath: _wheels.Array.data[3]
       value: 
       objectReference: {fileID: 5853578436379621027}
+    - target: {fileID: 4135720277179768449, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5718376995903775604, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
       propertyPath: m_Name
       value: Destroyed Pontiac
+      objectReference: {fileID: 0}
+    - target: {fileID: 5718376995903775604, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5718376995903775605, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
       propertyPath: m_RootOrder
@@ -208,6 +216,8 @@ PrefabInstance:
     - {fileID: 8330576934981538040, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
     - {fileID: 8525131627691136552, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
     - {fileID: 5115010887365720212, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
+    - {fileID: 3361527701586273443, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
+    - {fileID: 7406168769928722538, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
 --- !u!1 &8027936991941318796 stripped
 GameObject:
