@@ -87,6 +87,17 @@ public class CarBase : NetworkBehaviour
         _input = PlayerInput.Instance;
     }
 
+    private void Update()
+    {
+        // Respawn
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            _rigidbody.velocity = Vector3.zero;
+            _thisTransform.rotation = Quaternion.Euler(0, 0, 0);
+            _thisTransform.position = NetworkManager.startPositions[Random.Range(0, NetworkManager.startPositions.Count - 1)].transform.position;
+        }
+    }
+
     private void FixedUpdate()
     {
         if (!isLocalPlayer) return;
@@ -96,12 +107,6 @@ public class CarBase : NetworkBehaviour
 
     private void HandleInput()
     {
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            _rigidbody.velocity = Vector3.zero;
-            _thisTransform.position = new Vector3(10f, 1f, 10f);
-        }
-
         // Gas input
         HandleGas(_input.VerticalAxis * _motorForce);
 
