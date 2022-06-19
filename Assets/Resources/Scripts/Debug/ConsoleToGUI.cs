@@ -6,8 +6,7 @@ namespace DebugStuff
     {
         [SerializeField] private bool _isActive;
 
-        //#if !UNITY_EDITOR
-        static string myLog = "";
+        static string myLog = "DEBUG LOG:\n\n";
         private string output;
         private string stack;
 
@@ -23,7 +22,7 @@ namespace DebugStuff
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.BackQuote))
             {
                 _isActive = !_isActive;
             }
@@ -44,11 +43,9 @@ namespace DebugStuff
         {
             if (!_isActive) return;
 
-            //if (!Application.isEditor) //Do not display in editor ( or you can use the UNITY_EDITOR macro to also disable the rest)
             {
-                myLog = GUI.TextArea(new Rect(10, Screen.height / 2 - 10, Screen.width - 10, Screen.height / 2), myLog);
+                myLog = GUI.TextArea(new Rect(0, 0, Screen.width, Screen.height), myLog);
             }
         }
-        //#endif
     }
 }
