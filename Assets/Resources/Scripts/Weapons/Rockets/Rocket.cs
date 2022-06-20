@@ -25,7 +25,7 @@ public class Rocket : MonoBehaviour
     public delegate void RocketExplodeEvent();
     public event RocketExplodeEvent OnRocketExplode;
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR || DEBUG_BUILD
     [Header("Debugging")]
     [SerializeField] private bool _debug;
 #endif
@@ -48,8 +48,8 @@ public class Rocket : MonoBehaviour
         Ray direction = new Ray(_thisTransform.position, _thisTransform.forward);
         if (!Physics.SphereCast(direction, 0.03f, out RaycastHit hitInfo, _speed * Time.deltaTime)) return;
 
-#if UNITY_EDITOR
-        if(_debug)
+#if UNITY_EDITOR || DEBUG_BUILD
+        if (_debug)
         {
             Debug.Log("Rocket hitted " + hitInfo.transform.name);
         }
