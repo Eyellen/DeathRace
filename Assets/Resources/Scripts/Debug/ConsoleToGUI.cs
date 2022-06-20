@@ -1,14 +1,33 @@
+#if DEBUG_BUILD
+
 using UnityEngine;
 
-namespace DebugStuff
+namespace MyDebug
 {
     public class ConsoleToGUI : MonoBehaviour
     {
+        public static ConsoleToGUI Instance { get; private set; }
+
         [SerializeField] private bool _isActive;
 
         static string myLog = "DEBUG LOG:\n\n";
         private string output;
         private string stack;
+
+        private void Start()
+        {
+            if (!Instance)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Debug.LogError($"Trying to create another one {nameof(ConsoleToGUI)} on {transform.name} when it is a Singleton. " +
+                    $"Destroyed {transform.name} to prevent this.");
+                Destroy(gameObject);
+            }
+        }
 
         void OnEnable()
         {
@@ -49,3 +68,5 @@ namespace DebugStuff
         }
     }
 }
+
+#endif
