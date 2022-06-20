@@ -30,7 +30,7 @@ public class ThirdPersonCamera : CameraBase
 
     private void HandleFollowing()
     {
-#if UNITY_EDITOR
+#if UNITY_EDITOR || DEBUG_BUILD
         if (!_target)
         {
             if (_debugging)
@@ -45,7 +45,7 @@ public class ThirdPersonCamera : CameraBase
 
         _cameraTransform.position = _target.position + _currentCameraOffset;
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR || DEBUG_BUILD
         if (_debugging)
         {
             Debug.DrawLine(_target.position, _target.position + _currentCameraOffset);

@@ -5,7 +5,7 @@ using Mirror;
 
 public class GunBase : NetworkBehaviour
 {
-#if UNITY_EDITOR
+#if UNITY_EDITOR || DEBUG_BUILD
     [Header("Debugging")]
     [SerializeField] private bool _debug;
 #endif
@@ -59,7 +59,7 @@ public class GunBase : NetworkBehaviour
 
         HandleInput();
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR || DEBUG_BUILD
         if (_debug)
         {
             Debug.DrawRay(_shotPoint.position, _shotPoint.forward * _shotDistance, Color.red);
@@ -95,7 +95,7 @@ public class GunBase : NetworkBehaviour
         //OnGunShoot?.Invoke(shotRay.direction, _shotDistance);
         CmdSetGunShootEventDirection(shotRay.direction);
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR || DEBUG_BUILD
         if (_debug)
         {
             Debug.DrawRay(shotRay.origin, shotRay.direction * _shotDistance, Color.green, 0.5f);
