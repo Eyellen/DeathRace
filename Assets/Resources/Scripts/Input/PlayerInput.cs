@@ -29,6 +29,8 @@ public class PlayerInput : MonoBehaviour
         }
         else
         {
+            Debug.LogError($"Trying to create another one {nameof(PlayerInput)} on {transform.name} when it is a Singleton. " +
+                $"Destroyed {transform.name} to prevent this.");
             Destroy(gameObject);
         }
     }
