@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class SettingsUser : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private string _username;
 
-    // Update is called once per frame
-    void Update()
+    public void SetUsername(string username)
     {
-        
+        _username = username;
     }
 }

@@ -72,14 +72,14 @@ public class SettingsGraphics : MonoBehaviour
 
         _screenModes = new FullScreenMode[]
         {
-            FullScreenMode.ExclusiveFullScreen,
+            FullScreenMode.FullScreenWindow,
             FullScreenMode.MaximizedWindow,
             FullScreenMode.Windowed
         };
 
         List<string> options = new List<string>()
         {
-            "Exclusive FullScreen",
+            "FullScreen Window",
             "Maximized Window",
             "Windowed"
         };
