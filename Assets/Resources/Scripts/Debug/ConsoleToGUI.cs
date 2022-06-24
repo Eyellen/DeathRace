@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace MyDebug
 {
+    [DisallowMultipleComponent]
     public class ConsoleToGUI : MonoBehaviour
     {
         public static ConsoleToGUI Instance { get; private set; }
