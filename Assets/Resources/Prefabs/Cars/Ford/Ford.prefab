@@ -52,7 +52,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 50
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -87,7 +87,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.9
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -935,7 +935,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   _health: 100
-  _plateMass: 100
+  _brokenBackPlatePrefab: {fileID: 2309082221795030665, guid: 39fb28818d448014c96c128b3e59fb73, type: 3}
 --- !u!114 &2097122378246942681
 MonoBehaviour:
   m_ObjectHideFlags: 0

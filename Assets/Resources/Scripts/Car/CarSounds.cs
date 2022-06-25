@@ -6,8 +6,13 @@ public class CarSounds : MonoBehaviour
 {
     [SerializeField] private CarBase _car;
 
+    [Header("Engine sound")]
+    [SerializeField] private float _gasBonus;
     [SerializeField] private AudioSource _engineSource;
     [SerializeField] private float _minEnginePitch, _maxEnginePitch;
+    private float _currentGasBonus;
+
+    [Header("Wheel slip sound")]
     [SerializeField] private AudioSource _wheelSlipSource;
 
     void Start()
@@ -18,14 +23,18 @@ public class CarSounds : MonoBehaviour
 
     void Update()
     {
-        EngineSound(_car.Rpm);
+        EngineSound();
         WheelSlipSound(_car.MeanForwardSlip, _car.MeanSidewaysSlip);
     }
 
-    private void EngineSound(float rpm)
+    private void EngineSound()
     {
-        float pitch = Mathf.Clamp(Mathf.Abs(rpm) / (38197f / 15), _minEnginePitch, _maxEnginePitch);
-        _engineSource.pitch = pitch;
+        //float pitch = Mathf.Clamp(Mathf.Abs(rpm) / (38197f / 15), _minEnginePitch, _maxEnginePitch);
+
+        _currentGasBonus = _car.IsGasing ? Mathf.Lerp(_currentGasBonus, _gasBonus, Time.deltaTime) : Mathf.Lerp(_currentGasBonus, 0, Time.deltaTime);
+
+        float pitch = Mathf.Clamp((Mathf.Abs(_car.CurrentSpeed) / _car.SpeedLimit) * _maxEnginePitch, _minEnginePitch, _maxEnginePitch - _gasBonus);
+        _engineSource.pitch = pitch + _currentGasBonus;
     }
 
     private void WheelSlipSound(float forwardSlip, float sidewaysSlip)

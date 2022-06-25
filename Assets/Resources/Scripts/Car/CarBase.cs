@@ -19,7 +19,12 @@ public class CarBase : NetworkBehaviour
     [Header("Wheels")]
     [SerializeField] protected Axle[] _axles;
 
+    private float _currentSpeed;
+
     #region Properties
+    public float CurrentSpeed { get => _currentSpeed; }
+    public float SpeedLimit { get => _speedLimit; }
+    [field: SyncVar] public bool IsGasing { get; private set; }
     public bool IsGrounded
     {
         get
@@ -31,18 +36,20 @@ public class CarBase : NetworkBehaviour
             return false;
         }
     }
-    public float Rpm
+    public float EngineRpm
     {
         get
         {
             float rpm = 0;
-            int wheelsSchecked = 0;
+            int wheelsChecked = 0;
             foreach (var axle in _axles)
             {
+                if (!axle.IsDriveAxle) continue;
+
                 rpm += axle.RightWheel.Collider.rpm + axle.LeftWheel.Collider.rpm;
-                wheelsSchecked += 2;
+                wheelsChecked += 2;
             }
-            return rpm / wheelsSchecked;
+            return rpm / wheelsChecked;
         }
     }
     public float MeanSidewaysSlip
@@ -87,6 +94,20 @@ public class CarBase : NetworkBehaviour
         _input = PlayerInput.Instance;
     }
 
+    private void Update()
+    {
+        // Respawn
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            _rigidbody.velocity = Vector3.zero;
+            _thisTransform.rotation = Quaternion.Euler(0, 0, 0);
+            _thisTransform.position = NetworkManager.startPositions[Random.Range(0, NetworkManager.startPositions.Count - 1)].transform.position;
+        }
+
+        // Speed
+        _currentSpeed = _rigidbody.velocity.magnitude;
+    }
+
     private void FixedUpdate()
     {
         if (!isLocalPlayer) return;
@@ -96,14 +117,9 @@ public class CarBase : NetworkBehaviour
 
     private void HandleInput()
     {
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            _rigidbody.velocity = Vector3.zero;
-            _thisTransform.position = new Vector3(10f, 1f, 10f);
-        }
-
         // Gas input
         HandleGas(_input.VerticalAxis * _motorForce);
+        IsGasing = Mathf.Abs(_input.VerticalAxis) >= 0.1f;
 
         // Braking
         HandleBrake(_input.Brake * _brakeForce);

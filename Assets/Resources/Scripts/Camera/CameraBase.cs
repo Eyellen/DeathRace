@@ -5,7 +5,7 @@ using Mirror;
 
 public class CameraBase : NetworkBehaviour
 {
-#if UNITY_EDITOR
+#if UNITY_EDITOR || DEBUG_BUILD
     [SerializeField]
     protected bool _debugging = false;
 #endif
