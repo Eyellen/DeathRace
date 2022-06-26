@@ -783,6 +783,7 @@ GameObject:
   - component: {fileID: 5942715597136064828}
   - component: {fileID: 4867852099582534852}
   - component: {fileID: 1724214071986387385}
+  - component: {fileID: 3793097228303951607}
   m_Layer: 0
   m_Name: CarBase
   m_TagString: Player
@@ -1104,6 +1105,20 @@ MonoBehaviour:
   syncAngularVelocity: 1
   clearAngularVelocity: 0
   angularVelocitySensitivity: 0.1
+--- !u!114 &3793097228303951607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9099919895988192258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e777a585def5b9747ba7f4ca37f2c486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerFloatingInfoPrefab: {fileID: 2553615383794190934, guid: 645f86e68b1e432458c05928dbe65a46, type: 3}
+  _visibleDistance: 50
 --- !u!1 &9099919897771748779
 GameObject:
   m_ObjectHideFlags: 0
