@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class PlayerFloatingInfoManager : MonoBehaviour
+public class PlayerFloatingInfoManager : NetworkBehaviour
 {
     private Transform _thisTransform;
     private Transform _cameraTransform;
@@ -12,6 +13,10 @@ public class PlayerFloatingInfoManager : MonoBehaviour
     [SerializeField] private float _verticalOffset = 1.5f;
 
     private GameObject _canvas;
+
+    [field: SyncVar]
+    [field: SerializeField]
+    public string Username { get; set; }
 
     private void Start()
     {
@@ -62,6 +67,7 @@ public class PlayerFloatingInfoManager : MonoBehaviour
         PlayerFloatingInfo floatingInfo = _playerFloatingInfo.GetComponent<PlayerFloatingInfo>();
         floatingInfo.PlayerTransform = transform;
         floatingInfo.VerticalOffset = _verticalOffset;
+        floatingInfo.Username = Username;
 
         HideFloatingInfo();
     }
