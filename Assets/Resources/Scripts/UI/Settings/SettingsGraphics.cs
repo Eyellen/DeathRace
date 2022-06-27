@@ -14,6 +14,11 @@ public class SettingsGraphics : MonoBehaviour
     private FullScreenMode[] _screenModes;
     [SerializeField] private TMP_Dropdown _displayModeDropdown;
 
+    public Resolution CurrentResolution { get { return Screen.currentResolution; } }
+    public int DisplayModeIndex { get; private set; }
+    public int QualityIndex { get; private set; }
+    public bool IsShadowsEnabled { get; private set; }
+
     private void Start()
     {
         //Debug.Log(nameof(FullScreenMode.ExclusiveFullScreen));
@@ -63,6 +68,7 @@ public class SettingsGraphics : MonoBehaviour
     #region DisplayMode
     public void SetDisplayMode(int displayModeIndex)
     {
+        DisplayModeIndex = displayModeIndex;
         Screen.fullScreenMode = _screenModes[displayModeIndex];
     }
 
@@ -93,6 +99,7 @@ public class SettingsGraphics : MonoBehaviour
     #region Quality
     public void SetQualityLevel(int qualityIndex)
     {
+        QualityIndex = qualityIndex;
         QualitySettings.SetQualityLevel(qualityIndex);
     }
     #endregion
@@ -102,6 +109,7 @@ public class SettingsGraphics : MonoBehaviour
     #region Shadows
     public void SetShadows(bool isShadowsEnabled)
     {
+        IsShadowsEnabled = isShadowsEnabled;
         if (isShadowsEnabled)
             QualitySettings.shadows = ShadowQuality.All;
         else
