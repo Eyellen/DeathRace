@@ -77,4 +77,15 @@ public class SettingsUser : MonoBehaviour
             _sensitivityField.GetComponentInChildren<Slider>().value = _sensitivity.x;
         }
     }
+
+    private void Start()
+    {
+        SettingsGeneralData data = SettingsSaveSystem.CachedSave;
+
+        _username = data.userData.Username;
+        _isSensitivitySplitted = data.userData.IsSensitivitySplitted;
+        _sensitivity = new Vector2(data.userData.XSensitivity, data.userData.YSensitivity);
+
+        RefreshOptions();
+    }
 }
