@@ -2,18 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SettingsUser : MonoBehaviour
 {
+    [Header("Username settings")]
     private string _username;
+    [SerializeField] private TMP_InputField _usernameField;
 
+    [Header("Sensitivity settings")]
+    [SerializeField] private Toggle _splitSensitivityToggle;
     private Vector2 _sensitivity;
-
     [SerializeField] private GameObject _sensitivityField;
     [SerializeField] private GameObject _xSensitivityField;
     [SerializeField] private GameObject _ySensitivityField;
 
     public string Username { get => _username; }
+    public bool IsSensitivitySplitted { get => _splitSensitivityToggle.isOn; }
     public Vector2 Sensitivity { get => _sensitivity; }
 
     public void SetUsername(string username)
