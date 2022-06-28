@@ -8,6 +8,30 @@ public static class SettingsSaveSystem
 {
     private const string FileName = "/Settings.config";
 
+    #region CachedSave
+    private static SettingsGeneralData _cachedSave;
+    public static SettingsGeneralData CachedSave
+    {
+        get
+        {
+            if (_cachedSave == null)
+            {
+                Load();
+            }
+            return _cachedSave;
+        }
+        private set
+        {
+            _cachedSave = value;
+        }
+    }
+
+    private static void UpdateCachedSave(SettingsGeneral settingsGeneral)
+    {
+        CachedSave = new SettingsGeneralData(settingsGeneral);
+    }
+    #endregion
+
     public static void Save(SettingsGeneral settingsGeneral)
     {
         string path = Application.persistentDataPath + FileName;
@@ -23,6 +47,7 @@ public static class SettingsSaveSystem
 #if UNITY_EDITOR
         Debug.Log("SettingsData has beem saved successfully");
 #endif
+        UpdateCachedSave(settingsGeneral);
     }
 
     public static SettingsGeneralData Load()
@@ -47,6 +72,7 @@ public static class SettingsSaveSystem
 #if UNITY_EDITOR
         Debug.Log("SettingsData has beem loaded successfully");
 #endif
+        CachedSave = data;
         return data;
     }
 
