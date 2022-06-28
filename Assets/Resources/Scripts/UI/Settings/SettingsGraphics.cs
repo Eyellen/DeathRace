@@ -7,33 +7,47 @@ using TMPro;
 public class SettingsGraphics : MonoBehaviour
 {
     [Header("Resolutions category")]
-    private Resolution[] _screenResolutions;
     [SerializeField] private TMP_Dropdown _resolutionsDropdown;
-
+    private Resolution[] _screenResolutions;
+    
     [Header("Display Mode category")]
-    private FullScreenMode[] _screenModes;
     [SerializeField] private TMP_Dropdown _displayModeDropdown;
+    private FullScreenMode[] _screenModes;
+
+    [Header("Quality category")]
+    [SerializeField] private TMP_Dropdown _qualityDropdown;
+
+    [Header("Shadows category")]
+    [SerializeField] private Toggle _shadowsToggle;
 
     public Resolution CurrentResolution { get { return Screen.currentResolution; } }
+    public int ResolutionIndex { get; private set; }
     public int DisplayModeIndex { get; private set; }
     public int QualityIndex { get; private set; }
     public bool IsShadowsEnabled { get; private set; }
 
     private void Start()
     {
-        //Debug.Log(nameof(FullScreenMode.ExclusiveFullScreen));
-
         InitializeResolutions();
         InitializeDisplayMode();
+
+        SettingsGeneralData data = SettingsSaveSystem.CachedSave;
+
+        //Screen.SetResolution(data.graphicsData.ResolutionWidth, data.graphicsData.ResolutionHeight, Screen.fullScreenMode);
+        ResolutionIndex = data.graphicsData.ResolutionIndex;
+        DisplayModeIndex = data.graphicsData.DisplayModeIndex;
+        QualityIndex = data.graphicsData.QualityIndex;
+        IsShadowsEnabled = data.graphicsData.IsShadowsEnabled;
+        RefreshOptions();
     }
-
-
 
     #region Resolution
     public void SetResolution(int resolutionIndex)
     {
+        ResolutionIndex = resolutionIndex;
         Resolution resolution = _screenResolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreenMode);
+        RefreshOptions();
     }
 
     private void InitializeResolutions()
@@ -42,7 +56,6 @@ public class SettingsGraphics : MonoBehaviour
 
         _resolutionsDropdown.ClearOptions();
 
-        int currentResolutionIndex = 0;
         List<string> options = new List<string>();
         for (int i = 0; i < _screenResolutions.Length; i++)
         {
@@ -52,24 +65,23 @@ public class SettingsGraphics : MonoBehaviour
             if (_screenResolutions[i].width == Screen.currentResolution.width &&
                 _screenResolutions[i].height == Screen.currentResolution.height)
             {
-                currentResolutionIndex = i;
+                ResolutionIndex = i;
             }
         }
 
         _resolutionsDropdown.AddOptions(options);
 
-        _resolutionsDropdown.value = currentResolutionIndex;
+        _resolutionsDropdown.value = ResolutionIndex;
         _resolutionsDropdown.RefreshShownValue();
     }
     #endregion
-
-
 
     #region DisplayMode
     public void SetDisplayMode(int displayModeIndex)
     {
         DisplayModeIndex = displayModeIndex;
         Screen.fullScreenMode = _screenModes[displayModeIndex];
+        RefreshOptions();
     }
 
     private void InitializeDisplayMode()
@@ -94,17 +106,14 @@ public class SettingsGraphics : MonoBehaviour
     }
     #endregion
 
-
-
     #region Quality
     public void SetQualityLevel(int qualityIndex)
     {
         QualityIndex = qualityIndex;
         QualitySettings.SetQualityLevel(qualityIndex);
+        RefreshOptions();
     }
     #endregion
-
-
 
     #region Shadows
     public void SetShadows(bool isShadowsEnabled)
@@ -114,10 +123,9 @@ public class SettingsGraphics : MonoBehaviour
             QualitySettings.shadows = ShadowQuality.All;
         else
             QualitySettings.shadows = ShadowQuality.Disable;
+        RefreshOptions();
     }
     #endregion
-
-
 
     //#region RenderDistance
     //public void SetRenderDistance(float value)
@@ -125,4 +133,12 @@ public class SettingsGraphics : MonoBehaviour
         
     //}
     //#endregion
+
+    private void RefreshOptions()
+    {
+        _resolutionsDropdown.value = ResolutionIndex;
+        _displayModeDropdown.value = DisplayModeIndex;
+        _qualityDropdown.value = QualityIndex;
+        _shadowsToggle.isOn = IsShadowsEnabled;
+    }
 }

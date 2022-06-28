@@ -15,6 +15,7 @@ public class SettingsGeneralData
         public int ResolutionWidth { get; private set; }
         public int RefreshRate { get; private set; }
 
+        public int ResolutionIndex { get; private set; }
         public int DisplayModeIndex { get; private set; }
         public int QualityIndex { get; private set; }
         public bool IsShadowsEnabled { get; private set; }
@@ -25,6 +26,7 @@ public class SettingsGeneralData
             ResolutionWidth = settingsGraphics.CurrentResolution.width;
             RefreshRate = settingsGraphics.CurrentResolution.refreshRate;
 
+            ResolutionIndex = settingsGraphics.ResolutionIndex;
             DisplayModeIndex = settingsGraphics.DisplayModeIndex;
             QualityIndex = settingsGraphics.QualityIndex;
             IsShadowsEnabled = settingsGraphics.IsShadowsEnabled;
