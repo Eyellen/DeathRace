@@ -11,14 +11,12 @@ public class PlayerFloatingInfo : MonoBehaviour
 
     public Transform PlayerTransform { get; set; }
     public float VerticalOffset { get; set; }
-    public string Username { get; set; }
+    public string Username { get { return _usernameText.text; } set { _usernameText.text = value; } }
 
     private void Start()
     {
         _thisTransform = GetComponent<Transform>();
         _camera = Camera.main;
-
-        InitializeInfo();
     }
 
     private void LateUpdate()
@@ -29,17 +27,5 @@ public class PlayerFloatingInfo : MonoBehaviour
     private void UpdatePositionOnScreen()
     {
         _thisTransform.position = _camera.WorldToScreenPoint(PlayerTransform.position + Vector3.up * VerticalOffset);
-    }
-
-    private void InitializeInfo()
-    {
-        if (!string.IsNullOrEmpty(Username))
-        {
-            _usernameText.text = Username;
-        }
-        else
-        {
-            _usernameText.text = "Player";
-        }
     }
 }

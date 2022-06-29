@@ -7,6 +7,7 @@ public class PlayerFloatingInfoManager : NetworkBehaviour
 {
     private Transform _thisTransform;
     private Transform _cameraTransform;
+    private Camera _camera;
     private GameObject _playerFloatingInfo;
     [SerializeField] private GameObject _playerFloatingInfoPrefab;
     [SerializeField] private float _visibleDistance;
@@ -14,7 +15,7 @@ public class PlayerFloatingInfoManager : NetworkBehaviour
 
     private GameObject _canvas;
 
-    [field: SyncVar]
+    [field: SyncVar(hook = nameof(UpdateUsername))]
     [field: SerializeField]
     public string Username { get; set; }
 
@@ -22,7 +23,11 @@ public class PlayerFloatingInfoManager : NetworkBehaviour
     {
         _thisTransform = GetComponent<Transform>();
         _cameraTransform = Camera.main.transform;
+        _camera = Camera.main;
         _canvas = GameObject.Find("Canvas");
+
+        if (isLocalPlayer)
+            CmdSetUsername(Username = SettingsSaveSystem.CachedSave.userData.Username);
 
         InitializeFloatingInfo();
     }
@@ -39,7 +44,7 @@ public class PlayerFloatingInfoManager : NetworkBehaviour
 
     private void CheckIfNeedToShowOrHide()
     {
-        Vector3 player = Camera.main.WorldToViewportPoint(transform.position);
+        Vector3 player = _camera.WorldToViewportPoint(transform.position);
         bool onScreen = player.z > 0 && (player.x > -0.1 && player.x < 1.1) && (player.y > -0.1 && player.y < 1.1);
 
         if (Vector3.Distance(_cameraTransform.position, _thisTransform.position) > _visibleDistance || !onScreen)
@@ -70,5 +75,26 @@ public class PlayerFloatingInfoManager : NetworkBehaviour
         floatingInfo.Username = Username;
 
         HideFloatingInfo();
+    }
+
+    private void UpdateUsername(string oldValue, string newValue)
+    {
+        if (!_playerFloatingInfo) return;
+        if (!_playerFloatingInfo.TryGetComponent(out PlayerFloatingInfo floatingInfo)) return;
+        floatingInfo.Username = Username;
+    }
+    
+    [Command(requiresAuthority = false)]
+    private void CmdSetUsername(string username)
+    {
+        if (!string.IsNullOrEmpty(username))
+        {
+            Username = username;
+        }
+        else
+        {
+            Debug.LogWarning("Username is empty, Username set value to Player.");
+            Username = "Player";
+        }
     }
 }
