@@ -36,14 +36,16 @@ public static class SettingsSaveSystem
     {
         string path = Application.persistentDataPath + FileName;
 
-        using (var stream = new FileStream(path, FileMode.Create))
-        {
-            var formatter = new BinaryFormatter();
+        var stream = new FileStream(path, FileMode.Create);
 
-            var data = new SettingsGeneralData(settingsGeneral);
+        var formatter = new BinaryFormatter();
 
-            formatter.Serialize(stream, data);
-        }
+        var data = new SettingsGeneralData(settingsGeneral);
+
+        formatter.Serialize(stream, data);
+
+        stream.Close();
+
 #if UNITY_EDITOR
         Debug.Log("SettingsData has beem saved successfully");
 #endif
@@ -62,13 +64,14 @@ public static class SettingsSaveSystem
             return null;
         }
 
-        SettingsGeneralData data;
-        using (var stream = new FileStream(path, FileMode.Open))
-        {
-            var formatter = new BinaryFormatter();
+        var stream = new FileStream(path, FileMode.Open);
 
-            data = formatter.Deserialize(stream) as SettingsGeneralData;
-        }
+        var formatter = new BinaryFormatter();
+
+        SettingsGeneralData data = formatter.Deserialize(stream) as SettingsGeneralData;
+
+        stream.Close();
+
 #if UNITY_EDITOR
         Debug.Log("SettingsData has beem loaded successfully");
 #endif
