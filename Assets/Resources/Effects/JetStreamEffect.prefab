@@ -18,7 +18,7 @@ PrefabInstance:
     - target: {fileID: 4320682932359231474, guid: 83e032cfe22fa7d4aa8e3910f6781db6, type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 
-      objectReference: {fileID: 24300002, guid: 39d27344d840a5344aebbe310d24ccf1, type: 2}
+      objectReference: {fileID: 24300002, guid: e905bfd5f1beeae4a8cacb381a53aa2d, type: 2}
     - target: {fileID: 4320682932359231474, guid: 83e032cfe22fa7d4aa8e3910f6781db6, type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 1

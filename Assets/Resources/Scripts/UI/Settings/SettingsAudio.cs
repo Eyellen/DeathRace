@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class SettingsAudio : MonoBehaviour
 {
+    private const float _minDecibel = -80f;
+    private const float _maxDecibel = 0f;
+
     [Header("Mixers")]
     [SerializeField] private AudioMixer _generalMixer;
     [SerializeField] private AudioMixer _gameSoundsMixer;
@@ -43,7 +46,7 @@ public class SettingsAudio : MonoBehaviour
 
     private float FloatToDecibel(float volume)
     {
-        return Mathf.Lerp(-80f, 20f, volume);
+        return Mathf.Lerp(_minDecibel, _maxDecibel, volume);
     }
 
     private void RefreshOptions()
