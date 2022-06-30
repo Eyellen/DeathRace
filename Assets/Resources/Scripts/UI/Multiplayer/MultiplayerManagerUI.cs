@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class LANGameMenu : MonoBehaviour
+public class MultiplayerManagerUI : MonoBehaviour
 {
     private NetworkManager _networkManager;
 
@@ -27,4 +27,15 @@ public class LANGameMenu : MonoBehaviour
         _networkManager.networkAddress = ip;
     }
 
+    public void StopHostOrClient()
+    {
+        if(NetworkClient.localPlayer.isServer)
+        {
+            _networkManager.StopHost();
+        }
+        else
+        {
+            _networkManager.StopClient();
+        }
+    }
 }
