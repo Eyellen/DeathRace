@@ -12,6 +12,7 @@ public class PlayerFloatingInfoManager : NetworkBehaviour
     [SerializeField] private GameObject _playerFloatingInfoPrefab;
     [SerializeField] private float _visibleDistance;
     [SerializeField] private float _verticalOffset = 1.5f;
+    [SerializeField] private bool _isShowOnSelf;
 
     private GameObject _canvas;
 
@@ -24,7 +25,7 @@ public class PlayerFloatingInfoManager : NetworkBehaviour
         _thisTransform = GetComponent<Transform>();
         _cameraTransform = Camera.main.transform;
         _camera = Camera.main;
-        _canvas = GameObject.Find("Canvas");
+        _canvas = GameObject.Find("Canvas/UsernameFloatingInfos");
 
         if (isLocalPlayer)
             CmdSetUsername(Username = SettingsSaveSystem.CachedSave.userData.Username);
@@ -34,6 +35,12 @@ public class PlayerFloatingInfoManager : NetworkBehaviour
 
     private void Update()
     {
+        if(!_isShowOnSelf && isLocalPlayer)
+        {
+            HideFloatingInfo();
+            return;
+        }
+
         CheckIfNeedToShowOrHide();
     }
 

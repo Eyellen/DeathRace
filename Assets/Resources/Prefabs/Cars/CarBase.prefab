@@ -775,6 +775,7 @@ GameObject:
   - component: {fileID: 1649219433698045663}
   - component: {fileID: 7075551651831521368}
   - component: {fileID: 8083998131863091072}
+  - component: {fileID: 3793097228303951607}
   - component: {fileID: 7658570909016649496}
   - component: {fileID: 3988252081224543989}
   - component: {fileID: 40294703710993746}
@@ -783,7 +784,6 @@ GameObject:
   - component: {fileID: 5942715597136064828}
   - component: {fileID: 4867852099582534852}
   - component: {fileID: 1724214071986387385}
-  - component: {fileID: 3793097228303951607}
   m_Layer: 0
   m_Name: CarBase
   m_TagString: Player
@@ -873,6 +873,25 @@ MonoBehaviour:
   syncInterval: 0.1
   _health: 100
   _destroyedCarPrefab: {fileID: 0}
+--- !u!114 &3793097228303951607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9099919895988192258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e777a585def5b9747ba7f4ca37f2c486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  _playerFloatingInfoPrefab: {fileID: 2553615383794190934, guid: 645f86e68b1e432458c05928dbe65a46, type: 3}
+  _visibleDistance: 50
+  _verticalOffset: 1.5
+  _isShowOnSelf: 1
+  <Username>k__BackingField: 
 --- !u!114 &7658570909016649496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1105,24 +1124,6 @@ MonoBehaviour:
   syncAngularVelocity: 1
   clearAngularVelocity: 0
   angularVelocitySensitivity: 0.1
---- !u!114 &3793097228303951607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9099919895988192258}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e777a585def5b9747ba7f4ca37f2c486, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  _playerFloatingInfoPrefab: {fileID: 2553615383794190934, guid: 645f86e68b1e432458c05928dbe65a46, type: 3}
-  _visibleDistance: 50
-  _verticalOffset: 1.5
-  <Username>k__BackingField: 
 --- !u!1 &9099919897771748779
 GameObject:
   m_ObjectHideFlags: 0
