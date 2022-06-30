@@ -26,13 +26,13 @@ public static class SettingsSaveSystem
         }
     }
 
-    private static void UpdateCachedSave(SettingsGeneral settingsGeneral)
+    private static void UpdateCachedSave(SettingsGeneralUI settingsGeneral)
     {
         CachedSave = new SettingsGeneralData(settingsGeneral);
     }
     #endregion
 
-    public static void Save(SettingsGeneral settingsGeneral)
+    public static void Save(SettingsGeneralUI settingsGeneral)
     {
         string path = Application.persistentDataPath + FileName;
 

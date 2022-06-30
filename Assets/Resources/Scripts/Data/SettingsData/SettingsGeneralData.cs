@@ -20,7 +20,7 @@ public class SettingsGeneralData
         public int QualityIndex { get; private set; }
         public bool IsShadowsEnabled { get; private set; }
 
-        public GraphicsData(SettingsGraphics settingsGraphics)
+        public GraphicsData(SettingsGraphicsUI settingsGraphics)
         {
             ResolutionHeight = settingsGraphics.CurrentResolution.height;
             ResolutionWidth = settingsGraphics.CurrentResolution.width;
@@ -40,7 +40,7 @@ public class SettingsGeneralData
         public float GameSoundsVolume { get; private set; }
         public float AmbienceVolume { get; private set; }
 
-        public AudioData(SettingsAudio settingsAudio)
+        public AudioData(SettingsAudioUI settingsAudio)
         {
             GeneralVolume = settingsAudio.GeneralVolume;
             GameSoundsVolume = settingsAudio.GameSoundsVolume;
@@ -56,7 +56,7 @@ public class SettingsGeneralData
         public float XSensitivity { get; private set; }
         public float YSensitivity { get; private set; }
 
-        public UserData(SettingsUser settingsUser)
+        public UserData(SettingsUserUI settingsUser)
         {
             Username = settingsUser.Username;
             IsSensitivitySplitted = settingsUser.IsSensitivitySplitted;
@@ -69,7 +69,7 @@ public class SettingsGeneralData
     public AudioData audioData { get; private set; }
     public UserData userData { get; private set; }
 
-    public SettingsGeneralData(SettingsGeneral settingsGeneral)
+    public SettingsGeneralData(SettingsGeneralUI settingsGeneral)
     {
         graphicsData = new GraphicsData(settingsGeneral.SettingsGraphics);
         audioData = new AudioData(settingsGeneral.SettingsAudio);

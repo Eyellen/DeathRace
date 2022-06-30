@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-public class SettingsAudio : MonoBehaviour
+public class SettingsAudioUI : MonoBehaviour
 {
     private const float _minDecibel = -80f;
     private const float _maxDecibel = 0f;
