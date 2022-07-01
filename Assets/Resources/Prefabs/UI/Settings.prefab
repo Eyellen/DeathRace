@@ -2664,8 +2664,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7940921700653587974}
-        m_TargetAssemblyTypeName: SettingsGraphics, Assembly-CSharp
-        m_MethodName: SetDisplayMode
+        m_TargetAssemblyTypeName: SettingsGraphicsUI, Assembly-CSharp
+        m_MethodName: SetScreenMode
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
