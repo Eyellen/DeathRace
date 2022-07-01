@@ -22,7 +22,7 @@ public static class SettingsGraphics
     public static int CurrentQualityLevelIndex { get => QualitySettings.GetQualityLevel(); }
     public static bool IsShadowsEnabled { get => QualitySettings.shadows != ShadowQuality.Disable; }
 
-    public static void InitializeSettings()
+    public static void Initialize()
     {
         InitializeResolutions();
     }

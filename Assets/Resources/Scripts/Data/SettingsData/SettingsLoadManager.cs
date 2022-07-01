@@ -21,7 +21,7 @@ public class SettingsLoadManager : MonoBehaviour
 
     private void ApplyLoadedSettings()
     {
-        SettingsGraphics.InitializeSettings();
+        SettingsGraphics.Initialize();
         SettingsGraphics.SetResolution(_loadedSave.graphicsData.ResolutionWidth, _loadedSave.graphicsData.ResolutionHeight);
         SettingsGraphics.SetScreenMode(_loadedSave.graphicsData.ScreenModeIndex);
         SettingsGraphics.SetQualityLevel(_loadedSave.graphicsData.QualityIndex);
