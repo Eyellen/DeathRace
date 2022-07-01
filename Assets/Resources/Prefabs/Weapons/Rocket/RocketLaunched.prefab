@@ -198,6 +198,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: JetStreamEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 9010738889915091936, guid: 5ec48638153714c4a95bad2dde6427a1, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: e905bfd5f1beeae4a8cacb381a53aa2d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ec48638153714c4a95bad2dde6427a1, type: 3}
 --- !u!1001 &6579621553473255820

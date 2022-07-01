@@ -4,11 +4,12 @@ using UnityEngine;
 
 namespace MyDebug
 {
+    [DisallowMultipleComponent]
     public class ConsoleToGUI : MonoBehaviour
     {
         public static ConsoleToGUI Instance { get; private set; }
 
-        [SerializeField] private bool _isActive;
+        [SerializeField] private bool _enabled;
 
         static string myLog = "DEBUG LOG:\n\n";
         private string output;
@@ -43,7 +44,7 @@ namespace MyDebug
         {
             if (Input.GetKeyDown(KeyCode.BackQuote))
             {
-                _isActive = !_isActive;
+                _enabled = !_enabled;
             }
         }
 
@@ -60,7 +61,7 @@ namespace MyDebug
 
         void OnGUI()
         {
-            if (!_isActive) return;
+            if (!_enabled) return;
 
             {
                 myLog = GUI.TextArea(new Rect(0, 0, Screen.width, Screen.height), myLog);

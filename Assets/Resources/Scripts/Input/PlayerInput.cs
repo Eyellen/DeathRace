@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class PlayerInput : MonoBehaviour
 {
     public static PlayerInput Instance { get; private set; }
