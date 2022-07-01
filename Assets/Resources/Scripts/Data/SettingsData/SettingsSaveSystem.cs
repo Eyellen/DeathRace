@@ -25,11 +25,6 @@ public static class SettingsSaveSystem
             _cachedSave = value;
         }
     }
-
-    private static void UpdateCachedSave()
-    {
-        CachedSave = new SettingsGeneralData();
-    }
     #endregion
 
     public static void Save()
@@ -50,7 +45,7 @@ public static class SettingsSaveSystem
 #if UNITY_EDITOR
         Debug.Log("SettingsData has beem saved successfully");
 #endif
-        UpdateCachedSave();
+        CachedSave = data;
     }
 
     public static SettingsGeneralData Load()
