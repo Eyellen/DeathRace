@@ -41,6 +41,7 @@ public static class SettingsSaveSystem
         var formatter = new BinaryFormatter();
 
         var data = new SettingsGeneralData();
+        data.Initialize();
 
         formatter.Serialize(stream, data);
 

@@ -76,12 +76,14 @@ public class SettingsGeneralData
     public SettingsGeneralData()
     {
         graphicsData = new GraphicsData();
-        graphicsData.Initialize();
-
         audioData = new AudioData();
-        audioData.Initialize();
-
         userData = new UserData();
+    }
+
+    public void Initialize()
+    {
+        graphicsData.Initialize();
+        audioData.Initialize();
         userData.Initialize();
     }
 }
