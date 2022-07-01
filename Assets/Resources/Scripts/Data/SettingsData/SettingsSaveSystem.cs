@@ -26,13 +26,13 @@ public static class SettingsSaveSystem
         }
     }
 
-    private static void UpdateCachedSave(SettingsGeneralUI settingsGeneral)
+    private static void UpdateCachedSave()
     {
-        CachedSave = new SettingsGeneralData(settingsGeneral);
+        CachedSave = new SettingsGeneralData();
     }
     #endregion
 
-    public static void Save(SettingsGeneralUI settingsGeneral)
+    public static void Save()
     {
         string path = Application.persistentDataPath + FileName;
 
@@ -40,7 +40,7 @@ public static class SettingsSaveSystem
 
         var formatter = new BinaryFormatter();
 
-        var data = new SettingsGeneralData(settingsGeneral);
+        var data = new SettingsGeneralData();
 
         formatter.Serialize(stream, data);
 
@@ -49,7 +49,7 @@ public static class SettingsSaveSystem
 #if UNITY_EDITOR
         Debug.Log("SettingsData has beem saved successfully");
 #endif
-        UpdateCachedSave(settingsGeneral);
+        UpdateCachedSave();
     }
 
     public static SettingsGeneralData Load()
