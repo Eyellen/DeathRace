@@ -21,6 +21,7 @@ public class CameraBase : NetworkBehaviour
     protected virtual void Awake()
     {
         _cameraTransform = GetComponent<Transform>();
+        SettingsUser.OnSensitivityChanged += ChangeSensitivity;
     }
 
     protected virtual void LateUpdate()
@@ -37,5 +38,10 @@ public class CameraBase : NetworkBehaviour
         Quaternion rotation = Quaternion.Euler(-_yRotation, _xRotation, 0);
 
         _cameraTransform.rotation = rotation;
+    }
+
+    private void ChangeSensitivity()
+    {
+        _sensitivity = SettingsUser.Sensitivity * 6;
     }
 }
