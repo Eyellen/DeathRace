@@ -69,8 +69,19 @@ public static class SettingsSaveSystem
 
         var formatter = new BinaryFormatter();
 
-        SettingsGeneralData data = formatter.Deserialize(stream) as SettingsGeneralData;
-
+        SettingsGeneralData data;
+        try
+        {
+            data = formatter.Deserialize(stream) as SettingsGeneralData;
+        }
+        catch (System.Runtime.Serialization.SerializationException)
+        {
+#if UNITY_EDITOR
+            Debug.LogError("Trying to deserialize empty stream");
+#endif
+            return null;
+        }
+        
         stream.Close();
 
 #if UNITY_EDITOR

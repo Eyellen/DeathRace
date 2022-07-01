@@ -1113,9 +1113,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f23f6177f83ab74a8eb71bb9b3c4586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _generalMixer: {fileID: 24100000, guid: 1afd2feeec3a9594eae2a50dc3517488, type: 2}
-  _gameSoundsMixer: {fileID: 24100000, guid: e905bfd5f1beeae4a8cacb381a53aa2d, type: 2}
-  _ambienceMixer: {fileID: 24100000, guid: f6f63c56f63a61e499bd3a8a0c65e7f4, type: 2}
   _generalSlider: {fileID: 7940921699891852337}
   _gameSoundsSlider: {fileID: 7940921699882391693}
   _ambienceSlider: {fileID: 7940921701646841597}
@@ -3924,7 +3921,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Option A
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6655,9 +6652,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4a1f5f9795ca314181c1717381a5290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <SettingsGraphics>k__BackingField: {fileID: 7940921700653587974}
-  <SettingsAudio>k__BackingField: {fileID: 7940921699659016103}
-  <SettingsUser>k__BackingField: {fileID: 7940921700481792507}
 --- !u!1 &7940921700635154360
 GameObject:
   m_ObjectHideFlags: 0
@@ -8701,13 +8695,7 @@ MonoBehaviour:
   m_ItemImage: {fileID: 0}
   m_Value: 0
   m_Options:
-    m_Options:
-    - m_Text: Option A
-      m_Image: {fileID: 0}
-    - m_Text: Option B
-      m_Image: {fileID: 0}
-    - m_Text: Option C
-      m_Image: {fileID: 0}
+    m_Options: []
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

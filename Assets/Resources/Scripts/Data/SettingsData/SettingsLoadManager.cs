@@ -16,18 +16,25 @@ public class SettingsLoadManager : MonoBehaviour
     {
         _loadedSave = SettingsSaveSystem.Load();
 
+        InitializeSettings();
         ApplyLoadedSettings();
+    }
+
+    private void InitializeSettings()
+    {
+        SettingsGraphics.Initialize();
+        SettingsAudio.Initialize();
     }
 
     private void ApplyLoadedSettings()
     {
-        SettingsGraphics.Initialize();
+        if (_loadedSave == null) return;
+        
         SettingsGraphics.SetResolution(_loadedSave.graphicsData.ResolutionWidth, _loadedSave.graphicsData.ResolutionHeight);
         SettingsGraphics.SetScreenMode(_loadedSave.graphicsData.ScreenModeIndex);
         SettingsGraphics.SetQualityLevel(_loadedSave.graphicsData.QualityIndex);
         SettingsGraphics.SetShadowsEnabled(_loadedSave.graphicsData.IsShadowsEnabled);
 
-        SettingsAudio.Initialize();
         SettingsAudio.SetGeneralVolume(_loadedSave.audioData.GeneralVolume);
         SettingsAudio.SetGameSoundsVolume(_loadedSave.audioData.GameSoundsVolume);
         SettingsAudio.SetAmbienceVolume(_loadedSave.audioData.AmbienceVolume);
