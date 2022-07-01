@@ -14,9 +14,6 @@ public static class SettingsGraphics
         };
     private static int s_currentScreenModeIndex = 0;
 
-    //private static int s_currentQualityIndex;
-
-    //private static bool s_isShadowsEnabled;
 
     public static Resolution[] Resolutions { get => s_resolutions; }
 
@@ -36,13 +33,20 @@ public static class SettingsGraphics
         Screen.SetResolution(width, height, Screen.fullScreenMode);
     }
 
+    public static void SetResolution(int resolutionIndex)
+    {
+        Screen.SetResolution(s_resolutions[resolutionIndex].width,
+            s_resolutions[resolutionIndex].height, Screen.fullScreenMode);
+    }
+
     private static void InitializeResolutions()
     {
         List<Resolution> resolutions = new List<Resolution>();
         Resolution[] screenResolutions = Screen.resolutions;
         for (int i = 0; i < screenResolutions.Length; i++)
         {
-            if (screenResolutions[i].width == screenResolutions[i + 1].width &&
+            if (i + 1 < screenResolutions.Length &&
+                screenResolutions[i].width == screenResolutions[i + 1].width &&
                 screenResolutions[i].height == screenResolutions[i + 1].height) continue;
 
             resolutions.Add(screenResolutions[i]);

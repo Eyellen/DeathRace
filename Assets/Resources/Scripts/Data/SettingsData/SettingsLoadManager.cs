@@ -21,23 +21,11 @@ public class SettingsLoadManager : MonoBehaviour
 
     private void ApplyLoadedSettings()
     {
-        Screen.SetResolution(_loadedSave.graphicsData.ResolutionWidth, _loadedSave.graphicsData.ResolutionHeight, Screen.fullScreenMode);
-        FullScreenMode[] modes = new FullScreenMode[3]
-        {
-            FullScreenMode.FullScreenWindow,
-            FullScreenMode.MaximizedWindow,
-            FullScreenMode.Windowed,
-        };
-        Screen.fullScreenMode = modes[_loadedSave.graphicsData.DisplayModeIndex];
-        QualitySettings.SetQualityLevel(_loadedSave.graphicsData.QualityIndex);
-        if(_loadedSave.graphicsData.IsShadowsEnabled)
-        {
-            QualitySettings.shadows = ShadowQuality.All;
-        }
-        else
-        {
-            QualitySettings.shadows = ShadowQuality.Disable;
-        }
+        SettingsGraphics.InitializeSettings();
+        SettingsGraphics.SetResolution(_loadedSave.graphicsData.ResolutionWidth, _loadedSave.graphicsData.ResolutionHeight);
+        SettingsGraphics.SetScreenMode(_loadedSave.graphicsData.ScreenModeIndex);
+        SettingsGraphics.SetQualityLevel(_loadedSave.graphicsData.QualityIndex);
+        SettingsGraphics.SetShadowsEnabled(_loadedSave.graphicsData.IsShadowsEnabled);
 
         _generalMixer.SetFloat("Volume", Float01ToDecibel(_loadedSave.audioData.GeneralVolume));
         _gameSoundsMixer.SetFloat("Volume", Float01ToDecibel(_loadedSave.audioData.GameSoundsVolume));

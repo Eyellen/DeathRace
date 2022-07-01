@@ -15,21 +15,21 @@ public class SettingsGeneralData
         public int ResolutionWidth { get; private set; }
         public int RefreshRate { get; private set; }
 
-        public int ResolutionIndex { get; private set; }
-        public int DisplayModeIndex { get; private set; }
+        public int ScreenModeIndex { get; private set; }
         public int QualityIndex { get; private set; }
         public bool IsShadowsEnabled { get; private set; }
 
-        public GraphicsData(SettingsGraphicsUI settingsGraphics)
-        {
-            ResolutionHeight = settingsGraphics.CurrentResolution.height;
-            ResolutionWidth = settingsGraphics.CurrentResolution.width;
-            RefreshRate = settingsGraphics.CurrentResolution.refreshRate;
+        public GraphicsData() { }
 
-            ResolutionIndex = settingsGraphics.ResolutionIndex;
-            DisplayModeIndex = settingsGraphics.DisplayModeIndex;
-            QualityIndex = settingsGraphics.QualityIndex;
-            IsShadowsEnabled = settingsGraphics.IsShadowsEnabled;
+        public void Initialize()
+        {
+            ResolutionHeight = SettingsGraphics.CurrentResolution.height;
+            ResolutionWidth = SettingsGraphics.CurrentResolution.width;
+            RefreshRate = SettingsGraphics.CurrentResolution.refreshRate;
+
+            ScreenModeIndex = SettingsGraphics.CurrentScreenModeIndex;
+            QualityIndex = SettingsGraphics.CurrentQualityLevelIndex;
+            IsShadowsEnabled = SettingsGraphics.IsShadowsEnabled;
         }
     }
 
@@ -45,6 +45,11 @@ public class SettingsGeneralData
             GeneralVolume = settingsAudio.GeneralVolume;
             GameSoundsVolume = settingsAudio.GameSoundsVolume;
             AmbienceVolume = settingsAudio.AmbienceVolume;
+        }
+
+        public void Initialize()
+        {
+
         }
     }
 
@@ -63,6 +68,11 @@ public class SettingsGeneralData
             XSensitivity = settingsUser.Sensitivity.x;
             YSensitivity = settingsUser.Sensitivity.y;
         }
+
+        public void Initialize()
+        {
+
+        }
     }
 
     public GraphicsData graphicsData { get; private set; }
@@ -71,7 +81,8 @@ public class SettingsGeneralData
 
     public SettingsGeneralData(SettingsGeneralUI settingsGeneral)
     {
-        graphicsData = new GraphicsData(settingsGeneral.SettingsGraphics);
+        graphicsData = new GraphicsData();
+        graphicsData.Initialize();
         audioData = new AudioData(settingsGeneral.SettingsAudio);
         userData = new UserData(settingsGeneral.SettingsUser);
     }
