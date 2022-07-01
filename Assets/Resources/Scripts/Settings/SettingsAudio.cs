@@ -24,6 +24,13 @@ public static class SettingsAudio
         //Debug.Log($"Ambience mixer is loaded: {_ambienceMixer != null}, type: {_ambienceMixer?.GetType()}");
     }
 
+    public static void SetDefaultValues()
+    {
+        SetGeneralVolume(0.5f);
+        SetGameSoundsVolume(0.5f);
+        SetAmbienceVolume(0.5f);
+    }
+
     public static float GeneralVolume 
     {
         get
