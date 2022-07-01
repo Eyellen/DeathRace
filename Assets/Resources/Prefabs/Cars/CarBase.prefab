@@ -152,7 +152,7 @@ AudioSource:
   m_GameObject: {fileID: 1430653565512770032}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 897441e69aad4084bb72b7e851d78445, type: 2}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: e905bfd5f1beeae4a8cacb381a53aa2d, type: 2}
   m_audioClip: {fileID: 8300000, guid: e9643d8581d235f45a62997cba851988, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -355,7 +355,7 @@ AudioSource:
   m_GameObject: {fileID: 2579269825929585583}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 897441e69aad4084bb72b7e851d78445, type: 2}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: e905bfd5f1beeae4a8cacb381a53aa2d, type: 2}
   m_audioClip: {fileID: 8300000, guid: 427a730d71f78854088f3d731fd1d56a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0
@@ -587,7 +587,7 @@ AudioSource:
   m_GameObject: {fileID: 8051055168430776835}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 897441e69aad4084bb72b7e851d78445, type: 2}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: e905bfd5f1beeae4a8cacb381a53aa2d, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.75
@@ -775,6 +775,7 @@ GameObject:
   - component: {fileID: 1649219433698045663}
   - component: {fileID: 7075551651831521368}
   - component: {fileID: 8083998131863091072}
+  - component: {fileID: 3793097228303951607}
   - component: {fileID: 7658570909016649496}
   - component: {fileID: 3988252081224543989}
   - component: {fileID: 40294703710993746}
@@ -872,6 +873,25 @@ MonoBehaviour:
   syncInterval: 0.1
   _health: 100
   _destroyedCarPrefab: {fileID: 0}
+--- !u!114 &3793097228303951607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9099919895988192258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e777a585def5b9747ba7f4ca37f2c486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  _playerFloatingInfoPrefab: {fileID: 2553615383794190934, guid: 645f86e68b1e432458c05928dbe65a46, type: 3}
+  _visibleDistance: 50
+  _verticalOffset: 1.5
+  _isShowOnSelf: 1
+  <Username>k__BackingField: 
 --- !u!114 &7658570909016649496
 MonoBehaviour:
   m_ObjectHideFlags: 0
