@@ -58,17 +58,14 @@ public class SettingsGeneralData
         public float XSensitivity { get; private set; }
         public float YSensitivity { get; private set; }
 
-        public UserData(SettingsUserUI settingsUser)
-        {
-            Username = settingsUser.Username;
-            IsSensitivitySplitted = settingsUser.IsSensitivitySplitted;
-            XSensitivity = settingsUser.Sensitivity.x;
-            YSensitivity = settingsUser.Sensitivity.y;
-        }
+        public UserData() { }
 
         public void Initialize()
         {
-
+            Username = SettingsUser.Username;
+            IsSensitivitySplitted = SettingsUser.IsSensitivitySplit;
+            XSensitivity = SettingsUser.Sensitivity.x;
+            YSensitivity = SettingsUser.Sensitivity.y;
         }
     }
 
@@ -76,7 +73,7 @@ public class SettingsGeneralData
     public AudioData audioData { get; private set; }
     public UserData userData { get; private set; }
 
-    public SettingsGeneralData(SettingsGeneralUI settingsGeneral)
+    public SettingsGeneralData()
     {
         graphicsData = new GraphicsData();
         graphicsData.Initialize();
@@ -84,6 +81,7 @@ public class SettingsGeneralData
         audioData = new AudioData();
         audioData.Initialize();
 
-        userData = new UserData(settingsGeneral.SettingsUser);
+        userData = new UserData();
+        userData.Initialize();
     }
 }

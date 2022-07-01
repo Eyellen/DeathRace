@@ -7,85 +7,78 @@ using TMPro;
 public class SettingsUserUI : MonoBehaviour
 {
     [Header("Username settings")]
-    private string _username;
     [SerializeField] private TMP_InputField _usernameField;
 
     [Header("Sensitivity settings")]
-    private bool _isSensitivitySplitted;
     [SerializeField] private Toggle _splitSensitivityToggle;
-    private Vector2 _sensitivity;
     [SerializeField] private GameObject _sensitivityField;
     [SerializeField] private GameObject _xSensitivityField;
     [SerializeField] private GameObject _ySensitivityField;
 
-    public string Username { get => _username; }
-    public bool IsSensitivitySplitted { get => _isSensitivitySplitted; }
-    public Vector2 Sensitivity { get => _sensitivity; }
+    private Slider _sensitivitySlider;
+    private Slider _xSensitivitySlider;
+    private Slider _ySensitivitySlider;
+
+    private void Awake()
+    {
+        _sensitivitySlider = _sensitivityField.GetComponentInChildren<Slider>();
+        _xSensitivitySlider = _xSensitivityField.GetComponentInChildren<Slider>();
+        _ySensitivitySlider = _ySensitivityField.GetComponentInChildren<Slider>();
+    }
+
+    private void Start()
+    {
+        RefreshOptions();
+    }
 
     public void SetUsername(string username)
     {
-        _username = username;
+        SettingsUser.SetUsername(username);
         RefreshOptions();
     }
 
     public void ToggleSplitSensitivity(bool isSplit)
     {
-        _isSensitivitySplitted = isSplit;
-
-        _sensitivityField.SetActive(!isSplit);
-        _xSensitivityField.SetActive(isSplit);
-        _ySensitivityField.SetActive(isSplit);
-
-        if(!isSplit)
-        {
-            _sensitivity = new Vector2(_sensitivity.x, _sensitivity.x);
-        }
+        SettingsUser.SetSensitivitySplit(isSplit);
         RefreshOptions();
     }
 
     public void SetSensitivity(float value)
     {
-        _sensitivity.x = _sensitivity.y = value;
+        SettingsUser.SetSensitivity(value);
         RefreshOptions();
     }
 
     public void SetXSensitivity(float value)
     {
-        _sensitivity.x = value;
+        SettingsUser.SetXSensitivity(value);
         RefreshOptions();
     }
 
     public void SetYSensitivity(float value)
     {
-        _sensitivity.y = value;
+        SettingsUser.SetYSensitivity(value);
         RefreshOptions();
     }
 
     private void RefreshOptions()
     {
-        _usernameField.text = _username;
+        _usernameField.text = SettingsUser.Username;
 
-        _splitSensitivityToggle.isOn = _isSensitivitySplitted;
+        _splitSensitivityToggle.isOn = SettingsUser.IsSensitivitySplit;
 
-        if(_isSensitivitySplitted)
+        _sensitivityField.SetActive(!SettingsUser.IsSensitivitySplit);
+        _xSensitivityField.SetActive(SettingsUser.IsSensitivitySplit);
+        _ySensitivityField.SetActive(SettingsUser.IsSensitivitySplit);
+
+        if (SettingsUser.IsSensitivitySplit)
         {
-            _xSensitivityField.GetComponentInChildren<Slider>().value = _sensitivity.x;
-            _ySensitivityField.GetComponentInChildren<Slider>().value = _sensitivity.y;
+            _xSensitivitySlider.value = SettingsUser.Sensitivity.x;
+            _ySensitivitySlider.value = SettingsUser.Sensitivity.y;
         }
         else
         {
-            _sensitivityField.GetComponentInChildren<Slider>().value = _sensitivity.x;
+            _sensitivitySlider.value = SettingsUser.Sensitivity.x;
         }
-    }
-
-    private void Start()
-    {
-        SettingsGeneralData data = SettingsSaveSystem.CachedSave;
-
-        _username = data.userData.Username;
-        _isSensitivitySplitted = data.userData.IsSensitivitySplitted;
-        _sensitivity = new Vector2(data.userData.XSensitivity, data.userData.YSensitivity);
-
-        RefreshOptions();
     }
 }

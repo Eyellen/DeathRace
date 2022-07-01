@@ -31,5 +31,9 @@ public class SettingsLoadManager : MonoBehaviour
         SettingsAudio.SetGeneralVolume(_loadedSave.audioData.GeneralVolume);
         SettingsAudio.SetGameSoundsVolume(_loadedSave.audioData.GameSoundsVolume);
         SettingsAudio.SetAmbienceVolume(_loadedSave.audioData.AmbienceVolume);
+
+        SettingsUser.SetUsername(_loadedSave.userData.Username);
+        SettingsUser.SetSensitivitySplit(_loadedSave.userData.IsSensitivitySplitted);
+        SettingsUser.SetSensitivity(new Vector2(_loadedSave.userData.XSensitivity, _loadedSave.userData.YSensitivity));
     }
 }
