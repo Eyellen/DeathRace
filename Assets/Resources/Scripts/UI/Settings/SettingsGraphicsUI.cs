@@ -101,7 +101,7 @@ public class SettingsGraphicsUI : MonoBehaviour
 
     private void RefreshOptions()
     {
-        _resolutionsDropdown.value = CurrentResolutionIndex();
+        _resolutionsDropdown.RefreshShownValue();
         _displayModeDropdown.value = SettingsGraphics.CurrentScreenModeIndex;
         _qualityDropdown.value = SettingsGraphics.CurrentQualityLevelIndex;
         _shadowsToggle.isOn = SettingsGraphics.IsShadowsEnabled;
