@@ -40,16 +40,13 @@ public class SettingsGeneralData
         public float GameSoundsVolume { get; private set; }
         public float AmbienceVolume { get; private set; }
 
-        public AudioData(SettingsAudioUI settingsAudio)
-        {
-            GeneralVolume = settingsAudio.GeneralVolume;
-            GameSoundsVolume = settingsAudio.GameSoundsVolume;
-            AmbienceVolume = settingsAudio.AmbienceVolume;
-        }
+        public AudioData() { }
 
         public void Initialize()
         {
-
+            GeneralVolume = SettingsAudio.GeneralVolume;
+            GameSoundsVolume = SettingsAudio.GameSoundsVolume;
+            AmbienceVolume = SettingsAudio.AmbienceVolume;
         }
     }
 
@@ -83,7 +80,10 @@ public class SettingsGeneralData
     {
         graphicsData = new GraphicsData();
         graphicsData.Initialize();
-        audioData = new AudioData(settingsGeneral.SettingsAudio);
+
+        audioData = new AudioData();
+        audioData.Initialize();
+
         userData = new UserData(settingsGeneral.SettingsUser);
     }
 }

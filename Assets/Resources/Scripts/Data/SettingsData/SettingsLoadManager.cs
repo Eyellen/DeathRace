@@ -27,13 +27,9 @@ public class SettingsLoadManager : MonoBehaviour
         SettingsGraphics.SetQualityLevel(_loadedSave.graphicsData.QualityIndex);
         SettingsGraphics.SetShadowsEnabled(_loadedSave.graphicsData.IsShadowsEnabled);
 
-        _generalMixer.SetFloat("Volume", Float01ToDecibel(_loadedSave.audioData.GeneralVolume));
-        _gameSoundsMixer.SetFloat("Volume", Float01ToDecibel(_loadedSave.audioData.GameSoundsVolume));
-        _ambienceMixer.SetFloat("Volume", Float01ToDecibel(_loadedSave.audioData.AmbienceVolume));
-    }
-
-    private float Float01ToDecibel(float value)
-    {
-        return Mathf.Lerp(-80, 20, value);
+        SettingsAudio.Initialize();
+        SettingsAudio.SetGeneralVolume(_loadedSave.audioData.GeneralVolume);
+        SettingsAudio.SetGameSoundsVolume(_loadedSave.audioData.GameSoundsVolume);
+        SettingsAudio.SetAmbienceVolume(_loadedSave.audioData.AmbienceVolume);
     }
 }
