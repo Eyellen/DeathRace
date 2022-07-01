@@ -9,15 +9,15 @@ public static class SettingsAudio
     private const float _maxDecibel = 0f;
     private const string _keyVolume = "Volume";
 
-    private static AudioMixer _generalMixer;
-    private static AudioMixer _gameSoundsMixer;
-    private static AudioMixer _ambienceMixer;
+    private static AudioMixer s_generalMixer;
+    private static AudioMixer s_gameSoundsMixer;
+    private static AudioMixer s_ambienceMixer;
 
     public static void Initialize()
     {
-        _generalMixer = Resources.Load("AudioMixers/General") as AudioMixer;
-        _gameSoundsMixer = Resources.Load("AudioMixers/GameSounds") as AudioMixer;
-        _ambienceMixer = Resources.Load("AudioMixers/Ambience") as AudioMixer;
+        s_generalMixer = Resources.Load("AudioMixers/General") as AudioMixer;
+        s_gameSoundsMixer = Resources.Load("AudioMixers/GameSounds") as AudioMixer;
+        s_ambienceMixer = Resources.Load("AudioMixers/Ambience") as AudioMixer;
 
         //Debug.Log($"General mixer is loaded: {_generalMixer != null}, type: {_generalMixer?.GetType()}");
         //Debug.Log($"GameSounds mixer is loaded: {_gameSoundsMixer != null}, type: {_gameSoundsMixer?.GetType()}");
@@ -29,7 +29,7 @@ public static class SettingsAudio
         get
         {
             float volume = 0;
-            _generalMixer.GetFloat(_keyVolume, out volume);
+            s_generalMixer.GetFloat(_keyVolume, out volume);
             return DecibelToFloat01(volume);
         }
     }
@@ -38,7 +38,7 @@ public static class SettingsAudio
         get
         {
             float volume = 0;
-            _gameSoundsMixer.GetFloat(_keyVolume, out volume);
+            s_gameSoundsMixer.GetFloat(_keyVolume, out volume);
             return DecibelToFloat01(volume);
         }
     }
@@ -47,24 +47,24 @@ public static class SettingsAudio
         get
         {
             float volume = 0;
-            _ambienceMixer.GetFloat(_keyVolume, out volume);
+            s_ambienceMixer.GetFloat(_keyVolume, out volume);
             return DecibelToFloat01(volume);
         }
     }
 
     public static void SetGeneralVolume(float volume)
     {
-        _generalMixer.SetFloat(_keyVolume, Float01ToDecibel(volume));
+        s_generalMixer.SetFloat(_keyVolume, Float01ToDecibel(volume));
     }
 
     public static void SetGameSoundsVolume(float volume)
     {
-        _gameSoundsMixer.SetFloat(_keyVolume, Float01ToDecibel(volume));
+        s_gameSoundsMixer.SetFloat(_keyVolume, Float01ToDecibel(volume));
     }
 
     public static void SetAmbienceVolume(float volume)
     {
-        _ambienceMixer.SetFloat(_keyVolume, Float01ToDecibel(volume));
+        s_ambienceMixer.SetFloat(_keyVolume, Float01ToDecibel(volume));
     }
 
     private static float Float01ToDecibel(float value)
