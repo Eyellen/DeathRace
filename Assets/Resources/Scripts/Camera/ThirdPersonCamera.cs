@@ -16,7 +16,8 @@ public class ThirdPersonCamera : CameraBase
     {
         base.LateUpdate();
 
-        StartCoroutine(FindTarget());
+        if (_target == null)
+            FindTarget();
 
         HandleFollowing();
     }
@@ -53,21 +54,25 @@ public class ThirdPersonCamera : CameraBase
 #endif
     }
 
-    private IEnumerator FindTarget()
+    private void FindTarget()
     {
-        while (!_target)
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach (var player in players)
         {
-            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-
-            foreach (var player in players)
+            if (!player.TryGetComponent(out CarBase carBase))
             {
-                if (!player.GetComponent<CarBase>().isLocalPlayer) continue;
-
-                _target = player.transform;
-                break;
+#if UNITY_EDITOR
+                Debug.LogError("Trying to GetComponent<CarBase> on object that doesnt contain it. " +
+                    "Most likely you forgot to disable \"Player\" tag on Destroyed Car");
+#endif
+                continue;
             }
 
-            yield return new WaitForEndOfFrame();
+            if (!carBase.isLocalPlayer) continue;
+
+            _target = player.transform;
+            break;
         }
     }
 }
