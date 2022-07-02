@@ -13,7 +13,8 @@ public class CameraBase : NetworkBehaviour
     protected Transform _cameraTransform;
 
     [SerializeField]
-    protected Vector2 _sensitivity = new Vector2(3, 3);
+    protected Vector2 _sensitivity = new Vector2(1, 1);
+    protected const float _sensitivityMultiplier = 6;
 
     private float _xRotation;
     private float _yRotation;
@@ -21,7 +22,9 @@ public class CameraBase : NetworkBehaviour
     protected virtual void Awake()
     {
         _cameraTransform = GetComponent<Transform>();
-        SettingsUser.OnSensitivityChanged += ChangeSensitivity;
+
+        UpdateSensitivity();
+        SettingsUser.OnSensitivityChanged += UpdateSensitivity;
     }
 
     protected virtual void LateUpdate()
@@ -40,8 +43,8 @@ public class CameraBase : NetworkBehaviour
         _cameraTransform.rotation = rotation;
     }
 
-    private void ChangeSensitivity()
+    private void UpdateSensitivity()
     {
-        _sensitivity = SettingsUser.Sensitivity * 6;
+        _sensitivity = SettingsUser.Sensitivity * _sensitivityMultiplier;
     }
 }
