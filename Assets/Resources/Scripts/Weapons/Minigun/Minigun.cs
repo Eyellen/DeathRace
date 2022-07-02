@@ -21,7 +21,7 @@ public class Minigun : GunBase
 
     protected override void HandleInput()
     {
-        SpinBarrels(_input.IsLeftActionPressed);
+        SpinBarrels(PlayerInput.IsLeftActionPressed);
     }
 
     private void SpinBarrels(bool isActionOccurs)

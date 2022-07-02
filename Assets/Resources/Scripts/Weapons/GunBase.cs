@@ -10,7 +10,6 @@ public class GunBase : NetworkBehaviour
     [SerializeField] private bool _debug;
 #endif
 
-    protected PlayerInput _input;
     [Header("Gun")]
     [SerializeField] private Transform _shotPoint;
 
@@ -69,13 +68,12 @@ public class GunBase : NetworkBehaviour
 
     private void InitializeGunBase()
     {
-        _input = PlayerInput.Instance;
         _currentBulletsCount = _maxAmmoSupply;
     }
 
     protected virtual void HandleInput()
     {
-        Shoot(_input.IsLeftActionPressed);
+        Shoot(PlayerInput.IsLeftActionPressed);
     }
 
     protected void SingleShot()

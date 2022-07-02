@@ -31,8 +31,8 @@ public class CameraBase : NetworkBehaviour
 
     protected virtual void HandleRotation()
     {
-        _xRotation += Input.GetAxis("Mouse X") * _sensitivity.x;
-        _yRotation += Input.GetAxis("Mouse Y") * _sensitivity.y;
+        _xRotation += PlayerInput.MouseHorizontalAxis * _sensitivity.x;
+        _yRotation += PlayerInput.MouseVerticalAxis * _sensitivity.y;
 
         _yRotation = Mathf.Clamp(_yRotation, -90f, 90f);
         Quaternion rotation = Quaternion.Euler(-_yRotation, _xRotation, 0);
