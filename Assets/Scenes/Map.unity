@@ -23548,7 +23548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b117a53a35d314c428a92815e3e035ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _escapeMenu: {fileID: 1496916195}
+  _escapeMenu: {fileID: 1496916198}
 --- !u!1001 &598042129
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62161,6 +62161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1496916196}
   - component: {fileID: 1496916197}
+  - component: {fileID: 1496916198}
   m_Layer: 5
   m_Name: EscapeMenu
   m_TagString: Untagged
@@ -62198,6 +62199,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b327f2a7bb7a5a64582a157f33c2b464, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1496916198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496916195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ead27dbf73397c5459421f27f3b662cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1497544642

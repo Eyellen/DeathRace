@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class EscapeMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject _escapeMenu;
-
-    void Update()
+    private void OnEnable()
     {
-        HandleInput();
+        CursorManager.ShowCursor();
     }
 
-    void HandleInput()
+    private void OnDisable()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            _escapeMenu.SetActive(!_escapeMenu.activeSelf);
-        }
+        CursorManager.HideCursor();
+    }
+
+    public void SetActive(bool isActive)
+    {
+        gameObject.SetActive(isActive);
     }
 }
