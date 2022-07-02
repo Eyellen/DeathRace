@@ -6,7 +6,7 @@ using UnityEngine;
 /// Class designed to refer to all settings classes that need to be saved
 /// </summary>
 [DisallowMultipleComponent]
-public class SettingsGeneralUI : MonoBehaviour
+public class SettingsSaveUI : MonoBehaviour
 {
     public void SaveSettings()
     {
