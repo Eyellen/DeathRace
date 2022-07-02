@@ -61,7 +61,15 @@ public class ThirdPersonCamera : CameraBase
 
             foreach (var player in players)
             {
-                if (!player.GetComponent<CarBase>().isLocalPlayer) continue;
+                if (!player.TryGetComponent(out CarBase carBase))
+                {
+#if UNITY_EDITOR
+                    Debug.LogError("Trying to GetComponent<CarBase> on object that doesnt contain it. " +
+                        "Most likely you forgot to disable \"Player\" tag on Destroyed Car");
+#endif
+                }
+
+                if (carBase.isLocalPlayer) continue;
 
                 _target = player.transform;
                 break;
