@@ -634,6 +634,14 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 5718687356195051093}
+    - target: {fileID: 6027474470980764015, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027474470980764015, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 48283adefda01514e851c40517a63d59, type: 3}
     - target: {fileID: 7075551651831521368, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: _axles.Array.data[0].LeftWheel
       value: 
@@ -799,20 +807,6 @@ MonoBehaviour:
   _maxSpreadMagnitude: 10
   _timeBetweenShots: 0.1
   _maxAmmoSupply: 500
---- !u!114 &3390957799796103318
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5392499648290325123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2473e81f16e9e64fbd85e3b509ca252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gunScript: {fileID: 1384108294432149207}
-  _shootSource: {fileID: 4069308301861243509}
 --- !u!64 &3891164387344731008
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -827,3 +821,17 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 7693053913425508305, guid: d8ea2f508e801e847911ab41143238f4, type: 3}
+--- !u!114 &3390957799796103318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5392499648290325123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2473e81f16e9e64fbd85e3b509ca252, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gunScript: {fileID: 1384108294432149207}
+  _shootSource: {fileID: 4069308301861243509}
