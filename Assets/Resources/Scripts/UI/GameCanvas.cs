@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class GameCanvas : MonoBehaviour
 {
-    [SerializeField] private GameObject _escapeMenu;
+    [SerializeField] private EscapeMenu _escapeMenu;
+
+    private void Start()
+    {
+        CursorManager.HideCursor();
+    }
 
     void Update()
     {
@@ -15,7 +20,7 @@ public class GameCanvas : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            _escapeMenu.SetActive(!_escapeMenu.activeSelf);
+            _escapeMenu.SetActive(!_escapeMenu.gameObject.activeSelf);
         }
     }
 }
