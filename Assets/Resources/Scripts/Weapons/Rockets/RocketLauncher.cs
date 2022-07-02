@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RocketLauncher : MonoBehaviour
 {
-    private PlayerInput _input;
     private Transform _thisTransform;
 
     [SerializeField] private GameObject[] _rockets;
@@ -18,7 +17,6 @@ public class RocketLauncher : MonoBehaviour
 
     void Start()
     {
-        _input = PlayerInput.Instance;
         _thisTransform = GetComponent<Transform>();
     }
 
@@ -42,7 +40,7 @@ public class RocketLauncher : MonoBehaviour
 
     private void HandleInput()
     {
-        if (_input.IsRightActionPressed) Launch();
+        if (PlayerInput.IsRightActionPressed) Launch();
     }
 
     private void Launch()
