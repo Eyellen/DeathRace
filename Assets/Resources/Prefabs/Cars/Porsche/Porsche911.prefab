@@ -654,6 +654,10 @@ PrefabInstance:
       propertyPath: m_AssetId
       value: 5e8211567f42ab847a54b42ba5ab2112
       objectReference: {fileID: 0}
+    - target: {fileID: 8083998131863091072, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: _destroyedCarPrefab
+      value: 
+      objectReference: {fileID: 628293207204756241, guid: f3cd09dbca0e5444e83c93d9f5ac54b0, type: 3}
     - target: {fileID: 8606705896235550131, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: m_LocalPosition.z
       value: -1.262
@@ -795,20 +799,6 @@ MonoBehaviour:
   _maxSpreadMagnitude: 10
   _timeBetweenShots: 0.1
   _maxAmmoSupply: 500
---- !u!64 &3891164387344731008
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9197036396233547145}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 7693053913425508305, guid: d8ea2f508e801e847911ab41143238f4, type: 3}
 --- !u!114 &3390957799796103318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -823,3 +813,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gunScript: {fileID: 1384108294432149207}
   _shootSource: {fileID: 4069308301861243509}
+--- !u!64 &3891164387344731008
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9197036396233547145}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7693053913425508305, guid: d8ea2f508e801e847911ab41143238f4, type: 3}
