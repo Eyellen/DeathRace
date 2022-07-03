@@ -9,6 +9,8 @@ public class Player : NetworkBehaviour
 
     public Transform CameraTransform { get; private set; }
 
+    public CameraManager CameraManager { get; private set; }
+
     [field: SerializeField]
     [field: SyncVar]
     public string Username { get; private set; }
@@ -16,6 +18,7 @@ public class Player : NetworkBehaviour
     private void Start()
     {
         CameraTransform = transform.Find("Camera");
+        CameraManager = GetComponent<CameraManager>();
 
         if (isLocalPlayer)
         {
