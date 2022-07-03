@@ -11,6 +11,8 @@ public class CameraManager : MonoBehaviour
 
     private CameraBase _currentCameraScript;
 
+    public CameraBase CurrentCameraScript { get => _currentCameraScript; }
+
     public CameraMode CameraMode
     {
         get => _cameraMode;
