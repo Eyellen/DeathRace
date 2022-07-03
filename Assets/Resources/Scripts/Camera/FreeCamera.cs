@@ -7,16 +7,18 @@ public class FreeCamera : CameraBase
     [SerializeField]
     private float _movementSpeed = 20;
 
-    protected override void Awake()
+    protected override void LateUpdate()
     {
-        base.Awake();
+        base.LateUpdate();
+
+        HandleMovement();
     }
 
     private void HandleMovement()
     {
         // Forward/Backward movement
-        _cameraTransform.Translate(PlayerInput.VerticalAxis * _movementSpeed * Time.deltaTime * _cameraTransform.forward, Space.World);
+        _thisTransform.Translate(PlayerInput.VerticalAxis * _movementSpeed * Time.deltaTime * _thisTransform.forward, Space.World);
         // Right/Left movement
-        _cameraTransform.Translate(PlayerInput.HorizontalAxis * _movementSpeed * Time.deltaTime * _cameraTransform.right, Space.World);
+        _thisTransform.Translate(PlayerInput.HorizontalAxis * _movementSpeed * Time.deltaTime * _thisTransform.right, Space.World);
     }
 }

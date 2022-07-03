@@ -10,7 +10,7 @@ public class CameraBase : NetworkBehaviour
     protected bool _debugging = false;
 #endif
 
-    protected Transform _cameraTransform;
+    protected Transform _thisTransform;
 
     [SerializeField]
     protected Vector2 _sensitivity = new Vector2(1, 1);
@@ -21,7 +21,7 @@ public class CameraBase : NetworkBehaviour
 
     protected virtual void Awake()
     {
-        _cameraTransform = GetComponent<Transform>();
+        _thisTransform = GetComponent<Transform>();
 
         UpdateSensitivity();
         SettingsUser.OnSensitivityChanged += UpdateSensitivity;
@@ -40,7 +40,7 @@ public class CameraBase : NetworkBehaviour
         _yRotation = Mathf.Clamp(_yRotation, -90f, 90f);
         Quaternion rotation = Quaternion.Euler(-_yRotation, _xRotation, 0);
 
-        _cameraTransform.rotation = rotation;
+        _thisTransform.rotation = rotation;
     }
 
     private void UpdateSensitivity()

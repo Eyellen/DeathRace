@@ -26,7 +26,7 @@ public class ThirdPersonCamera : CameraBase
     {
         base.HandleRotation();
 
-        _currentCameraOffset = _cameraTransform.rotation * _cameraOffset;
+        _currentCameraOffset = _thisTransform.rotation * _cameraOffset;
     }
 
     private void HandleFollowing()
@@ -44,7 +44,7 @@ public class ThirdPersonCamera : CameraBase
         if (!_target) return;
 #endif
 
-        _cameraTransform.position = _target.position + _currentCameraOffset;
+        _thisTransform.position = _target.position + _currentCameraOffset;
 
 #if UNITY_EDITOR || DEBUG_BUILD
         if (_debugging)
@@ -56,11 +56,11 @@ public class ThirdPersonCamera : CameraBase
 
     private void FindTarget()
     {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        GameObject[] cars = GameObject.FindGameObjectsWithTag("Car");
 
-        foreach (var player in players)
+        foreach (var car in cars)
         {
-            if (!player.TryGetComponent(out CarBase carBase))
+            if (!car.TryGetComponent(out CarBase carBase))
             {
 #if UNITY_EDITOR
                 Debug.LogError("Trying to GetComponent<CarBase> on object that doesnt contain it. " +
@@ -71,7 +71,7 @@ public class ThirdPersonCamera : CameraBase
 
             if (!carBase.isLocalPlayer) continue;
 
-            _target = player.transform;
+            _target = car.transform;
             break;
         }
     }
