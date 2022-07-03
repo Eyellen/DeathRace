@@ -5,7 +5,7 @@ using UnityEngine;
 public class ThirdPersonCamera : CameraBase
 {
     [SerializeField]
-    private Transform _target;
+    public Transform Target { get; set; }
 
     [SerializeField]
     private Vector3 _cameraOffset = new Vector3(0, 1, -5);
@@ -16,7 +16,7 @@ public class ThirdPersonCamera : CameraBase
     {
         base.LateUpdate();
 
-        if (_target == null)
+        if (Target == null)
             FindTarget();
 
         HandleFollowing();
@@ -32,7 +32,7 @@ public class ThirdPersonCamera : CameraBase
     private void HandleFollowing()
     {
 #if UNITY_EDITOR || DEBUG_BUILD
-        if (!_target)
+        if (!Target)
         {
             if (_debugging)
             {
@@ -44,12 +44,12 @@ public class ThirdPersonCamera : CameraBase
         if (!_target) return;
 #endif
 
-        _thisTransform.position = _target.position + _currentCameraOffset;
+        _thisTransform.position = Target.position + _currentCameraOffset;
 
 #if UNITY_EDITOR || DEBUG_BUILD
         if (_debugging)
         {
-            Debug.DrawLine(_target.position, _target.position + _currentCameraOffset);
+            Debug.DrawLine(Target.position, Target.position + _currentCameraOffset);
         }
 #endif
     }
@@ -71,7 +71,7 @@ public class ThirdPersonCamera : CameraBase
 
             if (!carBase.isLocalPlayer) continue;
 
-            _target = car.transform;
+            Target = car.transform;
             break;
         }
     }
