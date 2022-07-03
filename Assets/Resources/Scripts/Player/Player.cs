@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
+[DisallowMultipleComponent]
 public class Player : NetworkBehaviour
 {
     public static Player LocalPlayer { get; private set; }
