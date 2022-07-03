@@ -8,7 +8,7 @@ public class GameCanvas : MonoBehaviour
 
     private void Start()
     {
-        CursorManager.HideCursor();
+        //CursorManager.HideCursor();
     }
 
     void Update()
