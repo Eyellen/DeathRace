@@ -27,7 +27,7 @@ public class PlayerFloatingInfoManager : NetworkBehaviour
         _camera = Camera.main;
         _canvas = GameObject.Find("Canvas/UsernameFloatingInfos");
 
-        if (isLocalPlayer)
+        if (netIdentity.hasAuthority)
             CmdSetUsername(Username = SettingsSaveSystem.CachedSave.userData.Username);
 
         InitializeFloatingInfo();
@@ -51,7 +51,7 @@ public class PlayerFloatingInfoManager : NetworkBehaviour
 
     private void CheckIfNeedToShowOrHide()
     {
-        Vector3 player = _camera.WorldToViewportPoint(transform.position);
+        Vector3 player = _camera.WorldToViewportPoint(_thisTransform.position);
         bool onScreen = player.z > 0 && (player.x > -0.1 && player.x < 1.1) && (player.y > -0.1 && player.y < 1.1);
 
         if (Vector3.Distance(_cameraTransform.position, _thisTransform.position) > _visibleDistance || !onScreen)
