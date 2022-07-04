@@ -18,7 +18,7 @@ public class Player : NetworkBehaviour
     [field: SyncVar]
     public string Username { get; private set; }
 
-    private void Start()
+    public override void OnStartClient()
     {
         CameraTransform = transform.Find("Camera");
         CameraManager = GetComponent<CameraManager>();
