@@ -121,7 +121,6 @@ public class SpawnManager : NetworkBehaviour
     [TargetRpc]
     private void TargetSetCameraTarget(NetworkConnection target, GameObject car)
     {
-        Player.LocalPlayer.CameraManager.CameraMode = CameraMode.ThirdPerson;
-        ((ThirdPersonCamera)Player.LocalPlayer.CameraManager.CurrentCameraScript).Target = car.transform;
+        Player.LocalPlayer.CameraManager.SetThirdPersonCamera(car.transform);
     }
 }
