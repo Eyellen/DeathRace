@@ -12,6 +12,8 @@ public class Player : NetworkBehaviour
 
     public CameraManager CameraManager { get; private set; }
 
+    public GameObject Car { get; set; }
+
     [field: SerializeField]
     [field: SyncVar]
     public string Username { get; private set; }
