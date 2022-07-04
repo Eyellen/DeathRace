@@ -22,7 +22,7 @@ public class CarSelectPreviewManager : MonoBehaviour
         }
         else
         {
-#if UNITY_EDITOR
+#if UNITY_EDITOR || DEBUG_BUILD
             Debug.LogWarning($"Trying to create another one {nameof(CarSelectPreviewManager)} when it's Singleton." +
                 $"The duplicate of {nameof(CarSelectPreviewManager)} will be destroyed");
 #endif
