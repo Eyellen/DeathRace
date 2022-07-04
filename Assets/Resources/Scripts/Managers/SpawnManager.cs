@@ -9,12 +9,13 @@ public class SpawnManager : NetworkBehaviour
     public static SpawnManager Instance { get; private set; }
 
     [SerializeField] private GameObject[] _carPrefabs;
-    public uint SelectedCarIndex { get; set; }
+    public uint SelectedCarIndex { get; set; } = 0;
+
 
     [SerializeField] private Transform[] _spawnPositions;
     private int _spawnPositionIndex = 0;
 
-    private void Start()
+    private void Awake()
     {
         InitializeInstance();
         InitializeSpawnPositions();
