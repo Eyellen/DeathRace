@@ -27,6 +27,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2878254450483448233, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3085680790376344997, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
       propertyPath: _gunScript
       value: 
@@ -120,7 +124,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 2878254450483448233, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
     - {fileID: 5990844990935680814, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
     - {fileID: 4693463305436532982, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
     - {fileID: 410215346137301377, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
