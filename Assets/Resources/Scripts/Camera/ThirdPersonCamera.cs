@@ -17,8 +17,11 @@ public class ThirdPersonCamera : CameraBase
         base.LateUpdate();
 
         if (Target == null)
+        {
             GetComponent<CameraManager>().SetFreeCamera();
-
+            return;
+        }
+        
         HandleFollowing();
     }
 
