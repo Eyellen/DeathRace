@@ -20,5 +20,7 @@ public class FreeCamera : CameraBase
         _thisTransform.Translate(PlayerInput.VerticalAxis * _movementSpeed * Time.deltaTime * _thisTransform.forward, Space.World);
         // Right/Left movement
         _thisTransform.Translate(PlayerInput.HorizontalAxis * _movementSpeed * Time.deltaTime * _thisTransform.right, Space.World);
+        // Up/Down movement
+        _thisTransform.Translate(PlayerInput.UpDownAxis * _movementSpeed * Time.deltaTime * _thisTransform.up, Space.World);
     }
 }
