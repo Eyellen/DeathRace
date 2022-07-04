@@ -87,6 +87,10 @@ PrefabInstance:
       propertyPath: _gun
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 9025149992377624005, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8459011793831864910, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
     - {fileID: 1384108294432149207, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
@@ -100,6 +104,5 @@ PrefabInstance:
     - {fileID: 6881284290704109037, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
     - {fileID: 2012215370410720410, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
     - {fileID: 715398283336297282, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
-    - {fileID: 9025149992377624005, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
     - {fileID: 113794942641660930, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
