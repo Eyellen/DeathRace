@@ -25,6 +25,5 @@ public class CarSelectButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public void SelectCar()
     {
         SpawnManager.Instance.SelectedCarIndex = _carIndex;
-        CarSelectPreviewManager.Instance.SelectedCarIndex = _carIndex;
     }
 }

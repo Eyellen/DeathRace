@@ -6,13 +6,12 @@ public class CarSelectPreviewManager : MonoBehaviour
 {
     public static CarSelectPreviewManager Instance { get; set; }
 
-    public uint SelectedCarIndex { get; set; }
     [field: SerializeField] public GameObject[] PreviewCars { get; set; }
 
     private void Start()
     {
         InitializeInstance();
-        PreviewCars[SelectedCarIndex].SetActive(true);
+        PreviewCars[SpawnManager.Instance.SelectedCarIndex].SetActive(true);
     }
 
     private void InitializeInstance()
@@ -33,13 +32,13 @@ public class CarSelectPreviewManager : MonoBehaviour
 
     public void ShowCar(uint carIndex)
     {
-        PreviewCars[SelectedCarIndex].SetActive(false);
+        PreviewCars[SpawnManager.Instance.SelectedCarIndex].SetActive(false);
         PreviewCars[carIndex].SetActive(true);
     }
 
     public void HideCar(uint carIndex)
     {
         PreviewCars[carIndex].SetActive(false);
-        PreviewCars[SelectedCarIndex].SetActive(true);
+        PreviewCars[SpawnManager.Instance.SelectedCarIndex].SetActive(true);
     }
 }
