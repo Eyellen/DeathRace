@@ -1,25 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class CarSelectButton : MonoBehaviour
+public class CarSelectButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private GameObject _carPrefab;
     [SerializeField] private uint _carIndex;
 
-    private void OnMouseEnter()
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("OnMouseEnter");
+        CarSelectPreviewManager.Instance.ShowCar(_carIndex);
     }
 
-    private void OnMouseExit()
+    public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("OnMouseExit");
+        CarSelectPreviewManager.Instance.HideCar(_carIndex);
+    }
+
+    public void OnDisable()
+    {
+        CarSelectPreviewManager.Instance.HideCar(_carIndex);
     }
 
     public void SelectCar()
     {
-        Debug.Log($"Selected {_carPrefab}");
         SpawnManager.Instance.SelectedCarIndex = _carIndex;
+        CarSelectPreviewManager.Instance.SelectedCarIndex = _carIndex;
     }
 }
