@@ -7,7 +7,6 @@ public class CarBase : NetworkBehaviour
 {
     protected Transform _thisTransform;
     protected Rigidbody _rigidbody;
-    protected PlayerInput _input;
 
     [Header("Car settings")]
     [SerializeField] protected float _motorForce;
@@ -91,7 +90,6 @@ public class CarBase : NetworkBehaviour
         _thisTransform = GetComponent<Transform>();
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.centerOfMass = _centreOfMass.localPosition;
-        _input = PlayerInput.Instance;
     }
 
     private void Update()
@@ -118,14 +116,14 @@ public class CarBase : NetworkBehaviour
     private void HandleInput()
     {
         // Gas input
-        HandleGas(_input.VerticalAxis * _motorForce);
-        IsGasing = Mathf.Abs(_input.VerticalAxis) >= 0.1f;
+        HandleGas(PlayerInput.VerticalAxis * _motorForce);
+        IsGasing = Mathf.Abs(PlayerInput.VerticalAxis) >= 0.1f;
 
         // Braking
-        HandleBrake(_input.Brake * _brakeForce);
+        HandleBrake(PlayerInput.Brake * _brakeForce);
 
         // Steering
-        HandleSteering(_input.HorizontalAxis * _maxSteerAngle);
+        HandleSteering(PlayerInput.HorizontalAxis * _maxSteerAngle);
     }
 
     private void HandleGas(float force)

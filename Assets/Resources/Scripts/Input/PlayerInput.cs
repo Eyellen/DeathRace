@@ -2,59 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[DisallowMultipleComponent]
-public class PlayerInput : MonoBehaviour
+public static class PlayerInput
 {
-    public static PlayerInput Instance { get; private set; }
+    public static bool IsBlocked { get; set; }
 
-    // Bool
-    public bool IsForwardPressed { get; private set; }
-    public bool IsBackwardPressed { get; private set; }
-    public bool IsRightPressed { get; private set; }
-    public bool IsLeftPressed { get; private set; }
-    public bool IsSpacePressed { get; private set; }
-    public bool IsRightActionPressed { get; private set; }
-    public bool IsLeftActionPressed { get; private set; }
+    // Bools
+    public static bool IsRightActionPressed { get => Condition(Input.GetMouseButton(1)); }
+    public static bool IsLeftActionPressed { get => Condition(Input.GetMouseButton(0)); }
 
-    // Float
-    public float HorizontalAxis { get; private set; }
-    public float VerticalAxis { get; private set; }
-    public float Brake { get; private set; }
+    // Floats
+    public static float MouseHorizontalAxis { get => Condition(Input.GetAxis("Mouse X")); }
+    public static float MouseVerticalAxis { get => Condition(Input.GetAxis("Mouse Y")); }
+    public static float HorizontalAxis { get => Condition(Input.GetAxisRaw("Horizontal")); }
+    public static float VerticalAxis { get => Condition(Input.GetAxisRaw("Vertical")); }
+    public static float Brake { get => Condition(Input.GetAxisRaw("Brake")); }
 
-    private void Start()
+    private static T Condition<T>(T value)
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Debug.LogError($"Trying to create another one {nameof(PlayerInput)} on {transform.name} when it is a Singleton. " +
-                $"Destroyed {transform.name} to prevent this.");
-            Destroy(gameObject);
-        }
-    }
-
-    void Update()
-    {
-        HandleInput();
-    }
-
-    private void HandleInput()
-    {
-        // Input
-        IsForwardPressed = Input.GetKey(KeyCode.W);
-        IsBackwardPressed = Input.GetKey(KeyCode.S);
-        IsRightPressed = Input.GetKey(KeyCode.D);
-        IsLeftPressed = Input.GetKey(KeyCode.A);
-        IsSpacePressed = Input.GetKey(KeyCode.Space);
-
-        IsRightActionPressed = Input.GetMouseButton(1);
-        IsLeftActionPressed = Input.GetMouseButton(0);
-
-        HorizontalAxis = Input.GetAxisRaw("Horizontal");
-        VerticalAxis = Input.GetAxisRaw("Vertical");
-        Brake = Input.GetAxisRaw("Brake");
+        return IsBlocked ? default(T) : value;
     }
 }

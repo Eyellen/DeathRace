@@ -24,8 +24,8 @@ namespace MyDebug
             }
             else
             {
-                Debug.LogError($"Trying to create another one {nameof(ConsoleToGUI)} on {transform.name} when it is a Singleton. " +
-                    $"Destroyed {transform.name} to prevent this.");
+                Debug.LogWarning($"Trying to create another one {nameof(ConsoleToGUI)} on {transform.name} when it is a Singleton. " +
+                    $"{transform.name} will be destroyed.");
                 Destroy(gameObject);
             }
         }

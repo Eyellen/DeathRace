@@ -634,6 +634,14 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 5718687356195051093}
+    - target: {fileID: 6027474470980764015, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027474470980764015, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 48283adefda01514e851c40517a63d59, type: 3}
     - target: {fileID: 7075551651831521368, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: _axles.Array.data[0].LeftWheel
       value: 
@@ -654,6 +662,10 @@ PrefabInstance:
       propertyPath: m_AssetId
       value: 5e8211567f42ab847a54b42ba5ab2112
       objectReference: {fileID: 0}
+    - target: {fileID: 8083998131863091072, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: _destroyedCarPrefab
+      value: 
+      objectReference: {fileID: 628293207204756241, guid: f3cd09dbca0e5444e83c93d9f5ac54b0, type: 3}
     - target: {fileID: 8606705896235550131, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: m_LocalPosition.z
       value: -1.262
