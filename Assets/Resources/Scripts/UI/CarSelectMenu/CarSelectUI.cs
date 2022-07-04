@@ -23,9 +23,9 @@ public class CarSelectUI : MonoBehaviour
 
     public void Confirm()
     {
-        if (SpawnManager.Instance.SelectedCar == null) return;
+        //if (SpawnManager.Instance.SelectedCar == null) return;
 
-        SpawnManager.Instance.CmdSpawn(Player.LocalPlayer.gameObject);
+        SpawnManager.Instance.Spawn();
         SetActive(false);
     }
 }

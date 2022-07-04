@@ -5,6 +5,7 @@ using UnityEngine;
 public class CarSelectButton : MonoBehaviour
 {
     [SerializeField] private GameObject _carPrefab;
+    [SerializeField] private uint _carIndex;
 
     private void OnMouseEnter()
     {
@@ -18,6 +19,7 @@ public class CarSelectButton : MonoBehaviour
 
     public void SelectCar()
     {
-        SpawnManager.Instance.SelectedCar = _carPrefab;
+        Debug.Log($"Selected {_carPrefab}");
+        SpawnManager.Instance.SelectedCarIndex = _carIndex;
     }
 }
