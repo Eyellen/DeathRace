@@ -14,7 +14,7 @@ public class CarNetworkManager : NetworkBehaviour
 
     private void DisableWheelsUpdateIfNotLocalPlayer()
     {
-        if (isLocalPlayer) return;
+        if (netIdentity.hasAuthority) return;
 
         foreach (var wheel in _wheels)
         {

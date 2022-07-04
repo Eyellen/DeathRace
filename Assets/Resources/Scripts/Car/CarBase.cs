@@ -108,7 +108,7 @@ public class CarBase : NetworkBehaviour
 
     private void FixedUpdate()
     {
-        if (!isLocalPlayer) return;
+        if (!netIdentity.hasAuthority) return;
 
         HandleInput();
     }
