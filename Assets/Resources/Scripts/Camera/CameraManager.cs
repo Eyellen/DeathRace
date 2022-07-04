@@ -87,7 +87,7 @@ public class CameraManager : MonoBehaviour
     {
         CameraMode = CameraMode.ThirdPerson;
         ((ThirdPersonCamera)_currentCameraScript).Target = target;
-        target.gameObject.GetComponent<CarDamageable>().OnCarDestroyed += SetFreeCamera;
+        //target.gameObject.GetComponent<CarDamageable>().OnCarDestroyed += SetFreeCamera;
     }
 
     public void SetFreeCamera()
