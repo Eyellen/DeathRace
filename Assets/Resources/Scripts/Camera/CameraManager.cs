@@ -33,18 +33,6 @@ public class CameraManager : MonoBehaviour
         Initialize();
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            CameraMode = CameraMode.Free;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            CameraMode = CameraMode.ThirdPerson;
-        }
-    }
-
     private void CameraModeChanged(CameraMode cameraMode)
     {
         switch (cameraMode)
