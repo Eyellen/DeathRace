@@ -29,7 +29,7 @@ public class SpawnManager : NetworkBehaviour
         }
         else
         {
-#if UNITY_EDITOR
+#if UNITY_EDITOR || DEBUG_BUILD
             Debug.LogWarning($"Trying to create another one {nameof(SpawnManager)} when it's Singleton." +
                 $"The duplicate of {nameof(SpawnManager)} will be destroyed");
 #endif
