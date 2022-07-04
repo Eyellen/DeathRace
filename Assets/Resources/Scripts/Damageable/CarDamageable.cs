@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Mirror;
@@ -17,8 +18,7 @@ public class CarDamageable : NetworkBehaviour, IDamageable<int>
 
     public int Health { get => _health; }
 
-    public delegate void CarDestroyedEvent();
-    public event CarDestroyedEvent OnCarDestroyed;
+    public event Action OnCarDestroyed;
 
     private void Start()
     {
@@ -56,11 +56,19 @@ public class CarDamageable : NetworkBehaviour, IDamageable<int>
     [Command(requiresAuthority = false)]
     private void CmdDestruct()
     {
+        TargetCallOnCarDestroyed(_currentCar.GetComponent<CarBase>().connectionToClient);
+
         GameObject destroyedCar = Instantiate(_destroyedCarPrefab, _currentCar.transform.position, _currentCar.transform.rotation);
         InitializeDestroyedCar(destroyedCar);
         NetworkServer.Spawn(destroyedCar);
 
         NetworkServer.Destroy(_currentCar);
+    }
+
+    [TargetRpc]
+    private void TargetCallOnCarDestroyed(NetworkConnection target)
+    {
+        OnCarDestroyed?.Invoke();
     }
 
     private void InitializeDestroyedCar(GameObject destroyedCar)
