@@ -94,4 +94,10 @@ public class CameraManager : MonoBehaviour
                 }
         }
     }
+
+    public void SetThirdPersonCamera(Transform target)
+    {
+        CameraMode = CameraMode.ThirdPerson;
+        ((ThirdPersonCamera)_currentCameraScript).Target = target;
+    }
 }
