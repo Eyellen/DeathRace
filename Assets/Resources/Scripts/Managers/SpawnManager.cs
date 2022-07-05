@@ -57,7 +57,7 @@ public class SpawnManager : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void CmdSpawn(GameObject carPrefab, GameObject ownerPlayer)
     {
-#if UNITY_EDITOR
+#if UNITY_EDITOR || DEBUG_BUILD
         if (_carPrefabs.Length <= 0)
         {
             Debug.LogError($"CarPrefabs in {nameof(SpawnManager)} doesn't contain {carPrefab}." +
@@ -93,13 +93,13 @@ public class SpawnManager : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void CmdSpawn(uint carIndex, GameObject ownerPlayer)
     {
-#if UNITY_EDITOR
         if(carIndex >= _carPrefabs.Length)
         {
+#if UNITY_EDITOR || DEBUG_BUILD
             Debug.LogError("carIndex out of range of carPrefabs array.");
+#endif
             return;
         }
-#endif
 
         Transform spawnPositionTransform = SpawnPositions[_spawnPositionIndex];
 
