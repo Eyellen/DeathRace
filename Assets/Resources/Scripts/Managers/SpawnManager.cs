@@ -55,7 +55,7 @@ public class SpawnManager : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdSpawn(GameObject carPrefab, GameObject ownerPlayer)
+    private void CmdSpawn(GameObject carPrefab, GameObject ownerPlayer)
     {
 #if UNITY_EDITOR || DEBUG_BUILD
         if (_carPrefabs.Length <= 0)
@@ -91,7 +91,7 @@ public class SpawnManager : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdSpawn(uint carIndex, GameObject ownerPlayer)
+    private void CmdSpawn(uint carIndex, GameObject ownerPlayer)
     {
         if(carIndex >= _carPrefabs.Length)
         {
@@ -119,5 +119,16 @@ public class SpawnManager : NetworkBehaviour
     {
         Player.LocalPlayer.Car = car;
         Player.LocalPlayer.CameraManager.SetThirdPersonCamera(car.transform);
+    }
+
+    public void DestroyCurrentCar()
+    {
+        CmdDestroyCurrentCar(Player.LocalPlayer.Car);
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdDestroyCurrentCar(GameObject currentCar)
+    {
+        NetworkServer.Destroy(currentCar);
     }
 }
