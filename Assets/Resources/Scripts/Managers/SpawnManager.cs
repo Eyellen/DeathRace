@@ -12,7 +12,7 @@ public class SpawnManager : NetworkBehaviour
     public uint SelectedCarIndex { get; set; } = 0;
 
 
-    [SerializeField] private Transform[] _spawnPositions;
+    [SerializeField] public Transform[] SpawnPositions { get; set; }
     private int _spawnPositionIndex = 0;
 
     private void Awake()
@@ -41,11 +41,11 @@ public class SpawnManager : NetworkBehaviour
     private void InitializeSpawnPositions()
     {
         GameObject[] positions = GameObject.FindGameObjectsWithTag("SpawnPosition");
-        _spawnPositions = new Transform[positions.Length];
+        SpawnPositions = new Transform[positions.Length];
 
         for (int i = 0; i < positions.Length; i++)
         {
-            _spawnPositions[i] = positions[i].transform;
+            SpawnPositions[i] = positions[i].transform;
         }
     }
 
@@ -77,14 +77,14 @@ public class SpawnManager : NetworkBehaviour
         }
 #endif
 
-        Transform spawnPositionTransform = _spawnPositions[_spawnPositionIndex];
+        Transform spawnPositionTransform = SpawnPositions[_spawnPositionIndex];
 
         GameObject car = Instantiate(carPrefab,
             spawnPositionTransform.position,
             spawnPositionTransform.rotation);
         NetworkServer.Spawn(car, ownerPlayer);
 
-        _spawnPositionIndex = (_spawnPositionIndex + 1) % _spawnPositions.Length;
+        _spawnPositionIndex = (_spawnPositionIndex + 1) % SpawnPositions.Length;
 
         NetworkConnection connection = ownerPlayer.GetComponent<Player>().connectionToClient;
         TargetSetCameraTarget(connection, car);
@@ -101,14 +101,14 @@ public class SpawnManager : NetworkBehaviour
         }
 #endif
 
-        Transform spawnPositionTransform = _spawnPositions[_spawnPositionIndex];
+        Transform spawnPositionTransform = SpawnPositions[_spawnPositionIndex];
 
         GameObject car = Instantiate(_carPrefabs[carIndex],
             spawnPositionTransform.position,
             spawnPositionTransform.rotation);
         NetworkServer.Spawn(car, ownerPlayer);
 
-        _spawnPositionIndex = (_spawnPositionIndex + 1) % _spawnPositions.Length;
+        _spawnPositionIndex = (_spawnPositionIndex + 1) % SpawnPositions.Length;
 
         NetworkConnection connection = ownerPlayer.GetComponent<Player>().connectionToClient;
         TargetSetCameraTarget(connection, car);
