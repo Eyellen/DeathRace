@@ -33,7 +33,10 @@ public class CarSelectPreviewManager : MonoBehaviour
     public void ShowCar(uint carIndex)
     {
         PreviewCars[SpawnManager.Instance.SelectedCarIndex].SetActive(false);
+
         PreviewCars[carIndex].transform.position = transform.position + Vector3.up * 0.5f;
+        PreviewCars[carIndex].transform.rotation = transform.rotation;
+
         PreviewCars[carIndex].SetActive(true);
     }
 
