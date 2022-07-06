@@ -11,6 +11,8 @@ public class CameraManager : MonoBehaviour
 
     private CameraBase _currentCameraScript;
 
+    public CameraBase CurrentCameraScript { get => _currentCameraScript; }
+
     public CameraMode CameraMode
     {
         get => _cameraMode;
@@ -29,18 +31,6 @@ public class CameraManager : MonoBehaviour
         _camera = gameObject;
 
         Initialize();
-    }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            CameraMode = CameraMode.Free;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            CameraMode = CameraMode.ThirdPerson;
-        }
     }
 
     private void CameraModeChanged(CameraMode cameraMode)
@@ -91,5 +81,17 @@ public class CameraManager : MonoBehaviour
                     break;
                 }
         }
+    }
+
+    public void SetThirdPersonCamera(Transform target)
+    {
+        CameraMode = CameraMode.ThirdPerson;
+        ((ThirdPersonCamera)_currentCameraScript).Target = target;
+        //target.gameObject.GetComponent<CarDamageable>().OnCarDestroyed += SetFreeCamera;
+    }
+
+    public void SetFreeCamera()
+    {
+        CameraMode = CameraMode.Free;
     }
 }

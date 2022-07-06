@@ -5,7 +5,7 @@ using UnityEngine;
 public class ThirdPersonCamera : CameraBase
 {
     [SerializeField]
-    private Transform _target;
+    public Transform Target { get; set; }
 
     [SerializeField]
     private Vector3 _cameraOffset = new Vector3(0, 1, -5);
@@ -16,9 +16,12 @@ public class ThirdPersonCamera : CameraBase
     {
         base.LateUpdate();
 
-        if (_target == null)
-            FindTarget();
-
+        if (Target == null)
+        {
+            GetComponent<CameraManager>().SetFreeCamera();
+            return;
+        }
+        
         HandleFollowing();
     }
 
@@ -31,48 +34,13 @@ public class ThirdPersonCamera : CameraBase
 
     private void HandleFollowing()
     {
-#if UNITY_EDITOR || DEBUG_BUILD
-        if (!_target)
-        {
-            if (_debugging)
-            {
-                Debug.LogWarning("Camera doesn't have target.");
-            }
-            return;
-        }
-#else
-        if (!_target) return;
-#endif
-
-        _thisTransform.position = _target.position + _currentCameraOffset;
+        _thisTransform.position = Target.position + _currentCameraOffset;
 
 #if UNITY_EDITOR || DEBUG_BUILD
         if (_debugging)
         {
-            Debug.DrawLine(_target.position, _target.position + _currentCameraOffset);
+            Debug.DrawLine(Target.position, Target.position + _currentCameraOffset);
         }
 #endif
-    }
-
-    private void FindTarget()
-    {
-        GameObject[] cars = GameObject.FindGameObjectsWithTag("Car");
-
-        foreach (var car in cars)
-        {
-            if (!car.TryGetComponent(out CarBase carBase))
-            {
-#if UNITY_EDITOR
-                Debug.LogError("Trying to GetComponent<CarBase> on object that doesnt contain it. " +
-                    "Most likely you forgot to disable \"Player\" tag on Destroyed Car");
-#endif
-                continue;
-            }
-
-            if (!carBase.isLocalPlayer) continue;
-
-            _target = car.transform;
-            break;
-        }
     }
 }

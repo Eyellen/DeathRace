@@ -21,6 +21,9 @@ public class CameraBase : NetworkBehaviour
 
     protected virtual void Awake()
     {
+        _xRotation = transform.rotation.eulerAngles.y;
+        _yRotation = -transform.rotation.eulerAngles.x;
+
         _thisTransform = GetComponent<Transform>();
 
         UpdateSensitivity();

@@ -5,10 +5,11 @@ using UnityEngine;
 public class GameCanvas : MonoBehaviour
 {
     [SerializeField] private EscapeMenu _escapeMenu;
+    [SerializeField] private CarSelectUI _carSelectMenu;
 
     private void Start()
     {
-        CursorManager.HideCursor();
+        //CursorManager.HideCursor();
     }
 
     void Update()
@@ -18,9 +19,20 @@ public class GameCanvas : MonoBehaviour
 
     void HandleInput()
     {
+        if (_carSelectMenu.gameObject.activeSelf &&
+            Input.GetKeyDown(KeyCode.Escape))
+        {
+            _carSelectMenu.SetActive(false);
+            return;
+        }
+
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             _escapeMenu.SetActive(!_escapeMenu.gameObject.activeSelf);
+        }
+        if(Input.GetKeyDown(KeyCode.N))
+        {
+            _carSelectMenu.SetActive(!_carSelectMenu.gameObject.activeSelf);
         }
     }
 }

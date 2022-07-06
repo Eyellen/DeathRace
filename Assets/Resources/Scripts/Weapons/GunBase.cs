@@ -54,7 +54,7 @@ public class GunBase : NetworkBehaviour
 
     protected virtual void Update()
     {
-        if (!isLocalPlayer) return;
+        if (!netIdentity.hasAuthority) return;
 
         HandleInput();
 
