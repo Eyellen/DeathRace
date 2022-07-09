@@ -548,6 +548,7 @@ GameObject:
   - component: {fileID: 6433090504288531538}
   - component: {fileID: 6433090504288531549}
   - component: {fileID: 6433090504288531537}
+  - component: {fileID: 2452306751093493191}
   m_Layer: 5
   m_Name: ServerInfoBarTemplate
   m_TagString: Untagged
@@ -562,7 +563,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6433090504288531551}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -706,6 +707,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2452306751093493191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6433090504288531551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cb5dfcdf1a33e448a41ecfb457f75e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _serverNameText: {fileID: 6433090503866705347}
+  _playersCountText: {fileID: 6433090503286678113}
+  _maxPingText: {fileID: 6433090503740445564}
+  _RegionText: {fileID: 6433090504485349579}
 --- !u!1 &6433090504485349621
 GameObject:
   m_ObjectHideFlags: 0
