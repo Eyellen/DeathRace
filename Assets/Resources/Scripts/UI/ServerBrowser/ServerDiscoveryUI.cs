@@ -20,6 +20,12 @@ public class ServerDiscoveryUI : MonoBehaviour
         }
     }
 
+    public void FindServers()
+    {
+        ClearServerList();
+        _networkDiscovery.StartDiscovery();
+    }
+
     public void OnDiscoveredServer(DiscoveryResponse info)
     {
         Instantiate(_serverInfoBarTemplatePrefab, _serversListArea.transform);
@@ -29,12 +35,20 @@ public class ServerDiscoveryUI : MonoBehaviour
         Debug.Log(info.MaxPing);
     }
 
-    private IEnumerator ClearServerList()
+    private IEnumerator ClearServerListCoroutine()
     {
         while (_serversListArea.transform.childCount > 0)
         {
             Destroy(_serversListArea.transform.GetChild(0).gameObject);
             yield return null;
+        }
+    }
+
+    private void ClearServerList()
+    {
+        for (int i = _serversListArea.transform.childCount - 1; i >= 0; i--)
+        {
+            Destroy(_serversListArea.transform.GetChild(i).gameObject);
         }
     }
 }
