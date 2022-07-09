@@ -4,7 +4,7 @@ using UnityEngine;
 using Mirror;
 using Mirror.Discovery;
 
-public class ServerBrowserUI : MonoBehaviour
+public class ServerDiscoveryUI : MonoBehaviour
 {
     [SerializeField] private NewNetworkDiscovery _networkDiscovery;
     [SerializeField] private GameObject _serversListArea;
