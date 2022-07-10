@@ -447,7 +447,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 86038960}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b327f2a7bb7a5a64582a157f33c2b464, type: 3}
+  m_Script: {fileID: 11500000, guid: 50261a5f5a8078543bdc83e74dbdbd3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &89978199
@@ -580,7 +580,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22457152, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 22457152, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2313,7 +2313,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 242131708}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1001905346}
+        m_TargetAssemblyTypeName: ServerDiscoveryUI, Assembly-CSharp
+        m_MethodName: FindServers
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &242131708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6186,6 +6198,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1001905345}
+  - component: {fileID: 1001905346}
   m_Layer: 5
   m_Name: ServerSearchBrowser
   m_TagString: Untagged
@@ -6213,6 +6226,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1001905346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1001905344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd69d957dfa5a444380c21c19644abc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _networkDiscovery: {fileID: 1978435479}
+  _serversListArea: {fileID: 1443784473}
+  _serverInfoBarTemplatePrefab: {fileID: 6433090504288531551, guid: c8731732a2935994b99a7802477f6275, type: 3}
 --- !u!1 &1023967382
 GameObject:
   m_ObjectHideFlags: 0
@@ -11431,7 +11459,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 86038963}
-        m_TargetAssemblyTypeName: MultiplayerManagerUI, Assembly-CSharp
+        m_TargetAssemblyTypeName: ServerManagerUI, Assembly-CSharp
         m_MethodName: Host
         m_Mode: 1
         m_Arguments:
@@ -12922,36 +12950,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1906245835}
   m_CullTransparentMesh: 1
---- !u!1 &1917069101
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1917069104}
-  m_Layer: 0
-  m_Name: DiscoveryManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1917069104
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1917069101}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 327.90637, y: 235.42986, z: 451.0353}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1924439600
 GameObject:
   m_ObjectHideFlags: 0
@@ -13468,6 +13466,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1966541377}
   m_CullTransparentMesh: 1
+--- !u!114 &1978435479 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8111587876293017376, guid: 53260f061327b1f4f80827380bcda829, type: 3}
+  m_PrefabInstance: {fileID: 5024362643747075317}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 923f76016e438fc4f8a1839072865918, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1996302316
 GameObject:
   m_ObjectHideFlags: 0
@@ -14722,7 +14731,60 @@ PrefabInstance:
       propertyPath: m_Name
       value: NetworkManager
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8111587876293017376, guid: 53260f061327b1f4f80827380bcda829, type: 3}
+      propertyPath: enableActiveDiscovery
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111587876293017376, guid: 53260f061327b1f4f80827380bcda829, type: 3}
+      propertyPath: ActiveDiscoveryInterval
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111587876293017376, guid: 53260f061327b1f4f80827380bcda829, type: 3}
+      propertyPath: OnServerFound.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111587876293017376, guid: 53260f061327b1f4f80827380bcda829, type: 3}
+      propertyPath: OnServerFound.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111587876293017376, guid: 53260f061327b1f4f80827380bcda829, type: 3}
+      propertyPath: OnServerFound.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111587876293017376, guid: 53260f061327b1f4f80827380bcda829, type: 3}
+      propertyPath: OnServerFound.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1001905346}
+    - target: {fileID: 8111587876293017376, guid: 53260f061327b1f4f80827380bcda829, type: 3}
+      propertyPath: OnServerFound.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1001905344}
+    - target: {fileID: 8111587876293017376, guid: 53260f061327b1f4f80827380bcda829, type: 3}
+      propertyPath: OnServerFound.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111587876293017376, guid: 53260f061327b1f4f80827380bcda829, type: 3}
+      propertyPath: OnServerFound.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111587876293017376, guid: 53260f061327b1f4f80827380bcda829, type: 3}
+      propertyPath: OnServerFound.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnDiscoveredServer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111587876293017376, guid: 53260f061327b1f4f80827380bcda829, type: 3}
+      propertyPath: OnServerFound.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111587876293017376, guid: 53260f061327b1f4f80827380bcda829, type: 3}
+      propertyPath: OnServerFound.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ServerBrowserUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111587876293017376, guid: 53260f061327b1f4f80827380bcda829, type: 3}
+      propertyPath: OnServerFound.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: ServerBrowserUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4538930383289326862, guid: 53260f061327b1f4f80827380bcda829, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 53260f061327b1f4f80827380bcda829, type: 3}
 --- !u!1001 &6433090503283020074
 PrefabInstance:
@@ -14858,6 +14920,10 @@ PrefabInstance:
     - target: {fileID: 6433090504288531551, guid: c8731732a2935994b99a7802477f6275, type: 3}
       propertyPath: m_Name
       value: ServerBarTemplate
+      objectReference: {fileID: 0}
+    - target: {fileID: 6433090504288531551, guid: c8731732a2935994b99a7802477f6275, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6433090504590949156, guid: c8731732a2935994b99a7802477f6275, type: 3}
       propertyPath: m_AnchorMax.y
