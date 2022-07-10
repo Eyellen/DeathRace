@@ -1,4 +1,7 @@
+using System;
 using System.Net;
+using UnityEngine;
+using UnityEngine.Events;
 using Mirror;
 using Mirror.Discovery;
 
@@ -15,13 +18,54 @@ public class DiscoveryRequest : NetworkMessage
 
 public class DiscoveryResponse : NetworkMessage
 {
+    // The server that sent this
+    // this is a property so that it is not serialized,  but the
+    // client fills this up after we receive it
+    public IPEndPoint EndPoint { get; set; }
+
+    public Uri uri;
+
+    // Prevent duplicate server appearance when a connection can be made via LAN on multiple NICs
+    public long serverId;
+
+
+
     // Add properties for whatever information you want the server to return to
     // clients for them to display or consume for establishing a connection.
+    public string ServerName;
+    public int MaxPlayersCount;
+    public int CurrentPlayersCount;
+    public int MaxPing;
 }
 
+[Serializable]
+public class ServerFoundUnityEvent : UnityEvent<DiscoveryResponse> { };
+
+[DisallowMultipleComponent]
 public class NewNetworkDiscovery : NetworkDiscoveryBase<DiscoveryRequest, DiscoveryResponse>
 {
     #region Server
+
+    public long ServerId { get; private set; }
+
+    [Tooltip("Transport to be advertised during discovery")]
+    public Transport transport;
+
+    [Tooltip("Invoked when a server is found")]
+    public ServerFoundUnityEvent OnServerFound;
+
+    public override void Start()
+    {
+        ServerId = RandomLong();
+
+        // active transport gets initialized in awake
+        // so make sure we set it here in Start()  (after awakes)
+        // Or just let the user assign it in the inspector
+        if (transport == null)
+            transport = Transport.activeTransport;
+
+        base.Start();
+    }
 
     /// <summary>
     /// Reply to the client to inform it of this server
@@ -49,7 +93,28 @@ public class NewNetworkDiscovery : NetworkDiscoveryBase<DiscoveryRequest, Discov
     /// <returns>A message containing information about this server</returns>
     protected override DiscoveryResponse ProcessRequest(DiscoveryRequest request, IPEndPoint endpoint) 
     {
-        return new DiscoveryResponse();
+        //return new DiscoveryResponse();
+        try
+        {
+            Debug.Log("Process Request called");
+            // this is an example reply message,  return your own
+            // to include whatever is relevant for your game
+            return new DiscoveryResponse
+            {
+                serverId = ServerId,
+                uri = transport.ServerUri(),
+
+                ServerName = ServerData.ServerName,
+                MaxPlayersCount = ServerData.MaxPlayersCount,
+                CurrentPlayersCount = ServerData.CurrentPlayersCount,
+                MaxPing = ServerData.MaxPing
+            };
+        }
+        catch (NotImplementedException)
+        {
+            Debug.LogError($"Transport {transport} does not support network discovery");
+            throw;
+        }
     }
 
     #endregion
@@ -77,7 +142,24 @@ public class NewNetworkDiscovery : NetworkDiscoveryBase<DiscoveryRequest, Discov
     /// </remarks>
     /// <param name="response">Response that came from the server</param>
     /// <param name="endpoint">Address of the server that replied</param>
-    protected override void ProcessResponse(DiscoveryResponse response, IPEndPoint endpoint) { }
+    protected override void ProcessResponse(DiscoveryResponse response, IPEndPoint endpoint) 
+    {
+        Debug.Log("Process Response called");
+        // we received a message from the remote endpoint
+        response.EndPoint = endpoint;
+
+        // although we got a supposedly valid url, we may not be able to resolve
+        // the provided host
+        // However we know the real ip address of the server because we just
+        // received a packet from it,  so use that as host.
+        UriBuilder realUri = new UriBuilder(response.uri)
+        {
+            Host = response.EndPoint.Address.ToString()
+        };
+        response.uri = realUri.Uri;
+
+        OnServerFound?.Invoke(response);
+    }
 
     #endregion
 }
