@@ -3,57 +3,7 @@ guid: 75e487733e3f23042ac0603ee3bd2896
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Chassis_00_Cube.002_BasisMat
-    second: {fileID: 2100000, guid: 97feb732d06f71b43b65cd03d3fc9993, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: TrainHook_B_Cube.047_HookMat
-    second: {fileID: 2100000, guid: bb557b274b9356647ac233a58a2ae11c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: TrainHook_S_Cube.041_HookMat
-    second: {fileID: 2100000, guid: bb557b274b9356647ac233a58a2ae11c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Train_Rooff_01_Cube.057_RoofMat
-    second: {fileID: 2100000, guid: c66ccabfd5ab1bd4fb5ae5dd6ba5515d, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Train_Wheel_01.005_Cube.081_mehanicMat
-    second: {fileID: 2100000, guid: 103fca21176cb1f4d9a2fb23625616e0, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Train_Wheel_01.005_Cube.081_wheelMat
-    second: {fileID: 2100000, guid: bb557b274b9356647ac233a58a2ae11c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Train_Wheel_01_Cube.028_mehanicMat
-    second: {fileID: 2100000, guid: 103fca21176cb1f4d9a2fb23625616e0, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Train_Wheel_01_Cube.028_wheelMat
-    second: {fileID: 2100000, guid: bb557b274b9356647ac233a58a2ae11c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Train_carriage_02_OpenDoor.001_Cube.051_Carriage_doorMat
-    second: {fileID: 2100000, guid: c66ccabfd5ab1bd4fb5ae5dd6ba5515d, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Train_carriage_02_OpenDoor_Cube.048_CarriageMat
-    second: {fileID: 2100000, guid: c66ccabfd5ab1bd4fb5ae5dd6ba5515d, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
