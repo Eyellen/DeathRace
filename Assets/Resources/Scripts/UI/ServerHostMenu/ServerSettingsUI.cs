@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class ServerHostMenuUI : MonoBehaviour
+public class ServerSettingsUI : MonoBehaviour
 {
     [SerializeField] private TMP_InputField _serverNameField;
     [SerializeField] private TMP_InputField _passwordField;
