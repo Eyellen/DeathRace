@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class LanManagerUI : MonoBehaviour
+public class LanHostUI : MonoBehaviour
 {
     private NetworkManager _networkManager;
 
