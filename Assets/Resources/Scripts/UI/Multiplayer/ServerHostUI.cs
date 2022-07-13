@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class ServerManagerUI : MonoBehaviour
+public class ServerHostUI : MonoBehaviour
 {
     private NetworkManager _networkManager;
     private NewNetworkDiscovery _networkDiscovery;
