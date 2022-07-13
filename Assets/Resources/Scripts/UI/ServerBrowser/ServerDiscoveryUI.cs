@@ -46,12 +46,15 @@ public class ServerDiscoveryUI : MonoBehaviour
 
     public void OnDiscoveredServer(DiscoveryResponse info)
     {
-        if(_discoveredServers.ContainsKey(info.serverId))
+        ServerInfoBarUI serverInfoBar;
+        if (_discoveredServers.ContainsKey(info.serverId))
         {
-            Destroy(_discoveredServers[info.serverId].gameObject);
+            serverInfoBar = _discoveredServers[info.serverId];
         }
-
-        ServerInfoBarUI serverInfoBar = Instantiate(_serverInfoBarTemplatePrefab, _serversListArea.transform).GetComponent<ServerInfoBarUI>();
+        else
+        {
+            serverInfoBar = Instantiate(_serverInfoBarTemplatePrefab, _serversListArea.transform).GetComponent<ServerInfoBarUI>();
+        }
         serverInfoBar.ServerDiscoveryUI = this;
 
         // Server Info
