@@ -15,7 +15,7 @@ public class ServerSettingsUI : MonoBehaviour
 
     private void Start()
     {
-        RefreshOptions();
+        InitializeSettings();
     }
 
     public void SetServerName(string name)
@@ -25,7 +25,7 @@ public class ServerSettingsUI : MonoBehaviour
 
     public void SetPassword(string pass)
     {
-        //
+        //ServerData.Password = pass;
     }
 
     public void SetMaxPlayersCount(float maxCount)
@@ -50,8 +50,15 @@ public class ServerSettingsUI : MonoBehaviour
     public void RefreshOptions()
     {
         _serverNameField.text = ServerData.ServerName;
-        //_passwordField.text = ServerData.;
+        //_passwordField.text = ServerData.Password;
         _maxPlayersSlider.value = ServerData.MaxPlayersCount;
         _maxPingSlider.value = ServerData.MaxPing;
+    }
+
+    private void InitializeSettings()
+    {
+        _serverNameField.text = SettingsUser.Username + "'s Lobby";
+        _maxPlayersSlider.value = 4;
+        _maxPingSlider.value = 4;
     }
 }
