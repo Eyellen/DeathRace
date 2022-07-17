@@ -15,6 +15,7 @@ public class CarDamageable : NetworkBehaviour, IDamageable<int>
     private Collider _carCollider;
     private GameObject _currentCar;
     [SerializeField] private GameObject _destroyedCarPrefab;
+    [SerializeField] private GameObject _explosionPrefab;
 
     public int Health { get => _health; }
 
@@ -58,9 +59,14 @@ public class CarDamageable : NetworkBehaviour, IDamageable<int>
     {
         TargetCallOnCarDestroyed(_currentCar.GetComponent<CarBase>().connectionToClient);
 
+        // Spawning Destroyed Car
         GameObject destroyedCar = Instantiate(_destroyedCarPrefab, _currentCar.transform.position, _currentCar.transform.rotation);
         InitializeDestroyedCar(destroyedCar);
         NetworkServer.Spawn(destroyedCar);
+
+        // Spawning Explosion
+        GameObject explosion = Instantiate(_explosionPrefab, _currentCar.transform.position, _currentCar.transform.rotation);
+        NetworkServer.Spawn(explosion);
 
         NetworkServer.Destroy(_currentCar);
     }

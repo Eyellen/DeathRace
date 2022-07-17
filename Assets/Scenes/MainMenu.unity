@@ -15331,6 +15331,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4993275009772166695, guid: 53260f061327b1f4f80827380bcda829, type: 3}
+      propertyPath: spawnPrefabs.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4993275009772166695, guid: 53260f061327b1f4f80827380bcda829, type: 3}
+      propertyPath: spawnPrefabs.Array.data[7]
+      value: 
+      objectReference: {fileID: 390734475171696009, guid: df4176b9d3b2ed344941e0eb2d253829, type: 3}
     - target: {fileID: 4993275009772166714, guid: 53260f061327b1f4f80827380bcda829, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -15380,59 +15388,10 @@ PrefabInstance:
       value: NetworkManager
       objectReference: {fileID: 0}
     - target: {fileID: 8111587876293017376, guid: 53260f061327b1f4f80827380bcda829, type: 3}
-      propertyPath: enableActiveDiscovery
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8111587876293017376, guid: 53260f061327b1f4f80827380bcda829, type: 3}
-      propertyPath: ActiveDiscoveryInterval
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8111587876293017376, guid: 53260f061327b1f4f80827380bcda829, type: 3}
-      propertyPath: OnServerFound.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8111587876293017376, guid: 53260f061327b1f4f80827380bcda829, type: 3}
-      propertyPath: OnServerFound.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8111587876293017376, guid: 53260f061327b1f4f80827380bcda829, type: 3}
-      propertyPath: OnServerFound.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8111587876293017376, guid: 53260f061327b1f4f80827380bcda829, type: 3}
       propertyPath: OnServerFound.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1001905346}
-    - target: {fileID: 8111587876293017376, guid: 53260f061327b1f4f80827380bcda829, type: 3}
-      propertyPath: OnServerFound.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1001905344}
-    - target: {fileID: 8111587876293017376, guid: 53260f061327b1f4f80827380bcda829, type: 3}
-      propertyPath: OnServerFound.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8111587876293017376, guid: 53260f061327b1f4f80827380bcda829, type: 3}
-      propertyPath: OnServerFound.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8111587876293017376, guid: 53260f061327b1f4f80827380bcda829, type: 3}
-      propertyPath: OnServerFound.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnDiscoveredServer
-      objectReference: {fileID: 0}
-    - target: {fileID: 8111587876293017376, guid: 53260f061327b1f4f80827380bcda829, type: 3}
-      propertyPath: OnServerFound.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8111587876293017376, guid: 53260f061327b1f4f80827380bcda829, type: 3}
-      propertyPath: OnServerFound.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ServerBrowserUI, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8111587876293017376, guid: 53260f061327b1f4f80827380bcda829, type: 3}
-      propertyPath: OnServerFound.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: ServerBrowserUI, Assembly-CSharp
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4538930383289326862, guid: 53260f061327b1f4f80827380bcda829, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53260f061327b1f4f80827380bcda829, type: 3}
 --- !u!1001 &7940921699943492456
 PrefabInstance:

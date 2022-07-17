@@ -873,6 +873,7 @@ MonoBehaviour:
   syncInterval: 0.1
   _health: 100
   _destroyedCarPrefab: {fileID: 0}
+  _explosionPrefab: {fileID: 390734475171696009, guid: df4176b9d3b2ed344941e0eb2d253829, type: 3}
 --- !u!114 &3793097228303951607
 MonoBehaviour:
   m_ObjectHideFlags: 0
