@@ -8,13 +8,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4320682932359231474, guid: 83e032cfe22fa7d4aa8e3910f6781db6, type: 3}
+      propertyPath: MinDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320682932359231474, guid: 83e032cfe22fa7d4aa8e3910f6781db6, type: 3}
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 1fd31868d68903d4f9e2c4a3b7ef98f3, type: 3}
     - target: {fileID: 4320682932359231474, guid: 83e032cfe22fa7d4aa8e3910f6781db6, type: 3}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320682932359231474, guid: 83e032cfe22fa7d4aa8e3910f6781db6, type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 
-      objectReference: {fileID: 24300002, guid: e905bfd5f1beeae4a8cacb381a53aa2d, type: 2}
+      objectReference: {fileID: 24300002, guid: 1bb698c89a785f441be62e6ab9e71f83, type: 2}
     - target: {fileID: 4320682932359231474, guid: 83e032cfe22fa7d4aa8e3910f6781db6, type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 1
