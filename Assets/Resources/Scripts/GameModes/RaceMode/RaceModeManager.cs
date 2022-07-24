@@ -17,6 +17,25 @@ public class RaceModeManager : MonoBehaviour
         InitializeCheckPoints();
     }
 
+    private void OnEnable()
+    {
+        //foreach (var checkPoint in CheckPoints)
+        //{
+        //    checkPoint.gameObject.SetActive(true);
+        //}
+        CheckPoints[0].transform.root.gameObject.SetActive(true);
+    }
+
+    private void OnDisable()
+    {
+        CheckPoints[0].transform.root.gameObject.SetActive(false);
+    }
+
+    public void SetActive(bool isActive)
+    {
+        gameObject.SetActive(isActive);
+    }
+
     private void InitializeInstance()
     {
         if (Instance == null)
