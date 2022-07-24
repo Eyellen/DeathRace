@@ -5110,6 +5110,7 @@ GameObject:
   - component: {fileID: 676514448279823343}
   - component: {fileID: 676514448279823341}
   - component: {fileID: 676514448279823342}
+  - component: {fileID: 5898192414228983194}
   m_Layer: 0
   m_Name: CheckPoint
   m_TagString: Untagged
@@ -9906,6 +9907,23 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &5898192414228983194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 676514448279823344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e60eeae530871c94b86df9d54633c5e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _notPassedMaterial: {fileID: 2100000, guid: 47b285c76c036dd439856d63d224f6d3, type: 2}
+  _passedMaterial: {fileID: 2100000, guid: d36345be6fb93e6498b2769c3845edee, type: 2}
+  _rightBoundParticlesRenderer: {fileID: 676514448534927459}
+  _leftBoundParticlesRenderer: {fileID: 676514447262065296}
+  <Trigger>k__BackingField: {fileID: 676514446675675591}
 --- !u!1 &676514448534927461
 GameObject:
   m_ObjectHideFlags: 0
