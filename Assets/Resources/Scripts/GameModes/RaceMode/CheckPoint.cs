@@ -12,6 +12,7 @@ public class CheckPoint : MonoBehaviour
 
     [field: SerializeField] public Collider Trigger { get; private set; }
 
+    public int CheckPointIndex { get; set; }
     public bool IsPassed { get; private set; }
 
     public void MarkAsPassed()
@@ -26,5 +27,12 @@ public class CheckPoint : MonoBehaviour
         IsPassed = false;
         _rightBoundParticlesRenderer.material = _notPassedMaterial;
         _leftBoundParticlesRenderer.material = _notPassedMaterial;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.root.tag != "Car") return;
+
+        Debug.Log($"Car entered the CheckPoint trigger by index {CheckPointIndex}");
     }
 }
