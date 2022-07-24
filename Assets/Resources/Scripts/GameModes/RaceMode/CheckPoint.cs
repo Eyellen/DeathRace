@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,8 @@ public class CheckPoint : MonoBehaviour
 
     public int CheckPointIndex { get; set; }
     public bool IsPassed { get; private set; }
+
+    public Action<int> OnCheckPointPassed;
 
     public void MarkAsPassed()
     {
@@ -33,6 +36,8 @@ public class CheckPoint : MonoBehaviour
     {
         if (other.transform.root.tag != "Car") return;
 
-        Debug.Log($"Car entered the CheckPoint trigger by index {CheckPointIndex}");
+        //Debug.Log($"Car entered the CheckPoint trigger by index {CheckPointIndex}");
+
+        OnCheckPointPassed?.Invoke(CheckPointIndex);
     }
 }
