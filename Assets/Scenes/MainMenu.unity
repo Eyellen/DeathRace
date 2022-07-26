@@ -432,6 +432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5933a02aa0b3ff340acf583822f1ae50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameModeDropdown: {fileID: 1770605332}
   _serverNameField: {fileID: 1268539604}
   _passwordField: {fileID: 909820880}
   _maxPlayersSlider: {fileID: 402932766}

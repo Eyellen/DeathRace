@@ -6,6 +6,7 @@ using TMPro;
 
 public class ServerSettingsUI : MonoBehaviour
 {
+    [SerializeField] private TMP_Dropdown _gameModeDropdown;
     [SerializeField] private TMP_InputField _serverNameField;
     [SerializeField] private TMP_InputField _passwordField;
     [SerializeField] private Slider _maxPlayersSlider;
@@ -13,7 +14,7 @@ public class ServerSettingsUI : MonoBehaviour
     [SerializeField] private Slider _maxPingSlider;
     [SerializeField] private TextMeshProUGUI _maxPingText;
 
-    private void Start()
+    private void OnEnable()
     {
         InitializeSettings();
     }
@@ -54,14 +55,15 @@ public class ServerSettingsUI : MonoBehaviour
 
     public void RefreshOptions()
     {
-        _serverNameField.text = ServerData.ServerName;
-        //_passwordField.text = ServerData.Password;
-        _maxPlayersSlider.value = ServerData.MaxPlayersCount;
-        _maxPingSlider.value = ServerData.MaxPing;
+        //_serverNameField.text = ServerData.ServerName;
+        ////_passwordField.text = ServerData.Password;
+        //_maxPlayersSlider.value = ServerData.MaxPlayersCount;
+        //_maxPingSlider.value = ServerData.MaxPing;
     }
 
     private void InitializeSettings()
     {
+        _gameModeDropdown.value = 1;
         _serverNameField.text = SettingsUser.Username + "'s Lobby";
         _maxPlayersSlider.value = 4;
         _maxPingSlider.value = 4;
