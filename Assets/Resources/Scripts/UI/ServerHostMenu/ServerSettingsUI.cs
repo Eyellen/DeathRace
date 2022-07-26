@@ -18,6 +18,11 @@ public class ServerSettingsUI : MonoBehaviour
         InitializeSettings();
     }
 
+    public void SetGameMode(int gameModeIndex)
+    {
+        ServerData.GameModeIndex = gameModeIndex;
+    }
+
     public void SetServerName(string name)
     {
         ServerData.ServerName = name;
