@@ -32,6 +32,7 @@ public class DiscoveryResponse : NetworkMessage
 
     // Add properties for whatever information you want the server to return to
     // clients for them to display or consume for establishing a connection.
+    public int GameModeIndex;
     public string ServerName;
     public int MaxPlayersCount;
     public int CurrentPlayersCount;
@@ -104,6 +105,7 @@ public class NewNetworkDiscovery : NetworkDiscoveryBase<DiscoveryRequest, Discov
                 serverId = ServerId,
                 uri = transport.ServerUri(),
 
+                GameModeIndex = ServerData.GameModeIndex,
                 ServerName = ServerData.ServerName,
                 MaxPlayersCount = ServerData.MaxPlayersCount,
                 CurrentPlayersCount = ServerData.CurrentPlayersCount,
