@@ -13,6 +13,7 @@ public class RaceModeManager : MonoBehaviour
 
     private void Start()
     {
+        //PlayerInput.IsButtonsBlocked = true;
         InitializeInstance();
         InitializeCheckPoints();
     }
@@ -23,12 +24,12 @@ public class RaceModeManager : MonoBehaviour
         //{
         //    checkPoint.gameObject.SetActive(true);
         //}
-        CheckPoints[0].transform.root.gameObject.SetActive(true);
+        CheckPoints[0].transform.parent.gameObject.SetActive(true);
     }
 
     private void OnDisable()
     {
-        CheckPoints[0].transform.root.gameObject.SetActive(false);
+        CheckPoints[0].transform.parent.gameObject.SetActive(false);
     }
 
     public void SetActive(bool isActive)
