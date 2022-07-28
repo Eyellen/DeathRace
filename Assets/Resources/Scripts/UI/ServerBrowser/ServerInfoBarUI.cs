@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+// TODO: Add an Initializer method with parameter type of DiscoveryResponse
 public class ServerInfoBarUI : MonoBehaviour
 {
     public ServerDiscoveryUI ServerDiscoveryUI { get; set; }
