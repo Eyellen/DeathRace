@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 public class CheckPoint : MonoBehaviour
 {
@@ -35,6 +36,7 @@ public class CheckPoint : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.root.tag != "Car") return;
+        if (!other.transform.root.GetComponent<CarBase>().netIdentity.hasAuthority) return;
 
         //Debug.Log($"Car entered the CheckPoint trigger by index {CheckPointIndex}");
 
