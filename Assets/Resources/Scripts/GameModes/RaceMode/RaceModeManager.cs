@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 public class RaceModeManager : GameModeBase
 {
     [field: SerializeField] 
     public CheckPoint[] CheckPoints { get; private set; }
 
-    private int _lapsCompleted = 0;
+    // Completed laps of each player by their car's netId
+    private readonly SyncDictionary<uint, int> _playersCompletedLaps = new SyncDictionary<uint, int>();
 
     protected override void Start()
     {
@@ -15,6 +17,15 @@ public class RaceModeManager : GameModeBase
 
         //PlayerInput.IsButtonsBlocked = true;
         InitializeCheckPoints();
+        InitializePlayersCompletedLapsDictionary();
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            InitializePlayersCompletedLapsDictionary();
+        }
     }
 
     private void OnEnable()
@@ -56,7 +67,8 @@ public class RaceModeManager : GameModeBase
         {
             if(CheckPoints[CheckPoints.Length - 1].IsPassed)
             {
-                _lapsCompleted++;
+                CmdSetLapsCompleted(Player.LocalPlayer.Car.GetComponent<NetworkIdentity>().netId);
+                Debug.Log($"player by netId {Player.LocalPlayer.Car.GetComponent<NetworkIdentity>().netId} completed lap");
                 ResetAllCheckPoints();
             }
 
@@ -72,11 +84,36 @@ public class RaceModeManager : GameModeBase
         }
     }
 
+    [Command(requiresAuthority = false)]
+    private void CmdSetLapsCompleted(uint netId)
+    {
+        _playersCompletedLaps[netId]++;
+        Debug.Log($"player by netId {netId} made {_playersCompletedLaps[netId]} lap");
+    }
+
     private void ResetAllCheckPoints()
     {
         foreach (var checkPoint in CheckPoints)
         {
             checkPoint.ResetPoint();
+        }
+    }
+
+    [ServerCallback]
+    private void InitializePlayersCompletedLapsDictionary()
+    {
+        // Looking for Players cars netIds
+        GameObject[] cars = GameObject.FindGameObjectsWithTag("Car");
+        uint[] netIds = new uint[cars.Length];
+        for (int i = 0; i < netIds.Length; i++)
+        {
+            netIds[i] = cars[i].GetComponent<NetworkIdentity>().netId;
+        }
+
+        foreach (var netId in netIds)
+        {
+            // Initializing every players completed laps count by 0
+            _playersCompletedLaps[netId] = 0;
         }
     }
 }
