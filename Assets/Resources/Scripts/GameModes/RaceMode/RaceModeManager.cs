@@ -28,17 +28,13 @@ public class RaceModeManager : GameModeBase
         // Starting game by button
         if(Input.GetKeyDown(KeyCode.T))
         {
-            InitializePlayersCompletedLapsDictionary();
-            PlayerInput.IsButtonsBlocked = false;
-            MessageManagerUI.Instance.HideBottonMessage();
+            RpcStartGame();
         }
 
         // Starting game when there is enough players
         if(GameObject.FindGameObjectsWithTag("Car").Length == ServerData.MaxPlayersCount)
         {
-            InitializePlayersCompletedLapsDictionary();
-            PlayerInput.IsButtonsBlocked = false;
-            MessageManagerUI.Instance.HideBottonMessage();
+            RpcStartGame();
         }
 
 
@@ -63,6 +59,21 @@ public class RaceModeManager : GameModeBase
         base.Disable();
 
         CheckPoints[0].transform.parent.gameObject.SetActive(false);
+    }
+
+    protected override void StartGame()
+    {
+        base.StartGame();
+
+        InitializePlayersCompletedLapsDictionary();
+        PlayerInput.IsButtonsBlocked = false;
+        MessageManagerUI.Instance.HideBottonMessage();
+    }
+
+    [ClientRpc]
+    private void RpcStartGame()
+    {
+        StartGame();
     }
 
     private void InitializeCheckPoints()
