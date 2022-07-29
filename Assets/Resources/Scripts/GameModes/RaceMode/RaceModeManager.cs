@@ -11,36 +11,56 @@ public class RaceModeManager : GameModeBase
     // Completed laps of each player by their car's netId
     private readonly SyncDictionary<uint, int> _playersCompletedLaps = new SyncDictionary<uint, int>();
 
-    protected override void Start()
+    public override void Initialize()
     {
-        base.Start();
+        base.Initialize();
 
-        //PlayerInput.IsButtonsBlocked = true;
         InitializeCheckPoints();
-        InitializePlayersCompletedLapsDictionary();
+
+        PlayerInput.IsButtonsBlocked = true;
+        MessageManagerUI.Instance.ShowBottonMessage("Waiting for other players to start.\nPress T to start now.");
     }
 
     private void Update()
     {
+        // Starting game by button
         if(Input.GetKeyDown(KeyCode.T))
         {
             InitializePlayersCompletedLapsDictionary();
+            PlayerInput.IsButtonsBlocked = false;
+            MessageManagerUI.Instance.HideBottonMessage();
+        }
+
+        // Starting game when there is enough players
+        if(GameObject.FindGameObjectsWithTag("Car").Length == ServerData.MaxPlayersCount)
+        {
+            InitializePlayersCompletedLapsDictionary();
+            PlayerInput.IsButtonsBlocked = false;
+            MessageManagerUI.Instance.HideBottonMessage();
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            foreach (var info in _playersCompletedLaps)
+            {
+                Debug.Log($"Car by netId {info.Key} have made {info.Value} laps");
+            }
         }
     }
 
-    private void OnEnable()
+    public override void Enable()
     {
+        base.Enable();
+
         CheckPoints[0].transform.parent.gameObject.SetActive(true);
     }
 
-    private void OnDisable()
+    public override void Disable()
     {
-        CheckPoints[0].transform.parent.gameObject.SetActive(false);
-    }
+        base.Disable();
 
-    public void SetActive(bool isActive)
-    {
-        gameObject.SetActive(isActive);
+        CheckPoints[0].transform.parent.gameObject.SetActive(false);
     }
 
     private void InitializeCheckPoints()
