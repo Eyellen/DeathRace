@@ -34,7 +34,7 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    [ServerCallback]
+    //[ServerCallback]
     private void InitializeGameModeManager()
     {
         CurrentGameMode = (GameMode)ServerData.GameModeIndex;
