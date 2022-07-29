@@ -47,4 +47,8 @@ public class GameModeBase : NetworkBehaviour
     {
         gameObject.SetActive(false);
     }
+
+    protected virtual void StartGame() { }
+    protected virtual void StopGame() { }
+    protected virtual void RestartGame() { }
 }
