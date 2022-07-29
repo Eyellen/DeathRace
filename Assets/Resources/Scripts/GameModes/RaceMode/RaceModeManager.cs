@@ -18,11 +18,13 @@ public class RaceModeManager : GameModeBase
         InitializeCheckPoints();
 
         PlayerInput.IsButtonsBlocked = true;
-        MessageManagerUI.Instance.ShowBottonMessage("Waiting for other players to start.\nPress T to start now.");
+        MessageManagerUI.Instance.ShowBottonMessage("Waiting for other players to start." + (isServer ? "\nPress T to start now." : ""));
     }
 
     private void Update()
     {
+        if (!isServer) return;
+
         // Starting game by button
         if(Input.GetKeyDown(KeyCode.T))
         {
