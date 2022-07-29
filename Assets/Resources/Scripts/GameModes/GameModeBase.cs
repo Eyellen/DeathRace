@@ -7,16 +7,13 @@ public class GameModeBase : NetworkBehaviour
 {
     public static GameModeBase Instance { get; private set; }
 
+    private bool _isInitialized = false;
+
     [field: SyncVar]
     public bool IsWaitingForPlayers { get; protected set; }
 
     [field: SyncVar]
     public bool IsGameStarted { get; protected set; }
-
-    protected virtual void Start()
-    {
-        InitializeInstance();
-    }
 
     private void InitializeInstance()
     {
@@ -30,5 +27,24 @@ public class GameModeBase : NetworkBehaviour
 #endif
             Destroy(gameObject);
         }
+    }
+
+    public virtual void Initialize()
+    {
+        _isInitialized = true;
+
+        InitializeInstance();
+    }
+
+    public virtual void Enable() 
+    {
+        if (!_isInitialized) Initialize();
+
+        gameObject.SetActive(true);
+    }
+
+    public virtual void Disable() 
+    {
+        gameObject.SetActive(false);
     }
 }
