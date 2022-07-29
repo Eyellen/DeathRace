@@ -2,28 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RaceModeManager : MonoBehaviour
+public class RaceModeManager : GameModeBase
 {
-    public static RaceModeManager Instance { get; private set; }
-
     [field: SerializeField] 
     public CheckPoint[] CheckPoints { get; private set; }
 
     private int _lapsCompleted = 0;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
+
         //PlayerInput.IsButtonsBlocked = true;
-        InitializeInstance();
         InitializeCheckPoints();
     }
 
     private void OnEnable()
     {
-        //foreach (var checkPoint in CheckPoints)
-        //{
-        //    checkPoint.gameObject.SetActive(true);
-        //}
         CheckPoints[0].transform.parent.gameObject.SetActive(true);
     }
 
@@ -35,14 +30,6 @@ public class RaceModeManager : MonoBehaviour
     public void SetActive(bool isActive)
     {
         gameObject.SetActive(isActive);
-    }
-
-    private void InitializeInstance()
-    {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
     }
 
     private void InitializeCheckPoints()
