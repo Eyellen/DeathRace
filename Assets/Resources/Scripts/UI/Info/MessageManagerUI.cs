@@ -28,13 +28,13 @@ public class MessageManagerUI : MonoBehaviour
         }
     }
 
-    private void ShowBottonMessage(string msg)
+    public void ShowBottonMessage(string msg)
     {
         _bottonMessageBar.text = msg;
         _bottonMessageBar.gameObject.SetActive(true);
     }
 
-    private void HideBottonMessage()
+    public void HideBottonMessage()
     {
         _bottonMessageBar.gameObject.SetActive(false);
     }
