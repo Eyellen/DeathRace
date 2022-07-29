@@ -12,13 +12,13 @@ public class SpawnManager : NetworkBehaviour
     public uint SelectedCarIndex { get; set; } = 0;
 
 
-    [SerializeField] public Transform[] SpawnPositions { get; set; }
+    [field: SerializeField] public Transform[] SpawnPositions { get; set; }
     private int _spawnPositionIndex = 0;
 
     private void Awake()
     {
         InitializeInstance();
-        InitializeSpawnPositions();
+        //InitializeSpawnPositions();
     }
 
     private void InitializeInstance()
