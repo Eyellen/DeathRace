@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Preview Pontiac
       objectReference: {fileID: 0}
+    - target: {fileID: 5718376995903775604, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 5718376995903775605, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
       propertyPath: m_RootOrder
       value: 0

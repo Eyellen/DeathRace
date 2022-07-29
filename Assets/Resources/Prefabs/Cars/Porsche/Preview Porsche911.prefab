@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Preview Porsche911
       objectReference: {fileID: 0}
+    - target: {fileID: 1555319263119888152, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 1555319263119888153, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
       propertyPath: m_RootOrder
       value: 0
