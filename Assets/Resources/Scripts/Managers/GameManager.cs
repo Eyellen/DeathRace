@@ -16,6 +16,7 @@ public class GameManager : NetworkBehaviour
     private void Start()
     {
         InitializeInstance();
+        DisableAllGameModeManagers();
         InitializeGameModeManager();
     }
 
@@ -49,7 +50,7 @@ public class GameManager : NetworkBehaviour
             case GameMode.Race:
                 {
                     // RACE MODE
-                    _raceModeManager.SetActive(true);
+                    _raceModeManager.Enable();
                     break;
                 }
             default:
@@ -57,5 +58,10 @@ public class GameManager : NetworkBehaviour
                     break;
                 }
         }
+    }
+
+    private void DisableAllGameModeManagers()
+    {
+        _raceModeManager.gameObject.SetActive(false);
     }
 }
