@@ -9,8 +9,6 @@ public class SpawnManager : NetworkBehaviour
     public static SpawnManager Instance { get; private set; }
 
     [SerializeField] private GameObject[] _carPrefabs;
-    public uint SelectedCarIndex { get; set; } = 0;
-
 
     [field: SerializeField] public Transform[] SpawnPositions { get; set; }
     private int _spawnPositionIndex = 0;
@@ -49,9 +47,9 @@ public class SpawnManager : NetworkBehaviour
         }
     }
 
-    public void Spawn()
+    public void SpawnLocalPlayer()
     {
-        CmdSpawn(SelectedCarIndex, Player.LocalPlayer.gameObject);
+        CmdSpawn((uint)Player.LocalPlayer.SelectedCarIndex, Player.LocalPlayer.gameObject);
     }
 
     [Command(requiresAuthority = false)]
@@ -130,5 +128,32 @@ public class SpawnManager : NetworkBehaviour
     private void CmdDestroyCurrentCar(GameObject currentCar)
     {
         NetworkServer.Destroy(currentCar);
+    }
+
+    [Server]
+    public void RespawnAllPlayers()
+    {
+        RemoveAllPlayersCars();
+        _spawnPositionIndex = 0;
+
+        Player[] players = FindObjectsOfType<Player>();
+
+        foreach (var player in players)
+        {
+            if (player.SelectedCarIndex == -1) continue;
+
+            CmdSpawn((uint)player.SelectedCarIndex, player.gameObject);
+        }
+    }
+
+    [Server]
+    private void RemoveAllPlayersCars()
+    {
+        GameObject[] cars = GameObject.FindGameObjectsWithTag("Car");
+
+        foreach (var car in cars)
+        {
+            NetworkServer.Destroy(car);
+        }
     }
 }
