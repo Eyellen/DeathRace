@@ -29,12 +29,13 @@ public class CarSelectUI : MonoBehaviour
             SpawnManager.Instance.DestroyCurrentCar();
         }
 
-        SpawnManager.Instance.Spawn();
+        SpawnManager.Instance.SpawnLocalPlayer();
         SetActive(false);
     }
 
     public void Spectate()
     {
+        Player.LocalPlayer.CmdSetSelectedCarIndex(-1);
         Player.LocalPlayer.Car?.GetComponent<CarDamageable>().DestroySelf();
     }
 }
