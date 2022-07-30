@@ -17,7 +17,7 @@ public class RaceModeManager : GameModeBase
 
         InitializeCheckPoints();
 
-        PlayerInput.IsButtonsBlocked = true;
+        //PlayerInput.IsButtonsBlocked = true;
         MessageManagerUI.Instance.ShowBottonMessage("Waiting for other players to start." + (isServer ? "\nPress T to start now." : string.Empty));
     }
 
@@ -65,6 +65,7 @@ public class RaceModeManager : GameModeBase
     {
         base.StartGame();
 
+        SpawnManager.Instance.RespawnAllPlayers();
         InitializePlayersCompletedLapsDictionary();
         PlayerInput.IsButtonsBlocked = false;
         MessageManagerUI.Instance.HideBottonMessage();
