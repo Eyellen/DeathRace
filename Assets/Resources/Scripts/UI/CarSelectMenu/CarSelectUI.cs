@@ -21,7 +21,7 @@ public class CarSelectUI : MonoBehaviour
         gameObject.SetActive(isActive);
     }
 
-    public void Confirm()
+    public void Spawn()
     {
         //if (SpawnManager.Instance.SelectedCar == null) return;
         if (Player.LocalPlayer.Car != null)
@@ -31,5 +31,10 @@ public class CarSelectUI : MonoBehaviour
 
         SpawnManager.Instance.Spawn();
         SetActive(false);
+    }
+
+    public void Spectate()
+    {
+        Player.LocalPlayer.Car?.GetComponent<CarDamageable>().DestroySelf();
     }
 }
