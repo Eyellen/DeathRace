@@ -87,4 +87,9 @@ public class CarDamageable : NetworkBehaviour, IDamageable<int>
         if (!destroyedCar.TryGetComponent(out CarBackPlateDamageable backPlateDamageable)) return;
         backPlateDamageable.Initialize(gameObject.GetComponent<CarBackPlateDamageable>());
     }
+
+    public void DestroySelf()
+    {
+        Damage(_health, _carCollider);
+    }
 }
