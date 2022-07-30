@@ -7,6 +7,7 @@ public class MessageManagerUI : MonoBehaviour
 {
     public static MessageManagerUI Instance { get; private set; }
 
+    [SerializeField] private TextMeshProUGUI _topMessageBar;
     [SerializeField] private TextMeshProUGUI _bottonMessageBar;
 
     private void Start()
@@ -28,6 +29,17 @@ public class MessageManagerUI : MonoBehaviour
         }
     }
 
+    public void ShowTopMessage(string msg)
+    {
+        _topMessageBar.text = msg;
+        _topMessageBar.gameObject.SetActive(true);
+    }
+
+    public void HideTopMessage()
+    {
+        _topMessageBar.gameObject.SetActive(false);
+    }
+
     public void ShowBottonMessage(string msg)
     {
         _bottonMessageBar.text = msg;
@@ -36,6 +48,12 @@ public class MessageManagerUI : MonoBehaviour
 
     public void HideBottonMessage()
     {
+        _bottonMessageBar.gameObject.SetActive(false);
+    }
+
+    public void HideAllMessages()
+    {
+        _topMessageBar.gameObject.SetActive(false);
         _bottonMessageBar.gameObject.SetActive(false);
     }
 }
