@@ -12,6 +12,11 @@ public class Player : NetworkBehaviour
 
     public CameraManager CameraManager { get; private set; }
 
+    // Index of selected car, value -1 means that player is spectating
+    [field: SyncVar]
+    public int SelectedCarIndex { get; private set; } = 0;
+
+    // Reference to the car if it's been spawned
     public GameObject Car { get; set; }
 
     [field: SerializeField]
@@ -39,5 +44,11 @@ public class Player : NetworkBehaviour
     private void CmdSetUsername(string username)
     {
         Username = username;
+    }
+
+    [Command]
+    public void CmdSetSelectedCarIndex(int carIndex)
+    {
+        SelectedCarIndex = carIndex;
     }
 }
