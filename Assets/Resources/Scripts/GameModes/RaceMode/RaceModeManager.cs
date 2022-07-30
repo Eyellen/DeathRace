@@ -17,7 +17,6 @@ public class RaceModeManager : GameModeBase
 
         InitializeCheckPoints();
 
-        //PlayerInput.IsButtonsBlocked = true;
         MessageManagerUI.Instance.ShowBottonMessage("Waiting for other players to start." + (isServer ? "\nPress T to start now." : string.Empty));
     }
 
@@ -51,7 +50,7 @@ public class RaceModeManager : GameModeBase
     {
         base.Enable();
 
-        CheckPoints[0].transform.parent.gameObject.SetActive(true);
+        //CheckPoints[0].transform.parent.gameObject.SetActive(true);
     }
 
     public override void Disable()
@@ -65,9 +64,9 @@ public class RaceModeManager : GameModeBase
     {
         base.StartGame();
 
+        CheckPoints[0].transform.parent.gameObject.SetActive(true);
         SpawnManager.Instance.RespawnAllPlayers();
         InitializePlayersCompletedLapsDictionary();
-        PlayerInput.IsButtonsBlocked = false;
         MessageManagerUI.Instance.HideBottonMessage();
     }
 
