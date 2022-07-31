@@ -17,6 +17,7 @@ public class Player : NetworkBehaviour
     public int SelectedCarIndex { get; private set; } = 0;
 
     // Reference to the car if it's been spawned
+    [field: SyncVar]
     public GameObject Car { get; set; }
 
     [field: SerializeField]
