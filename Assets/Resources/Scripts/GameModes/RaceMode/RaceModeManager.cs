@@ -145,11 +145,11 @@ public class RaceModeManager : GameModeBase
         _playersCompletedLaps.Clear();
 
         // Looking for Players cars netIds
-        GameObject[] cars = GameObject.FindGameObjectsWithTag("Car");
+        CarBase[] cars = FindObjectsOfType<CarBase>();
         uint[] netIds = new uint[cars.Length];
         for (int i = 0; i < netIds.Length; i++)
         {
-            netIds[i] = cars[i].GetComponent<NetworkIdentity>().netId;
+            netIds[i] = cars[i].netId;
         }
 
 #if UNITY_EDITOR
