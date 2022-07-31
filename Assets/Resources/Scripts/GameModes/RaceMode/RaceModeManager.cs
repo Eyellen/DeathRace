@@ -66,8 +66,12 @@ public class RaceModeManager : GameModeBase
         base.StartGame();
 
         SpawnManager.Instance.RespawnAllPlayers();
+
         // Need some latency because old cars will be destroyed only on next frame
-        InitializePlayersCompletedLapsDictionary();
+        //InitializePlayersCompletedLapsDictionary();
+
+        // Skipping 1 frame to wait till old cars will be destroyed and invoking InitializePlayersCompletedLapsDictionary()
+        StartCoroutine(Invoke(InitializePlayersCompletedLapsDictionary, 1));
 
         RpcStartGame();
     }
@@ -148,10 +152,26 @@ public class RaceModeManager : GameModeBase
             netIds[i] = cars[i].GetComponent<NetworkIdentity>().netId;
         }
 
+#if UNITY_EDITOR
+        Debug.Log("Initializing players completed laps dictionary");
+#endif
         foreach (var netId in netIds)
         {
             // Initializing every players completed laps count by 0
             _playersCompletedLaps[netId] = 0;
+#if UNITY_EDITOR
+            Debug.Log($"Car NetId: {netId} | Laps: {_playersCompletedLaps[netId]}");
+#endif
         }
+    }
+
+    private IEnumerator Invoke(System.Action method, int afterFrames)
+    {
+        while(afterFrames > 0)
+        {
+            yield return null;
+            afterFrames--;
+        }
+        method();
     }
 }
