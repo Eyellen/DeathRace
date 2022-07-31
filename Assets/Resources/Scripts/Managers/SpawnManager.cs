@@ -105,6 +105,7 @@ public class SpawnManager : NetworkBehaviour
             spawnPositionTransform.position,
             spawnPositionTransform.rotation);
         NetworkServer.Spawn(car, ownerPlayer);
+        ownerPlayer.GetComponent<Player>().Car = car;
 
         _spawnPositionIndex = (_spawnPositionIndex + 1) % SpawnPositions.Length;
 
@@ -115,7 +116,7 @@ public class SpawnManager : NetworkBehaviour
     [TargetRpc]
     private void TargetSetCameraTarget(NetworkConnection target, GameObject car)
     {
-        Player.LocalPlayer.Car = car;
+        //Player.LocalPlayer.Car = car;
         Player.LocalPlayer.CameraManager.SetThirdPersonCamera(car.transform);
     }
 
