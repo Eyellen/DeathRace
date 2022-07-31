@@ -34,6 +34,7 @@ public class RaceModeManager : GameModeBase
         }
     }
 
+    [ServerCallback]
     protected override void ServerUpdate()
     {
         base.ServerUpdate();
@@ -61,6 +62,7 @@ public class RaceModeManager : GameModeBase
         CheckPoints[0].transform.parent.gameObject.SetActive(false);
     }
 
+    [Server]
     protected override void StartGame()
     {
         base.StartGame();
