@@ -89,7 +89,7 @@ public class GameModeBase : NetworkBehaviour
     [Server]
     protected IEnumerator StartGameCoroutine(int seconds)
     {
-        if (IsGameStarting) yield break;
+        if (IsGameOn || IsGameStarting) yield break;
         IsGameStarting = true;
 
         while (seconds > 0)
