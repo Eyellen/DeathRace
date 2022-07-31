@@ -17,33 +17,31 @@ public class RaceModeManager : GameModeBase
 
         InitializeCheckPoints();
 
-        MessageManager.Instance.ShowBottomMessage("Waiting for other players to start." + (isServer ? "\nPress T to start now." : string.Empty));
+        MessageManager.Instance.ShowBottomMessage("Waiting for other players to start." + (isServer ? "\nPress P to start now." : string.Empty));
     }
 
-    private void Update()
+    protected override void Update()
     {
-        if (!isServer) return;
+        base.Update();
 
-        // Starting game by button
-        if(Input.GetKeyDown(KeyCode.T))
-        {
-            //RpcStartGame();
-            StartCoroutine(StartGameCoroutine(3));
-        }
-
-        // Starting game when there is enough players
-        if(GameObject.FindGameObjectsWithTag("Car").Length == ServerData.MaxPlayersCount)
-        {
-            RpcStartGame();
-        }
-
-
+        // Info for debugging
         if (Input.GetKeyDown(KeyCode.Y))
         {
             foreach (var info in _playersCompletedLaps)
             {
                 Debug.Log($"Car by netId {info.Key} have made {info.Value} laps");
             }
+        }
+    }
+
+    protected override void ServerUpdate()
+    {
+        base.ServerUpdate();
+
+        // Starting game when there is enough players
+        if (!IsGameStarting && GameObject.FindGameObjectsWithTag("Car").Length == ServerData.MaxPlayersCount)
+        {
+            StartCoroutine(StartGameCoroutine(3));
         }
     }
 
@@ -65,16 +63,17 @@ public class RaceModeManager : GameModeBase
     {
         base.StartGame();
 
-        CheckPoints[0].transform.parent.gameObject.SetActive(true);
         SpawnManager.Instance.RespawnAllPlayers();
         InitializePlayersCompletedLapsDictionary();
-        MessageManager.Instance.HideBottomMessage();
+
+        RpcStartGame();
     }
 
     [ClientRpc]
     private void RpcStartGame()
     {
-        StartGame();
+        CheckPoints[0].transform.parent.gameObject.SetActive(true);
+        MessageManager.Instance.HideBottomMessage();
     }
 
     private void InitializeCheckPoints()
@@ -149,19 +148,5 @@ public class RaceModeManager : GameModeBase
             // Initializing every players completed laps count by 0
             _playersCompletedLaps[netId] = 0;
         }
-    }
-
-    [Server]
-    private IEnumerator StartGameCoroutine(int seconds)
-    {
-        MessageManager.Instance.RpcShowBottomMessage($"The game is starting in {seconds} seconds");
-        while (seconds >= 0)
-        {
-            yield return new WaitForSeconds(1);
-            MessageManager.Instance.RpcShowBottomMessage($"The game is starting in {seconds} seconds");
-            seconds--;
-        }
-        RpcStartGame();
-        MessageManager.Instance.RpcHideBottomMessage();
     }
 }
