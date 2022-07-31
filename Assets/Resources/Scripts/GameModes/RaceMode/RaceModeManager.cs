@@ -39,7 +39,9 @@ public class RaceModeManager : GameModeBase
         base.ServerUpdate();
 
         // Starting game when there is enough players
-        if (!IsGameStarting && GameObject.FindGameObjectsWithTag("Car").Length == ServerData.MaxPlayersCount)
+        if (!IsGameOn && !IsGameStarting && // This condition is not required here but written for optimization
+            // Since if the conditions above will be false then the condition below will not be checked
+            GameObject.FindGameObjectsWithTag("Car").Length == ServerData.MaxPlayersCount)
         {
             StartCoroutine(StartGameCoroutine(3));
         }
@@ -64,6 +66,7 @@ public class RaceModeManager : GameModeBase
         base.StartGame();
 
         SpawnManager.Instance.RespawnAllPlayers();
+        // Need some latency because old cars will be destroyed only on next frame
         InitializePlayersCompletedLapsDictionary();
 
         RpcStartGame();
@@ -135,6 +138,8 @@ public class RaceModeManager : GameModeBase
     [ServerCallback]
     private void InitializePlayersCompletedLapsDictionary()
     {
+        _playersCompletedLaps.Clear();
+
         // Looking for Players cars netIds
         GameObject[] cars = GameObject.FindGameObjectsWithTag("Car");
         uint[] netIds = new uint[cars.Length];
