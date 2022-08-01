@@ -10,9 +10,6 @@ public class GameModeBase : NetworkBehaviour
     private bool _isInitialized = false;
 
     [field: SyncVar]
-    public bool IsWaitingForPlayers { get; private set; }
-
-    [field: SyncVar]
     public bool IsGameStarting { get; private set; }
 
     [field: SyncVar]
@@ -64,6 +61,13 @@ public class GameModeBase : NetworkBehaviour
         {
             StartCoroutine(StartGameCoroutine(3));
         }
+
+        // Start game if Host is spectating and there is at least 2 not spectating players
+        if (Player.LocalPlayer.SelectedCarIndex == -1 &&
+            GameObject.FindGameObjectsWithTag("Car").Length >= 3)
+        {
+            StartCoroutine(StartGameCoroutine(3));
+        }
     }
 
     [Server]
@@ -72,13 +76,15 @@ public class GameModeBase : NetworkBehaviour
         if (IsGameOn) return;
         IsGameStarting = false;
         IsGameOn = true;
+        MessageManager.Instance.RpcHideAllMessages();
     }
 
     [Server]
-    protected virtual void StopGame() { }
-
-    [Server]
-    protected virtual void RestartGame() { }
+    protected virtual void StopGame() 
+    {
+        if (!IsGameOn) return;
+        IsGameOn = false;
+    }
 
     /// <summary>
     /// Server method.
