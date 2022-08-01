@@ -104,10 +104,6 @@ public class SpawnManager : NetworkBehaviour
         GameObject car = Instantiate(_carPrefabs[carIndex],
             spawnPositionTransform.position,
             spawnPositionTransform.rotation);
-
-        // To prevent abnormal behaviour of car on respawn
-        car.GetComponent<Rigidbody>().isKinematic = true;
-
         NetworkServer.Spawn(car, ownerPlayer);
         ownerPlayer.GetComponent<Player>().Car = car;
 
@@ -121,10 +117,6 @@ public class SpawnManager : NetworkBehaviour
     private void TargetSetCameraTarget(NetworkConnection target, GameObject car)
     {
         //Player.LocalPlayer.Car = car;
-
-        // To prevent abnormal behaviour of car on respawn
-        car.GetComponent<Rigidbody>().isKinematic = false;
-
         Player.LocalPlayer.CameraManager.SetThirdPersonCamera(car.transform);
     }
 
