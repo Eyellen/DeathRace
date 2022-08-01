@@ -64,4 +64,14 @@ public class GameManager : NetworkBehaviour
     {
         _raceModeManager.gameObject.SetActive(false);
     }
+
+    public void ClearScene()
+    {
+        GameObject[] destroyedCars = GameObject.FindGameObjectsWithTag("DestroyedCar");
+
+        foreach (var car in destroyedCars)
+        {
+            Destroy(car);
+        }
+    }
 }
