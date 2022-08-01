@@ -5,7 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Car
-  - SpawnPosition
+  - DestroyedCar
   layers:
   - Default
   - TransparentFX
