@@ -11,13 +11,16 @@ public class RaceModeManager : GameModeBase
     // Completed laps of each player by their car's netId
     private readonly SyncDictionary<uint, int> _playersCompletedLaps = new SyncDictionary<uint, int>();
 
+    [field: SerializeField]
+    public int LapsToWin { get; set; } = 1;
+
     public override void Initialize()
     {
         base.Initialize();
 
         InitializeCheckPoints();
 
-        MessageManager.Instance.ShowBottomMessage("Waiting for other players to start." + (isServer ? "\nPress P to start now." : string.Empty));
+        WaitingForPlayersMessage();
     }
 
     protected override void Update()
@@ -73,7 +76,7 @@ public class RaceModeManager : GameModeBase
         //InitializePlayersCompletedLapsDictionary();
 
         // Skipping 1 frame to wait till old cars will be destroyed and invoking InitializePlayersCompletedLapsDictionary()
-        StartCoroutine(Invoke(InitializePlayersCompletedLapsDictionary, 1));
+        StartCoroutine(Invoke(InitializePlayersCompletedLapsDictionary, afterFrames: 1));
 
         RpcStartGame();
     }
@@ -82,7 +85,24 @@ public class RaceModeManager : GameModeBase
     private void RpcStartGame()
     {
         CheckPoints[0].transform.parent.gameObject.SetActive(true);
-        MessageManager.Instance.HideBottomMessage();
+    }
+
+    [Server]
+    protected override void StopGame()
+    {
+        base.StopGame();
+
+        AnnounceTheWinner();
+
+        RpcStopGame();
+    }
+
+    [ClientRpc]
+    private void RpcStopGame()
+    {
+        CheckPoints[0].transform.parent.gameObject.SetActive(false);
+        ResetAllCheckPoints();
+        WaitingForPlayersMessage();
     }
 
     private void InitializeCheckPoints()
@@ -110,7 +130,6 @@ public class RaceModeManager : GameModeBase
             if(CheckPoints[CheckPoints.Length - 1].IsPassed)
             {
                 CmdSetLapsCompleted(Player.LocalPlayer.Car.GetComponent<NetworkIdentity>().netId);
-                Debug.Log($"player by netId {Player.LocalPlayer.Car.GetComponent<NetworkIdentity>().netId} completed lap");
                 ResetAllCheckPoints();
             }
 
@@ -130,7 +149,9 @@ public class RaceModeManager : GameModeBase
     private void CmdSetLapsCompleted(uint netId)
     {
         _playersCompletedLaps[netId]++;
-        Debug.Log($"player by netId {netId} made {_playersCompletedLaps[netId]} lap");
+
+        if (_playersCompletedLaps[netId] >= LapsToWin)
+            StopGame();
     }
 
     private void ResetAllCheckPoints()
@@ -175,5 +196,39 @@ public class RaceModeManager : GameModeBase
             afterFrames--;
         }
         method();
+    }
+
+    private void AnnounceTheWinner()
+    {
+        uint? winnersNetId = null;
+        int maxScore = 0;
+        foreach (var playerScore in _playersCompletedLaps)
+        {
+            if (playerScore.Value <= maxScore) continue;
+
+            maxScore = playerScore.Value;
+            winnersNetId = playerScore.Key;
+        }
+
+        if (winnersNetId == null)
+        {
+            MessageManager.Instance.RpcShowTopMessage("Round Draw");
+        }
+        else
+        {
+            Player[] players = FindObjectsOfType<Player>();
+            foreach (var player in players)
+            {
+                if (player.Car?.GetComponent<CarBase>().netId != winnersNetId) continue;
+
+                MessageManager.Instance.RpcShowTopMessage($"{player.Username} Won The Game");
+                break;
+            }
+        }
+    }
+
+    private void WaitingForPlayersMessage()
+    {
+        MessageManager.Instance.ShowBottomMessage("Waiting for other players to start." + (isServer ? "\nPress P to start now." : string.Empty));
     }
 }
