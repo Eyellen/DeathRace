@@ -17,7 +17,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1991797751086903928, guid: c92edc376df199a42b8533a71797fde1, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: DestroyedCar
       objectReference: {fileID: 0}
     - target: {fileID: 1991797751086903929, guid: c92edc376df199a42b8533a71797fde1, type: 3}
       propertyPath: m_RootOrder
