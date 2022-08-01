@@ -77,6 +77,7 @@ public class GameModeBase : NetworkBehaviour
         IsGameStarting = false;
         IsGameOn = true;
         MessageManager.Instance.RpcHideAllMessages();
+        GameManager.Instance.ClearScene();
     }
 
     [Server]
