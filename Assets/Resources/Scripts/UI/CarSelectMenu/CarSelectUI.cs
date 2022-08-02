@@ -1,9 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CarSelectUI : MonoBehaviour
 {
+    [SerializeField] private Button _spawnButton;
+
+    private void Start()
+    {
+        GameModeBase.OnInitialized += InitializeEvents;
+    }
+
     private void OnEnable()
     {
         CursorManager.ShowCursor();
@@ -14,6 +22,11 @@ public class CarSelectUI : MonoBehaviour
     {
         CursorManager.HideCursor();
         PlayerInput.IsBlocked = false;
+    }
+
+    private void OnDestroy()
+    {
+        GameModeBase.OnInitialized -= InitializeEvents;
     }
 
     public void SetActive(bool isActive)
@@ -37,5 +50,17 @@ public class CarSelectUI : MonoBehaviour
     {
         Player.LocalPlayer.CmdSetSelectedCarIndex(-1);
         Player.LocalPlayer.Car?.GetComponent<CarDamageable>().DestroySelf();
+    }
+
+    public void CheckIfSpawnIsAllowed()
+    {
+        _spawnButton.interactable = !GameModeBase.Instance.IsGameOn;
+    }
+
+    private void InitializeEvents()
+    {
+        CheckIfSpawnIsAllowed();
+        GameModeBase.Instance.OnGameStarted += CheckIfSpawnIsAllowed;
+        GameModeBase.Instance.OnGameEnded += CheckIfSpawnIsAllowed;
     }
 }
