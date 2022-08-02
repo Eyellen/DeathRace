@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,10 @@ using Mirror;
 
 public class GameModeBase : NetworkBehaviour
 {
+#if UNITY_EDITOR
+    [SerializeField] protected bool _isDebugging = false;
+#endif
+
     public static GameModeBase Instance { get; private set; }
 
     private bool _isInitialized = false;
@@ -15,6 +20,12 @@ public class GameModeBase : NetworkBehaviour
     [field: SyncVar]
     public bool IsGameOn { get; private set; }
 
+    public static Action OnInitialized;
+
+    public Action OnGameStarted;
+
+    public Action OnGameEnded;
+
     private void InitializeInstance()
     {
         if (Instance == null)
@@ -22,24 +33,37 @@ public class GameModeBase : NetworkBehaviour
         else
         {
 #if UNITY_EDITOR
-            Debug.LogWarning($"Trying to create a duplicate of {nameof(GameModeBase)} when it's not allowed. " +
-                $"The duplicate will be destroyed");
+            if (_isDebugging)
+                Debug.LogWarning($"Trying to create a duplicate of {nameof(GameModeBase)} when it's not allowed. " +
+                    $"The duplicate will be destroyed");
 #endif
             Destroy(gameObject);
         }
     }
 
-    public virtual void Initialize()
+    public virtual bool Initialize()
     {
+        if (_isInitialized) return false;
         _isInitialized = true;
 
         InitializeInstance();
+
+#if UNITY_EDITOR
+        if (_isDebugging)
+        {
+            OnInitialized += () => Debug.Log("OnInitialized called");
+            OnGameStarted += () => Debug.Log("OnGameStarted called");
+            OnGameEnded += () => Debug.Log("OnGameEnded called");
+        }
+#endif
+        OnInitialized?.Invoke();
+
+        return true;
     }
 
     public virtual void Enable() 
     {
-        if (!_isInitialized) Initialize();
-
+        Initialize();
         gameObject.SetActive(true);
     }
 
@@ -68,23 +92,52 @@ public class GameModeBase : NetworkBehaviour
         {
             StartCoroutine(StartGameCoroutine(3));
         }
+
+        // If there is 1 or less players then game ends
+        if(GameObject.FindGameObjectsWithTag("Car").Length <= 1)
+        {
+            //StopGame();
+        }
     }
 
     [Server]
-    protected virtual void StartGame() 
+    protected virtual bool StartGame() 
     {
-        if (IsGameOn) return;
+        if (IsGameOn) return false;
         IsGameStarting = false;
         IsGameOn = true;
+        RpcStartGame();
         MessageManager.Instance.RpcHideAllMessages();
         GameManager.Instance.ClearScene();
+        Debug.Log("StartGame called");
+        return true;
+    }
+
+    [ClientRpc]
+    protected virtual void RpcStartGame()
+    {
+        IsGameStarting = false;
+        IsGameOn = true;
+        Debug.Log("RpcStartGame called");
+        OnGameStarted?.Invoke();
     }
 
     [Server]
-    protected virtual void StopGame() 
+    protected virtual bool StopGame() 
     {
-        if (!IsGameOn) return;
+        if (!IsGameOn) return false;
         IsGameOn = false;
+        RpcStopGame();
+
+        return true;
+    }
+
+    [ClientRpc]
+    protected virtual void RpcStopGame()
+    {
+        IsGameOn = false;
+
+        OnGameEnded?.Invoke();
     }
 
     /// <summary>
