@@ -26,7 +26,7 @@ public class CarSelectUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameModeBase.OnInitialized -= InitializeEvents;
+        //GameModeBase.OnInitialized -= InitializeEvents;
     }
 
     public void SetActive(bool isActive)

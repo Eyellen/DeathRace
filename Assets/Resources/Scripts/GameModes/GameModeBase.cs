@@ -76,7 +76,14 @@ public class GameModeBase : NetworkBehaviour
     {
         ServerUpdate();
     }
-    
+
+    private void OnDestroy()
+    {
+        // Clears all subscriptions from OnInitialized static event
+        // because it can cause errors
+        OnInitialized = null;
+    }
+
     [ServerCallback]
     protected virtual void ServerUpdate()
     {
