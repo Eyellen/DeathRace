@@ -9,7 +9,8 @@ public class CarSelectUI : MonoBehaviour
 
     private void Start()
     {
-        GameModeBase.OnInitialized += InitializeEvents;
+        if (GameModeBase.Instance != null)
+            GameModeBase.OnInitialized += InitializeEvents;
     }
 
     private void OnEnable()
@@ -54,7 +55,8 @@ public class CarSelectUI : MonoBehaviour
 
     public void CheckIfSpawnIsAllowed()
     {
-        _spawnButton.interactable = !GameModeBase.Instance.IsGameOn;
+        if (GameModeBase.Instance != null)
+            _spawnButton.interactable = !GameModeBase.Instance.IsGameOn;
     }
 
     private void InitializeEvents()
