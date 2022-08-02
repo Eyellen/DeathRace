@@ -14,13 +14,15 @@ public class RaceModeManager : GameModeBase
     [field: SerializeField]
     public int LapsToWin { get; set; } = 1;
 
-    public override void Initialize()
+    public override bool Initialize()
     {
-        base.Initialize();
+        if (!base.Initialize()) return false;
 
         InitializeCheckPoints();
 
-        WaitingForPlayersMessage();
+        MessageWaitingForPlayers();
+
+        return true;
     }
 
     protected override void Update()
@@ -66,9 +68,9 @@ public class RaceModeManager : GameModeBase
     }
 
     [Server]
-    protected override void StartGame()
+    protected override bool StartGame()
     {
-        base.StartGame();
+        if (!base.StartGame()) return false;
 
         SpawnManager.Instance.RespawnAllPlayers();
 
@@ -78,31 +80,41 @@ public class RaceModeManager : GameModeBase
         // Skipping 1 frame to wait till old cars will be destroyed and invoking InitializePlayersCompletedLapsDictionary()
         StartCoroutine(Invoke(InitializePlayersCompletedLapsDictionary, afterFrames: 1));
 
-        RpcStartGame();
+        // No need to call here because it's being called in base method
+        //RpcStartGame();
+
+        return true;
     }
 
     [ClientRpc]
-    private void RpcStartGame()
+    protected override void RpcStartGame()
     {
+        base.RpcStartGame();
+
         CheckPoints[0].transform.parent.gameObject.SetActive(true);
     }
 
     [Server]
-    protected override void StopGame()
+    protected override bool StopGame()
     {
-        base.StopGame();
+        if (!base.StopGame()) return false;
 
         AnnounceTheWinner();
 
-        RpcStopGame();
+        // No need to call here because it's being called in base method
+        //RpcStopGame();
+
+        return true;
     }
 
     [ClientRpc]
-    private void RpcStopGame()
+    protected override void RpcStopGame()
     {
+        base.RpcStopGame();
+
         CheckPoints[0].transform.parent.gameObject.SetActive(false);
         ResetAllCheckPoints();
-        WaitingForPlayersMessage();
+        MessageWaitingForPlayers();
     }
 
     private void InitializeCheckPoints()
@@ -200,6 +212,19 @@ public class RaceModeManager : GameModeBase
 
     private void AnnounceTheWinner()
     {
+        if (GameObject.FindGameObjectsWithTag("Car").Length == 0)
+        {
+            MessageManager.Instance.RpcShowTopMessage("Round Draw");
+            return;
+        }
+
+        if (GameObject.FindGameObjectsWithTag("Car").Length == 1)
+        {
+            // TODO:
+            // Find car's player and announce him as a winner
+            // The best way is to create CarInfo calss and assign player there
+        }
+
         uint? winnersNetId = null;
         int maxScore = 0;
         foreach (var playerScore in _playersCompletedLaps)
@@ -227,7 +252,7 @@ public class RaceModeManager : GameModeBase
         }
     }
 
-    private void WaitingForPlayersMessage()
+    private void MessageWaitingForPlayers()
     {
         MessageManager.Instance.ShowBottomMessage("Waiting for other players to start." + (isServer ? "\nPress P to start now." : string.Empty));
     }
