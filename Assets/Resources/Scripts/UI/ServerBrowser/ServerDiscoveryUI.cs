@@ -57,18 +57,7 @@ public class ServerDiscoveryUI : MonoBehaviour
             serverInfoBar = Instantiate(_serverInfoBarTemplatePrefab, _serversListArea.transform).GetComponent<ServerInfoBarUI>();
         }
         serverInfoBar.ServerDiscoveryUI = this;
-
-        // Server Info
-        serverInfoBar.ServerId = info.serverId;
-        serverInfoBar.Uri = info.uri;
-
-        serverInfoBar.GameModeIndex = info.GameModeIndex;
-        serverInfoBar.ServerName = info.ServerName;
-        serverInfoBar.PlayersCount = $"{info.CurrentPlayersCount}/{info.MaxPlayersCount}";
-        serverInfoBar.MaxPing = info.MaxPing.ToString();
-        //serverInfoBar.Region = info.Region;
-        //
-
+        serverInfoBar.DiscoveryResponse = info;
         _discoveredServers[info.serverId] = serverInfoBar;
     }
 
