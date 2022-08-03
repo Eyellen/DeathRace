@@ -65,13 +65,19 @@ public class GameManager : NetworkBehaviour
         _raceModeManager.gameObject.SetActive(false);
     }
 
+    [Server]
     public void ClearScene()
     {
         GameObject[] destroyedCars = GameObject.FindGameObjectsWithTag("DestroyedCar");
+        GameObject[] backPlates = GameObject.FindGameObjectsWithTag("BackPlate");
 
         foreach (var car in destroyedCars)
         {
-            Destroy(car);
+            NetworkServer.Destroy(car);
+        }
+        foreach (var backPlate in backPlates)
+        {
+            NetworkServer.Destroy(backPlate);
         }
     }
 }
