@@ -34,6 +34,26 @@ public class ServerInfoBarUI : MonoBehaviour
     public string MaxPing { get { return _maxPingText.text; } set { _maxPingText.text = value; } }
     public string Region { get { return _RegionText.text; } set { _RegionText.text = value; } }
 
+    private DiscoveryResponse _discoveryResponse;
+
+    public DiscoveryResponse DiscoveryResponse
+    {
+        get => _discoveryResponse;
+        set
+        {
+            _discoveryResponse = value;
+
+            ServerId = _discoveryResponse.serverId;
+            Uri = _discoveryResponse.uri;
+
+            ServerName = _discoveryResponse.ServerName;
+            GameModeIndex = _discoveryResponse.GameModeIndex;
+            PlayersCount = $"{_discoveryResponse.CurrentPlayersCount}/{_discoveryResponse.MaxPlayersCount}";
+            MaxPing = _discoveryResponse.MaxPing.ToString();
+            //Region = _discoveryResponse.Region;
+        }
+    }
+
     public void SetAddress()
     {
         ServerDiscoveryUI.SelectedServerUri = Uri;
