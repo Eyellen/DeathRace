@@ -173,8 +173,7 @@ public class SpawnManager : NetworkBehaviour
         }
     }
 
-    [Command(requiresAuthority = false)]
-    public void CmdRemoveCarFromSpawnedCars(uint netId)
+    public void RemoveCarFromSpawnedCars(uint netId)
     {
         _spawnedCarsStorage.Remove(netId);
     }
