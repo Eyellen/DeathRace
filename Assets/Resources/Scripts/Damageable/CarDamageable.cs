@@ -27,6 +27,12 @@ public class CarDamageable : NetworkBehaviour, IDamageable<int>
         _carCollider = transform.Find("Body/Frame").GetComponent<Collider>();
     }
 
+    [ServerCallback]
+    private void OnDestroy()
+    {
+        SpawnManager.Instance?.RemoveCarFromSpawnedCars(netId);
+    }
+
     public void Damage(int damage, Collider collider)
     {
         if (collider != _carCollider) return;
@@ -86,5 +92,10 @@ public class CarDamageable : NetworkBehaviour, IDamageable<int>
 
         if (!destroyedCar.TryGetComponent(out CarBackPlateDamageable backPlateDamageable)) return;
         backPlateDamageable.Initialize(gameObject.GetComponent<CarBackPlateDamageable>());
+    }
+
+    public void DestroySelf()
+    {
+        Damage(_health, _carCollider);
     }
 }

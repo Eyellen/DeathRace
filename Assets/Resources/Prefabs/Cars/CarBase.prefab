@@ -775,6 +775,7 @@ GameObject:
   - component: {fileID: 1649219433698045663}
   - component: {fileID: 7075551651831521368}
   - component: {fileID: 8083998131863091072}
+  - component: {fileID: 4502079051064003974}
   - component: {fileID: 3793097228303951607}
   - component: {fileID: 7658570909016649496}
   - component: {fileID: 3988252081224543989}
@@ -874,6 +875,20 @@ MonoBehaviour:
   _health: 100
   _destroyedCarPrefab: {fileID: 0}
   _explosionPrefab: {fileID: 390734475171696009, guid: df4176b9d3b2ed344941e0eb2d253829, type: 3}
+--- !u!114 &4502079051064003974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9099919895988192258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddc885109cc0cf146b1c7546513b2646, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
 --- !u!114 &3793097228303951607
 MonoBehaviour:
   m_ObjectHideFlags: 0

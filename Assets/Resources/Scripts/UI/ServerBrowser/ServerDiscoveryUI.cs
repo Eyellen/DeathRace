@@ -14,6 +14,7 @@ public class ServerDiscoveryUI : MonoBehaviour
     [SerializeField] private GameObject _serverInfoBarTemplatePrefab;
 
     private Dictionary<long, ServerInfoBarUI> _discoveredServers = new Dictionary<long, ServerInfoBarUI>();
+    public long SelectedServerId { get; set; }
     public Uri SelectedServerUri { get; set; }
 
 #if UNITY_EDITOR
@@ -61,6 +62,7 @@ public class ServerDiscoveryUI : MonoBehaviour
         serverInfoBar.ServerId = info.serverId;
         serverInfoBar.Uri = info.uri;
 
+        serverInfoBar.GameModeIndex = info.GameModeIndex;
         serverInfoBar.ServerName = info.ServerName;
         serverInfoBar.PlayersCount = $"{info.CurrentPlayersCount}/{info.MaxPlayersCount}";
         serverInfoBar.MaxPing = info.MaxPing.ToString();
@@ -84,6 +86,14 @@ public class ServerDiscoveryUI : MonoBehaviour
         if (SelectedServerUri == null) return;
 
         _networkDiscovery.StopDiscovery();
+        InitializeServerDataForConnection();
         NetworkManager.singleton.StartClient(SelectedServerUri);
+    }
+
+    private void InitializeServerDataForConnection()
+    {
+        ServerData.GameModeIndex = _discoveredServers[SelectedServerId].GameModeIndex;
+        ServerData.ServerName = _discoveredServers[SelectedServerId].ServerName;
+        ServerData.MaxPing = int.Parse(_discoveredServers[SelectedServerId].MaxPing);
     }
 }
