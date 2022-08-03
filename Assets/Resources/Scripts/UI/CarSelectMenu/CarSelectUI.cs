@@ -40,7 +40,7 @@ public class CarSelectUI : MonoBehaviour
         //if (SpawnManager.Instance.SelectedCar == null) return;
         if (Player.LocalPlayer.Car != null)
         {
-            SpawnManager.Instance.DestroyCurrentCar();
+            SpawnManager.Instance.RemoveCurrentCar();
         }
 
         SpawnManager.Instance.SpawnLocalPlayer();
