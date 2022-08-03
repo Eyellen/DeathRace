@@ -27,6 +27,11 @@ public class CarDamageable : NetworkBehaviour, IDamageable<int>
         _carCollider = transform.Find("Body/Frame").GetComponent<Collider>();
     }
 
+    private void OnDestroy()
+    {
+        SpawnManager.Instance.CmdRemoveCarFromSpawnedCars(netId);
+    }
+
     public void Damage(int damage, Collider collider)
     {
         if (collider != _carCollider) return;
