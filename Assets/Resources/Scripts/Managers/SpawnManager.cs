@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 using Mirror;
 
@@ -9,6 +10,10 @@ public class SpawnManager : NetworkBehaviour
     public static SpawnManager Instance { get; private set; }
 
     [SerializeField] private GameObject[] _carPrefabs;
+
+    // The key in this dictionary is netId of spawnedCar
+    private readonly SyncDictionary<uint, GameObject> _spawnedCarsStorage = new SyncDictionary<uint, GameObject>();
+    public ReadOnlyDictionary<uint, GameObject> SpawnedCars => new ReadOnlyDictionary<uint, GameObject>(_spawnedCarsStorage);
 
     [field: SerializeField] public Transform[] SpawnPositions { get; set; }
     private int _spawnPositionIndex = 0;
@@ -105,6 +110,8 @@ public class SpawnManager : NetworkBehaviour
             spawnPositionTransform.position,
             spawnPositionTransform.rotation);
         NetworkServer.Spawn(car, ownerPlayer);
+        _spawnedCarsStorage[car.GetComponent<CarInfo>().netId] = car;
+        car.GetComponent<CarInfo>().Player = ownerPlayer.GetComponent<Player>();
         ownerPlayer.GetComponent<Player>().Car = car;
 
         _spawnPositionIndex = (_spawnPositionIndex + 1) % SpawnPositions.Length;
@@ -120,15 +127,23 @@ public class SpawnManager : NetworkBehaviour
         Player.LocalPlayer.CameraManager.SetThirdPersonCamera(car.transform);
     }
 
-    public void DestroyCurrentCar()
+    /// <summary>
+    /// Removes car without explosion effect and without leaving a DestroyedCar
+    /// </summary>
+    public void RemoveCurrentCar()
     {
-        CmdDestroyCurrentCar(Player.LocalPlayer.Car);
+        CmdRemoveCar(Player.LocalPlayer.Car);
     }
 
+    /// <summary>
+    /// Server Command. Removes car without explosion effect and without leaving a DestroyedCar
+    /// </summary>
+    /// <param name="car"></param>
     [Command(requiresAuthority = false)]
-    private void CmdDestroyCurrentCar(GameObject currentCar)
+    private void CmdRemoveCar(GameObject car)
     {
-        NetworkServer.Destroy(currentCar);
+        _spawnedCarsStorage.Remove(car.GetComponent<CarInfo>().netId);
+        NetworkServer.Destroy(car);
     }
 
     [Server]
@@ -156,5 +171,11 @@ public class SpawnManager : NetworkBehaviour
         {
             NetworkServer.Destroy(car);
         }
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdRemoveCarFromSpawnedCars(uint netId)
+    {
+        _spawnedCarsStorage.Remove(netId);
     }
 }
