@@ -34,6 +34,14 @@ public class ServerInfoBarUI : MonoBehaviour
     public string MaxPing { get { return _maxPingText.text; } set { _maxPingText.text = value; } }
     public string Region { get { return _RegionText.text; } set { _RegionText.text = value; } }
 
+    private float _lastResponseTime;
+    /// <summary>
+    /// Time to reconnect in seconds.
+    /// If server not responding anymore it has this time to start responding again.
+    /// Otherwise this ServerBar will be destroyed.
+    /// </summary>
+    private float _timeToReconnect = 7;
+
     private DiscoveryResponse _discoveryResponse;
 
     public DiscoveryResponse DiscoveryResponse
@@ -42,6 +50,8 @@ public class ServerInfoBarUI : MonoBehaviour
         set
         {
             _discoveryResponse = value;
+
+            _lastResponseTime = Time.time;
 
             ServerId = _discoveryResponse.serverId;
             Uri = _discoveryResponse.uri;
@@ -52,6 +62,13 @@ public class ServerInfoBarUI : MonoBehaviour
             MaxPing = _discoveryResponse.MaxPing.ToString();
             //Region = _discoveryResponse.Region;
         }
+    }
+
+    private void Update()
+    {
+        if (Time.time > _lastResponseTime + _timeToReconnect)
+            //gameObject.SetActive(false);
+            Destroy(gameObject);
     }
 
     public void SetAddress()
