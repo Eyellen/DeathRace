@@ -88,22 +88,22 @@ public class GameModeBase : NetworkBehaviour
     protected virtual void ServerUpdate()
     {
         // Starting game by button
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P) && SpawnManager.Instance.SpawnedCars.Count >= 2)
         {
             StartCoroutine(StartGameCoroutine(3));
         }
 
         // Start game if Host is spectating and there is at least 2 not spectating players
         if (Player.LocalPlayer.SelectedCarIndex == -1 &&
-            GameObject.FindGameObjectsWithTag("Car").Length >= 3)
+            SpawnManager.Instance.SpawnedCars.Count >= 2)
         {
             StartCoroutine(StartGameCoroutine(3));
         }
 
         // If there is 1 or less players then game ends
-        if(GameObject.FindGameObjectsWithTag("Car").Length <= 1)
+        if (SpawnManager.Instance.SpawnedCars.Count <= 1)
         {
-            //StopGame();
+            StopGame();
         }
     }
 
@@ -147,6 +147,15 @@ public class GameModeBase : NetworkBehaviour
         OnGameEnded?.Invoke();
     }
 
+    [Server]
+    public void RestartGame()
+    {
+        StopGame();
+
+        if (SpawnManager.Instance.SpawnedCars.Count >= 2)
+            StartCoroutine(StartGameCoroutine(3));
+    }
+
     /// <summary>
     /// Server method.
     /// Starts game in seconds via StartGame() method and displays message to all clients
@@ -169,4 +178,22 @@ public class GameModeBase : NetworkBehaviour
 
         StartGame();
     }
+
+    //protected virtual bool CheckIfCanStartGame()
+    //{
+    //    // Starting game by button
+    //    if (Input.GetKeyDown(KeyCode.P) && SpawnManager.Instance.SpawnedCars.Count >= 2)
+    //    {
+    //        return true;
+    //    }
+
+    //    // Start game if Host is spectating and there is at least 2 not spectating players
+    //    if (Player.LocalPlayer.SelectedCarIndex == -1 &&
+    //        SpawnManager.Instance.SpawnedCars.Count >= 2)
+    //    {
+    //        return true;
+    //    }
+
+    //    return false;
+    //}
 }
