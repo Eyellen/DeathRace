@@ -212,17 +212,19 @@ public class RaceModeManager : GameModeBase
 
     private void AnnounceTheWinner()
     {
-        if (GameObject.FindGameObjectsWithTag("Car").Length == 0)
+        if(SpawnManager.Instance.SpawnedCars.Count == 0)
         {
             MessageManager.Instance.RpcShowTopMessage("Round Draw");
             return;
         }
 
-        if (GameObject.FindGameObjectsWithTag("Car").Length == 1)
+        if(SpawnManager.Instance.SpawnedCars.Count == 1)
         {
-            // TODO:
-            // Find car's player and announce him as a winner
-            // The best way is to create CarInfo calss and assign player there
+            foreach (var car in SpawnManager.Instance.SpawnedCars.Values)
+            {
+                MessageManager.Instance.RpcShowTopMessage($"{car.GetComponent<CarInfo>().Player.Username} Won The Game");
+                return;
+            }
         }
 
         uint? winnersNetId = null;
@@ -241,12 +243,11 @@ public class RaceModeManager : GameModeBase
         }
         else
         {
-            Player[] players = FindObjectsOfType<Player>();
-            foreach (var player in players)
+            foreach (var car in SpawnManager.Instance.SpawnedCars)
             {
-                if (player.Car?.GetComponent<CarBase>().netId != winnersNetId) continue;
+                if (car.Key != winnersNetId) continue;
 
-                MessageManager.Instance.RpcShowTopMessage($"{player.Username} Won The Game");
+                MessageManager.Instance.RpcShowTopMessage($"{car.Value.GetComponent<CarInfo>().Player.Username} Won The Game");
                 break;
             }
         }
