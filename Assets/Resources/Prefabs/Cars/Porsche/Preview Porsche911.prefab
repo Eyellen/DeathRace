@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: _gunScript
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 113794942641660930, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
+      propertyPath: m_AssetId
+      value: 6668226c98315f94da1d58528eed5dd1
+      objectReference: {fileID: 0}
     - target: {fileID: 1555319263119888152, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
       propertyPath: m_Name
       value: Preview Porsche911
@@ -109,4 +113,5 @@ PrefabInstance:
     - {fileID: 2012215370410720410, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
     - {fileID: 715398283336297282, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
     - {fileID: 113794942641660930, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
+    - {fileID: 6171738282231219868, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}

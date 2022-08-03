@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1127470854650059106, guid: c92edc376df199a42b8533a71797fde1, type: 3}
+      propertyPath: m_AssetId
+      value: 3370365ba0c6ddc4887e7304fd78a281
+      objectReference: {fileID: 0}
     - target: {fileID: 1991797751086903928, guid: c92edc376df199a42b8533a71797fde1, type: 3}
       propertyPath: m_Name
       value: Preview Ford
@@ -96,4 +100,5 @@ PrefabInstance:
     - {fileID: 1127470854650059106, guid: c92edc376df199a42b8533a71797fde1, type: 3}
     - {fileID: 2926374383086854241, guid: c92edc376df199a42b8533a71797fde1, type: 3}
     - {fileID: 4451062046741087920, guid: c92edc376df199a42b8533a71797fde1, type: 3}
+    - {fileID: 6599946526094785532, guid: c92edc376df199a42b8533a71797fde1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c92edc376df199a42b8533a71797fde1, type: 3}
