@@ -20,7 +20,8 @@ public class RaceModeManager : GameModeBase
 
         InitializeCheckPoints();
 
-        MessageWaitingForPlayers();
+        if (!IsGameOn && !IsGameStarting)
+            MessageWaitingForPlayers();
 
         return true;
     }
