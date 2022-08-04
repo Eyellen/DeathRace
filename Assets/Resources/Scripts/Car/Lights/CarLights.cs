@@ -6,9 +6,11 @@ using Mirror;
 
 public class CarLights : NetworkBehaviour
 {
+    [SerializeField]
+    [Range(0, 2)]
     [SyncVar]
-    private LightMode _currentLightMode = LightMode.None;
-    private LightMode _previousLightMode;
+    private int _currentLightModeIndex = 0;
+    private int _previousLightModeIndex;
 
     [Header("Near Lights")]
     [SerializeField]
@@ -20,16 +22,25 @@ public class CarLights : NetworkBehaviour
 
     private void Update()
     {
-        if(PlayerInput.IsLightsPressed)
+        if (_currentLightModeIndex != _previousLightModeIndex)
         {
-            _currentLightMode = (LightMode)((int)(_currentLightMode + 1) % Enum.GetValues(typeof(LightMode)).Length);
+            _previousLightModeIndex = _currentLightModeIndex;
+            ToggleLights((LightMode)_currentLightModeIndex);
         }
 
-        if(_currentLightMode != _previousLightMode)
+        if (!hasAuthority) return;
+
+        if(PlayerInput.IsLightsPressed)
         {
-            _previousLightMode = _currentLightMode;
-            ToggleLights(_currentLightMode);
+            _currentLightModeIndex = (_currentLightModeIndex + 1) % Enum.GetValues(typeof(LightMode)).Length;
+            CmdSetCurrentLightModeIndex(_currentLightModeIndex);
         }
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdSetCurrentLightModeIndex(int lightModeIndex)
+    {
+        _currentLightModeIndex = lightModeIndex;
     }
 
     private void ToggleLights(LightMode lightMode)
