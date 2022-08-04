@@ -55,7 +55,9 @@ public class CarSelectUI : MonoBehaviour
     public void Spectate()
     {
         Player.LocalPlayer.CmdSetSelectedCarIndex(-1);
-        Player.LocalPlayer.Car?.GetComponent<CarDamageable>().DestroySelf();
+
+        if (Player.LocalPlayer.Car != null)
+            Player.LocalPlayer.Car.GetComponent<CarDamageable>().DestroySelf();
     }
 
     public void CheckIfSpawnIsAllowed()
