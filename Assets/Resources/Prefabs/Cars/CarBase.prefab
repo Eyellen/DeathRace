@@ -354,7 +354,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1617219111920793933}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
@@ -637,7 +637,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3416686093107338873}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
@@ -867,7 +867,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7506012720557490846}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
@@ -1144,7 +1144,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8742409643641873143}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
@@ -1245,6 +1245,7 @@ GameObject:
   - component: {fileID: 8083998131863091072}
   - component: {fileID: 4502079051064003974}
   - component: {fileID: 3793097228303951607}
+  - component: {fileID: 974697301143145523}
   - component: {fileID: 7658570909016649496}
   - component: {fileID: 3988252081224543989}
   - component: {fileID: 40294703710993746}
@@ -1377,6 +1378,22 @@ MonoBehaviour:
   _verticalOffset: 1.5
   _isShowOnSelf: 1
   <Username>k__BackingField: 
+--- !u!114 &974697301143145523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9099919895988192258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f71ba49b28a22a4b835bb2ac0375a48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  _nearLights: []
+  _farLights: []
 --- !u!114 &7658570909016649496
 MonoBehaviour:
   m_ObjectHideFlags: 0
