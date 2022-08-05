@@ -8,7 +8,6 @@ public class GameManager : NetworkBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    [field: SyncVar]
     public GameMode CurrentGameMode { get; private set; }
 
     [SerializeField] private RaceModeManager _raceModeManager;
