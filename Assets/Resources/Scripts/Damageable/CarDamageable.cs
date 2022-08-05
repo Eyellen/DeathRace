@@ -19,7 +19,7 @@ public class CarDamageable : NetworkBehaviour, IDamageable<int>
 
     public int Health { get => _health; }
 
-    public event Action OnCarDestroyed;
+    public event Action OnCarDestroyed = () => Debug.Log("OnCarDestroyedCalled");
 
     private void Start()
     {
@@ -45,7 +45,6 @@ public class CarDamageable : NetworkBehaviour, IDamageable<int>
 
         CmdSetDestructed(true);
         CmdDestruct();
-        OnCarDestroyed?.Invoke();
     }
 
     [Command(requiresAuthority = false)]
@@ -69,6 +68,8 @@ public class CarDamageable : NetworkBehaviour, IDamageable<int>
         GameObject destroyedCar = Instantiate(_destroyedCarPrefab, _currentCar.transform.position, _currentCar.transform.rotation);
         InitializeDestroyedCar(destroyedCar);
         NetworkServer.Spawn(destroyedCar);
+
+        destroyedCar.GetComponent<DestroyedCar>().TargetOnDestroyedCarSpawned(_currentCar.GetComponent<CarBase>().connectionToClient);
 
         // Spawning Explosion
         GameObject explosion = Instantiate(_explosionPrefab, _currentCar.transform.position, _currentCar.transform.rotation);
