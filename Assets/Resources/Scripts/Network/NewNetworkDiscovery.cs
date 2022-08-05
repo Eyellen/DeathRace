@@ -32,8 +32,9 @@ public class DiscoveryResponse : NetworkMessage
 
     // Add properties for whatever information you want the server to return to
     // clients for them to display or consume for establishing a connection.
-    public int GameModeIndex;
+    public string GameVersion;
     public string ServerName;
+    public int GameModeIndex;
     public int MaxPlayersCount;
     public int CurrentPlayersCount;
     public int MaxPing;
@@ -105,8 +106,9 @@ public class NewNetworkDiscovery : NetworkDiscoveryBase<DiscoveryRequest, Discov
                 serverId = ServerId,
                 uri = transport.ServerUri(),
 
-                GameModeIndex = ServerData.GameModeIndex,
+                GameVersion = Application.version,
                 ServerName = ServerData.ServerName,
+                GameModeIndex = ServerData.GameModeIndex,
                 MaxPlayersCount = ServerData.MaxPlayersCount,
                 CurrentPlayersCount = ServerData.CurrentPlayersCount,
                 MaxPing = ServerData.MaxPing
@@ -146,6 +148,9 @@ public class NewNetworkDiscovery : NetworkDiscoveryBase<DiscoveryRequest, Discov
     /// <param name="endpoint">Address of the server that replied</param>
     protected override void ProcessResponse(DiscoveryResponse response, IPEndPoint endpoint) 
     {
+        if (response.GameVersion != Application.version)
+            return;
+
         Debug.Log("Process Response called");
         // we received a message from the remote endpoint
         response.EndPoint = endpoint;
