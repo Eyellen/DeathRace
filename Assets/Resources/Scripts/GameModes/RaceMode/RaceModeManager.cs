@@ -12,11 +12,20 @@ public class RaceModeManager : GameModeBase
     private readonly SyncDictionary<uint, int> _playersCompletedLaps = new SyncDictionary<uint, int>();
 
     [field: SerializeField]
-    public int LapsToWin { get; set; } = 1;
+    public int LapsToWin { get; private set; } = 1;
+    public int ActivateTilesOnLap { get; private set; }
+    public int ReactivateTilesAfterLap { get; private set; }
+    public int ReactivateTilesAfterSeconds { get; private set; }
 
     public override bool Initialize()
     {
         if (!base.Initialize()) return false;
+
+        var data = ServerData.CurrentGameModeData as RaceModeData;
+        LapsToWin = data.LapsToWin;
+        ActivateTilesOnLap = data.ActivateTilesOnLap;
+        ReactivateTilesAfterLap = data.ReactivateTilesAfterLap;
+        ReactivateTilesAfterSeconds = data.ReactivateTilesAfterSeconds;
 
         InitializeCheckPoints();
 
