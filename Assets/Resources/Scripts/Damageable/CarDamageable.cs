@@ -39,18 +39,18 @@ public class CarDamageable : NetworkBehaviour, IDamageable<int>
 
         if (_health <= 0 && _isDestructed) return;
 
-        CmdSetDamage(damage);
+        CmdSetHealth(_health -= damage);
 
         if (_health > 0) return;
 
-        CmdSetDestructed(true);
+        CmdSetDestructed(_isDestructed = true);
         CmdDestruct();
     }
 
     [Command(requiresAuthority = false)]
-    private void CmdSetDamage(int damage)
+    private void CmdSetHealth(int health)
     {
-        _health -= damage;
+        _health = health;
     }
 
     [Command(requiresAuthority = false)]
