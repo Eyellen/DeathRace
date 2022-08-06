@@ -91,9 +91,6 @@ GameObject:
   m_Component:
   - component: {fileID: 456634783775829033}
   - component: {fileID: 8212384313240395320}
-  - component: {fileID: 8385908726559881143}
-  - component: {fileID: 7700724425155339602}
-  - component: {fileID: 3205696948555893946}
   m_Layer: 0
   m_Name: Train_carriage_04
   m_TagString: Untagged
@@ -136,50 +133,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.7061319, y: 0.48442936, z: 9.898693}
-  m_Center: {x: -0.0044837, y: 1.1860529, z: 0.01156044}
---- !u!64 &8385908726559881143
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 945081122352264851}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -7135707295154631083, guid: 85c24d8e5f69883449bd898da578e562, type: 3}
---- !u!64 &7700724425155339602
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 945081122352264851}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2841296977266028196, guid: 85c24d8e5f69883449bd898da578e562, type: 3}
---- !u!64 &3205696948555893946
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 945081122352264851}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -564839999707096667, guid: 85c24d8e5f69883449bd898da578e562, type: 3}
+  m_Size: {x: 1.5487928, y: 1.4848859, z: 9.898697}
+  m_Center: {x: 0.0013728142, y: 0.6858245, z: -0.010562897}
 --- !u!1 &1608444525826897342
 GameObject:
   m_ObjectHideFlags: 0
