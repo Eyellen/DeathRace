@@ -74,12 +74,6 @@ public class CarDamageable : NetworkBehaviour, IDamageable<int>
         NetworkServer.Destroy(_currentCar);
     }
 
-    [TargetRpc]
-    private void TargetCallOnCarDestroyed(NetworkConnection target)
-    {
-        OnCarDestroyed?.Invoke();
-    }
-
     private void InitializeDestroyedCar(GameObject destroyedCar)
     {
         // Speed inheritance

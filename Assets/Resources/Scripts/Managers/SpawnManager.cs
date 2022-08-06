@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-<<<<<<< HEAD
-=======
 using System.Collections.ObjectModel;
->>>>>>> Dev
 using UnityEngine;
 using Mirror;
 
