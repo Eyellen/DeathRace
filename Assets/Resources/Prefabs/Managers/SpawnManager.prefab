@@ -47,7 +47,7 @@ MonoBehaviour:
   sceneId: 0
   serverOnly: 0
   visible: 0
-  m_AssetId: 
+  m_AssetId: ac9748f017d5e954fa2bbd7ec4f75115
   hasSpawned: 0
 --- !u!114 &6875308132515599233
 MonoBehaviour:
@@ -67,4 +67,3 @@ MonoBehaviour:
   - {fileID: 1991797751086903928, guid: c92edc376df199a42b8533a71797fde1, type: 3}
   - {fileID: 5718376995903775604, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
   - {fileID: 1555319263119888152, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
-  _spawnPositions: []

@@ -78,7 +78,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1555319263119888152, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: DestroyedCar
       objectReference: {fileID: 0}
     - target: {fileID: 1555319263119888153, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
       propertyPath: m_RootOrder
@@ -124,6 +124,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3408802195026076762, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3473350399416231170, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -135,6 +139,10 @@ PrefabInstance:
     - target: {fileID: 4848120277422874495, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
       propertyPath: _gunScript
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5123994522794560315, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5392499648290325123, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
       propertyPath: m_IsActive
@@ -170,6 +178,8 @@ PrefabInstance:
     - {fileID: 3390957799796103318, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
     - {fileID: 4326169736065324038, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
     - {fileID: 8388183656856160463, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
+    - {fileID: 6171738282231219868, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
+    - {fileID: 7375242835334580009, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
 --- !u!1 &628293207204756241 stripped
 GameObject:

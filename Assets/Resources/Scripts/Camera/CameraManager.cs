@@ -94,4 +94,15 @@ public class CameraManager : MonoBehaviour
     {
         CameraMode = CameraMode.Free;
     }
+
+    public void SetFreeCamera(float seconds)
+    {
+        StartCoroutine(SetFreeCameraCoroutine(seconds));
+    }
+
+    private IEnumerator SetFreeCameraCoroutine(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        CameraMode = CameraMode.Free;
+    }
 }

@@ -15,15 +15,20 @@ public class CarDamageable : NetworkBehaviour, IDamageable<int>
     private Collider _carCollider;
     private GameObject _currentCar;
     [SerializeField] private GameObject _destroyedCarPrefab;
+    [SerializeField] private GameObject _explosionPrefab;
 
     public int Health { get => _health; }
-
-    public event Action OnCarDestroyed;
 
     private void Start()
     {
         _currentCar = gameObject;
         _carCollider = transform.Find("Body/Frame").GetComponent<Collider>();
+    }
+
+    [ServerCallback]
+    private void OnDestroy()
+    {
+        SpawnManager.Instance?.RemoveCarFromSpawnedCars(netId);
     }
 
     public void Damage(int damage, Collider collider)
@@ -32,19 +37,18 @@ public class CarDamageable : NetworkBehaviour, IDamageable<int>
 
         if (_health <= 0 && _isDestructed) return;
 
-        CmdSetDamage(damage);
+        CmdSetHealth(_health -= damage);
 
         if (_health > 0) return;
 
-        CmdSetDestructed(true);
+        CmdSetDestructed(_isDestructed = true);
         CmdDestruct();
-        OnCarDestroyed?.Invoke();
     }
 
     [Command(requiresAuthority = false)]
-    private void CmdSetDamage(int damage)
+    private void CmdSetHealth(int health)
     {
-        _health -= damage;
+        _health = health;
     }
 
     [Command(requiresAuthority = false)]
@@ -56,11 +60,16 @@ public class CarDamageable : NetworkBehaviour, IDamageable<int>
     [Command(requiresAuthority = false)]
     private void CmdDestruct()
     {
-        TargetCallOnCarDestroyed(_currentCar.GetComponent<CarBase>().connectionToClient);
-
+        // Spawning Destroyed Car
         GameObject destroyedCar = Instantiate(_destroyedCarPrefab, _currentCar.transform.position, _currentCar.transform.rotation);
         InitializeDestroyedCar(destroyedCar);
         NetworkServer.Spawn(destroyedCar);
+
+        destroyedCar.GetComponent<DestroyedCar>().TargetOnDestroyedCarSpawned(_currentCar.GetComponent<CarBase>().connectionToClient);
+
+        // Spawning Explosion
+        GameObject explosion = Instantiate(_explosionPrefab, _currentCar.transform.position, _currentCar.transform.rotation);
+        NetworkServer.Spawn(explosion);
 
         NetworkServer.Destroy(_currentCar);
     }
@@ -80,5 +89,10 @@ public class CarDamageable : NetworkBehaviour, IDamageable<int>
 
         if (!destroyedCar.TryGetComponent(out CarBackPlateDamageable backPlateDamageable)) return;
         backPlateDamageable.Initialize(gameObject.GetComponent<CarBackPlateDamageable>());
+    }
+
+    public void DestroySelf()
+    {
+        Damage(_health, _carCollider);
     }
 }

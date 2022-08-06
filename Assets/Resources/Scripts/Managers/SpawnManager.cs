@@ -1,5 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+<<<<<<< HEAD
+=======
+using System.Collections.ObjectModel;
+>>>>>>> Dev
 using UnityEngine;
 using Mirror;
 
@@ -9,16 +13,18 @@ public class SpawnManager : NetworkBehaviour
     public static SpawnManager Instance { get; private set; }
 
     [SerializeField] private GameObject[] _carPrefabs;
-    public uint SelectedCarIndex { get; set; } = 0;
 
+    // The key in this dictionary is netId of spawnedCar
+    private readonly SyncDictionary<uint, GameObject> _spawnedCarsStorage = new SyncDictionary<uint, GameObject>();
+    public ReadOnlyDictionary<uint, GameObject> SpawnedCars => new ReadOnlyDictionary<uint, GameObject>(_spawnedCarsStorage);
 
-    [SerializeField] public Transform[] SpawnPositions { get; set; }
+    [field: SerializeField] public Transform[] SpawnPositions { get; set; }
     private int _spawnPositionIndex = 0;
 
     private void Awake()
     {
         InitializeInstance();
-        InitializeSpawnPositions();
+        //InitializeSpawnPositions();
     }
 
     private void InitializeInstance()
@@ -49,9 +55,9 @@ public class SpawnManager : NetworkBehaviour
         }
     }
 
-    public void Spawn()
+    public void SpawnLocalPlayer()
     {
-        CmdSpawn(SelectedCarIndex, Player.LocalPlayer.gameObject);
+        CmdSpawn((uint)Player.LocalPlayer.SelectedCarIndex, Player.LocalPlayer.gameObject);
     }
 
     [Command(requiresAuthority = false)]
@@ -107,6 +113,9 @@ public class SpawnManager : NetworkBehaviour
             spawnPositionTransform.position,
             spawnPositionTransform.rotation);
         NetworkServer.Spawn(car, ownerPlayer);
+        _spawnedCarsStorage[car.GetComponent<CarInfo>().netId] = car;
+        car.GetComponent<CarInfo>().Player = ownerPlayer.GetComponent<Player>();
+        ownerPlayer.GetComponent<Player>().Car = car;
 
         _spawnPositionIndex = (_spawnPositionIndex + 1) % SpawnPositions.Length;
 
@@ -117,18 +126,58 @@ public class SpawnManager : NetworkBehaviour
     [TargetRpc]
     private void TargetSetCameraTarget(NetworkConnection target, GameObject car)
     {
-        Player.LocalPlayer.Car = car;
+        //Player.LocalPlayer.Car = car;
         Player.LocalPlayer.CameraManager.SetThirdPersonCamera(car.transform);
     }
 
-    public void DestroyCurrentCar()
+    /// <summary>
+    /// Removes car without explosion effect and without leaving a DestroyedCar
+    /// </summary>
+    public void RemoveCurrentCar()
     {
-        CmdDestroyCurrentCar(Player.LocalPlayer.Car);
+        CmdRemoveCar(Player.LocalPlayer.Car);
     }
 
+    /// <summary>
+    /// Server Command. Removes car without explosion effect and without leaving a DestroyedCar
+    /// </summary>
+    /// <param name="car"></param>
     [Command(requiresAuthority = false)]
-    private void CmdDestroyCurrentCar(GameObject currentCar)
+    private void CmdRemoveCar(GameObject car)
     {
-        NetworkServer.Destroy(currentCar);
+        _spawnedCarsStorage.Remove(car.GetComponent<CarInfo>().netId);
+        NetworkServer.Destroy(car);
+    }
+
+    [Server]
+    public void RespawnAllPlayers()
+    {
+        RemoveAllPlayersCars();
+        _spawnPositionIndex = 0;
+
+        Player[] players = FindObjectsOfType<Player>();
+
+        foreach (var player in players)
+        {
+            if (player.SelectedCarIndex == -1) continue;
+
+            CmdSpawn((uint)player.SelectedCarIndex, player.gameObject);
+        }
+    }
+
+    [Server]
+    private void RemoveAllPlayersCars()
+    {
+        GameObject[] cars = GameObject.FindGameObjectsWithTag("Car");
+
+        foreach (var car in cars)
+        {
+            NetworkServer.Destroy(car);
+        }
+    }
+
+    public void RemoveCarFromSpawnedCars(uint netId)
+    {
+        _spawnedCarsStorage.Remove(netId);
     }
 }

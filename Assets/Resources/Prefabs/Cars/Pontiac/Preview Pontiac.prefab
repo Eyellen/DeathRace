@@ -19,6 +19,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2148866744779728727, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2482277984752035887, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
       propertyPath: _gunScript
       value: 
@@ -54,6 +58,10 @@ PrefabInstance:
     - target: {fileID: 5718376995903775604, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
       propertyPath: m_Name
       value: Preview Pontiac
+      objectReference: {fileID: 0}
+    - target: {fileID: 5718376995903775604, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5718376995903775605, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
       propertyPath: m_RootOrder
@@ -103,6 +111,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6582605486098286702, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
+      propertyPath: m_AssetId
+      value: eda603b31bd997542aa8e9d354eeac6a
+      objectReference: {fileID: 0}
     - target: {fileID: 7010121170387230622, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
       propertyPath: _gunScript
       value: 
@@ -143,4 +155,6 @@ PrefabInstance:
     - {fileID: 3575170547605772836, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
     - {fileID: 453657781038680451, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
     - {fileID: 6582605486098286702, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
+    - {fileID: 1110190570927237872, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
+    - {fileID: 4365249719762791237, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 59d4776c426fcb84bb3cafb705ad7a79, type: 3}

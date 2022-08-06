@@ -100,7 +100,8 @@ public class GunBase : NetworkBehaviour
         }
 #endif
 
-        if (!Physics.Raycast(shotRay, out RaycastHit hitInfo, _shotDistance)) return;
+        int layer = 1 << LayerMask.NameToLayer("Default");
+        if (!Physics.Raycast(shotRay, out RaycastHit hitInfo, _shotDistance, layer, QueryTriggerInteraction.Ignore)) return;
 
         IDamageable<int>[] damageables = hitInfo.transform.GetComponents<IDamageable<int>>();
         if (damageables.Length <= 0) return;
