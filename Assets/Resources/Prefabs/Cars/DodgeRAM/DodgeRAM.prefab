@@ -664,7 +664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _minigun: {fileID: 4379428605870743069}
   _barrelSpinSource: {fileID: 7422223978424837196}
-  _barrelsStartSpin: {fileID: 8300000, guid: bb8e60422a3b4404fb7e01705ec09948, type: 3}
+  _barrelsStartSpin: {fileID: 8300000, guid: 39330a4f9197d8b4d9fe85879268396b, type: 3}
   _barrelsSpinLoop: {fileID: 8300000, guid: b404eb834eda4ae41aea63cac8bd032b, type: 3}
   _barrelsStopSpin: {fileID: 8300000, guid: 7283b717a7513ac4a9b4fb1e56327bfe, type: 3}
   _minigunShootSource: {fileID: 2879619103989737243}
@@ -821,13 +821,13 @@ AudioSource:
   m_Volume: 0.75
   m_Pitch: 1
   Loop: 1
-  Mute: 1
+  Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 50
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -838,40 +838,13 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
-      inSlope: -10.279641
-      outSlope: -10.279641
+      value: 0.5
+      inSlope: -1.235453
+      outSlope: -1.235453
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.22427444
-    - serializedVersion: 3
-      time: 0.068255484
-      value: 0.40087116
-      inSlope: -5.8283277
-      outSlope: -5.8283277
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.41807422
-      outWeight: 0.108804025
-    - serializedVersion: 3
-      time: 0.112005055
-      value: 0.2143594
-      inSlope: -2.3912444
-      outSlope: -2.3912444
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.57927555
-    - serializedVersion: 3
-      time: 0.24048561
-      value: 0.066770464
-      inSlope: -0.15325385
-      outSlope: -0.15325385
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.16018647
+      outWeight: 0.09046455
     - serializedVersion: 3
       time: 1
       value: 0
