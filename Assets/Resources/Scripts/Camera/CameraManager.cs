@@ -87,6 +87,9 @@ public class CameraManager : MonoBehaviour
 
     public void SetThirdPersonCamera(Transform target)
     {
+        if (_setFreeCameraCoroutine != null)
+            StopCoroutine(_setFreeCameraCoroutine);
+
         CameraMode = CameraMode.ThirdPerson;
         ((ThirdPersonCamera)_currentCameraScript).Target = target;
     }
@@ -98,15 +101,15 @@ public class CameraManager : MonoBehaviour
 
     public void SetFreeCamera(float seconds)
     {
+        if (_setFreeCameraCoroutine != null)
+            StopCoroutine(_setFreeCameraCoroutine);
+
         _setFreeCameraCoroutine = SetFreeCameraCoroutine(seconds);
         StartCoroutine(_setFreeCameraCoroutine);
     }
 
     private IEnumerator SetFreeCameraCoroutine(float seconds)
     {
-        if (_setFreeCameraCoroutine != null)
-            StopCoroutine(_setFreeCameraCoroutine);
-
         yield return new WaitForSeconds(seconds);
         CameraMode = CameraMode.Free;
     }
