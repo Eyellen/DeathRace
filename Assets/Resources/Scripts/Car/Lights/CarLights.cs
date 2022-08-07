@@ -8,9 +8,8 @@ public class CarLights : NetworkBehaviour
 {
     [SerializeField]
     [Range(0, 2)]
-    [SyncVar]
+    [SyncVar(hook = nameof(ToggleLights))]
     private int _currentLightModeIndex = 0;
-    private int _previousLightModeIndex;
 
     [Header("Near Lights")]
     [SerializeField]
@@ -22,17 +21,12 @@ public class CarLights : NetworkBehaviour
 
     private void Update()
     {
-        if (_currentLightModeIndex != _previousLightModeIndex)
-        {
-            _previousLightModeIndex = _currentLightModeIndex;
-            ToggleLights((LightMode)_currentLightModeIndex);
-        }
-
         if (!hasAuthority) return;
 
         if(PlayerInput.IsLightsPressed)
         {
             _currentLightModeIndex = (_currentLightModeIndex + 1) % Enum.GetValues(typeof(LightMode)).Length;
+            ToggleLights(0, _currentLightModeIndex);
             CmdSetCurrentLightModeIndex(_currentLightModeIndex);
         }
     }
@@ -43,9 +37,9 @@ public class CarLights : NetworkBehaviour
         _currentLightModeIndex = lightModeIndex;
     }
 
-    private void ToggleLights(LightMode lightMode)
+    private void ToggleLights(int prevIndex, int newIndex)
     {
-        switch (lightMode)
+        switch ((LightMode)newIndex)
         {
             case LightMode.None:
                 ToggleNearLights(false);
