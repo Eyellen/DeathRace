@@ -4,22 +4,36 @@ using UnityEngine;
 
 public static class PlayerInput
 {
+    // Blocks all inputs
     public static bool IsBlocked { get; set; }
 
+    // Blocks only buttons (doesn't block mouse movement)
+    public static bool IsButtonsBlocked { get; set; }
+
+    // Blocks only mouse axis
+    public static bool IsMouseAxisBlocked { get; set; }
+
     // Bools
-    public static bool IsRightActionPressed { get => Condition(Input.GetMouseButton(1)); }
-    public static bool IsLeftActionPressed { get => Condition(Input.GetMouseButton(0)); }
+    public static bool IsRightActionPressed { get => CheckIfButtonsBlocked(Input.GetMouseButton(1)); }
+    public static bool IsLeftActionPressed { get => CheckIfButtonsBlocked(Input.GetMouseButton(0)); }
+
+    public static bool IsLightsPressed { get => CheckIfButtonsBlocked(Input.GetKeyDown(KeyCode.H)); }
 
     // Floats
-    public static float MouseHorizontalAxis { get => Condition(Input.GetAxisRaw("Mouse X")); }
-    public static float MouseVerticalAxis { get => Condition(Input.GetAxisRaw("Mouse Y")); }
-    public static float HorizontalAxis { get => Condition(Input.GetAxisRaw("Horizontal")); }
-    public static float VerticalAxis { get => Condition(Input.GetAxisRaw("Vertical")); }
-    public static float UpDownAxis { get => Condition(Input.GetAxisRaw("UpDown")); }
-    public static float Brake { get => Condition(Input.GetAxisRaw("Brake")); }
+    public static float MouseHorizontalAxis { get => CheckIfNouseAxisBlocked(Input.GetAxisRaw("Mouse X")); }
+    public static float MouseVerticalAxis { get => CheckIfNouseAxisBlocked(Input.GetAxisRaw("Mouse Y")); }
+    public static float HorizontalAxis { get => CheckIfButtonsBlocked(Input.GetAxisRaw("Horizontal")); }
+    public static float VerticalAxis { get => CheckIfButtonsBlocked(Input.GetAxisRaw("Vertical")); }
+    public static float UpDownAxis { get => CheckIfButtonsBlocked(Input.GetAxisRaw("UpDown")); }
+    public static float Brake { get => CheckIfButtonsBlocked(Input.GetAxisRaw("Brake")); }
 
-    private static T Condition<T>(T value)
+    private static T CheckIfButtonsBlocked<T>(T value)
     {
-        return IsBlocked ? default(T) : value;
+        return (IsBlocked || IsButtonsBlocked) ? default(T) : value;
+    }
+
+    private static T CheckIfNouseAxisBlocked<T>(T value)
+    {
+        return (IsBlocked || IsMouseAxisBlocked) ? default(T) : value;
     }
 }

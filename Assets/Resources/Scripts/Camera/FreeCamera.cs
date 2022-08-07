@@ -7,6 +7,9 @@ public class FreeCamera : CameraBase
     [SerializeField]
     private float _movementSpeed = 20;
 
+    [SerializeField]
+    private float _speedMultiplier = 3;
+
     protected override void LateUpdate()
     {
         base.LateUpdate();
@@ -16,6 +19,11 @@ public class FreeCamera : CameraBase
 
     private void HandleMovement()
     {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+            _movementSpeed *= _speedMultiplier;
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+            _movementSpeed /= _speedMultiplier;
+
         // Forward/Backward movement
         _thisTransform.Translate(PlayerInput.VerticalAxis * _movementSpeed * Time.deltaTime * _thisTransform.forward, Space.World);
         // Right/Left movement

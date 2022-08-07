@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3446662326044965567}
   m_Layer: 0
   m_Name: Broken Back Plate
-  m_TagString: Untagged
+  m_TagString: BackPlate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

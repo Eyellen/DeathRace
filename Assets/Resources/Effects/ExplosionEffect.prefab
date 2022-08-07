@@ -8,13 +8,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4320682932359231474, guid: 83e032cfe22fa7d4aa8e3910f6781db6, type: 3}
+      propertyPath: MinDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320682932359231474, guid: 83e032cfe22fa7d4aa8e3910f6781db6, type: 3}
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 1fd31868d68903d4f9e2c4a3b7ef98f3, type: 3}
     - target: {fileID: 4320682932359231474, guid: 83e032cfe22fa7d4aa8e3910f6781db6, type: 3}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320682932359231474, guid: 83e032cfe22fa7d4aa8e3910f6781db6, type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 
-      objectReference: {fileID: 24300002, guid: e905bfd5f1beeae4a8cacb381a53aa2d, type: 2}
+      objectReference: {fileID: 24300002, guid: 1bb698c89a785f441be62e6ab9e71f83, type: 2}
     - target: {fileID: 4320682932359231474, guid: 83e032cfe22fa7d4aa8e3910f6781db6, type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 1
@@ -96,6 +104,23 @@ MonoBehaviour:
   _minDamage: 0
   _maxDamage: 100
   <ExceptionObjectCollider>k__BackingField: {fileID: 0}
+--- !u!114 &5032110408079077292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390734475171696009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  visible: 0
+  m_AssetId: df4176b9d3b2ed344941e0eb2d253829
+  hasSpawned: 0
 --- !u!1001 &9008027253662254098
 PrefabInstance:
   m_ObjectHideFlags: 0

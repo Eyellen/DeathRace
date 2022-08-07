@@ -45,7 +45,8 @@ public class GunBaseEffects : MonoBehaviour
     {
         Ray shotRay = new Ray(_shotPoint.position, direction.normalized * length);
         Vector3 destination = shotRay.origin + shotRay.direction * length;
-        if (Physics.Raycast(shotRay, out RaycastHit hitInfo))
+        int layer = 1 << LayerMask.NameToLayer("Default");
+        if (Physics.Raycast(shotRay, out RaycastHit hitInfo, length, layer, QueryTriggerInteraction.Ignore))
         {
             SpawnHitParticles(hitInfo);
 
