@@ -13,6 +13,8 @@ public class CameraManager : MonoBehaviour
 
     public CameraBase CurrentCameraScript { get => _currentCameraScript; }
 
+    private IEnumerator _setFreeCameraCoroutine;
+
     public CameraMode CameraMode
     {
         get => _cameraMode;
@@ -87,7 +89,6 @@ public class CameraManager : MonoBehaviour
     {
         CameraMode = CameraMode.ThirdPerson;
         ((ThirdPersonCamera)_currentCameraScript).Target = target;
-        //target.gameObject.GetComponent<CarDamageable>().OnCarDestroyed += SetFreeCamera;
     }
 
     public void SetFreeCamera()
@@ -97,11 +98,15 @@ public class CameraManager : MonoBehaviour
 
     public void SetFreeCamera(float seconds)
     {
-        StartCoroutine(SetFreeCameraCoroutine(seconds));
+        _setFreeCameraCoroutine = SetFreeCameraCoroutine(seconds);
+        StartCoroutine(_setFreeCameraCoroutine);
     }
 
     private IEnumerator SetFreeCameraCoroutine(float seconds)
     {
+        if (_setFreeCameraCoroutine != null)
+            StopCoroutine(_setFreeCameraCoroutine);
+
         yield return new WaitForSeconds(seconds);
         CameraMode = CameraMode.Free;
     }
