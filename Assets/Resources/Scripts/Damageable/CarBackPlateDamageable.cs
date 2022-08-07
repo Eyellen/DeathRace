@@ -12,6 +12,7 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
     [SyncVar]
     private bool _isBroken;
 
+    private Transform _backPlateHolder;
     private Collider _backPlateCollider;
 
     [SerializeField] private GameObject _brokenBackPlatePrefab;
@@ -21,7 +22,8 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
 
     private void Start()
     {
-        _backPlateCollider = transform.Find("Body/BackPlate").GetComponent<Collider>();
+        _backPlateHolder = transform.Find("Body/BackPlateHolder");
+        _backPlateCollider = _backPlateHolder.Find("BackPlate").GetComponent<Collider>();
 
         CheckIfBackPlateBroken();
     }
@@ -55,7 +57,7 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
     [Command(requiresAuthority = false)]
     private void CmdDestruct()
     {
-        GameObject brokenBackPlate = Instantiate(_brokenBackPlatePrefab, _backPlateCollider.transform.position, _backPlateCollider.transform.rotation);
+        GameObject brokenBackPlate = Instantiate(_brokenBackPlatePrefab, _backPlateHolder.transform.position, _backPlateHolder.transform.rotation);
 
         RpcDestruct();
 
@@ -67,7 +69,8 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
     [ClientRpc]
     private void RpcDestruct()
     {
-        Destroy(_backPlateCollider.gameObject);
+        if (_backPlateCollider != null)
+            Destroy(_backPlateCollider.gameObject);
     }
 
     public void Initialize(CarBackPlateDamageable other)
