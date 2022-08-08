@@ -6,6 +6,15 @@ using Mirror;
 
 public class CarLights : NetworkBehaviour
 {
+    [Header("Materials")]
+    [SerializeField] private Material _offLightsMaterial;
+    [SerializeField] private Material _onLightsMaterial;
+
+    [Header("Lights objects")]
+    [SerializeField] private Renderer[] _lightsRenderer;
+    [SerializeField] private Renderer[] _additionalLightsRenderer;
+
+    [Header("Parameters")]
     [SerializeField]
     [Range(0, 2)]
     [SyncVar(hook = nameof(ToggleLights))]
@@ -18,6 +27,11 @@ public class CarLights : NetworkBehaviour
     [Header("Far Lights")]
     [SerializeField]
     private Light[] _farLights;
+
+    private void Start()
+    {
+        InitializeLights();
+    }
 
     private void Update()
     {
@@ -39,6 +53,10 @@ public class CarLights : NetworkBehaviour
 
     private void ToggleLights(int prevIndex, int newIndex)
     {
+        foreach (var lightsObjects in _lightsRenderer)
+        {
+            lightsObjects.material = newIndex > 0 ? _onLightsMaterial : _offLightsMaterial;
+        }
         switch ((LightMode)newIndex)
         {
             case LightMode.None:
@@ -75,5 +93,14 @@ public class CarLights : NetworkBehaviour
         {
             light.enabled = isEnabled;
         }
+        foreach (var lightsObjects in _additionalLightsRenderer)
+        {
+            lightsObjects.material = isEnabled ? _onLightsMaterial : _offLightsMaterial;
+        }
+    }
+
+    private void InitializeLights()
+    {
+        ToggleLights(0, _currentLightModeIndex);
     }
 }
