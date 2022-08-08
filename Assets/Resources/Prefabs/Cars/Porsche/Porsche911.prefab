@@ -17,7 +17,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 785145313614042216, guid: ba1b52d258f0cb14884f5189532b0d25, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.618
+      value: -0.6
       objectReference: {fileID: 0}
     - target: {fileID: 785145313614042216, guid: ba1b52d258f0cb14884f5189532b0d25, type: 3}
       propertyPath: m_LocalPosition.y
@@ -58,6 +58,10 @@ PrefabInstance:
     - target: {fileID: 4601708392856192888, guid: ba1b52d258f0cb14884f5189532b0d25, type: 3}
       propertyPath: m_Name
       value: LeftWheel
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749013834044668798, guid: ba1b52d258f0cb14884f5189532b0d25, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba1b52d258f0cb14884f5189532b0d25, type: 3}
@@ -160,7 +164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 785145313614042216, guid: ba1b52d258f0cb14884f5189532b0d25, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.618
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 785145313614042216, guid: ba1b52d258f0cb14884f5189532b0d25, type: 3}
       propertyPath: m_LocalPosition.y
@@ -204,7 +208,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4749013834044668798, guid: ba1b52d258f0cb14884f5189532b0d25, type: 3}
       propertyPath: m_LocalScale.x
-      value: -1
+      value: -0.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba1b52d258f0cb14884f5189532b0d25, type: 3}
