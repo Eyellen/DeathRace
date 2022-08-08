@@ -33,7 +33,7 @@ public class RocketLauncher : NetworkBehaviour
         MeasureSpeed();
     }
 
-    [ServerCallback]
+    //[ServerCallback]
     private void MeasureSpeed()
     {
         _previousPosition = _currentPosition;
@@ -45,11 +45,12 @@ public class RocketLauncher : NetworkBehaviour
     [ClientCallback]
     private void HandleInput()
     {
-        if (PlayerInput.IsRightActionPressed) CmdLaunch();
+        if (PlayerInput.IsRightActionPressed)
+            CmdLaunch(_currentMovingSpeed);
     }
 
     [Command(requiresAuthority = false)]
-    private void CmdLaunch()
+    private void CmdLaunch(float rocketSpeed)
     {
         if (Time.time < _lastLaunchTime + _timeBetweenLaunches) return;
         _lastLaunchTime = Time.time;
@@ -59,7 +60,8 @@ public class RocketLauncher : NetworkBehaviour
             if (_rockets[i] == null) continue;
 
             GameObject launchedRocket = Instantiate(_launchedRocketPrefab, _rockets[i].transform.position, _rockets[i].transform.rotation);
-            launchedRocket.GetComponent<Rocket>().Speed += _currentMovingSpeed;
+            //launchedRocket.GetComponent<Rocket>().Speed += _currentMovingSpeed;
+            launchedRocket.GetComponent<Rocket>().Speed += rocketSpeed;
             NetworkServer.Spawn(launchedRocket);
 
             RpcDestroyRocket(i);
