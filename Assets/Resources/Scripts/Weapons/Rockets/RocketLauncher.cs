@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class RocketLauncher : MonoBehaviour
+public class RocketLauncher : NetworkBehaviour
 {
     private Transform _thisTransform;
 
@@ -22,6 +23,8 @@ public class RocketLauncher : MonoBehaviour
 
     void Update()
     {
+        if (!hasAuthority) return;
+
         HandleInput();
     }
 
@@ -30,6 +33,7 @@ public class RocketLauncher : MonoBehaviour
         MeasureSpeed();
     }
 
+    [ServerCallback]
     private void MeasureSpeed()
     {
         _previousPosition = _currentPosition;
@@ -38,26 +42,35 @@ public class RocketLauncher : MonoBehaviour
         _currentMovingSpeed = (_currentPosition - _previousPosition).magnitude / Time.deltaTime;
     }
 
+    [ClientCallback]
     private void HandleInput()
     {
-        if (PlayerInput.IsRightActionPressed) Launch();
+        if (PlayerInput.IsRightActionPressed) CmdLaunch();
     }
 
-    private void Launch()
+    [Command(requiresAuthority = false)]
+    private void CmdLaunch()
     {
         if (Time.time < _lastLaunchTime + _timeBetweenLaunches) return;
         _lastLaunchTime = Time.time;
 
-        foreach (GameObject rocket in _rockets)
+        for (int i = 0; i < _rockets.Length; i++)
         {
-            if (!rocket) continue;
+            if (_rockets[i] == null) continue;
 
-            GameObject launchedRocket = Instantiate(_launchedRocketPrefab, rocket.transform.position, rocket.transform.rotation);
+            GameObject launchedRocket = Instantiate(_launchedRocketPrefab, _rockets[i].transform.position, _rockets[i].transform.rotation);
             launchedRocket.GetComponent<Rocket>().Speed += _currentMovingSpeed;
+            NetworkServer.Spawn(launchedRocket);
 
-            Destroy(rocket);
+            RpcDestroyRocket(i);
 
             return;
         }
+    }
+
+    [ClientRpc]
+    private void RpcDestroyRocket(int rocketIndex)
+    {
+        Destroy(_rockets[rocketIndex]);
     }
 }
