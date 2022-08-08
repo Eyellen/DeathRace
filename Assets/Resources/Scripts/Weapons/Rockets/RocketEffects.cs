@@ -24,11 +24,8 @@ public class RocketEffects : MonoBehaviour
     {
         _smokeEffectTransform.parent = null;
 
-        ParticleSystem[] particles = _smokeEffectTransform.GetComponentsInChildren<ParticleSystem>();
-        foreach (ParticleSystem particle in particles)
-        {
-            var main = particle.main;
-            main.loop = false;
-        }
+        ParticleSystem smoke = _smokeEffectTransform.GetComponent<ParticleSystem>();
+        var main = smoke.main;
+        main.loop = false;
     }
 }
