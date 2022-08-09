@@ -36,7 +36,7 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
 
         if (_health > 0) return;
 
-        _isBroken = true; // To prevent errors on Client while _isBroken getting synced on Server and other Clients
+        _isBroken = true; // To prevent errors on Client while _isBroken getting synced on Server and Client
         CmdDestruct();
     }
 
@@ -55,6 +55,8 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
     [Command(requiresAuthority = false)]
     private void CmdDestruct()
     {
+        if (_backPlateCollider == null) return;
+
         GameObject brokenBackPlate = Instantiate(_brokenBackPlatePrefab, _backPlateCollider.transform.position, _backPlateCollider.transform.rotation);
 
         RpcDestruct();
@@ -67,7 +69,8 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
     [ClientRpc]
     private void RpcDestruct()
     {
-        Destroy(_backPlateCollider.gameObject);
+        if (_backPlateCollider != null)
+            Destroy(_backPlateCollider.gameObject);
     }
 
     public void Initialize(CarBackPlateDamageable other)

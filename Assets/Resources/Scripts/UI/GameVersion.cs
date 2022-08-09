@@ -1,4 +1,3 @@
-#if UNITY_EDITOR
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,10 +8,11 @@ public class GameVersion : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _gameVersionText;
 
+#if UNITY_EDITOR
     void Update()
     {
         if (_gameVersionText.text != ("Version " + Application.version))
             _gameVersionText.text = "Version " + Application.version;
     }
-}
 #endif
+}

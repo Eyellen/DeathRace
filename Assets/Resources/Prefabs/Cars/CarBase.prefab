@@ -393,7 +393,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -643,7 +643,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
-  m_Range: 50
+  m_Range: 70
   m_SpotAngle: 90
   m_InnerSpotAngle: 4
   m_CookieSize: 10
@@ -676,7 +676,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -873,7 +873,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
-  m_Range: 50
+  m_Range: 70
   m_SpotAngle: 90
   m_InnerSpotAngle: 4
   m_CookieSize: 10
@@ -906,7 +906,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -1183,7 +1183,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -1392,8 +1392,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  _nearLights: []
-  _farLights: []
+  _offLightsMaterial: {fileID: 2100000, guid: 489e190f074253a4b9b65298e162f566, type: 2}
+  _onLightsMaterial: {fileID: 2100000, guid: e75f35376b089434e8304c0f035ce9c4, type: 2}
+  _lightsObjects: []
+  _currentLightModeIndex: 1
+  _nearLights:
+  - {fileID: 2463188075098037529}
+  - {fileID: 3926409950765566894}
+  _farLights:
+  - {fileID: 6845418465829570272}
+  - {fileID: 5163734374452872788}
 --- !u!114 &7658570909016649496
 MonoBehaviour:
   m_ObjectHideFlags: 0

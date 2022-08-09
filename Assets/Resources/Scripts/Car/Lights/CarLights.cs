@@ -6,11 +6,19 @@ using Mirror;
 
 public class CarLights : NetworkBehaviour
 {
+    [Header("Materials")]
+    [SerializeField] private Material _offLightsMaterial;
+    [SerializeField] private Material _onLightsMaterial;
+
+    [Header("Lights objects")]
+    [SerializeField] private Renderer[] _lightsRenderer;
+    [SerializeField] private Renderer[] _additionalLightsRenderer;
+
+    [Header("Parameters")]
     [SerializeField]
     [Range(0, 2)]
-    [SyncVar]
+    [SyncVar(hook = nameof(ToggleLights))]
     private int _currentLightModeIndex = 0;
-    private int _previousLightModeIndex;
 
     [Header("Near Lights")]
     [SerializeField]
@@ -20,19 +28,19 @@ public class CarLights : NetworkBehaviour
     [SerializeField]
     private Light[] _farLights;
 
+    private void Start()
+    {
+        InitializeLights();
+    }
+
     private void Update()
     {
-        if (_currentLightModeIndex != _previousLightModeIndex)
-        {
-            _previousLightModeIndex = _currentLightModeIndex;
-            ToggleLights((LightMode)_currentLightModeIndex);
-        }
-
         if (!hasAuthority) return;
 
         if(PlayerInput.IsLightsPressed)
         {
             _currentLightModeIndex = (_currentLightModeIndex + 1) % Enum.GetValues(typeof(LightMode)).Length;
+            ToggleLights(0, _currentLightModeIndex);
             CmdSetCurrentLightModeIndex(_currentLightModeIndex);
         }
     }
@@ -43,9 +51,13 @@ public class CarLights : NetworkBehaviour
         _currentLightModeIndex = lightModeIndex;
     }
 
-    private void ToggleLights(LightMode lightMode)
+    private void ToggleLights(int prevIndex, int newIndex)
     {
-        switch (lightMode)
+        foreach (var lightsObjects in _lightsRenderer)
+        {
+            lightsObjects.material = newIndex > 0 ? _onLightsMaterial : _offLightsMaterial;
+        }
+        switch ((LightMode)newIndex)
         {
             case LightMode.None:
                 ToggleNearLights(false);
@@ -81,5 +93,14 @@ public class CarLights : NetworkBehaviour
         {
             light.enabled = isEnabled;
         }
+        foreach (var lightsObjects in _additionalLightsRenderer)
+        {
+            lightsObjects.material = isEnabled ? _onLightsMaterial : _offLightsMaterial;
+        }
+    }
+
+    private void InitializeLights()
+    {
+        ToggleLights(0, _currentLightModeIndex);
     }
 }

@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class Rocket : MonoBehaviour
+public class Rocket : NetworkBehaviour
 {
     private Transform _thisTransform;
     [SerializeField] private GameObject _explosionPrefab;
@@ -43,6 +44,7 @@ public class Rocket : MonoBehaviour
         CheckHit();
     }
 
+    [ServerCallback]
     private void CheckHit()
     {
         Ray direction = new Ray(_thisTransform.position, _thisTransform.forward);
@@ -64,6 +66,7 @@ public class Rocket : MonoBehaviour
         //Gizmos.DrawSphere(transform.position, _impactRadius);
     }
 
+    [ServerCallback]
     private void HandleFly()
     {
         _thisTransform.Translate(_thisTransform.forward * _speed * Time.deltaTime, Space.World);
@@ -76,17 +79,25 @@ public class Rocket : MonoBehaviour
         Explode();
     }
 
+    [ServerCallback]
     private void Explode()
     {
         if (_isExploded) return;
         _isExploded = true;
 
         InitializeExplosion();
-
-        OnRocketExplode?.Invoke();
+        RpcOnRocketExplode();
+        
         Destroy(gameObject);
     }
 
+    [ClientRpc]
+    private void RpcOnRocketExplode()
+    {
+        OnRocketExplode?.Invoke();
+    }
+
+    [ServerCallback]
     private void HandleDirectHit(RaycastHit hitInfo)
     {
         if (_directHit) return;
@@ -106,14 +117,16 @@ public class Rocket : MonoBehaviour
         //damageable.Damage(_maxDamage, hitInfo.collider);
     }
 
+    [ServerCallback]
     private void InitializeExplosion()
     {
-        GameObject explosionPrefab = Instantiate(_explosionPrefab, transform.position, transform.rotation);
-        Explosion explosion = explosionPrefab.GetComponent<Explosion>();
+        GameObject explosionObject = Instantiate(_explosionPrefab, transform.position, transform.rotation);
+        Explosion explosion = explosionObject.GetComponent<Explosion>();
         explosion.ExplosionRadius = _impactRadius;
         explosion.ExplosionForce = _explosionForce;
         explosion.MinDamage = _minDamage;
         explosion.MaxDamage = _maxDamage;
         explosion.ExceptionObjectCollider = _directHit;
+        NetworkServer.Spawn(explosionObject);
     }
 }
