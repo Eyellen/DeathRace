@@ -978,6 +978,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 1.28
       objectReference: {fileID: 0}
+    - target: {fileID: 1865345937230226068, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.37699997
+      objectReference: {fileID: 0}
+    - target: {fileID: 2119994687969783370, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.37699997
+      objectReference: {fileID: 0}
     - target: {fileID: 2195352555853042989, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: target
       value: 
@@ -1018,6 +1026,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 17
       objectReference: {fileID: 0}
+    - target: {fileID: 2791432954134695550, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.506
+      objectReference: {fileID: 0}
     - target: {fileID: 3479035317790920117, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.493
@@ -1054,6 +1066,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 8042890381745933386}
+    - target: {fileID: 4941167625447042880, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.37699997
+      objectReference: {fileID: 0}
     - target: {fileID: 5942715597136064828, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: target
       value: 
@@ -1066,6 +1082,10 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 48283adefda01514e851c40517a63d59, type: 3}
+    - target: {fileID: 6551831581887840944, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.29200006
+      objectReference: {fileID: 0}
     - target: {fileID: 7075551651831521368, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: _axles.Array.data[0].LeftWheel
       value: 
@@ -1105,6 +1125,10 @@ PrefabInstance:
     - target: {fileID: 8606705896235550131, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: m_LocalPosition.z
       value: -1.262
+      objectReference: {fileID: 0}
+    - target: {fileID: 9099919895647167251, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.37699997
       objectReference: {fileID: 0}
     - target: {fileID: 9099919895988192258, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: m_Name
@@ -1153,6 +1177,10 @@ PrefabInstance:
     - target: {fileID: 9099919895988192259, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9099919897771748776, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.37699997
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
@@ -1242,6 +1270,27 @@ MonoBehaviour:
   _maxSpreadMagnitude: 10
   _timeBetweenShots: 0.1
   _maxAmmoSupply: 500
+--- !u!114 &2036719822519536927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555319263119888152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9df1758fffc89d047b089aa6d55e33fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  _rockets:
+  - {fileID: 8300440590501047294}
+  - {fileID: 848990366656783669}
+  - {fileID: 5178612348295741998}
+  - {fileID: 4121494262390764065}
+  _launchedRocketPrefab: {fileID: 7030441473324519576, guid: 55148a5f3fa3b704295e9ccec8fbeeb0, type: 3}
+  _timeBetweenLaunches: 2
 --- !u!114 &8459011793831864910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1263,25 +1312,6 @@ MonoBehaviour:
   _maxSpreadMagnitude: 10
   _timeBetweenShots: 0.1
   _maxAmmoSupply: 500
---- !u!114 &2036719822519536927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1555319263119888152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9df1758fffc89d047b089aa6d55e33fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rockets:
-  - {fileID: 8300440590501047294}
-  - {fileID: 848990366656783669}
-  - {fileID: 5178612348295741998}
-  - {fileID: 4121494262390764065}
-  _launchedRocketPrefab: {fileID: 7030441473324519576, guid: 55148a5f3fa3b704295e9ccec8fbeeb0, type: 3}
-  _timeBetweenLaunches: 2
 --- !u!65 &5147367313457318479
 BoxCollider:
   m_ObjectHideFlags: 0
