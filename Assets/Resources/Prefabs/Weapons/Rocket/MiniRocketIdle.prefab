@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &4709544962932253610
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4659940429491008145, guid: 55148a5f3fa3b704295e9ccec8fbeeb0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7030441473324519576, guid: 55148a5f3fa3b704295e9ccec8fbeeb0, type: 3}
+      propertyPath: m_Name
+      value: MiniRocketIdle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7510042563664901664, guid: 55148a5f3fa3b704295e9ccec8fbeeb0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605892080156834504, guid: 55148a5f3fa3b704295e9ccec8fbeeb0, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605892080156834504, guid: 55148a5f3fa3b704295e9ccec8fbeeb0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605892080156834504, guid: 55148a5f3fa3b704295e9ccec8fbeeb0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605892080156834504, guid: 55148a5f3fa3b704295e9ccec8fbeeb0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605892080156834504, guid: 55148a5f3fa3b704295e9ccec8fbeeb0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605892080156834504, guid: 55148a5f3fa3b704295e9ccec8fbeeb0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605892080156834504, guid: 55148a5f3fa3b704295e9ccec8fbeeb0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605892080156834504, guid: 55148a5f3fa3b704295e9ccec8fbeeb0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605892080156834504, guid: 55148a5f3fa3b704295e9ccec8fbeeb0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605892080156834504, guid: 55148a5f3fa3b704295e9ccec8fbeeb0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605892080156834504, guid: 55148a5f3fa3b704295e9ccec8fbeeb0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7782391982224180364, guid: 55148a5f3fa3b704295e9ccec8fbeeb0, type: 3}
+      propertyPath: m_AssetId
+      value: bd37ba1a877e44a4fb39af9e477d7e62
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1339908140373775942, guid: 55148a5f3fa3b704295e9ccec8fbeeb0, type: 3}
+    - {fileID: 1779959282052871726, guid: 55148a5f3fa3b704295e9ccec8fbeeb0, type: 3}
+    - {fileID: 883887468387410226, guid: 55148a5f3fa3b704295e9ccec8fbeeb0, type: 3}
+    - {fileID: 8945860098130833631, guid: 55148a5f3fa3b704295e9ccec8fbeeb0, type: 3}
+    - {fileID: 7782391982224180364, guid: 55148a5f3fa3b704295e9ccec8fbeeb0, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 55148a5f3fa3b704295e9ccec8fbeeb0, type: 3}
+--- !u!1 &7321387049365047505 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2648504202460015483, guid: 55148a5f3fa3b704295e9ccec8fbeeb0, type: 3}
+  m_PrefabInstance: {fileID: 4709544962932253610}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &2440756365395269811
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7321387049365047505}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.37, y: 0.08, z: 0.08}
+  m_Center: {x: 0.014, y: 0, z: 0}
