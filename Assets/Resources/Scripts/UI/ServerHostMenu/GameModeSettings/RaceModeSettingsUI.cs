@@ -12,13 +12,9 @@ public class RaceModeSettingsUI : GameModeSettingsBaseUI
     [SerializeField] private Slider _activateTilesOnLapSlider;
     [SerializeField] private TextMeshProUGUI _activateTilesOnLapText;
 
-    [SerializeField] private Slider _reactivateTilesAfterLapSlider;
-    [SerializeField] private TextMeshProUGUI _resetTilesAfterLapText;
+    [SerializeField] private TMP_Dropdown _tilesCooldownDropdown;
 
-    [SerializeField] private Slider _reactivateTilesAfterSecondsSlider;
-    [SerializeField] private TextMeshProUGUI _resetTilesAfterSecondsText;
-
-    private RaceModeData _raceModeData = new RaceModeData(5, 3, 1, 15);
+    private RaceModeData _raceModeData = new RaceModeData(5, 3, 3);
 
     private void OnEnable()
     {
@@ -29,6 +25,7 @@ public class RaceModeSettingsUI : GameModeSettingsBaseUI
     {
         _lapsToWinText.text = laps.ToString();
         _raceModeData.LapsToWin = (int)laps;
+        _activateTilesOnLapSlider.maxValue = (int)laps - 1;
     }
 
     public void SetActivateTilesOnLap(float lapNumber)
@@ -37,16 +34,43 @@ public class RaceModeSettingsUI : GameModeSettingsBaseUI
         _raceModeData.ActivateTilesOnLap = (int)lapNumber;
     }
 
-    public void SetReactivateTilesAfterLap(float lapNumber)
+    public void SetTilesCooldown(int index)
     {
-        _resetTilesAfterLapText.text = lapNumber.ToString();
-        _raceModeData.ReactivateTilesAfterLap = (int)lapNumber;
-    }
+        switch (index)
+        {
+            case 0:
+                // 5 seconds
+                _raceModeData.TilesCooldown = 5;
+                break;
 
-    public void SetReactivateTilesAfterSeconds(float seconds)
-    {
-        _resetTilesAfterSecondsText.text = seconds.ToString() + "s";
-        _raceModeData.ReactivateTilesAfterSeconds = (int)seconds;
+            case 1:
+                // 15 seconds
+                _raceModeData.TilesCooldown = 15;
+                break;
+
+            case 2:
+                // 30 seconds
+                _raceModeData.TilesCooldown = 30;
+                break;
+
+            case 3:
+                // 1 minute
+                _raceModeData.TilesCooldown = 60;
+                break;
+
+            case 4:
+                // 3 minutes
+                _raceModeData.TilesCooldown = 180;
+                break;
+
+            case 5:
+                // 5 minutes
+                _raceModeData.TilesCooldown = 300;
+                break;
+
+            default:
+                break;
+        }
     }
 
     private void InitializeSettings()
@@ -54,7 +78,6 @@ public class RaceModeSettingsUI : GameModeSettingsBaseUI
         ServerData.CurrentGameModeData = _raceModeData;
         _lapsToWinSlider.value = _raceModeData.LapsToWin;
         _activateTilesOnLapSlider.value = _raceModeData.ActivateTilesOnLap;
-        _reactivateTilesAfterLapSlider.value = _raceModeData.ReactivateTilesAfterLap;
-        _reactivateTilesAfterSecondsSlider.value = _raceModeData.ReactivateTilesAfterSeconds;
+        _tilesCooldownDropdown.value = _raceModeData.TilesCooldown;
     }
 }

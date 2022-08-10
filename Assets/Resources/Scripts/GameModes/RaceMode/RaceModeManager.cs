@@ -14,8 +14,7 @@ public class RaceModeManager : GameModeBase
     [field: SerializeField]
     public int LapsToWin { get; private set; } = 1;
     public int ActivateTilesOnLap { get; private set; }
-    public int ReactivateTilesAfterLap { get; private set; }
-    public int ReactivateTilesAfterSeconds { get; private set; }
+    public int TilesCooldown { get; private set; }
 
     public override bool Initialize()
     {
@@ -24,8 +23,7 @@ public class RaceModeManager : GameModeBase
         var data = ServerData.CurrentGameModeData as RaceModeData;
         LapsToWin = data.LapsToWin;
         ActivateTilesOnLap = data.ActivateTilesOnLap;
-        ReactivateTilesAfterLap = data.ReactivateTilesAfterLap;
-        ReactivateTilesAfterSeconds = data.ReactivateTilesAfterSeconds;
+        TilesCooldown = data.TilesCooldown;
 
         InitializeCheckPoints();
 

@@ -6,19 +6,16 @@ public class RaceModeData : GameModeDataBase
 {
     public int LapsToWin { get; set; }
     public int ActivateTilesOnLap { get; set; }
-    public int ReactivateTilesAfterLap { get; set; }
-    public int ReactivateTilesAfterSeconds { get; set; }
+    public int TilesCooldown { get; set; }
 
     public RaceModeData(
         int lapsToWin,
         int activateTilesOnLap,
-        int reactivateTilesAfterLap,
-        int reactivateTilesAfterSeconds
+        int tilesCooldown
         )
     {
         LapsToWin = lapsToWin;
         ActivateTilesOnLap = activateTilesOnLap;
-        ReactivateTilesAfterLap = reactivateTilesAfterLap;
-        ReactivateTilesAfterSeconds = reactivateTilesAfterSeconds;
+        TilesCooldown = tilesCooldown;
     }
 }
