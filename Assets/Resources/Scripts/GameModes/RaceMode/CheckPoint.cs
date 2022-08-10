@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
 
 public class CheckPoint : MonoBehaviour
 {
@@ -11,8 +10,6 @@ public class CheckPoint : MonoBehaviour
 
     [SerializeField] private ParticleSystemRenderer _rightBoundParticlesRenderer;
     [SerializeField] private ParticleSystemRenderer _leftBoundParticlesRenderer;
-
-    [field: SerializeField] public Collider Trigger { get; private set; }
 
     public int CheckPointIndex { get; set; }
     public bool IsPassed { get; private set; }
