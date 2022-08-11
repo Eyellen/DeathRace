@@ -1,53 +1,77 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 public class DeathTile : TileBase
 {
     [SerializeField] private GameObject _spikes;
+    private Transform _spikesTransform;
 
     [SerializeField] private float _maxHeight;
     [SerializeField] private float _minHeight;
 
     private IEnumerator _spikesCoroutine;
 
+    private void Start()
+    {
+        _spikesTransform = _spikes.transform;
+    }
+
     protected override void OnCarEnter(GameObject car)
+    {
+        CmdRaiseSpikes();
+    }
+
+    [Server]
+    protected override void OnTileReset()
+    {
+        SetReady(false);
+        CmdLowerSpikes();
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdRaiseSpikes()
     {
         if (_spikesCoroutine != null)
             StopCoroutine(_spikesCoroutine);
 
-        _spikesCoroutine = RaiseSpikes();
+        _spikesCoroutine = RaiseSpikesCoroutine();
         StartCoroutine(_spikesCoroutine);
     }
 
-    protected override void OnTileReset()
+    [Command(requiresAuthority = false)]
+    private void CmdLowerSpikes()
     {
         if (_spikesCoroutine != null)
             StopCoroutine(_spikesCoroutine);
 
-        _spikesCoroutine = LowerSpikes();
-        StartCoroutine(LowerSpikes());
+        _spikesCoroutine = LowerSpikesCoroutine();
+        StartCoroutine(LowerSpikesCoroutine());
     }
 
-    private IEnumerator RaiseSpikes()
+    [Server]
+    private IEnumerator RaiseSpikesCoroutine()
     {
-        var spikesTransform = _spikes.transform;
-
-        while (spikesTransform.position.y < _maxHeight)
+        Debug.Log("Raising spikes");
+        while (_spikesTransform.position.y < _maxHeight)
         {
-            spikesTransform.position += Vector3.up * Time.deltaTime;
+            _spikesTransform.position += Vector3.up * Time.deltaTime;
 
             yield return null;
         }
     }
 
-    private IEnumerator LowerSpikes()
+    [Server]
+    private IEnumerator LowerSpikesCoroutine()
     {
-        var spikesTransform = _spikes.transform;
-
-        while (spikesTransform.position.y > _minHeight)
+        Debug.Log("Lowering spikes");
+        while (_spikesTransform.position.y > _minHeight)
         {
-            spikesTransform.position -= Vector3.up * Time.deltaTime;
+            _spikesTransform.position -= Vector3.up * Time.deltaTime;
+
+            if (_spikesTransform.position.y < _minHeight)
+                SetReady(true);
 
             yield return null;
         }
