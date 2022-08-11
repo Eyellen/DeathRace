@@ -24,6 +24,9 @@ public class GunBase : NetworkBehaviour
     private int _currentBulletsCount;
 
     #region Properties
+    [field: SerializeField]
+    [field: SyncVar]
+    public bool IsActivated { get; set; }
     private bool IsAmmoRunOut
     {
         get
@@ -78,6 +81,8 @@ public class GunBase : NetworkBehaviour
 
     protected void SingleShot()
     {
+        if (!IsActivated) return;
+
         if (IsAmmoRunOut)
         {
             CmdSetShooting(false);
@@ -146,6 +151,8 @@ public class GunBase : NetworkBehaviour
 
     protected virtual void Shoot(bool isActionOccurs)
     {
+        if (!IsActivated) return;
+
         CmdSetShooting(isActionOccurs);
         if(isActionOccurs)
         {
