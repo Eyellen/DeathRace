@@ -16,6 +16,10 @@ public class RocketLauncher : NetworkBehaviour
     private Vector3 _currentPosition;
     private float _currentMovingSpeed;
 
+    [field: SerializeField]
+    [field: SyncVar]
+    public bool IsActivated { get; set; }
+
     void Start()
     {
         _thisTransform = GetComponent<Transform>();
@@ -45,6 +49,8 @@ public class RocketLauncher : NetworkBehaviour
     [ClientCallback]
     private void HandleInput()
     {
+        if (!IsActivated) return;
+
         if (PlayerInput.IsRightActionPressed)
             CmdLaunch(_currentMovingSpeed);
     }
@@ -52,6 +58,8 @@ public class RocketLauncher : NetworkBehaviour
     [Command(requiresAuthority = false)]
     private void CmdLaunch(float rocketSpeed)
     {
+        if (!IsActivated) return;
+
         if (Time.time < _lastLaunchTime + _timeBetweenLaunches) return;
         _lastLaunchTime = Time.time;
 
