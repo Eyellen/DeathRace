@@ -287,6 +287,9 @@ public class RaceModeManager : GameModeBase
         foreach (var tile in tiles)
         {
             tile.Cooldown = TilesCooldown;
+
+            if (ActivateTilesOnLap > 0)
+                tile.SetReady(false);
         }
     }
 
@@ -299,5 +302,6 @@ public class RaceModeManager : GameModeBase
             tile.SetReady(true);
         }
         IsTilesActivated = true;
+        MessageManager.Instance.RpcShowTopMessage("All Tiles Activated", 3);
     }
 }
