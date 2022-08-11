@@ -12,9 +12,9 @@ public class Spikes : MonoBehaviour
 
         Debug.Log(collision.relativeVelocity.magnitude);
 
-        if (collision.relativeVelocity.magnitude < _minSpeedForDamage) return;
+        if (Mathf.Abs(collision.relativeVelocity.magnitude) < _minSpeedForDamage) return;
 
-        float coefficient = (collision.relativeVelocity.magnitude - _minSpeedForDamage) / (25 - _minSpeedForDamage);
+        float coefficient = (Mathf.Abs(collision.relativeVelocity.magnitude) - _minSpeedForDamage) / (25 - _minSpeedForDamage);
         damageable.Damage01(coefficient, collision.collider);
     }
 }
