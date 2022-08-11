@@ -20,11 +20,14 @@ public class RaceModeManager : GameModeBase
     {
         if (!base.Initialize()) return false;
 
-        var data = ServerData.CurrentGameModeData as RaceModeData;
-        LapsToWin = data.LapsToWin;
-        ActivateTilesOnLap = data.ActivateTilesOnLap;
-        TilesCooldown = data.TilesCooldown;
-
+        if(isServer)
+        {
+            var data = ServerData.CurrentGameModeData as RaceModeData;
+            LapsToWin = data.LapsToWin;
+            ActivateTilesOnLap = data.ActivateTilesOnLap;
+            TilesCooldown = data.TilesCooldown;
+        }
+        
         InitializeCheckPoints();
 
         if (!IsGameOn && !IsGameStarting)
