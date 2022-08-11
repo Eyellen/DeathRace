@@ -10,11 +10,12 @@ public class WeaponTile : TileBase
         {
             GunBase[] guns = car.GetComponents<GunBase>();
             foreach (var gun in guns)
-                gun.enabled = true;
+                gun.IsActivated = true;
         }
         
         if(car.TryGetComponent(out RocketLauncher rocketLauncher))
         {
-            rocketLauncher.enabled = true;
+            rocketLauncher.IsActivated = true;
         }
-    }}
+    }
+}
