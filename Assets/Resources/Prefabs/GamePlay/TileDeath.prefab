@@ -238,6 +238,19 @@ MonoBehaviour:
   _spikes: {fileID: 2465824678505584681}
   _maxHeight: 0
   _minHeight: -0.795
+--- !u!114 &4284987966501409496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3600366592632098218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b1a9939eaedc1046926a77d2d63846a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minSpeedForDamage: 6
 --- !u!114 &5455801668878059664
 MonoBehaviour:
   m_ObjectHideFlags: 0
