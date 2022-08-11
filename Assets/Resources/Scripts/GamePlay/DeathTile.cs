@@ -53,7 +53,6 @@ public class DeathTile : TileBase
     [Server]
     private IEnumerator RaiseSpikesCoroutine()
     {
-        Debug.Log("Raising spikes");
         while (_spikesTransform.position.y < _maxHeight)
         {
             _spikesTransform.position += Vector3.up * Time.deltaTime;
@@ -65,7 +64,6 @@ public class DeathTile : TileBase
     [Server]
     private IEnumerator LowerSpikesCoroutine()
     {
-        Debug.Log("Lowering spikes");
         while (_spikesTransform.position.y > _minHeight)
         {
             _spikesTransform.position -= Vector3.up * Time.deltaTime;
