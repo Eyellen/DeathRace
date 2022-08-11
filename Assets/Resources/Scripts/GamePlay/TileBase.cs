@@ -9,15 +9,9 @@ public abstract class TileBase : NetworkBehaviour
     [field: SyncVar]
     public bool IsReady { get; private set; } = true;
 
-    private int _cooldown = 5;
+    public int Cooldown { get; set; } = 5;
 
     [SerializeField] private Light _tileLight;
-
-    [Server]
-    public void InitializeTile(int cooldown)
-    {
-        _cooldown = cooldown;
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -35,7 +29,7 @@ public abstract class TileBase : NetworkBehaviour
     {
         if (!IsReady) return;
         SetReady(false);
-        StartCoroutine(Cooldown());
+        StartCoroutine(CooldownCoroutine());
     }
 
     [ClientRpc]
@@ -45,16 +39,16 @@ public abstract class TileBase : NetworkBehaviour
     }
 
     [Server]
-    private IEnumerator Cooldown()
+    private IEnumerator CooldownCoroutine()
     {
-        yield return new WaitForSeconds(_cooldown);
+        yield return new WaitForSeconds(Cooldown);
 
         SetReady(true);
         OnTileReset();
     }
 
     [Server]
-    protected void SetReady(bool isReady)
+    public void SetReady(bool isReady)
     {
         IsReady = isReady;
         RpcToggleLight(isReady);
