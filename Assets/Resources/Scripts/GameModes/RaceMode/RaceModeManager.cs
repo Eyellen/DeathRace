@@ -290,6 +290,8 @@ public class RaceModeManager : GameModeBase
 
             if (ActivateTilesOnLap > 0)
                 tile.SetReady(false);
+            else
+                tile.SetReady(true);
         }
     }
 
