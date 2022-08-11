@@ -14,7 +14,7 @@ public class RaceModeSettingsUI : GameModeSettingsBaseUI
 
     [SerializeField] private TMP_Dropdown _tilesCooldownDropdown;
 
-    private RaceModeData _raceModeData = new RaceModeData(5, 3, 3);
+    private RaceModeData _raceModeData;
 
     private void OnEnable()
     {
@@ -75,9 +75,10 @@ public class RaceModeSettingsUI : GameModeSettingsBaseUI
 
     private void InitializeSettings()
     {
+        _raceModeData = new RaceModeData(5, 3, 3);
         ServerData.CurrentGameModeData = _raceModeData;
-        _lapsToWinSlider.value = _raceModeData.LapsToWin;
-        _activateTilesOnLapSlider.value = _raceModeData.ActivateTilesOnLap;
-        _tilesCooldownDropdown.value = _raceModeData.TilesCooldown;
+        _lapsToWinSlider.value = 5;
+        _activateTilesOnLapSlider.value = 3;
+        _tilesCooldownDropdown.value = 3;
     }
 }
