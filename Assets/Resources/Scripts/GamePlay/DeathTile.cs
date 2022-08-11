@@ -13,8 +13,10 @@ public class DeathTile : TileBase
 
     private IEnumerator _spikesCoroutine;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
+
         _spikesTransform = _spikes.transform;
     }
 

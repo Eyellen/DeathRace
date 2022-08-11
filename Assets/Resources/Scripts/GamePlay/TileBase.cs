@@ -13,6 +13,11 @@ public abstract class TileBase : NetworkBehaviour
 
     [SerializeField] private Light _tileLight;
 
+    protected virtual void Start()
+    {
+        if (IsReady) _tileLight.enabled = true;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.root.tag != "Car") return;
