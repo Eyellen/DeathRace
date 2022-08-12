@@ -10,6 +10,14 @@ public class Spikes : MonoBehaviour
     {
         if (Mathf.Abs(collision.relativeVelocity.magnitude) < _minSpeedForDamage) return;
 
+        // To prevent caling on server
+        // Need to be called only via Command
+        if (!collision.transform.root.GetComponent<CarBase>().hasAuthority) return;
+
+#if UNITY_EDITOR
+        Debug.Log(collision.relativeVelocity.magnitude);
+#endif
+
         IDamageable<int>[] damageables = collision.gameObject.GetComponents<IDamageable<int>>();
         if (damageables.Length == 0) return;
 
@@ -18,14 +26,5 @@ public class Spikes : MonoBehaviour
         {
             damageable.Damage01(coefficient, collision.collider);
         }
-
-        //if (!collision.gameObject.TryGetComponent(out IDamageable<int> damageable)) return;
-
-        //Debug.Log(collision.relativeVelocity.magnitude);
-
-        //if (Mathf.Abs(collision.relativeVelocity.magnitude) < _minSpeedForDamage) return;
-
-        //float coefficient = (Mathf.Abs(collision.relativeVelocity.magnitude) - _minSpeedForDamage) / (25 - _minSpeedForDamage);
-        //damageable.Damage01(coefficient, collision.collider);
     }
 }
