@@ -80,8 +80,10 @@ public class RaceModeManager : GameModeBase
     {
         if (!base.StartGame()) return false;
 
+
         ResetAllTiles();
-        SetActiveAllTiles(true);
+        if (ActivateTilesOnLap == 0)
+            SetActiveAllTiles(true);
 
         SpawnManager.Instance.RespawnAllPlayers();
 
