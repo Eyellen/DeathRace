@@ -19,6 +19,7 @@ public static class PlayerInput
 
     public static bool IsLightsPressed { get => CheckIfButtonsBlocked(Input.GetKeyDown(KeyCode.H)); }
     public static bool IsBackViewHolding { get => CheckIfButtonsBlocked(Input.GetKey(KeyCode.C)); }
+    public static bool IsReleasedBackView { get => CheckIfButtonsBlocked(Input.GetKeyUp(KeyCode.C)); }
 
     // Floats
     public static float MouseHorizontalAxis { get => CheckIfNouseAxisBlocked(Input.GetAxisRaw("Mouse X")); }

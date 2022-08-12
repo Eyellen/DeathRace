@@ -50,6 +50,10 @@ public class ThirdPersonCamera : CameraBase
             _currentCameraOffset = _thisTransform.rotation * _cameraOffset;
             return;
         }
+        if(PlayerInput.IsReleasedBackView)
+        {
+            _thisTransform.rotation = Quaternion.Euler(20, Target.rotation.eulerAngles.y, 0);
+        }
 
         // Would be good to implement state machine here
         if (_lastMouseInputTime + _switchToAutoCameraAfterSeconds > Time.time)
