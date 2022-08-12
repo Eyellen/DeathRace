@@ -1134,7 +1134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  _health: 100
+  _maxHealth: 100
   _brokenBackPlatePrefab: {fileID: 2309082221795030665, guid: 39fb28818d448014c96c128b3e59fb73, type: 3}
 --- !u!114 &2097122378246942681
 MonoBehaviour:
@@ -1157,6 +1157,7 @@ MonoBehaviour:
   _maxSpreadMagnitude: 5
   _timeBetweenShots: 0.05
   _maxAmmoSupply: 500
+  <IsActivated>k__BackingField: 0
   _minigunBarrels: {fileID: 5918355607006343134}
   _barrelsSpinningTime: 2
   _maxSpinningSpeed: 1000
@@ -1181,6 +1182,7 @@ MonoBehaviour:
   _maxSpreadMagnitude: 5
   _timeBetweenShots: 0.05
   _maxAmmoSupply: 500
+  <IsActivated>k__BackingField: 0
   _minigunBarrels: {fileID: 5150976368125004047}
   _barrelsSpinningTime: 2
   _maxSpinningSpeed: 1000

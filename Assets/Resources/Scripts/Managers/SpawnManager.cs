@@ -18,6 +18,9 @@ public class SpawnManager : NetworkBehaviour
     [field: SerializeField] public Transform[] SpawnPositions { get; set; }
     private int _spawnPositionIndex = 0;
 
+    public System.Action OnLocalCarSpawned;
+    public System.Action OnLocalCarDestroyed;
+
     private void Awake()
     {
         InitializeInstance();
@@ -90,7 +93,7 @@ public class SpawnManager : NetworkBehaviour
         _spawnPositionIndex = (_spawnPositionIndex + 1) % SpawnPositions.Length;
 
         NetworkConnection connection = ownerPlayer.GetComponent<Player>().connectionToClient;
-        TargetSetCameraTarget(connection, car);
+        TargetOnLocalCarSpawned(connection, car);
     }
 
     [Command(requiresAuthority = false)]
@@ -117,14 +120,21 @@ public class SpawnManager : NetworkBehaviour
         _spawnPositionIndex = (_spawnPositionIndex + 1) % SpawnPositions.Length;
 
         NetworkConnection connection = ownerPlayer.GetComponent<Player>().connectionToClient;
-        TargetSetCameraTarget(connection, car);
+        TargetOnLocalCarSpawned(connection, car);
     }
 
     [TargetRpc]
-    private void TargetSetCameraTarget(NetworkConnection target, GameObject car)
+    private void TargetOnLocalCarSpawned(NetworkConnection target, GameObject car)
     {
+        OnLocalCarSpawned?.Invoke();
         //Player.LocalPlayer.Car = car;
         Player.LocalPlayer.CameraManager.SetThirdPersonCamera(car.transform);
+    }
+
+    [TargetRpc]
+    public void TargetOnLocalCarDestroyed(NetworkConnection target)
+    {
+        OnLocalCarDestroyed?.Invoke();
     }
 
     /// <summary>

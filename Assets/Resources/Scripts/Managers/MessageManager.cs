@@ -36,10 +36,29 @@ public class MessageManager : NetworkBehaviour
         _topMessageBar.gameObject.SetActive(true);
     }
 
+    public void ShowTopMessage(string msg, float seconds)
+    {
+        StartCoroutine(ShowTopMessageCoroutine(msg, seconds));
+    }
+
+    private IEnumerator ShowTopMessageCoroutine(string msg, float seconds)
+    {
+        ShowTopMessage(msg);
+        yield return new WaitForSeconds(seconds);
+        //HideTopMessage();
+        HideTopMessageSmoothly();
+    }
+
     [ClientRpc]
     public void RpcShowTopMessage(string msg)
     {
         ShowTopMessage(msg);
+    }
+
+    [ClientRpc]
+    public void RpcShowTopMessage(string msg, float seconds)
+    {
+        ShowTopMessage(msg, seconds);
     }
 
     public void HideTopMessage()
@@ -47,10 +66,36 @@ public class MessageManager : NetworkBehaviour
         _topMessageBar.gameObject.SetActive(false);
     }
 
+    public void HideTopMessageSmoothly()
+    {
+        StartCoroutine(HideTopMessageCoroutine());
+    }
+
+    private IEnumerator HideTopMessageCoroutine()
+    {
+        float initialAlpha = _topMessageBar.alpha;
+
+        while (_topMessageBar.alpha > 0)
+        {
+            _topMessageBar.alpha -= Time.deltaTime;
+
+            yield return null;
+        }
+
+        _topMessageBar.gameObject.SetActive(false);
+        _topMessageBar.alpha = initialAlpha;
+    }
+
     [ClientRpc]
     public void RpcHideTopMessage()
     {
         HideTopMessage();
+    }
+
+    [ClientRpc]
+    public void RpcHideTopMessageSmoothly()
+    {
+        HideTopMessageSmoothly();
     }
 
     public void ShowBottomMessage(string msg)

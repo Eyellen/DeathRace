@@ -1342,7 +1342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  _health: 100
+  _maxHealth: 100
   _destroyedCarPrefab: {fileID: 0}
   _explosionPrefab: {fileID: 390734475171696009, guid: df4176b9d3b2ed344941e0eb2d253829, type: 3}
 --- !u!114 &4502079051064003974
@@ -1394,7 +1394,8 @@ MonoBehaviour:
   syncInterval: 0.1
   _offLightsMaterial: {fileID: 2100000, guid: 489e190f074253a4b9b65298e162f566, type: 2}
   _onLightsMaterial: {fileID: 2100000, guid: e75f35376b089434e8304c0f035ce9c4, type: 2}
-  _lightsObjects: []
+  _lightsRenderer: []
+  _additionalLightsRenderer: []
   _currentLightModeIndex: 1
   _nearLights:
   - {fileID: 2463188075098037529}

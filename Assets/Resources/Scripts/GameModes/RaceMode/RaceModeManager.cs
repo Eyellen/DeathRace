@@ -12,11 +12,18 @@ public class RaceModeManager : GameModeBase
     private readonly SyncDictionary<uint, int> _playersCompletedLaps = new SyncDictionary<uint, int>();
 
     [field: SerializeField]
-    public int LapsToWin { get; set; } = 1;
+    public int LapsToWin { get; private set; } = 1;
+    public int ActivateTilesOnLap { get; private set; }
+    public int TilesCooldown { get; private set; }
+
+    private bool IsTilesActivated;
 
     public override bool Initialize()
     {
         if (!base.Initialize()) return false;
+
+        InitializeGameModeSettings();
+        InitializeAllTiles();
 
         InitializeCheckPoints();
 
@@ -163,6 +170,11 @@ public class RaceModeManager : GameModeBase
     {
         _playersCompletedLaps[netId]++;
 
+        if (!IsTilesActivated &&
+            _playersCompletedLaps[netId] == ActivateTilesOnLap)
+            ActivateAllTiles();
+
+
         if (_playersCompletedLaps[netId] >= LapsToWin)
             StopGame();
     }
@@ -257,5 +269,41 @@ public class RaceModeManager : GameModeBase
     private void MessageWaitingForPlayers()
     {
         MessageManager.Instance.ShowBottomMessage("Waiting for other players to start." + (isServer ? "\nPress P to start now." : string.Empty));
+    }
+
+    [ServerCallback]
+    private void InitializeGameModeSettings()
+    {
+        var data = ServerData.CurrentGameModeData as RaceModeData;
+        LapsToWin = data.LapsToWin;
+        ActivateTilesOnLap = data.ActivateTilesOnLap;
+        TilesCooldown = data.TilesCooldown;
+    }
+
+    [Server]
+    private void InitializeAllTiles()
+    {
+        TileBase[] tiles = FindObjectsOfType<TileBase>();
+        foreach (var tile in tiles)
+        {
+            tile.Cooldown = TilesCooldown;
+
+            if (ActivateTilesOnLap > 0)
+                tile.SetReady(false);
+            else
+                tile.SetReady(true);
+        }
+    }
+
+    [Server]
+    private void ActivateAllTiles()
+    {
+        TileBase[] tiles = FindObjectsOfType<TileBase>();
+        foreach (var tile in tiles)
+        {
+            tile.SetReady(true);
+        }
+        IsTilesActivated = true;
+        MessageManager.Instance.RpcShowTopMessage("All Tiles Activated", 3);
     }
 }
