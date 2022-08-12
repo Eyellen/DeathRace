@@ -82,6 +82,7 @@ public class CarDamageable : NetworkBehaviour, IDamageable<int>
         NetworkServer.Spawn(explosion);
 
         NetworkServer.Destroy(_currentCar);
+        SpawnManager.Instance.TargetOnLocalCarDestroyed(connectionToClient);
     }
 
     private void InitializeDestroyedCar(GameObject destroyedCar)
