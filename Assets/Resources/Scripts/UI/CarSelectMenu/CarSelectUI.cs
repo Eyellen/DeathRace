@@ -43,6 +43,8 @@ public class CarSelectUI : MonoBehaviour
 
     public void Spawn()
     {
+        GameCanvas.Instance.SetActiveHUD(true);
+
         if (Player.LocalPlayer.Car != null)
         {
             SpawnManager.Instance.RemoveCurrentCar();
