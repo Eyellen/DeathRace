@@ -26,7 +26,8 @@ public abstract class TileBase : NetworkBehaviour
 
         if (!IsReady) return;
 
-        // To prevent caling on server, only by Command
+        // To prevent caling on server
+        // Need to be called only via Command
         if (!other.transform.root.GetComponent<CarBase>().hasAuthority) return;
 
         CmdOnTriggerEnter();
