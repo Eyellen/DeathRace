@@ -18,6 +18,9 @@ public class SpawnManager : NetworkBehaviour
     [field: SerializeField] public Transform[] SpawnPositions { get; set; }
     private int _spawnPositionIndex = 0;
 
+    public System.Action OnLocalCarSpawned;
+    public System.Action OnLocalCarDestroyed;
+
     private void Awake()
     {
         InitializeInstance();
@@ -90,7 +93,7 @@ public class SpawnManager : NetworkBehaviour
         _spawnPositionIndex = (_spawnPositionIndex + 1) % SpawnPositions.Length;
 
         NetworkConnection connection = ownerPlayer.GetComponent<Player>().connectionToClient;
-        TargetSetCameraTarget(connection, car);
+        TargetOnLocalCarSpawned(connection, car);
     }
 
     [Command(requiresAuthority = false)]
@@ -117,14 +120,43 @@ public class SpawnManager : NetworkBehaviour
         _spawnPositionIndex = (_spawnPositionIndex + 1) % SpawnPositions.Length;
 
         NetworkConnection connection = ownerPlayer.GetComponent<Player>().connectionToClient;
-        TargetSetCameraTarget(connection, car);
+        TargetOnLocalCarSpawned(connection, car);
     }
 
     [TargetRpc]
-    private void TargetSetCameraTarget(NetworkConnection target, GameObject car)
+    private void TargetOnLocalCarSpawned(NetworkConnection target, GameObject car)
     {
+        StartCoroutine(OnLocalCarSpawnedCoroutine());
         //Player.LocalPlayer.Car = car;
         Player.LocalPlayer.CameraManager.SetThirdPersonCamera(car.transform);
+    }
+
+    /// <summary>
+    /// This method written to prevent errors that appear before car being spawned
+    /// It waits 1 frame (till Car will be Instantiated) and then calls OnLocalCarSpawned
+    /// </summary>
+    private IEnumerator OnLocalCarSpawnedCoroutine()
+    {
+        yield return new WaitForEndOfFrame();
+
+        OnLocalCarSpawned?.Invoke();
+    }
+
+    [TargetRpc]
+    public void TargetOnLocalCarDestroyed(NetworkConnection target)
+    {
+        StartCoroutine(OnLocalCarDestroyedCoroutine());
+    }
+
+    /// <summary>
+    /// This method written to prevent errors that appear before car being spawned
+    /// It waits 1 frame (till Car will be Destroyed) and then calls OnLocalCarDestroyed
+    /// </summary>
+    private IEnumerator OnLocalCarDestroyedCoroutine()
+    {
+        yield return new WaitForEndOfFrame();
+
+        OnLocalCarDestroyed?.Invoke();
     }
 
     /// <summary>

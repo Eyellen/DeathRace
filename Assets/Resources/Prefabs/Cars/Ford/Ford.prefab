@@ -723,7 +723,7 @@ PrefabInstance:
     - target: {fileID: 291192481012067170, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: -8923898537461648023, guid: 25ac81c735d8209408ea65a7e9d81997, type: 3}
+      objectReference: {fileID: 1836878881245397803, guid: 25ac81c735d8209408ea65a7e9d81997, type: 3}
     - target: {fileID: 974697301143145523, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: _farLights.Array.size
       value: 2
@@ -759,11 +759,19 @@ PrefabInstance:
     - target: {fileID: 974697301143145523, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: _lightsObjects.Array.data[0]
       value: 
-      objectReference: {fileID: 7654285728444618315}
+      objectReference: {fileID: 0}
     - target: {fileID: 974697301143145523, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: _lightsRenderer.Array.data[0]
       value: 
-      objectReference: {fileID: 8266523725706856756}
+      objectReference: {fileID: 987728363950623367}
+    - target: {fileID: 974697301143145523, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: _additionalLightsRenderer.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 974697301143145523, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: _additionalLightsRenderer.Array.data[0]
+      value: 
+      objectReference: {fileID: 4348765098733264041}
     - target: {fileID: 1769861777077012191, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.555
@@ -775,6 +783,14 @@ PrefabInstance:
     - target: {fileID: 1769861777077012191, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: m_LocalPosition.z
       value: 1.454
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865345937230226068, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.23400001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2119994687969783370, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.23400001
       objectReference: {fileID: 0}
     - target: {fileID: 2195352555853042989, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: target
@@ -840,6 +856,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 17.417
       objectReference: {fileID: 0}
+    - target: {fileID: 2791432954134695550, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.363
+      objectReference: {fileID: 0}
     - target: {fileID: 3479035317790920117, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.555
@@ -896,6 +916,10 @@ PrefabInstance:
       propertyPath: interpolateRotation
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4941167625447042880, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.23400001
+      objectReference: {fileID: 0}
     - target: {fileID: 5163734374452872788, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: m_SpotAngle
       value: 90
@@ -924,6 +948,10 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 409b1e20729b32441b10d4f5433c1984, type: 3}
+    - target: {fileID: 6551831581887840944, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.435
+      objectReference: {fileID: 0}
     - target: {fileID: 6845418465829570272, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: m_SpotAngle
       value: 90
@@ -949,6 +977,10 @@ PrefabInstance:
       value: c92edc376df199a42b8533a71797fde1
       objectReference: {fileID: 0}
     - target: {fileID: 8083998131863091072, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: _maxHealth
+      value: 800
+      objectReference: {fileID: 0}
+    - target: {fileID: 8083998131863091072, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: _destroyedCarPrefab
       value: 
       objectReference: {fileID: 3664917185779700594, guid: 49a2ef4e7b1027e40a878b2d4b283071, type: 3}
@@ -963,6 +995,10 @@ PrefabInstance:
     - target: {fileID: 8373357255698842027, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: m_LocalPosition.z
       value: 1.454
+      objectReference: {fileID: 0}
+    - target: {fileID: 9099919895647167251, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.23400001
       objectReference: {fileID: 0}
     - target: {fileID: 9099919895988192258, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: m_Name
@@ -1011,6 +1047,10 @@ PrefabInstance:
     - target: {fileID: 9099919895988192259, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9099919897771748776, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.23400001
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
@@ -1098,7 +1138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  _health: 100
+  _maxHealth: 1500
   _brokenBackPlatePrefab: {fileID: 2309082221795030665, guid: 39fb28818d448014c96c128b3e59fb73, type: 3}
 --- !u!114 &2097122378246942681
 MonoBehaviour:
@@ -1121,6 +1161,7 @@ MonoBehaviour:
   _maxSpreadMagnitude: 5
   _timeBetweenShots: 0.05
   _maxAmmoSupply: 500
+  <IsActivated>k__BackingField: 0
   _minigunBarrels: {fileID: 5918355607006343134}
   _barrelsSpinningTime: 2
   _maxSpinningSpeed: 1000
@@ -1145,6 +1186,7 @@ MonoBehaviour:
   _maxSpreadMagnitude: 5
   _timeBetweenShots: 0.05
   _maxAmmoSupply: 500
+  <IsActivated>k__BackingField: 0
   _minigunBarrels: {fileID: 5150976368125004047}
   _barrelsSpinningTime: 2
   _maxSpinningSpeed: 1000
@@ -1286,13 +1328,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25ac81c735d8209408ea65a7e9d81997, type: 3}
---- !u!23 &8266523725706856756 stripped
+--- !u!23 &987728363950623367 stripped
 MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2039269802020210332, guid: 25ac81c735d8209408ea65a7e9d81997, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7152133086302094639, guid: 25ac81c735d8209408ea65a7e9d81997, type: 3}
   m_PrefabInstance: {fileID: 7995128021117833128}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7654285728444618315 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -8877409863009265181, guid: 25ac81c735d8209408ea65a7e9d81997, type: 3}
+--- !u!23 &4348765098733264041 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -3265799938451385599, guid: 25ac81c735d8209408ea65a7e9d81997, type: 3}
   m_PrefabInstance: {fileID: 7995128021117833128}
   m_PrefabAsset: {fileID: 0}

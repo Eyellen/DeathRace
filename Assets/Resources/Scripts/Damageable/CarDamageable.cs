@@ -5,8 +5,10 @@ using Mirror;
 
 public class CarDamageable : NetworkBehaviour, IDamageable<int>
 {
-    [SyncVar]
     [SerializeField]
+    private int _maxHealth;
+
+    [SyncVar]
     private int _health;
 
     [SyncVar]
@@ -17,10 +19,13 @@ public class CarDamageable : NetworkBehaviour, IDamageable<int>
     [SerializeField] private GameObject _destroyedCarPrefab;
     [SerializeField] private GameObject _explosionPrefab;
 
+    public int MaxHealth { get => _maxHealth; }
     public int Health { get => _health; }
+    public float HealthRemainingRatio { get => (float)_health / _maxHealth; }
 
     private void Start()
     {
+        CmdSetHealth(_maxHealth);
         _currentCar = gameObject;
         _carCollider = transform.Find("Body/Frame").GetComponent<Collider>();
     }
@@ -43,6 +48,11 @@ public class CarDamageable : NetworkBehaviour, IDamageable<int>
 
         CmdSetDestructed(_isDestructed = true);
         CmdDestruct();
+    }
+
+    public void Damage01(float coefficient, Collider collider)
+    {
+        Damage((int)(_maxHealth * coefficient), collider);
     }
 
     [Command(requiresAuthority = false)]
@@ -72,6 +82,7 @@ public class CarDamageable : NetworkBehaviour, IDamageable<int>
         NetworkServer.Spawn(explosion);
 
         NetworkServer.Destroy(_currentCar);
+        SpawnManager.Instance.TargetOnLocalCarDestroyed(connectionToClient);
     }
 
     private void InitializeDestroyedCar(GameObject destroyedCar)

@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3285348000047869663
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6561182269038205949, guid: 80e9276c07c6e984daa5bf4bb328e1cb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8226072314985550756, guid: 80e9276c07c6e984daa5bf4bb328e1cb, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8226072314985550756, guid: 80e9276c07c6e984daa5bf4bb328e1cb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8226072314985550756, guid: 80e9276c07c6e984daa5bf4bb328e1cb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8226072314985550756, guid: 80e9276c07c6e984daa5bf4bb328e1cb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8226072314985550756, guid: 80e9276c07c6e984daa5bf4bb328e1cb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8226072314985550756, guid: 80e9276c07c6e984daa5bf4bb328e1cb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8226072314985550756, guid: 80e9276c07c6e984daa5bf4bb328e1cb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8226072314985550756, guid: 80e9276c07c6e984daa5bf4bb328e1cb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8226072314985550756, guid: 80e9276c07c6e984daa5bf4bb328e1cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8226072314985550756, guid: 80e9276c07c6e984daa5bf4bb328e1cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8226072314985550756, guid: 80e9276c07c6e984daa5bf4bb328e1cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8330648072222187340, guid: 80e9276c07c6e984daa5bf4bb328e1cb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8621565227106168288, guid: 80e9276c07c6e984daa5bf4bb328e1cb, type: 3}
+      propertyPath: m_AssetId
+      value: e45ea974aea7cd24b933dd594aec01d7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805745523747813876, guid: 80e9276c07c6e984daa5bf4bb328e1cb, type: 3}
+      propertyPath: m_Name
+      value: RpgRocketIdle
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7458941746990946739, guid: 80e9276c07c6e984daa5bf4bb328e1cb, type: 3}
+    - {fileID: 222576518553689922, guid: 80e9276c07c6e984daa5bf4bb328e1cb, type: 3}
+    - {fileID: 1720759179875010654, guid: 80e9276c07c6e984daa5bf4bb328e1cb, type: 3}
+    - {fileID: 8621565227106168288, guid: 80e9276c07c6e984daa5bf4bb328e1cb, type: 3}
+    - {fileID: 665724575894863658, guid: 80e9276c07c6e984daa5bf4bb328e1cb, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 80e9276c07c6e984daa5bf4bb328e1cb, type: 3}
+--- !u!1 &1365692054506663112 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4567792592692298263, guid: 80e9276c07c6e984daa5bf4bb328e1cb, type: 3}
+  m_PrefabInstance: {fileID: 3285348000047869663}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &2661047749194037920
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365692054506663112}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.06, y: 0.06, z: 0.8}
+  m_Center: {x: 0, y: 0, z: -0.12}

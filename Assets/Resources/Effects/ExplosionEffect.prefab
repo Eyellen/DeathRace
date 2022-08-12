@@ -102,7 +102,7 @@ MonoBehaviour:
   _explosionRadius: 5
   _explosionForce: 1000
   _minDamage: 0
-  _maxDamage: 100
+  _maxDamage: 400
   <ExceptionObjectCollider>k__BackingField: {fileID: 0}
 --- !u!114 &5032110408079077292
 MonoBehaviour:

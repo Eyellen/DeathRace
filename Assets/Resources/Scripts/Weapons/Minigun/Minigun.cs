@@ -26,6 +26,8 @@ public class Minigun : GunBase
 
     private void SpinBarrels(bool isActionOccurs)
     {
+        if (!IsActivated) return;
+
         CmdSetShooting(false);
 
         _currentSpinningSpeed = Mathf.Lerp(0, _maxSpinningSpeed, _spinningTimePassed / _barrelsSpinningTime);

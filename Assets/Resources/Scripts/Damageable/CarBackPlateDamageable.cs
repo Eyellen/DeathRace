@@ -5,8 +5,10 @@ using Mirror;
 
 public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
 {
-    [SyncVar]
     [SerializeField]
+    private int _maxHealth;
+
+    [SyncVar]
     private int _health;
 
     [SyncVar]
@@ -21,6 +23,7 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
 
     private void Start()
     {
+        CmdSetHealth(_maxHealth);
         _backPlateCollider = transform.Find("Body/BackPlate").GetComponent<Collider>();
 
         CheckIfBackPlateBroken();
@@ -38,6 +41,11 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
 
         _isBroken = true; // To prevent errors on Client while _isBroken getting synced on Server and Client
         CmdDestruct();
+    }
+
+    public void Damage01(float coefficient, Collider collider)
+    {
+        Damage((int)(_maxHealth * coefficient), collider);
     }
 
     [Command(requiresAuthority = false)]
