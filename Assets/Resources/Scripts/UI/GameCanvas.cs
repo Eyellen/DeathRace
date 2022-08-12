@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameCanvas : MonoBehaviour
 {
+    public static GameCanvas Instance { get; private set; }
+
     [SerializeField] private EscapeMenu _escapeMenu;
     [SerializeField] private CarSelectUI _carSelectMenu;
 
@@ -11,7 +13,16 @@ public class GameCanvas : MonoBehaviour
 
     private void Start()
     {
+        InitializeInstance();
         //CursorManager.HideCursor();
+    }
+
+    private void InitializeInstance()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
     }
 
     void Update()
@@ -39,10 +50,23 @@ public class GameCanvas : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.F1))
         {
-            foreach (var objectToHide in _objectsToHide)
-            {
-                objectToHide.SetActive(!objectToHide.activeSelf);
-            }
+            ToggleHUD();
+        }
+    }
+
+    private void ToggleHUD()
+    {
+        foreach (var objectToHide in _objectsToHide)
+        {
+            objectToHide.SetActive(!objectToHide.activeSelf);
+        }
+    }
+
+    public void SetActiveHUD(bool isActive)
+    {
+        foreach (var objectToHide in _objectsToHide)
+        {
+            objectToHide.SetActive(isActive);
         }
     }
 }

@@ -12,7 +12,8 @@ public class Spikes : MonoBehaviour
 
         // To prevent caling on server
         // Need to be called only via Command
-        if (!collision.transform.root.GetComponent<CarBase>().hasAuthority) return;
+        if (!collision.transform.root.TryGetComponent(out CarBase carBase)) return;
+        if (!carBase.hasAuthority) return;
 
 #if UNITY_EDITOR
         Debug.Log(collision.relativeVelocity.magnitude);
