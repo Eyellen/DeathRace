@@ -323,5 +323,6 @@ public class RaceModeManager : GameModeBase
         {
             tile.ResetTile();
         }
+        IsTilesActivated = false;
     }
 }
