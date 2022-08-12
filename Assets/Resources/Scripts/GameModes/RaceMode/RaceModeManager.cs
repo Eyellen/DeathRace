@@ -80,6 +80,9 @@ public class RaceModeManager : GameModeBase
     {
         if (!base.StartGame()) return false;
 
+        ResetAllTiles();
+        SetActiveAllTiles(true);
+
         SpawnManager.Instance.RespawnAllPlayers();
 
         // Need some latency because old cars will be destroyed only on next frame
@@ -108,7 +111,7 @@ public class RaceModeManager : GameModeBase
         if (!base.StopGame()) return false;
 
         AnnounceTheWinner();
-        SetActiveAllTiles(false);
+        ResetAllTiles();
 
         // No need to call here because it's being called in base method
         //RpcStopGame();
@@ -308,5 +311,15 @@ public class RaceModeManager : GameModeBase
 
         if (isActive)
             MessageManager.Instance.RpcShowTopMessage("All Tiles Activated", 3);
+    }
+
+    [Server]
+    private void ResetAllTiles()
+    {
+        TileBase[] tiles = FindObjectsOfType<TileBase>();
+        foreach (var tile in tiles)
+        {
+            tile.ResetTile();
+        }
     }
 }
