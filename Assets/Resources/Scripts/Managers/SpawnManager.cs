@@ -126,14 +126,36 @@ public class SpawnManager : NetworkBehaviour
     [TargetRpc]
     private void TargetOnLocalCarSpawned(NetworkConnection target, GameObject car)
     {
-        OnLocalCarSpawned?.Invoke();
+        StartCoroutine(OnLocalCarSpawnedCoroutine());
         //Player.LocalPlayer.Car = car;
         Player.LocalPlayer.CameraManager.SetThirdPersonCamera(car.transform);
+    }
+
+    /// <summary>
+    /// This method written to prevent errors that appear before car being spawned
+    /// It waits 1 frame (till Car will be Instantiated) and then calls OnLocalCarSpawned
+    /// </summary>
+    private IEnumerator OnLocalCarSpawnedCoroutine()
+    {
+        yield return new WaitForEndOfFrame();
+
+        OnLocalCarSpawned?.Invoke();
     }
 
     [TargetRpc]
     public void TargetOnLocalCarDestroyed(NetworkConnection target)
     {
+        StartCoroutine(OnLocalCarDestroyedCoroutine());
+    }
+
+    /// <summary>
+    /// This method written to prevent errors that appear before car being spawned
+    /// It waits 1 frame (till Car will be Destroyed) and then calls OnLocalCarDestroyed
+    /// </summary>
+    private IEnumerator OnLocalCarDestroyedCoroutine()
+    {
+        yield return new WaitForEndOfFrame();
+
         OnLocalCarDestroyed?.Invoke();
     }
 
