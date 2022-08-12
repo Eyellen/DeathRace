@@ -114,11 +114,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1607937850206090772, guid: 19c55f665488666409fd42a5fbe9ea72, type: 3}
       propertyPath: m_Color.g
-      value: 0.31788397
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1607937850206090772, guid: 19c55f665488666409fd42a5fbe9ea72, type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7671901580192525638, guid: 19c55f665488666409fd42a5fbe9ea72, type: 3}
       propertyPath: m_Name
@@ -157,4 +157,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b00a1fe5237ac1247947e28a7eb3ef08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   _tileLight: {fileID: 8227775957796972692}
+--- !u!114 &6597112960205562023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010624386902700998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  visible: 0
+  m_AssetId: f80db0c28a41b7141a3944653aec01e6
+  hasSpawned: 0
