@@ -31,7 +31,7 @@ public class DeathTile : TileBase
     }
 
     [Server]
-    protected override void OnTileDeactivated()
+    protected override void OnTileReset()
     {
         if (_spikesCoroutine != null)
             StopCoroutine(_spikesCoroutine);

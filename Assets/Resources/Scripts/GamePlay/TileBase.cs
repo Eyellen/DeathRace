@@ -69,19 +69,22 @@ public abstract class TileBase : NetworkBehaviour
     {
         IsReady = isReady;
         RpcToggleLight(isReady);
+    }
 
-        if (!isReady)
-        {
-            if (_cooldownCoroutine != null)
-                StopCoroutine(_cooldownCoroutine);
+    [Server]
+    public void ResetTile()
+    {
+        SetReady(false);
 
-            OnTileDeactivated();
-        }
+        if (_cooldownCoroutine != null)
+            StopCoroutine(_cooldownCoroutine);
+
+        OnTileReset();
     }
 
     protected abstract void OnCarEnter(GameObject car);
 
     protected virtual void OnTileCooledDown() { }
 
-    protected virtual void OnTileDeactivated() { }
+    protected virtual void OnTileReset() { }
 }
