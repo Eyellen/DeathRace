@@ -11,6 +11,8 @@ public abstract class TileBase : NetworkBehaviour
 
     public int Cooldown { get; set; } = 5;
 
+    private IEnumerator _cooldownCoroutine;
+
     [SerializeField] private Light _tileLight;
 
     protected virtual void Start()
@@ -37,7 +39,13 @@ public abstract class TileBase : NetworkBehaviour
     {
         if (!IsReady) return;
         SetReady(false);
-        StartCoroutine(CooldownCoroutine());
+
+        _cooldownCoroutine = CooldownCoroutine();
+        StartCoroutine(_cooldownCoroutine);
+        //if (_cooldownCoroutine != null)
+        //    StopCoroutine(_cooldownCoroutine);
+        //_cooldownCoroutine = CooldownCoroutine();
+        //StartCoroutine(_cooldownCoroutine);
     }
 
     [ClientRpc]
@@ -52,7 +60,7 @@ public abstract class TileBase : NetworkBehaviour
         yield return new WaitForSeconds(Cooldown);
 
         SetReady(true);
-        OnTileReset();
+        OnTileCooledDown();
     }
 
     [Server]
@@ -60,9 +68,19 @@ public abstract class TileBase : NetworkBehaviour
     {
         IsReady = isReady;
         RpcToggleLight(isReady);
+
+        if (!isReady)
+        {
+            if (_cooldownCoroutine != null)
+                StopCoroutine(_cooldownCoroutine);
+
+            OnTileDeactivated();
+        }
     }
 
     protected abstract void OnCarEnter(GameObject car);
 
-    protected virtual void OnTileReset() { }
+    protected virtual void OnTileCooledDown() { }
+
+    protected virtual void OnTileDeactivated() { }
 }

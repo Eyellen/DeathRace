@@ -26,10 +26,19 @@ public class DeathTile : TileBase
     }
 
     [Server]
-    protected override void OnTileReset()
+    protected override void OnTileCooledDown()
     {
         SetReady(false);
         CmdLowerSpikes();
+    }
+
+    [Server]
+    protected override void OnTileDeactivated()
+    {
+        if (_spikesCoroutine != null)
+            StopCoroutine(_spikesCoroutine);
+
+        _spikesTransform.position = new Vector3(_spikesTransform.position.x, _minHeight, _spikesTransform.position.z);
     }
 
     [Command(requiresAuthority = false)]
