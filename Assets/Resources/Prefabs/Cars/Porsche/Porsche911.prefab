@@ -970,6 +970,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 3070863170405424184, guid: d8ea2f508e801e847911ab41143238f4, type: 3}
+    - target: {fileID: 291192481012067170, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: b72c2128c00daa44db01d360c27604a2, type: 2}
     - target: {fileID: 974697301143145523, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: _farLights.Array.size
       value: 2

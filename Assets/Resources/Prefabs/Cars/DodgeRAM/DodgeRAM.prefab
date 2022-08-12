@@ -39,7 +39,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5304304649248090779}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b72c2128c00daa44db01d360c27604a2, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -306,6 +306,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 947468451505305349, guid: 420a780c678fbab43b03e13b171635f3, type: 3}
+    - target: {fileID: 291192481012067170, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: b72c2128c00daa44db01d360c27604a2, type: 2}
     - target: {fileID: 974697301143145523, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: _lightsObjects.Array.size
       value: 2
@@ -578,39 +582,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8222764389388500412, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
   m_PrefabInstance: {fileID: 1510056741415056394}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2096172261079863723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3890616433952849299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d6aec4e0067cc943ba86ec4c16f84e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _minigun: {fileID: 4379428605870743069}
-  _barrelSpinSource: {fileID: 7422223978424837196}
-  _barrelsStartSpin: {fileID: 8300000, guid: 39330a4f9197d8b4d9fe85879268396b, type: 3}
-  _barrelsSpinLoop: {fileID: 8300000, guid: b404eb834eda4ae41aea63cac8bd032b, type: 3}
-  _barrelsStopSpin: {fileID: 8300000, guid: 7283b717a7513ac4a9b4fb1e56327bfe, type: 3}
-  _minigunShootSource: {fileID: 2879619103989737243}
-  _shootLoop: {fileID: 8300000, guid: 409b1e20729b32441b10d4f5433c1984, type: 3}
---- !u!114 &6996701806663676039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3890616433952849299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2473e81f16e9e64fbd85e3b509ca252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gunScript: {fileID: 2190439037131829495}
-  _shootSource: {fileID: 5138933195616630117}
 --- !u!114 &2190439037131829495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -771,6 +742,39 @@ MonoBehaviour:
   _timeBetweenShots: 0.2
   _maxAmmoSupply: 300
   <IsActivated>k__BackingField: 0
+--- !u!114 &2096172261079863723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3890616433952849299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d6aec4e0067cc943ba86ec4c16f84e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minigun: {fileID: 4379428605870743069}
+  _barrelSpinSource: {fileID: 7422223978424837196}
+  _barrelsStartSpin: {fileID: 8300000, guid: 39330a4f9197d8b4d9fe85879268396b, type: 3}
+  _barrelsSpinLoop: {fileID: 8300000, guid: b404eb834eda4ae41aea63cac8bd032b, type: 3}
+  _barrelsStopSpin: {fileID: 8300000, guid: 7283b717a7513ac4a9b4fb1e56327bfe, type: 3}
+  _minigunShootSource: {fileID: 2879619103989737243}
+  _shootLoop: {fileID: 8300000, guid: 409b1e20729b32441b10d4f5433c1984, type: 3}
+--- !u!114 &6996701806663676039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3890616433952849299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2473e81f16e9e64fbd85e3b509ca252, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gunScript: {fileID: 2190439037131829495}
+  _shootSource: {fileID: 5138933195616630117}
 --- !u!82 &2879619103989737243
 AudioSource:
   m_ObjectHideFlags: 0
