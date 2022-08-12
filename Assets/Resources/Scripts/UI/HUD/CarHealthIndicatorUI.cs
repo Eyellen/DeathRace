@@ -16,12 +16,7 @@ public class CarHealthIndicatorUI : MonoBehaviour
     {
         _carHealthFillerImage = _carHealthFiller.GetComponent<Image>();
 
-        SpawnManager.Instance.OnLocalCarSpawned += AsignCar;
-        SpawnManager.Instance.OnLocalCarSpawned += Enable;
-
-        SpawnManager.Instance.OnLocalCarDestroyed += Disable;
-
-        Disable();
+        StartCoroutine(InitializeEvents());
     }
 
     private void Update()
@@ -52,5 +47,17 @@ public class CarHealthIndicatorUI : MonoBehaviour
     private void AsignCar()
     {
         _car = Player.LocalPlayer.Car.GetComponent<CarDamageable>();
+    }
+
+    private IEnumerator InitializeEvents()
+    {
+        yield return new WaitForEndOfFrame();
+
+        SpawnManager.Instance.OnLocalCarSpawned += AsignCar;
+        SpawnManager.Instance.OnLocalCarSpawned += Enable;
+
+        SpawnManager.Instance.OnLocalCarDestroyed += Disable;
+
+        Disable();
     }
 }
