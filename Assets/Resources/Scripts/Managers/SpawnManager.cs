@@ -126,6 +126,7 @@ public class SpawnManager : NetworkBehaviour
     [TargetRpc]
     private void TargetOnLocalCarSpawned(NetworkConnection target, GameObject car)
     {
+        GameCanvas.Instance.SetActiveHUD(true);
         StartCoroutine(OnLocalCarSpawnedCoroutine());
         //Player.LocalPlayer.Car = car;
         Player.LocalPlayer.CameraManager.SetThirdPersonCamera(car.transform);
