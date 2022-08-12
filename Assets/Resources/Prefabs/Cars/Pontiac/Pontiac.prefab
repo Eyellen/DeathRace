@@ -549,6 +549,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 8839407116817895057, guid: 4469a9ccf4ecefd49a1c518f9f8728a5, type: 3}
+    - target: {fileID: 291192481012067170, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: b72c2128c00daa44db01d360c27604a2, type: 2}
     - target: {fileID: 867246045196898228, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.909
@@ -879,20 +883,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 867246045196898228, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
   m_PrefabInstance: {fileID: 3536074999032899446}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5115010887365720212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1159776862999342831}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2473e81f16e9e64fbd85e3b509ca252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gunScript: {fileID: 318695869884761743}
-  _shootSource: {fileID: 7113239222575015449}
 --- !u!114 &318695869884761743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1069,6 +1059,20 @@ MonoBehaviour:
   _timeBetweenShots: 0.2
   _maxAmmoSupply: 300
   <IsActivated>k__BackingField: 0
+--- !u!114 &5115010887365720212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159776862999342831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2473e81f16e9e64fbd85e3b509ca252, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gunScript: {fileID: 318695869884761743}
+  _shootSource: {fileID: 7113239222575015449}
 --- !u!1001 &3583961497569099095
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -166,7 +166,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2810772948995953279}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b72c2128c00daa44db01d360c27604a2, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -724,6 +724,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1836878881245397803, guid: 25ac81c735d8209408ea65a7e9d81997, type: 3}
+    - target: {fileID: 291192481012067170, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: b72c2128c00daa44db01d360c27604a2, type: 2}
     - target: {fileID: 974697301143145523, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: _farLights.Array.size
       value: 2
