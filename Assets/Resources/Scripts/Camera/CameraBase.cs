@@ -19,6 +19,9 @@ public class CameraBase : NetworkBehaviour
     private float _xRotation;
     private float _yRotation;
 
+    protected float XRotation { get => _xRotation; set => _xRotation = value; }
+    protected float YRotation { get => _yRotation; set => _yRotation = value; }
+
     protected virtual void Awake()
     {
         _xRotation = transform.rotation.eulerAngles.y;
