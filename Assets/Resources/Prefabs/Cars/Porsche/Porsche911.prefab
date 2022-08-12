@@ -1310,7 +1310,7 @@ MonoBehaviour:
   _shotPoint: {fileID: 1341188075830429576}
   _damage: 5
   _shotDistance: 100
-  _maxSpreadMagnitude: 10
+  _maxSpreadMagnitude: 5
   _timeBetweenShots: 0.1
   _maxAmmoSupply: 500
   <IsActivated>k__BackingField: 0
@@ -1354,7 +1354,7 @@ MonoBehaviour:
   _shotPoint: {fileID: 5824030221021018686}
   _damage: 5
   _shotDistance: 100
-  _maxSpreadMagnitude: 10
+  _maxSpreadMagnitude: 5
   _timeBetweenShots: 0.1
   _maxAmmoSupply: 500
   <IsActivated>k__BackingField: 0
