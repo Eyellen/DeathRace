@@ -455,6 +455,10 @@ PrefabInstance:
       value: ace11b2923d492c44bb74e449d051b1e
       objectReference: {fileID: 0}
     - target: {fileID: 8083998131863091072, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: _maxHealth
+      value: 1900
+      objectReference: {fileID: 0}
+    - target: {fileID: 8083998131863091072, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: _destroyedCarPrefab
       value: 
       objectReference: {fileID: 5338104260655364224, guid: 08e80f0fa805a594ab1f4ed3ed31a5ef, type: 3}
@@ -574,138 +578,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1865345937230226068, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
   m_PrefabInstance: {fileID: 1510056741415056394}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2190439037131829495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7691484563626307592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad2f5acc9ef28d64085198f21c8cf43e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  _debug: 1
-  _shotPoint: {fileID: 1816944158000711546}
-  _damage: 5
-  _shotDistance: 100
-  _maxSpreadMagnitude: 10
-  _timeBetweenShots: 0.2
-  _maxAmmoSupply: 300
---- !u!114 &4133372878850457018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7691484563626307592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad2f5acc9ef28d64085198f21c8cf43e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  _debug: 1
-  _shotPoint: {fileID: 116010490285913980}
-  _damage: 5
-  _shotDistance: 100
-  _maxSpreadMagnitude: 10
-  _timeBetweenShots: 0.2
-  _maxAmmoSupply: 300
---- !u!114 &4379428605870743069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7691484563626307592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e366e08e92433e74a82a2949cb67d7fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  _debug: 1
-  _shotPoint: {fileID: 5266154618923793668}
-  _damage: 5
-  _shotDistance: 100
-  _maxSpreadMagnitude: 5
-  _timeBetweenShots: 0.05
-  _maxAmmoSupply: 500
-  _minigunBarrels: {fileID: 981564575524615968}
-  _barrelsSpinningTime: 2
-  _maxSpinningSpeed: 1000
---- !u!114 &7894240178094897872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7691484563626307592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad2f5acc9ef28d64085198f21c8cf43e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  _debug: 1
-  _shotPoint: {fileID: 1327929426620906109}
-  _damage: 5
-  _shotDistance: 100
-  _maxSpreadMagnitude: 10
-  _timeBetweenShots: 0.2
-  _maxAmmoSupply: 300
---- !u!114 &7985308084139046639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7691484563626307592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e366e08e92433e74a82a2949cb67d7fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  _debug: 1
-  _shotPoint: {fileID: 1298313546763774979}
-  _damage: 5
-  _shotDistance: 100
-  _maxSpreadMagnitude: 5
-  _timeBetweenShots: 0.05
-  _maxAmmoSupply: 500
-  _minigunBarrels: {fileID: 6237095383446775335}
-  _barrelsSpinningTime: 2
-  _maxSpinningSpeed: 1000
---- !u!114 &8951911054412085076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7691484563626307592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad2f5acc9ef28d64085198f21c8cf43e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  _debug: 1
-  _shotPoint: {fileID: 7830366857335998223}
-  _damage: 5
-  _shotDistance: 100
-  _maxSpreadMagnitude: 10
-  _timeBetweenShots: 0.2
-  _maxAmmoSupply: 300
 --- !u!114 &2096172261079863723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -739,6 +611,144 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gunScript: {fileID: 2190439037131829495}
   _shootSource: {fileID: 5138933195616630117}
+--- !u!114 &2190439037131829495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691484563626307592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad2f5acc9ef28d64085198f21c8cf43e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  _debug: 1
+  _shotPoint: {fileID: 1816944158000711546}
+  _damage: 5
+  _shotDistance: 100
+  _maxSpreadMagnitude: 10
+  _timeBetweenShots: 0.2
+  _maxAmmoSupply: 300
+  <IsActivated>k__BackingField: 0
+--- !u!114 &4133372878850457018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691484563626307592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad2f5acc9ef28d64085198f21c8cf43e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  _debug: 1
+  _shotPoint: {fileID: 116010490285913980}
+  _damage: 5
+  _shotDistance: 100
+  _maxSpreadMagnitude: 10
+  _timeBetweenShots: 0.2
+  _maxAmmoSupply: 300
+  <IsActivated>k__BackingField: 0
+--- !u!114 &4379428605870743069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691484563626307592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e366e08e92433e74a82a2949cb67d7fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  _debug: 1
+  _shotPoint: {fileID: 5266154618923793668}
+  _damage: 5
+  _shotDistance: 100
+  _maxSpreadMagnitude: 5
+  _timeBetweenShots: 0.15
+  _maxAmmoSupply: 500
+  <IsActivated>k__BackingField: 0
+  _minigunBarrels: {fileID: 981564575524615968}
+  _barrelsSpinningTime: 2
+  _maxSpinningSpeed: 1000
+--- !u!114 &7894240178094897872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691484563626307592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad2f5acc9ef28d64085198f21c8cf43e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  _debug: 1
+  _shotPoint: {fileID: 1327929426620906109}
+  _damage: 5
+  _shotDistance: 100
+  _maxSpreadMagnitude: 10
+  _timeBetweenShots: 0.2
+  _maxAmmoSupply: 300
+  <IsActivated>k__BackingField: 0
+--- !u!114 &7985308084139046639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691484563626307592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e366e08e92433e74a82a2949cb67d7fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  _debug: 1
+  _shotPoint: {fileID: 1298313546763774979}
+  _damage: 5
+  _shotDistance: 100
+  _maxSpreadMagnitude: 5
+  _timeBetweenShots: 0.15
+  _maxAmmoSupply: 500
+  <IsActivated>k__BackingField: 0
+  _minigunBarrels: {fileID: 6237095383446775335}
+  _barrelsSpinningTime: 2
+  _maxSpinningSpeed: 1000
+--- !u!114 &8951911054412085076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691484563626307592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad2f5acc9ef28d64085198f21c8cf43e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  _debug: 1
+  _shotPoint: {fileID: 7830366857335998223}
+  _damage: 5
+  _shotDistance: 100
+  _maxSpreadMagnitude: 10
+  _timeBetweenShots: 0.2
+  _maxAmmoSupply: 300
+  <IsActivated>k__BackingField: 0
 --- !u!82 &2879619103989737243
 AudioSource:
   m_ObjectHideFlags: 0

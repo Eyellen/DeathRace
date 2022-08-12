@@ -1151,6 +1151,10 @@ PrefabInstance:
       value: 5e8211567f42ab847a54b42ba5ab2112
       objectReference: {fileID: 0}
     - target: {fileID: 8083998131863091072, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: _maxHealth
+      value: 1700
+      objectReference: {fileID: 0}
+    - target: {fileID: 8083998131863091072, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: _destroyedCarPrefab
       value: 
       objectReference: {fileID: 628293207204756241, guid: f3cd09dbca0e5444e83c93d9f5ac54b0, type: 3}

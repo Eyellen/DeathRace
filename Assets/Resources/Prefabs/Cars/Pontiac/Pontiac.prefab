@@ -738,6 +738,10 @@ PrefabInstance:
       value: 59d4776c426fcb84bb3cafb705ad7a79
       objectReference: {fileID: 0}
     - target: {fileID: 8083998131863091072, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: _maxHealth
+      value: 1800
+      objectReference: {fileID: 0}
+    - target: {fileID: 8083998131863091072, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: _destroyedCarPrefab
       value: 
       objectReference: {fileID: 545901098036113822, guid: bbd61356fac13a344b9bff9ecca110d8, type: 3}
@@ -875,6 +879,20 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 867246045196898228, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
   m_PrefabInstance: {fileID: 3536074999032899446}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5115010887365720212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159776862999342831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2473e81f16e9e64fbd85e3b509ca252, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gunScript: {fileID: 318695869884761743}
+  _shootSource: {fileID: 7113239222575015449}
 --- !u!114 &318695869884761743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -896,6 +914,7 @@ MonoBehaviour:
   _maxSpreadMagnitude: 10
   _timeBetweenShots: 0.2
   _maxAmmoSupply: 300
+  <IsActivated>k__BackingField: 0
 --- !u!114 &2523432765899949166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -917,6 +936,7 @@ MonoBehaviour:
   _maxSpreadMagnitude: 10
   _timeBetweenShots: 0.2
   _maxAmmoSupply: 300
+  <IsActivated>k__BackingField: 0
 --- !u!114 &5320240468582353124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -938,6 +958,7 @@ MonoBehaviour:
   _maxSpreadMagnitude: 10
   _timeBetweenShots: 0.2
   _maxAmmoSupply: 300
+  <IsActivated>k__BackingField: 0
 --- !u!114 &6791669694278889450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -959,6 +980,7 @@ MonoBehaviour:
   _maxSpreadMagnitude: 10
   _timeBetweenShots: 0.2
   _maxAmmoSupply: 300
+  <IsActivated>k__BackingField: 0
 --- !u!114 &6841959474314269356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -980,6 +1002,7 @@ MonoBehaviour:
   _maxSpreadMagnitude: 10
   _timeBetweenShots: 0.2
   _maxAmmoSupply: 300
+  <IsActivated>k__BackingField: 0
 --- !u!114 &7020047711162771264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1001,6 +1024,7 @@ MonoBehaviour:
   _maxSpreadMagnitude: 10
   _timeBetweenShots: 0.2
   _maxAmmoSupply: 300
+  <IsActivated>k__BackingField: 0
 --- !u!114 &8330576934981538040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1022,6 +1046,7 @@ MonoBehaviour:
   _maxSpreadMagnitude: 10
   _timeBetweenShots: 0.2
   _maxAmmoSupply: 300
+  <IsActivated>k__BackingField: 0
 --- !u!114 &8525131627691136552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1043,20 +1068,7 @@ MonoBehaviour:
   _maxSpreadMagnitude: 10
   _timeBetweenShots: 0.2
   _maxAmmoSupply: 300
---- !u!114 &5115010887365720212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1159776862999342831}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2473e81f16e9e64fbd85e3b509ca252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gunScript: {fileID: 318695869884761743}
-  _shootSource: {fileID: 7113239222575015449}
+  <IsActivated>k__BackingField: 0
 --- !u!1001 &3583961497569099095
 PrefabInstance:
   m_ObjectHideFlags: 0
