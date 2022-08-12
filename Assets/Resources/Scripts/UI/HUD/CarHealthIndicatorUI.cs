@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class CarHealthIndicatorUI : MonoBehaviour
 {
-    [SerializeField] private Color _green;
-    [SerializeField] private Color _red;
+    [SerializeField] private HUD _hudScript;
+    [SerializeField] private Color _green = new Color32(21, 255, 0, 255);
+    [SerializeField] private Color _red = new Color32(255, 0, 0, 255);
 
     [SerializeField] private RectTransform _carHealthFiller;
     private Image _carHealthFillerImage;
@@ -16,7 +17,9 @@ public class CarHealthIndicatorUI : MonoBehaviour
     {
         _carHealthFillerImage = _carHealthFiller.GetComponent<Image>();
 
-        StartCoroutine(InitializeEvents());
+        _hudScript.StartCoroutine(InitializeEvents());
+
+        Disable();
     }
 
     private void Update()
@@ -46,18 +49,25 @@ public class CarHealthIndicatorUI : MonoBehaviour
 
     private void AsignCar()
     {
+        _hudScript.StartCoroutine(AsignCarCoroutine());
+    }
+
+    private IEnumerator AsignCarCoroutine()
+    {
+        while (Player.LocalPlayer.Car == null)
+            yield return null;
+
         _car = Player.LocalPlayer.Car.GetComponent<CarDamageable>();
     }
 
     private IEnumerator InitializeEvents()
     {
-        yield return new WaitForEndOfFrame();
+        while (SpawnManager.Instance == null)
+            yield return null;
 
         SpawnManager.Instance.OnLocalCarSpawned += AsignCar;
         SpawnManager.Instance.OnLocalCarSpawned += Enable;
 
         SpawnManager.Instance.OnLocalCarDestroyed += Disable;
-
-        Disable();
     }
 }
