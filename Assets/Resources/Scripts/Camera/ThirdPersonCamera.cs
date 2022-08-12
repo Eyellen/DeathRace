@@ -14,7 +14,7 @@ public class ThirdPersonCamera : CameraBase
     private float _mouseInactiveThreshold = 0.05f;
 
     [SerializeField]
-    private float _switchToAutoCameraAfterSeconds = 10f;
+    private float _switchToAutoCameraAfterSeconds = 3f;
 
     [SerializeField]
     private float _autoCameraLookSmoothness = 2;
@@ -44,6 +44,13 @@ public class ThirdPersonCamera : CameraBase
 
     protected override void HandleRotation()
     {
+        if (PlayerInput.IsBackViewHolding)
+        {
+            HandleBackView();
+            _currentCameraOffset = _thisTransform.rotation * _cameraOffset;
+            return;
+        }
+
         // Would be good to implement state machine here
         if (_lastMouseInputTime + _switchToAutoCameraAfterSeconds > Time.time)
         {
@@ -72,10 +79,15 @@ public class ThirdPersonCamera : CameraBase
     private void HandleAutoCamera()
     {
         _thisTransform.rotation = Quaternion.Lerp(_thisTransform.rotation,
-            Quaternion.Euler(20f, Target.rotation.eulerAngles.y, 0),
+            Quaternion.Euler(20, Target.rotation.eulerAngles.y, 0),
             Time.deltaTime * _autoCameraLookSmoothness);
 
         XRotation = _thisTransform.rotation.eulerAngles.y;
         YRotation = -_thisTransform.rotation.eulerAngles.x;
+    }
+
+    private void HandleBackView()
+    {
+        _thisTransform.rotation = Quaternion.Euler(20, Target.rotation.eulerAngles.y + 180, 0);
     }
 }
