@@ -108,6 +108,7 @@ public class RaceModeManager : GameModeBase
         if (!base.StopGame()) return false;
 
         AnnounceTheWinner();
+        SetActiveAllTiles(false);
 
         // No need to call here because it's being called in base method
         //RpcStopGame();
@@ -172,7 +173,7 @@ public class RaceModeManager : GameModeBase
 
         if (!IsTilesActivated &&
             _playersCompletedLaps[netId] == ActivateTilesOnLap)
-            ActivateAllTiles();
+            SetActiveAllTiles(true);
 
 
         if (_playersCompletedLaps[netId] >= LapsToWin)
@@ -296,14 +297,16 @@ public class RaceModeManager : GameModeBase
     }
 
     [Server]
-    private void ActivateAllTiles()
+    private void SetActiveAllTiles(bool isActive)
     {
         TileBase[] tiles = FindObjectsOfType<TileBase>();
         foreach (var tile in tiles)
         {
-            tile.SetReady(true);
+            tile.SetReady(isActive);
         }
-        IsTilesActivated = true;
-        MessageManager.Instance.RpcShowTopMessage("All Tiles Activated", 3);
+        IsTilesActivated = isActive;
+
+        if (isActive)
+            MessageManager.Instance.RpcShowTopMessage("All Tiles Activated", 3);
     }
 }
