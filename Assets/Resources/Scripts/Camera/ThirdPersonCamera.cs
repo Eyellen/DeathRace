@@ -6,6 +6,7 @@ public class ThirdPersonCamera : CameraBase
 {
     [SerializeField]
     public Transform Target { get; set; }
+    private Rigidbody _targetRigidbody;
 
     [SerializeField]
     private Vector3 _cameraOffset = new Vector3(0, 1, -5);
@@ -22,6 +23,11 @@ public class ThirdPersonCamera : CameraBase
     private Vector3 _currentCameraOffset;
 
     private float _lastMouseInputTime;
+
+    private void Start()
+    {
+        _targetRigidbody = Target.GetComponent<Rigidbody>();
+    }
 
     protected override void LateUpdate()
     {
@@ -56,7 +62,8 @@ public class ThirdPersonCamera : CameraBase
         }
 
         // Would be good to implement state machine here
-        if (_lastMouseInputTime + _switchToAutoCameraAfterSeconds > Time.time)
+        if (_lastMouseInputTime + _switchToAutoCameraAfterSeconds > Time.time ||
+            Mathf.Abs(_targetRigidbody.velocity.magnitude) < 1f)
         {
             base.HandleRotation();
         }
