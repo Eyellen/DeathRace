@@ -43,8 +43,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4025034529487082186}
-  - component: {fileID: 4025034529487082187}
-  - component: {fileID: 5414537778648243913}
   m_Layer: 0
   m_Name: RpgRocketLauncher
   m_TagString: Untagged
@@ -69,45 +67,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4025034529487082187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4025034529487082185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9df1758fffc89d047b089aa6d55e33fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  _rockets:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _launchedRocketPrefab: {fileID: 8805745523747813876, guid: 80e9276c07c6e984daa5bf4bb328e1cb, type: 3}
-  _timeBetweenLaunches: 2
-  <IsActivated>k__BackingField: 0
---- !u!114 &5414537778648243913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4025034529487082185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  serverOnly: 0
-  visible: 0
-  m_AssetId: f94b8d74d06f2cb408945d3224c25f8a
-  hasSpawned: 0
 --- !u!1 &7684877482101360726
 GameObject:
   m_ObjectHideFlags: 0
