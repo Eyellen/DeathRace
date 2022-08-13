@@ -100,7 +100,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bb8db5819551104a9a9d13a4feae9ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   _tileLight: {fileID: 4256917821489173644}
+--- !u!114 &105032683815582965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5132703992240279518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  visible: 0
+  m_AssetId: b5c554f7e5bfd7a479dfca94b1616680
+  hasSpawned: 0
 --- !u!1001 &6344055655011303355
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -108,6 +127,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3302370852536005821}
     m_Modifications:
+    - target: {fileID: 269705854013708305, guid: 1c5d432b949f3114dbe0f9968d918464, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295981845187338849, guid: 1c5d432b949f3114dbe0f9968d918464, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2679861340159759607, guid: 1c5d432b949f3114dbe0f9968d918464, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7088789398739730082, guid: 1c5d432b949f3114dbe0f9968d918464, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -155,6 +186,18 @@ PrefabInstance:
     - target: {fileID: 7578327591549920280, guid: 1c5d432b949f3114dbe0f9968d918464, type: 3}
       propertyPath: m_Name
       value: Plane_Bullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 7578327591549920280, guid: 1c5d432b949f3114dbe0f9968d918464, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8622415881752813513, guid: 1c5d432b949f3114dbe0f9968d918464, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8887290190247918414, guid: 1c5d432b949f3114dbe0f9968d918464, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c5d432b949f3114dbe0f9968d918464, type: 3}

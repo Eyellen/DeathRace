@@ -7,9 +7,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7271363257063671973}
     m_Modifications:
+    - target: {fileID: 958034247701751280, guid: 97157e1cd897f83489b0c9d6a8734666, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2885840238221148547, guid: 97157e1cd897f83489b0c9d6a8734666, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3469068251921086359, guid: 97157e1cd897f83489b0c9d6a8734666, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4740535569567810307, guid: 97157e1cd897f83489b0c9d6a8734666, type: 3}
       propertyPath: m_Name
       value: Plane_Sheeld
+      objectReference: {fileID: 0}
+    - target: {fileID: 4740535569567810307, guid: 97157e1cd897f83489b0c9d6a8734666, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5368874972167133625, guid: 97157e1cd897f83489b0c9d6a8734666, type: 3}
       propertyPath: m_RootOrder
@@ -54,6 +70,14 @@ PrefabInstance:
     - target: {fileID: 5368874972167133625, guid: 97157e1cd897f83489b0c9d6a8734666, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548910039947165113, guid: 97157e1cd897f83489b0c9d6a8734666, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8298114808025067379, guid: 97157e1cd897f83489b0c9d6a8734666, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97157e1cd897f83489b0c9d6a8734666, type: 3}
