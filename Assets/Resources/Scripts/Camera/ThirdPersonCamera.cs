@@ -4,8 +4,17 @@ using UnityEngine;
 
 public class ThirdPersonCamera : CameraBase
 {
+    private Transform _target;
     [SerializeField]
-    public Transform Target { get; set; }
+    public Transform Target
+    {
+        get => _target;
+        set
+        {
+            _target = value;
+            _targetRigidbody = _target.GetComponent<Rigidbody>();
+        }
+    }
     private Rigidbody _targetRigidbody;
 
     [SerializeField]
@@ -23,11 +32,6 @@ public class ThirdPersonCamera : CameraBase
     private Vector3 _currentCameraOffset;
 
     private float _lastMouseInputTime;
-
-    private void Start()
-    {
-        _targetRigidbody = Target.GetComponent<Rigidbody>();
-    }
 
     protected override void LateUpdate()
     {
