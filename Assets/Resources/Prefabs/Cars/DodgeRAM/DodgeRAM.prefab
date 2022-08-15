@@ -387,6 +387,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 1.69
       objectReference: {fileID: 0}
+    - target: {fileID: 2791177541292657682, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.472
+      objectReference: {fileID: 0}
+    - target: {fileID: 2791177541292657682, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.97
+      objectReference: {fileID: 0}
     - target: {fileID: 2791432954134695550, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.074
@@ -415,6 +423,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 4713154825217886514, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4867852099582534852, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: target
       value: 
@@ -427,6 +439,10 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 48283adefda01514e851c40517a63d59, type: 3}
+    - target: {fileID: 6360386080209210518, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: _maxCount
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7075551651831521368, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: _axles.Array.size
       value: 2
@@ -592,6 +608,77 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2380983168014748057, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
   m_PrefabInstance: {fileID: 1510056741415056394}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &706697054439866802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385604287714496010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5078c46a1236cde4e9fa261e8d336b88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gunScript: {fileID: 4379428605870743069}
+  _shotfireParticles:
+  - {fileID: 8828901900629808713}
+  - {fileID: 2420444500705740622}
+  _bulletTracerPrefab: {fileID: 4671762997982137765, guid: cdc0810c1b79f7544a0220c368c4962d, type: 3}
+  _bulletHitEffectPrefab: {fileID: 8727484934170051341, guid: b3cdbeee282f12d4fb619bda0c0fb072, type: 3}
+--- !u!114 &6827113372336584338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385604287714496010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5078c46a1236cde4e9fa261e8d336b88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gunScript: {fileID: 4133372878850457018}
+  _shotfireParticles:
+  - {fileID: 3279820783377348703}
+  - {fileID: 3832405334493300825}
+  - {fileID: 2800841438852154712}
+  - {fileID: 6347924411810445354}
+  _bulletTracerPrefab: {fileID: 4671762997982137765, guid: cdc0810c1b79f7544a0220c368c4962d, type: 3}
+  _bulletHitEffectPrefab: {fileID: 8727484934170051341, guid: b3cdbeee282f12d4fb619bda0c0fb072, type: 3}
+--- !u!114 &2096172261079863723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3890616433952849299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d6aec4e0067cc943ba86ec4c16f84e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minigun: {fileID: 4379428605870743069}
+  _barrelSpinSource: {fileID: 7422223978424837196}
+  _barrelsStartSpin: {fileID: 8300000, guid: 39330a4f9197d8b4d9fe85879268396b, type: 3}
+  _barrelsSpinLoop: {fileID: 8300000, guid: b404eb834eda4ae41aea63cac8bd032b, type: 3}
+  _barrelsStopSpin: {fileID: 8300000, guid: 7283b717a7513ac4a9b4fb1e56327bfe, type: 3}
+  _minigunShootSource: {fileID: 2879619103989737243}
+  _shootLoop: {fileID: 8300000, guid: 409b1e20729b32441b10d4f5433c1984, type: 3}
+--- !u!114 &6996701806663676039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3890616433952849299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2473e81f16e9e64fbd85e3b509ca252, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gunScript: {fileID: 4133372878850457018}
+  _shootSource: {fileID: 5138933195616630117}
 --- !u!114 &4133372878850457018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -669,77 +756,6 @@ MonoBehaviour:
   _launchedRocketPrefab: {fileID: 8805745523747813876, guid: 80e9276c07c6e984daa5bf4bb328e1cb, type: 3}
   _timeBetweenLaunches: 10
   <IsActivated>k__BackingField: 0
---- !u!114 &706697054439866802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1385604287714496010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5078c46a1236cde4e9fa261e8d336b88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gunScript: {fileID: 4379428605870743069}
-  _shotfireParticles:
-  - {fileID: 8828901900629808713}
-  - {fileID: 2420444500705740622}
-  _bulletTracerPrefab: {fileID: 4671762997982137765, guid: cdc0810c1b79f7544a0220c368c4962d, type: 3}
-  _bulletHitEffectPrefab: {fileID: 8727484934170051341, guid: b3cdbeee282f12d4fb619bda0c0fb072, type: 3}
---- !u!114 &6827113372336584338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1385604287714496010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5078c46a1236cde4e9fa261e8d336b88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gunScript: {fileID: 4133372878850457018}
-  _shotfireParticles:
-  - {fileID: 3279820783377348703}
-  - {fileID: 3832405334493300825}
-  - {fileID: 2800841438852154712}
-  - {fileID: 6347924411810445354}
-  _bulletTracerPrefab: {fileID: 4671762997982137765, guid: cdc0810c1b79f7544a0220c368c4962d, type: 3}
-  _bulletHitEffectPrefab: {fileID: 8727484934170051341, guid: b3cdbeee282f12d4fb619bda0c0fb072, type: 3}
---- !u!114 &2096172261079863723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3890616433952849299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d6aec4e0067cc943ba86ec4c16f84e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _minigun: {fileID: 4379428605870743069}
-  _barrelSpinSource: {fileID: 7422223978424837196}
-  _barrelsStartSpin: {fileID: 8300000, guid: 39330a4f9197d8b4d9fe85879268396b, type: 3}
-  _barrelsSpinLoop: {fileID: 8300000, guid: b404eb834eda4ae41aea63cac8bd032b, type: 3}
-  _barrelsStopSpin: {fileID: 8300000, guid: 7283b717a7513ac4a9b4fb1e56327bfe, type: 3}
-  _minigunShootSource: {fileID: 2879619103989737243}
-  _shootLoop: {fileID: 8300000, guid: 409b1e20729b32441b10d4f5433c1984, type: 3}
---- !u!114 &6996701806663676039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3890616433952849299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2473e81f16e9e64fbd85e3b509ca252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gunScript: {fileID: 4133372878850457018}
-  _shootSource: {fileID: 5138933195616630117}
 --- !u!82 &2879619103989737243
 AudioSource:
   m_ObjectHideFlags: 0
