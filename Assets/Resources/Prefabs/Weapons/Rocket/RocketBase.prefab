@@ -132,7 +132,7 @@ MonoBehaviour:
   _explosionPrefab: {fileID: 2782628266562626142, guid: 55dd733288bba9248b94b4175830eab0, type: 3}
   _speed: 20
   _maxTravelTime: 5
-  _impactRadius: 20
+  _impactRadius: 15
   _explosionForce: 100000
   _minDamage: 0
   _maxDamage: 600
