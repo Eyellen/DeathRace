@@ -6,7 +6,7 @@ using Mirror;
 public class Minigun : GunBase
 {
     [Header("Minigun")]
-    [SerializeField] private Transform _minigunBarrels;
+    [SerializeField] private Transform[] _minigunBarrels;
 
     [Header("Minigun settings")]
     [SerializeField] private float _barrelsSpinningTime;
@@ -21,6 +21,8 @@ public class Minigun : GunBase
 
     protected override void HandleInput()
     {
+        if (!hasAuthority) return;
+
         SpinBarrels(PlayerInput.IsLeftActionPressed);
     }
 
@@ -31,7 +33,8 @@ public class Minigun : GunBase
         CmdSetShooting(false);
 
         _currentSpinningSpeed = Mathf.Lerp(0, _maxSpinningSpeed, _spinningTimePassed / _barrelsSpinningTime);
-        _minigunBarrels.Rotate(Vector3.forward, _currentSpinningSpeed * Time.deltaTime);
+        foreach (var barrel in _minigunBarrels)
+            barrel.Rotate(Vector3.forward, _currentSpinningSpeed * Time.deltaTime);
         //Debug.Log(_spinningTimePassed);
         //Debug.Log(_currentSpinningSpeed);
 

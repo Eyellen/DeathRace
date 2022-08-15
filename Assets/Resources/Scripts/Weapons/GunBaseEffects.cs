@@ -5,11 +5,10 @@ using UnityEngine;
 public class GunBaseEffects : MonoBehaviour
 {
     [SerializeField] private GunBase _gunScript;
-    [SerializeField] private Transform _shotPoint;
 
     [Header("Shotfire particles")]
-    [SerializeField] private ParticleSystem _shotfireParticles;
-    private bool _isShotfirePlaying;
+    [SerializeField] private ParticleSystem[] _shotfireParticles;
+    private bool[] _isShotfirePlaying;
 
     [Header("Bullet tracer effect")]
     [SerializeField] private GameObject _bulletTracerPrefab;
@@ -17,36 +16,46 @@ public class GunBaseEffects : MonoBehaviour
     [Header("Hit impact")]
     [SerializeField] private GameObject _bulletHitEffectPrefab;
 
+    private int _layer;
+
+    private float _lastShotTime;
+
     void Start()
     {
-        _gunScript.OnGunShoot += SpawnBulletTracer;
+        _isShotfirePlaying = new bool[_shotfireParticles.Length];
+        _layer = 1 << LayerMask.NameToLayer("Default");
+        _gunScript.OnLocalGunShoot += SpawnBulletTracer;
     }
 
     void Update()
     {
         ShootEffect();
+
+        if (!_gunScript.hasAuthority)
+            SimulateShooting();
     }
 
     private void ShootEffect()
     {
-        if (_gunScript.IsShooting && !_isShotfirePlaying)
+        for (int i = 0; i < _isShotfirePlaying.Length; i++)
         {
-            _isShotfirePlaying = true;
-            _shotfireParticles.Play();
-        }
-        if (!_gunScript.IsShooting && _isShotfirePlaying)
-        {
-            _isShotfirePlaying = false;
-            _shotfireParticles.Stop();
+            if (_gunScript.IsShooting && !_isShotfirePlaying[i])
+            {
+                _isShotfirePlaying[i] = true;
+                _shotfireParticles[i].Play();
+            }
+            if (!_gunScript.IsShooting && _isShotfirePlaying[i])
+            {
+                _isShotfirePlaying[i] = false;
+                _shotfireParticles[i].Stop();
+            }
         }
     }
 
-    private void SpawnBulletTracer(Vector3 direction, float length)
+    private void SpawnBulletTracer(Ray shotRay, float length)
     {
-        Ray shotRay = new Ray(_shotPoint.position, direction.normalized * length);
         Vector3 destination = shotRay.origin + shotRay.direction * length;
-        int layer = 1 << LayerMask.NameToLayer("Default");
-        if (Physics.Raycast(shotRay, out RaycastHit hitInfo, length, layer, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(shotRay, out RaycastHit hitInfo, length, _layer, QueryTriggerInteraction.Ignore))
         {
             SpawnHitParticles(hitInfo);
 
@@ -60,5 +69,20 @@ public class GunBaseEffects : MonoBehaviour
     {
         var hitParticle = Instantiate(_bulletHitEffectPrefab, hitInfo.point, Quaternion.identity);
         hitParticle.transform.LookAt(hitInfo.point + hitInfo.normal);
+    }
+
+    private void SimulateShooting()
+    {
+        if (!_gunScript.IsShooting) return;
+
+        if (Time.time < _lastShotTime + _gunScript.TimeBetweenShots) return;
+
+        foreach (var shotPoint in _gunScript.ShotPoints)
+        {
+            _gunScript.InitializeShotRay(shotPoint, out Ray shotRay);
+
+            SpawnBulletTracer(shotRay, _gunScript.ShotDistance);
+        }
+        _lastShotTime = Time.time;
     }
 }
