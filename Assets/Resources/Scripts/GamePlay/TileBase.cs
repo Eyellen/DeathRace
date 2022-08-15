@@ -22,6 +22,8 @@ public abstract class TileBase : NetworkBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if (other.transform.name != "Frame") return;
+
         if (other.transform.root.tag != "Car") return;
 
         if (!IsReady) return;
