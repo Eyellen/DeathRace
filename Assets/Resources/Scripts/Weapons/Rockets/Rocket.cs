@@ -19,6 +19,8 @@ public class Rocket : NetworkBehaviour
     private Collider _directHit;
     private bool _isExploded;
 
+    private int _layer;
+
     #region Properties
     public float Speed { get { return _speed; } set { _speed = value; } }
     #endregion
@@ -33,6 +35,8 @@ public class Rocket : NetworkBehaviour
 
     private void Start()
     {
+        _layer = 1 << LayerMask.NameToLayer("Default");
+
         _thisTransform = GetComponent<Transform>();
 
         StartCoroutine(HandleTravelLimit(_maxTravelTime));
@@ -48,7 +52,7 @@ public class Rocket : NetworkBehaviour
     private void CheckHit()
     {
         Ray direction = new Ray(_thisTransform.position, _thisTransform.forward);
-        if (!Physics.SphereCast(direction, 0.03f, out RaycastHit hitInfo, _speed * Time.deltaTime)) return;
+        if (!Physics.SphereCast(direction, 0.03f, out RaycastHit hitInfo, _speed * Time.deltaTime, _layer, QueryTriggerInteraction.Ignore)) return;
 
 #if UNITY_EDITOR || DEBUG_BUILD
         if (_debug)
