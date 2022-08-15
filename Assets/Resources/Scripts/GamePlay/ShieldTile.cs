@@ -1,11 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 public class ShieldTile : TileBase
 {
     protected override void OnCarEnter(GameObject car)
     {
-        throw new System.NotImplementedException();
+        CmdActivateProtectionSystems(car);
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdActivateProtectionSystems(GameObject car)
+    {
+        if (!car.TryGetComponent(out CarProtectSystems carProtectSystems)) return;
+
+        carProtectSystems.IsActivated = true;
     }
 }
