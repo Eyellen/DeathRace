@@ -608,83 +608,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2380983168014748057, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
   m_PrefabInstance: {fileID: 1510056741415056394}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4133372878850457018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7691484563626307592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad2f5acc9ef28d64085198f21c8cf43e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  _debug: 1
-  <ShotPoints>k__BackingField:
-  - {fileID: 1816944158000711546}
-  - {fileID: 116010490285913980}
-  - {fileID: 1327929426620906109}
-  - {fileID: 7830366857335998223}
-  <Damage>k__BackingField: 5
-  <ShotDistance>k__BackingField: 100
-  <MaxSpreadMagnitude>k__BackingField: 5
-  <TimeBetweenShots>k__BackingField: 0.2
-  <MaxAmmoSupply>k__BackingField: 500
-  <IsActivated>k__BackingField: 0
---- !u!114 &4379428605870743069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7691484563626307592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e366e08e92433e74a82a2949cb67d7fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  _debug: 1
-  <ShotPoints>k__BackingField:
-  - {fileID: 5266154618923793668}
-  - {fileID: 1298313546763774979}
-  <Damage>k__BackingField: 5
-  <ShotDistance>k__BackingField: 100
-  <MaxSpreadMagnitude>k__BackingField: 5
-  <TimeBetweenShots>k__BackingField: 0.15
-  <MaxAmmoSupply>k__BackingField: 500
-  <IsActivated>k__BackingField: 0
-  _minigunBarrels:
-  - {fileID: 981564575524615968}
-  - {fileID: 6237095383446775335}
-  _barrelsSpinningTime: 2
-  _maxSpinningSpeed: 1000
---- !u!114 &7927659660582016793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7691484563626307592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9df1758fffc89d047b089aa6d55e33fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  _rockets:
-  - {fileID: 5983080287524235565}
-  - {fileID: 5983080287103545537}
-  - {fileID: 5983080287106037588}
-  - {fileID: 5983080286650350503}
-  _launchedRocketPrefab: {fileID: 8805745523747813876, guid: 80e9276c07c6e984daa5bf4bb328e1cb, type: 3}
-  _timeBetweenLaunches: 10
-  <IsActivated>k__BackingField: 0
 --- !u!114 &706697054439866802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -756,6 +679,83 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gunScript: {fileID: 4133372878850457018}
   _shootSource: {fileID: 5138933195616630117}
+--- !u!114 &4133372878850457018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691484563626307592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad2f5acc9ef28d64085198f21c8cf43e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  _debug: 1
+  <ShotPoints>k__BackingField:
+  - {fileID: 1816944158000711546}
+  - {fileID: 116010490285913980}
+  - {fileID: 1327929426620906109}
+  - {fileID: 7830366857335998223}
+  <Damage>k__BackingField: 5
+  <ShotDistance>k__BackingField: 100
+  <MaxSpreadMagnitude>k__BackingField: 5
+  <TimeBetweenShots>k__BackingField: 0.2
+  <MaxAmmoSupply>k__BackingField: 600
+  <IsActivated>k__BackingField: 0
+--- !u!114 &4379428605870743069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691484563626307592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e366e08e92433e74a82a2949cb67d7fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  _debug: 1
+  <ShotPoints>k__BackingField:
+  - {fileID: 5266154618923793668}
+  - {fileID: 1298313546763774979}
+  <Damage>k__BackingField: 5
+  <ShotDistance>k__BackingField: 100
+  <MaxSpreadMagnitude>k__BackingField: 5
+  <TimeBetweenShots>k__BackingField: 0.15
+  <MaxAmmoSupply>k__BackingField: 300
+  <IsActivated>k__BackingField: 0
+  _minigunBarrels:
+  - {fileID: 981564575524615968}
+  - {fileID: 6237095383446775335}
+  _barrelsSpinningTime: 2
+  _maxSpinningSpeed: 1000
+--- !u!114 &7927659660582016793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691484563626307592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9df1758fffc89d047b089aa6d55e33fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  _rockets:
+  - {fileID: 5983080287524235565}
+  - {fileID: 5983080287103545537}
+  - {fileID: 5983080287106037588}
+  - {fileID: 5983080286650350503}
+  _launchedRocketPrefab: {fileID: 8805745523747813876, guid: 80e9276c07c6e984daa5bf4bb328e1cb, type: 3}
+  _timeBetweenLaunches: 10
+  <IsActivated>k__BackingField: 0
 --- !u!82 &2879619103989737243
 AudioSource:
   m_ObjectHideFlags: 0
