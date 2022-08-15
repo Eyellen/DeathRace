@@ -19,41 +19,53 @@ public class Minigun : GunBase
     public bool IsSpinning { get => _isSpinning; }
     #endregion
 
+    protected override void Update()
+    {
+        base.Update();
+
+        if (!hasAuthority)
+            SpinBarrels(IsSpinning);
+    }
+
     protected override void HandleInput()
     {
         if (!hasAuthority) return;
 
-        SpinBarrels(PlayerInput.IsLeftActionPressed);
+        Shoot(PlayerInput.IsLeftActionPressed);
     }
 
-    private void SpinBarrels(bool isActionOccurs)
+    protected override void Shoot(bool isActionOccurs)
     {
         if (!IsActivated) return;
 
-        CmdSetShooting(false);
+        if (IsShooting)
+            CmdSetShooting(false);
 
+        if (SpinBarrels(isActionOccurs) != _maxSpinningSpeed) return;
+
+        base.Shoot(isActionOccurs);
+    }
+
+    private float SpinBarrels(bool isActionOccurs)
+    {
         _currentSpinningSpeed = Mathf.Lerp(0, _maxSpinningSpeed, _spinningTimePassed / _barrelsSpinningTime);
+
         foreach (var barrel in _minigunBarrels)
             barrel.Rotate(Vector3.forward, _currentSpinningSpeed * Time.deltaTime);
-        //Debug.Log(_spinningTimePassed);
-        //Debug.Log(_currentSpinningSpeed);
 
         if (!isActionOccurs)
         {
-            CmdSetIsSpinning(false);
+            if (_isSpinning)
+                CmdSetIsSpinning(false);
             _spinningTimePassed = Mathf.Clamp(_spinningTimePassed - Time.deltaTime, 0, _barrelsSpinningTime);
-            return;
+            return _currentSpinningSpeed;
         }
 
-        if(!_isSpinning)
-        {
+        if (!_isSpinning)
             CmdSetIsSpinning(true);
-        }
         _spinningTimePassed = Mathf.Clamp(_spinningTimePassed + Time.deltaTime, 0, _barrelsSpinningTime);
 
-        if (_currentSpinningSpeed != _maxSpinningSpeed) return;
-
-        Shoot(isActionOccurs);
+        return _currentSpinningSpeed;
     }
 
     [Command]
