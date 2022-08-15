@@ -21,6 +21,8 @@ public static class PlayerInput
     public static bool IsBackViewHolding { get => CheckIfButtonsBlocked(Input.GetKey(KeyCode.C)); }
     public static bool IsReleasedBackView { get => CheckIfButtonsBlocked(Input.GetKeyUp(KeyCode.C)); }
 
+    public static bool IsSmokePressed { get => CheckIfButtonsBlocked(Input.GetKeyDown(KeyCode.X)); }
+
     // Floats
     public static float MouseHorizontalAxis { get => CheckIfNouseAxisBlocked(Input.GetAxisRaw("Mouse X")); }
     public static float MouseVerticalAxis { get => CheckIfNouseAxisBlocked(Input.GetAxisRaw("Mouse Y")); }
