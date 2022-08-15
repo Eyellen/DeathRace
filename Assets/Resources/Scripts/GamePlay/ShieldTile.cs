@@ -5,7 +5,7 @@ using Mirror;
 
 public class ShieldTile : TileBase
 {
-    protected override void OnCarEnter(GameObject car)
+    protected override void OnCarExit(GameObject car)
     {
         CmdActivateProtectionSystems(car);
     }
