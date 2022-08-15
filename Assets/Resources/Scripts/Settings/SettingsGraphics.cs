@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class GameResolution
 {
-    public int Width;
-    public int Height;
+    public int Width { get; private set; }
+    public int Height { get; private set; }
 
     public GameResolution CurrentResolution { get => new GameResolution(Screen.width, Screen.height); }
-
-    public GameResolution() { }
 
     public GameResolution(int width, int height)
     {
