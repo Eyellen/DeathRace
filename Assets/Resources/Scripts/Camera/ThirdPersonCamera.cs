@@ -28,7 +28,7 @@ public class ThirdPersonCamera : CameraBase
     private float _minSpeedFov = 60;
 
     [SerializeField]
-    private float _maxSpeedFov = 75;
+    private float _maxSpeedFov = 70;
 
     [SerializeField]
     private float _maxMovementSpeed = 25;
