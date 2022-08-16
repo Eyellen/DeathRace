@@ -90,6 +90,8 @@ public class Rocket : NetworkBehaviour
         _isExploded = true;
 
         InitializeExplosion();
+
+        OnRocketExplode?.Invoke();
         RpcOnRocketExplode();
         
         Destroy(gameObject);
