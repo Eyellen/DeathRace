@@ -735,6 +735,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8222127753708515548, guid: 20e95724559418940af1834f35cfaf6a, type: 3}
     - target: {fileID: 291192481012067170, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 291192481012067170, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 13400000, guid: b72c2128c00daa44db01d360c27604a2, type: 2}
@@ -877,6 +881,10 @@ PrefabInstance:
     - target: {fileID: 2791177541292657682, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: m_LocalPosition.z
       value: -2.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 2791432954134695550, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.044
       objectReference: {fileID: 0}
     - target: {fileID: 2791432954134695550, guid: 23b5ddc8ace393649ad54e68b1eecbb0, type: 3}
       propertyPath: m_LocalPosition.z
