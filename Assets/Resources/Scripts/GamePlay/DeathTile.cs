@@ -18,7 +18,7 @@ public class DeathTile : TileBase
         _spikesTransform = _spikes.transform;
     }
 
-    protected override void OnCarEnter(GameObject car)
+    protected override void OnCarExit(GameObject car)
     {
         CmdRaiseSpikes();
     }

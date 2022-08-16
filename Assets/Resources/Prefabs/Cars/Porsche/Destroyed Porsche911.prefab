@@ -72,6 +72,10 @@ PrefabInstance:
       propertyPath: m_AssetId
       value: f3cd09dbca0e5444e83c93d9f5ac54b0
       objectReference: {fileID: 0}
+    - target: {fileID: 1220517809418572108, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1555319263119888152, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
       propertyPath: m_Name
       value: Destroyed Porsche911
@@ -180,6 +184,9 @@ PrefabInstance:
     - {fileID: 8388183656856160463, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
     - {fileID: 6171738282231219868, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
     - {fileID: 7375242835334580009, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
+    - {fileID: 3988255556934331856, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
+    - {fileID: 4763269969695313378, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
+    - {fileID: 3717813024510314380, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
 --- !u!1 &628293207204756241 stripped
 GameObject:

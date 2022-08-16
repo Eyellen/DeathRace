@@ -10,23 +10,27 @@ public class GunBase : NetworkBehaviour
     [SerializeField] private bool _debug;
 #endif
 
-    [Header("Gun")]
-    [SerializeField] private Transform _shotPoint;
+    [field: Header("Gun")]
+    [field: SerializeField] public Transform[] ShotPoints { get; private set; }
 
-    [Header("Gun settings")]
-    [SerializeField] private int _damage;
-    [SerializeField] private float _shotDistance;
-    [SerializeField] private float _maxSpreadMagnitude;
-    [SerializeField] private float _timeBetweenShots;
-    [SerializeField] private int _maxAmmoSupply;
+    [field: Header("Gun settings")]
+    [field: SerializeField] public int Damage { get; private set; }
+    [field: SerializeField] public float ShotDistance { get; private set; }
+    [field: SerializeField] public float MaxSpreadMagnitude { get; private set; }
+    [field: SerializeField] public float TimeBetweenShots { get; private set; }
+    [field: SerializeField] public int MaxAmmoSupply { get; private set; }
 
     private float _lastShotTime;
     private int _currentBulletsCount;
 
-    #region Properties
+    private int _layer;
+
     [field: SerializeField]
     [field: SyncVar]
     public bool IsActivated { get; set; }
+
+    [field: SyncVar] public bool IsShooting { get; protected set; }
+
     private bool IsAmmoRunOut
     {
         get
@@ -34,21 +38,17 @@ public class GunBase : NetworkBehaviour
             return _currentBulletsCount <= 0;
         }
     }
+
     private bool IsTimeBetweenShotsPassed
     {
         get
         {
-            return Time.time > (_lastShotTime + _timeBetweenShots);
+            return Time.time > (_lastShotTime + TimeBetweenShots);
         }
     }
-    [field: SyncVar] public bool IsShooting { get; protected set; }
-    #endregion
-
-    public delegate void GunShootEvent(Vector3 direction, float length);
-    public event GunShootEvent OnGunShoot;
-
-    [SyncVar(hook = nameof(HookOnGunShoot))] 
-    private Vector3 _gunShootEventDirection;
+    
+    public delegate void GunShootEvent(Ray shotRay, float length);
+    public event GunShootEvent OnLocalGunShoot;
 
     protected virtual void Awake()
     {
@@ -57,25 +57,27 @@ public class GunBase : NetworkBehaviour
 
     protected virtual void Update()
     {
-        if (!netIdentity.hasAuthority) return;
-
         HandleInput();
 
 #if UNITY_EDITOR || DEBUG_BUILD
         if (_debug)
         {
-            Debug.DrawRay(_shotPoint.position, _shotPoint.forward * _shotDistance, Color.red);
+            foreach (var shotPoint in ShotPoints)
+                Debug.DrawRay(shotPoint.position, shotPoint.forward * ShotDistance, Color.red);
         }
 #endif
     }
 
     private void InitializeGunBase()
     {
-        _currentBulletsCount = _maxAmmoSupply;
+        _layer = 1 << LayerMask.NameToLayer("Default");
+        _currentBulletsCount = MaxAmmoSupply;
     }
 
     protected virtual void HandleInput()
     {
+        if (!hasAuthority) return;
+
         Shoot(PlayerInput.IsLeftActionPressed);
     }
 
@@ -94,59 +96,46 @@ public class GunBase : NetworkBehaviour
 
         _currentBulletsCount--;
 
-        InitializeShotRay(out Ray shotRay);
-        //OnGunShoot?.Invoke(shotRay.direction, _shotDistance);
-        CmdSetGunShootEventDirection(shotRay.direction);
+        for (int i = 0; i < ShotPoints.Length; i++)
+        {
+            InitializeShotRay(ShotPoints[i], out Ray shotRay);
+
+            OnLocalGunShoot.Invoke(shotRay, ShotDistance);
 
 #if UNITY_EDITOR || DEBUG_BUILD
-        if (_debug)
-        {
-            Debug.DrawRay(shotRay.origin, shotRay.direction * _shotDistance, Color.green, 0.5f);
-        }
+            if (_debug)
+            {
+                Debug.DrawRay(shotRay.origin, shotRay.direction * ShotDistance, Color.green);
+            }
 #endif
 
-        int layer = 1 << LayerMask.NameToLayer("Default");
-        if (!Physics.Raycast(shotRay, out RaycastHit hitInfo, _shotDistance, layer, QueryTriggerInteraction.Ignore)) return;
+            if (!Physics.Raycast(shotRay, out RaycastHit hitInfo, ShotDistance, _layer, QueryTriggerInteraction.Ignore)) continue;
 
-        IDamageable<int>[] damageables = hitInfo.transform.GetComponents<IDamageable<int>>();
-        if (damageables.Length <= 0) return;
+            IDamageable<int>[] damageables = hitInfo.transform.GetComponents<IDamageable<int>>();
+            if (damageables.Length <= 0) continue;
 
-        foreach (IDamageable<int> damageable in damageables)
-        {
-            damageable.Damage(_damage, hitInfo.collider);
+            foreach (IDamageable<int> damageable in damageables)
+            {
+                damageable.Damage(Damage, hitInfo.collider);
+            }
         }
-
-        //if (!hitInfo.transform.TryGetComponent(out IDamageable<int> damageable)) return;
-
-        //damageable.Damage(_damage, hitInfo.collider);
     }
 
-    [Command(requiresAuthority = false)]
-    private void CmdSetGunShootEventDirection(Vector3 direction)
+    private void AddSpread(Transform shotPoint, ref Ray shotRay)
     {
-        _gunShootEventDirection = direction;
-    }
-
-    private void HookOnGunShoot(Vector3 oldValue, Vector3 newValue)
-    {
-        OnGunShoot?.Invoke(newValue, _shotDistance);
-    }
-
-    private void AddSpread(ref Ray shotRay)
-    {
-        Vector3 xSpread = _shotPoint.right * Random.Range(-1f, 1f) * _maxSpreadMagnitude;
-        Vector3 ySpread = _shotPoint.up * Random.Range(-1f, 1f) * _maxSpreadMagnitude;
+        Vector3 xSpread = shotPoint.right * Random.Range(-1f, 1f) * MaxSpreadMagnitude;
+        Vector3 ySpread = shotPoint.up * Random.Range(-1f, 1f) * MaxSpreadMagnitude;
 
         Vector3 spread = xSpread + ySpread;
-        spread = spread.magnitude > _maxSpreadMagnitude ? spread.normalized * _maxSpreadMagnitude : spread;
+        spread = spread.magnitude > MaxSpreadMagnitude ? spread.normalized * MaxSpreadMagnitude : spread;
 
         shotRay.direction += spread / 100;
     }
 
-    private void InitializeShotRay(out Ray shotRay)
+    public void InitializeShotRay(Transform shotPoint, out Ray shotRay)
     {
-        shotRay = new Ray(_shotPoint.position, _shotPoint.forward);
-        AddSpread(ref shotRay);
+        shotRay = new Ray(shotPoint.position, shotPoint.forward);
+        AddSpread(shotPoint, ref shotRay);
     }
 
     protected virtual void Shoot(bool isActionOccurs)

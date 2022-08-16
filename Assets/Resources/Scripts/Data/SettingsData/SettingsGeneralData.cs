@@ -23,9 +23,9 @@ public class SettingsGeneralData
 
         public void Initialize()
         {
-            ResolutionHeight = SettingsGraphics.CurrentResolution.height;
-            ResolutionWidth = SettingsGraphics.CurrentResolution.width;
-            RefreshRate = SettingsGraphics.CurrentResolution.refreshRate;
+            ResolutionHeight = SettingsGraphics.CurrentResolution.Height;
+            ResolutionWidth = SettingsGraphics.CurrentResolution.Width;
+            //RefreshRate = SettingsGraphics.CurrentResolution.refreshRate;
 
             ScreenModeIndex = SettingsGraphics.CurrentScreenModeIndex;
             QualityIndex = SettingsGraphics.CurrentQualityLevelIndex;

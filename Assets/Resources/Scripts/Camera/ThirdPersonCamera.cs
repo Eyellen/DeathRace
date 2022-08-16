@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ThirdPersonCamera : CameraBase
 {
+    [field: Header("Third Person Camera Settings")]
+    private Camera _camera;
+
     private Transform _target;
     [SerializeField]
     public Transform Target
@@ -19,7 +22,18 @@ public class ThirdPersonCamera : CameraBase
 
     [SerializeField]
     private Vector3 _cameraOffset = new Vector3(0, 1, -5);
+    private Vector3 _currentCameraOffset;
 
+    [SerializeField]
+    private float _minSpeedFov = 60;
+
+    [SerializeField]
+    private float _maxSpeedFov = 70;
+
+    [SerializeField]
+    private float _maxMovementSpeed = 25;
+
+    [field: Header("Auto Camera Settings")]
     [SerializeField]
     private float _mouseInactiveThreshold = 0.05f;
 
@@ -29,9 +43,14 @@ public class ThirdPersonCamera : CameraBase
     [SerializeField]
     private float _autoCameraLookSmoothness = 2;
 
-    private Vector3 _currentCameraOffset;
-
     private float _lastMouseInputTime;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        _camera = GetComponentInChildren<Camera>();
+    }
 
     protected override void LateUpdate()
     {
@@ -50,6 +69,8 @@ public class ThirdPersonCamera : CameraBase
         }
 
         HandleFollowing();
+
+        HandleFieldOfView();
     }
 
     protected override void HandleRotation()
@@ -104,5 +125,11 @@ public class ThirdPersonCamera : CameraBase
     private void HandleBackView()
     {
         _thisTransform.rotation = Quaternion.Euler(20, Target.rotation.eulerAngles.y + 180, 0);
+    }
+
+    private void HandleFieldOfView()
+    {
+        _camera.fieldOfView = Mathf.Lerp(_minSpeedFov, _maxSpeedFov,
+            Mathf.SmoothStep(0, 1, Mathf.Abs(_targetRigidbody.velocity.magnitude) / _maxMovementSpeed));
     }
 }
