@@ -18,7 +18,7 @@ public class CarLights : NetworkBehaviour
     [field: SerializeField]
     [field: Range(0, 2)]
     [field: SyncVar(hook = nameof(ToggleLights))]
-    public int CurrentLightModeIndex { get; private set; } = 0;
+    public int CurrentLightModeIndex { get; private set; } = 1;
 
     [Header("Near Lights")]
     [SerializeField]
