@@ -1428,7 +1428,7 @@ MonoBehaviour:
   _onLightsMaterial: {fileID: 2100000, guid: e75f35376b089434e8304c0f035ce9c4, type: 2}
   _lightsRenderer: []
   _additionalLightsRenderer: []
-  _currentLightModeIndex: 1
+  <CurrentLightModeIndex>k__BackingField: 1
   _nearLights:
   - {fileID: 2463188075098037529}
   - {fileID: 3926409950765566894}
@@ -1679,8 +1679,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cea21011618374d4da0c181a945a23d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  <IsActivated>k__BackingField: 0
   _protectionSmoke: {fileID: 6296719856472038733}
-  _actionTime: 3
+  _smokeActionTime: 3
+  _smokeCooldown: 20
+  _maxSmokeCount: 5
 --- !u!1 &9099919897771748779
 GameObject:
   m_ObjectHideFlags: 0

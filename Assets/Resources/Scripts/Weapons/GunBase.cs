@@ -31,7 +31,7 @@ public class GunBase : NetworkBehaviour
 
     [field: SyncVar] public bool IsShooting { get; protected set; }
 
-    private bool IsAmmoRunOut
+    public bool IsAmmoRunOut
     {
         get
         {
