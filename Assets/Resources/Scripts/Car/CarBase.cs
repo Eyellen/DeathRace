@@ -99,9 +99,7 @@ public class CarBase : NetworkBehaviour
         {
             _rigidbody.velocity = Vector3.zero;
             _thisTransform.rotation = Quaternion.Euler(0, 0, 0);
-            _thisTransform.position = 
-                SpawnManager.Instance.SpawnPositions[Random.Range(0, 
-                SpawnManager.Instance.SpawnPositions.Length - 1)].transform.position;
+            _thisTransform.position = new Vector3(_thisTransform.position.x, 1, _thisTransform.position.z);
         }
 
         // Speed
