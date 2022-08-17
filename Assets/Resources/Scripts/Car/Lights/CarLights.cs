@@ -14,11 +14,11 @@ public class CarLights : NetworkBehaviour
     [SerializeField] private Renderer[] _lightsRenderer;
     [SerializeField] private Renderer[] _additionalLightsRenderer;
 
-    [Header("Parameters")]
-    [SerializeField]
-    [Range(0, 2)]
-    [SyncVar(hook = nameof(ToggleLights))]
-    private int _currentLightModeIndex = 0;
+    [field: Header("Parameters")]
+    [field: SerializeField]
+    [field: Range(0, 2)]
+    [field: SyncVar(hook = nameof(ToggleLights))]
+    public int CurrentLightModeIndex { get; private set; } = 0;
 
     [Header("Near Lights")]
     [SerializeField]
@@ -39,16 +39,16 @@ public class CarLights : NetworkBehaviour
 
         if(PlayerInput.IsLightsPressed)
         {
-            _currentLightModeIndex = (_currentLightModeIndex + 1) % Enum.GetValues(typeof(LightMode)).Length;
-            ToggleLights(0, _currentLightModeIndex);
-            CmdSetCurrentLightModeIndex(_currentLightModeIndex);
+            CurrentLightModeIndex = (CurrentLightModeIndex + 1) % Enum.GetValues(typeof(LightMode)).Length;
+            ToggleLights(0, CurrentLightModeIndex);
+            CmdSetCurrentLightModeIndex(CurrentLightModeIndex);
         }
     }
 
     [Command(requiresAuthority = false)]
     private void CmdSetCurrentLightModeIndex(int lightModeIndex)
     {
-        _currentLightModeIndex = lightModeIndex;
+        CurrentLightModeIndex = lightModeIndex;
     }
 
     private void ToggleLights(int prevIndex, int newIndex)
@@ -101,6 +101,6 @@ public class CarLights : NetworkBehaviour
 
     private void InitializeLights()
     {
-        ToggleLights(0, _currentLightModeIndex);
+        ToggleLights(0, CurrentLightModeIndex);
     }
 }
