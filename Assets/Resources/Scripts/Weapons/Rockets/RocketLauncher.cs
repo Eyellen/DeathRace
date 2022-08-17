@@ -20,6 +20,19 @@ public class RocketLauncher : NetworkBehaviour
     [field: SyncVar]
     public bool IsActivated { get; set; }
 
+    public bool IsRocketsRanOut
+    {
+        get
+        {
+            foreach (var rocket in _rockets)
+            {
+                if (rocket != null) return false;
+            }
+
+            return true;
+        }
+    }
+
     void Start()
     {
         _thisTransform = GetComponent<Transform>();
