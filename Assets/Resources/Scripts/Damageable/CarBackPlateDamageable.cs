@@ -40,7 +40,7 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
         if (_health > 0) return;
 
         _isBroken = true; // To prevent errors on Client while _isBroken getting synced on Server and Client
-        CmdDestruct();
+        CmdDestruct(Player.LocalPlayer.gameObject);
     }
 
     public void Damage01(float coefficient, Collider collider)
@@ -61,7 +61,7 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
     }
 
     [Command(requiresAuthority = false)]
-    private void CmdDestruct()
+    private void CmdDestruct(GameObject ownerPlayer)
     {
         if (_backPlateCollider == null) return;
 
@@ -69,7 +69,7 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
 
         RpcDestruct();
 
-        NetworkServer.Spawn(brokenBackPlate);
+        NetworkServer.Spawn(brokenBackPlate, ownerPlayer);
 
         CmdSetBroken(true);
     }
