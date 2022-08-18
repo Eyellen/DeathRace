@@ -36,6 +36,8 @@ public class DashboardUI : MonoBehaviour
     [SerializeField] private Color _headlightsFarLight;
     private CarLights _lights;
 
+    private IEnumerator _updateCoroutine;
+
     private void Start()
     {
         _hudScript.StartCoroutine(InitializeEvents());
@@ -43,12 +45,34 @@ public class DashboardUI : MonoBehaviour
         Disable();
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        HandleGunPanel();
-        HandleRocketPanel();
-        HandleSmokePanel();
-        HandleLightsPanel();
+        if (_updateCoroutine != null)
+            StopCoroutine(_updateCoroutine);
+
+        _updateCoroutine = UpdateCoroutine();
+        StartCoroutine(_updateCoroutine);
+    }
+
+    private void OnDisable()
+    {
+        if (_updateCoroutine != null)
+            StopCoroutine(_updateCoroutine);
+    }
+
+    private IEnumerator UpdateCoroutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.2f);
+
+            HandleGunPanel();
+            HandleRocketPanel();
+            HandleSmokePanel();
+            HandleLightsPanel();
+
+            yield return null;
+        }
     }
 
     private void InitializeVariabled()
