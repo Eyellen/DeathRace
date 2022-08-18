@@ -20,7 +20,7 @@ public abstract class TileBase : NetworkBehaviour
         if (IsReady) _tileLight.enabled = true;
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.transform.name != "Frame") return;
 
@@ -32,13 +32,13 @@ public abstract class TileBase : NetworkBehaviour
         // Need to be called only via Command
         if (!other.transform.root.GetComponent<CarBase>().hasAuthority) return;
 
-        CmdOnTriggerExit();
+        CmdOnTriggerEnter();
 
-        OnCarExit(other.transform.root.gameObject);
+        OnCarEnter(other.transform.root.gameObject);
     }
 
     [Command(requiresAuthority = false)]
-    private void CmdOnTriggerExit()
+    private void CmdOnTriggerEnter()
     {
         if (!IsReady) return;
         SetReady(false);
@@ -84,7 +84,7 @@ public abstract class TileBase : NetworkBehaviour
         OnTileReset();
     }
 
-    protected abstract void OnCarExit(GameObject car);
+    protected abstract void OnCarEnter(GameObject car);
 
     protected virtual void OnTileCooledDown() { }
 

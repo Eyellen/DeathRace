@@ -18,7 +18,7 @@ public class DeathTile : TileBase
         _spikesTransform = _spikes.transform;
     }
 
-    protected override void OnCarExit(GameObject car)
+    protected override void OnCarEnter(GameObject car)
     {
         CmdRaiseSpikes();
     }
@@ -62,6 +62,7 @@ public class DeathTile : TileBase
     [Server]
     private IEnumerator RaiseSpikesCoroutine()
     {
+        yield return new WaitForSeconds(0.3f);
         while (_spikesTransform.position.y < _maxHeight)
         {
             _spikesTransform.position += Vector3.up * Time.deltaTime;
