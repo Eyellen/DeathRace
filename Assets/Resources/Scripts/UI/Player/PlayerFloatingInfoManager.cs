@@ -25,16 +25,14 @@ public class PlayerFloatingInfoManager : NetworkBehaviour
         _thisTransform = GetComponent<Transform>();
         _cameraTransform = Camera.main.transform;
         _camera = Camera.main;
-        _canvas = GameObject.Find("Canvas/PlayerFloatingInfos");
 
-        if (netIdentity.hasAuthority)
-            CmdSetUsername(Username = SettingsSaveSystem.CachedSave.userData.Username);
-
-        InitializeFloatingInfo();
+        StartCoroutine(InitializeCanvasCoroutine());
     }
 
     private void Update()
     {
+        if (_canvas == null || _playerFloatingInfo == null) return;
+
         if(!_isShowOnSelf && isLocalPlayer)
         {
             HideFloatingInfo();
@@ -47,6 +45,21 @@ public class PlayerFloatingInfoManager : NetworkBehaviour
     private void OnDestroy()
     {
         Destroy(_playerFloatingInfo);
+    }
+
+    private IEnumerator InitializeCanvasCoroutine()
+    {
+        while (_canvas == null)
+        {
+            _canvas = GameObject.Find("Canvas/PlayerFloatingInfos");
+
+            yield return null;
+        }
+
+        if (netIdentity.hasAuthority)
+            CmdSetUsername(Username = SettingsSaveSystem.CachedSave.userData.Username);
+
+        InitializeFloatingInfo();
     }
 
     private void CheckIfNeedToShowOrHide()
