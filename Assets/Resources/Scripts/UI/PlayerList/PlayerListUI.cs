@@ -11,7 +11,17 @@ public class PlayerListUI : MonoBehaviour
 
     private void Start()
     {
+        //InitializePlayerList();
+    }
+
+    private void OnEnable()
+    {
         InitializePlayerList();
+    }
+
+    private void OnDisable()
+    {
+        ClearPlayerList();
     }
 
     private void InitializePlayerList()
@@ -22,6 +32,14 @@ public class PlayerListUI : MonoBehaviour
         {
             var playerInfoBar = Instantiate(_playerInfoBarTemplatePrefab, _playerListContent.transform);
             playerInfoBar.transform.Find("Username").GetComponent<TextMeshProUGUI>().text = player.Username;
+        }
+    }
+
+    private void ClearPlayerList()
+    {
+        for (int i = _playerListContent.transform.childCount - 1; i >= 0; i--)
+        {
+            Destroy(_playerListContent.transform.GetChild(i).gameObject);
         }
     }
 }
