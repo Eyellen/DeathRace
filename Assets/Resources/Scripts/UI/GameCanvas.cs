@@ -8,7 +8,7 @@ public class GameCanvas : MonoBehaviour
 
     [SerializeField] private EscapeMenu _escapeMenu;
     [SerializeField] private CarSelectUI _carSelectMenu;
-    [SerializeField] private GameObject _tabTable;
+    [SerializeField] private GameObject _playerList;
 
     [SerializeField] private GameObject[] _objectsToHide;
 
@@ -55,9 +55,9 @@ public class GameCanvas : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.Tab))
-            _tabTable.SetActive(true);
+            _playerList.SetActive(true);
         if (Input.GetKeyUp(KeyCode.Tab))
-            _tabTable.SetActive(false);
+            _playerList.SetActive(false);
     }
 
     private void ToggleHUD()
