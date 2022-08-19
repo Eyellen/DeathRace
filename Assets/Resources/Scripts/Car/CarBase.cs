@@ -22,7 +22,7 @@ public class CarBase : NetworkBehaviour
 
     #region Properties
     public float CurrentSpeed { get => _currentSpeed; }
-    public float SpeedLimit { get => _speedLimit; }
+    public float SpeedLimit { get => _speedLimit; set => _speedLimit = value; }
     [field: SyncVar] public bool IsGasing { get; private set; }
     public bool IsGrounded
     {
