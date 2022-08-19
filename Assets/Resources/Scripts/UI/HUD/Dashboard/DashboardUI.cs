@@ -19,6 +19,7 @@ public class DashboardUI : MonoBehaviour
     [SerializeField] private Image _rocket;
     [SerializeField] private Color _rocketEnabled;
     [SerializeField] private Color _rocketDisabled;
+    [SerializeField] private Color _rocketCooldown;
     [SerializeField] private Color _rocketNotAvailable;
     private RocketLauncher _rocketLauncher;
 
@@ -26,6 +27,7 @@ public class DashboardUI : MonoBehaviour
     [SerializeField] private Image _smoke;
     [SerializeField] private Color _smokeEnabled;
     [SerializeField] private Color _smokeDisabled;
+    [SerializeField] private Color _smokeCooldown;
     [SerializeField] private Color _smokeNotAvailable;
     private CarProtectSystems _protectSystems;
 
@@ -132,6 +134,11 @@ public class DashboardUI : MonoBehaviour
             return;
         }
 
+        if (!_rocketLauncher.IsReadyToShoot)
+        {
+            _rocket.color = _rocketCooldown;
+            return;
+        }
         if (_rocketLauncher.IsActivated)
         {
             _rocket.color = _rocketEnabled;
@@ -153,6 +160,11 @@ public class DashboardUI : MonoBehaviour
             return;
         }
 
+        if (!_protectSystems.IsSmokeReady)
+        {
+            _smoke.color = _smokeCooldown;
+            return;
+        }
         if (_protectSystems.IsActivated)
         {
             _smoke.color = _smokeEnabled;
