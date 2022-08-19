@@ -52,7 +52,8 @@ public class Rocket : NetworkBehaviour
     private void CheckHit()
     {
         Ray direction = new Ray(_thisTransform.position, _thisTransform.forward);
-        if (!Physics.SphereCast(direction, 0.03f, out RaycastHit hitInfo, _speed * Time.deltaTime, _layer, QueryTriggerInteraction.Ignore)) return;
+        if (!Physics.SphereCast(direction, 0.03f, out RaycastHit hitInfo, _speed * Time.deltaTime + Time.deltaTime, 
+            _layer, QueryTriggerInteraction.Ignore)) return;
 
 #if UNITY_EDITOR || DEBUG_BUILD
         if (_debug)
