@@ -1203,6 +1203,7 @@ MonoBehaviour:
   syncInterval: 0.1
   _maxHealth: 1500
   _brokenBackPlatePrefab: {fileID: 2309082221795030665, guid: 39fb28818d448014c96c128b3e59fb73, type: 3}
+  <SpeedBoost>k__BackingField: 3
 --- !u!114 &2097122378246942681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1232,24 +1233,6 @@ MonoBehaviour:
   - {fileID: 5150976368125004047}
   _barrelsSpinningTime: 2
   _maxSpinningSpeed: 1000
---- !u!114 &5363481897791921728
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7071577443673787514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5078c46a1236cde4e9fa261e8d336b88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gunScript: {fileID: 2097122378246942681}
-  _shotfireParticles:
-  - {fileID: 2682880213515374263}
-  - {fileID: 3486430359146080358}
-  _bulletTracerPrefab: {fileID: 4671762997982137765, guid: cdc0810c1b79f7544a0220c368c4962d, type: 3}
-  _bulletHitEffectPrefab: {fileID: 8727484934170051341, guid: b3cdbeee282f12d4fb619bda0c0fb072, type: 3}
 --- !u!114 &2139003209260957289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1269,6 +1252,24 @@ MonoBehaviour:
   _barrelsStopSpin: {fileID: 8300000, guid: 7283b717a7513ac4a9b4fb1e56327bfe, type: 3}
   _minigunShootSource: {fileID: 3911593388354139925}
   _shootLoop: {fileID: 8300000, guid: 409b1e20729b32441b10d4f5433c1984, type: 3}
+--- !u!114 &5363481897791921728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7071577443673787514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5078c46a1236cde4e9fa261e8d336b88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gunScript: {fileID: 2097122378246942681}
+  _shotfireParticles:
+  - {fileID: 2682880213515374263}
+  - {fileID: 3486430359146080358}
+  _bulletTracerPrefab: {fileID: 4671762997982137765, guid: cdc0810c1b79f7544a0220c368c4962d, type: 3}
+  _bulletHitEffectPrefab: {fileID: 8727484934170051341, guid: b3cdbeee282f12d4fb619bda0c0fb072, type: 3}
 --- !u!1001 &7388600322172581381
 PrefabInstance:
   m_ObjectHideFlags: 0
