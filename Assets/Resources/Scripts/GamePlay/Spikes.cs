@@ -6,6 +6,14 @@ public class Spikes : MonoBehaviour
 {
     [SerializeField] private float _minSpeedForDamage;
     [SerializeField] private float _damageCoefficientMultiplier = 1;
+    [SerializeField] private bool _isSelfDestructable = false;
+    [SerializeField] private float _selfDestroyingTime = 3;
+
+    private void Start()
+    {
+        if (_isSelfDestructable)
+            StartCoroutine(DestroyScript(_selfDestroyingTime));
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -28,5 +36,15 @@ public class Spikes : MonoBehaviour
         {
             damageable.Damage01(coefficient, collision.collider);
         }
+
+        if (_isSelfDestructable)
+            Destroy(this);
+    }
+
+    private IEnumerator DestroyScript(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+
+        Destroy(this);
     }
 }
