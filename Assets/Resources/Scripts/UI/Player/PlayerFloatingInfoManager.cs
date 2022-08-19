@@ -72,6 +72,14 @@ public class PlayerFloatingInfoManager : NetworkBehaviour
             HideFloatingInfo();
             return;
         }
+
+        // To check if there is some object between player and camera
+        if (Physics.Linecast(_cameraTransform.position, _thisTransform.position + Vector3.up * _verticalOffset))
+        {
+            HideFloatingInfo();
+            return;
+        }
+
         ShowFloatingInfo();
     }
 
