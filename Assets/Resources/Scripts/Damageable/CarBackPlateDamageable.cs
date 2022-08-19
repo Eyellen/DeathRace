@@ -38,6 +38,8 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
 
     private void Update()
     {
+        if (!hasAuthority) return;
+
         if (PlayerInput.IsDropBackPlatePressed)
             DropBackPlate();
     }
