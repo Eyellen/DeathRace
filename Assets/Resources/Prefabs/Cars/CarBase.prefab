@@ -1406,7 +1406,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   _playerFloatingInfoPrefab: {fileID: 2553615383794190934, guid: 645f86e68b1e432458c05928dbe65a46, type: 3}
-  _visibleDistance: 50
+  _visibleDistance: 20
   _verticalOffset: 1.5
   _isShowOnSelf: 1
   <Username>k__BackingField: 
