@@ -21,12 +21,27 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
     public int Health { get => _health; }
     public bool IsBroken { get => _isBroken; }
 
+    [field: Tooltip("Speed boost that will be applied to car after droping BackPlate")]
+    [field: SerializeField]
+    public float SpeedBoost { get; private set; } = 3f;
+
     private void Start()
     {
         CmdSetHealth(_maxHealth);
         _backPlateCollider = transform.Find("Body/BackPlate").GetComponent<Collider>();
 
         CheckIfBackPlateBroken();
+    }
+
+    private void Update()
+    {
+        if (PlayerInput.IsDropBackPlatePressed)
+            DropBackPlate();
+    }
+
+    private void OnDestroy()
+    {
+        gameObject.GetComponent<CarBase>().SpeedLimit += SpeedBoost;
     }
 
     public void Damage(int damage, Collider collider)
@@ -40,7 +55,7 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
         if (_health > 0) return;
 
         _isBroken = true; // To prevent errors on Client while _isBroken getting synced on Server and Client
-        CmdDestruct(Player.LocalPlayer.gameObject);
+        CmdDestruct();
     }
 
     public void Damage01(float coefficient, Collider collider)
@@ -61,14 +76,16 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
     }
 
     [Command(requiresAuthority = false)]
-    private void CmdDestruct(GameObject ownerPlayer)
+    private void CmdDestruct()
     {
         if (_backPlateCollider == null) return;
 
-        GameObject brokenBackPlate = Instantiate(_brokenBackPlatePrefab, _backPlateCollider.transform.position, _backPlateCollider.transform.rotation);
+        GameObject brokenBackPlate = Instantiate(_brokenBackPlatePrefab,
+            _backPlateCollider.transform.position, _backPlateCollider.transform.rotation);
 
         RpcDestruct();
 
+        GameObject ownerPlayer = gameObject.GetComponent<CarInfo>().Player.gameObject;
         NetworkServer.Spawn(brokenBackPlate, ownerPlayer);
 
         CmdSetBroken(true);
@@ -95,5 +112,15 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
         if (!_isBroken) return;
 
         Destroy(_backPlateCollider.gameObject);
+    }
+
+    private void DestroySelf()
+    {
+        Damage01(1, _backPlateCollider);
+    }
+
+    private void DropBackPlate()
+    {
+        DestroySelf();
     }
 }
