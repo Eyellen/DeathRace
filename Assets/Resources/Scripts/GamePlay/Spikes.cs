@@ -8,6 +8,7 @@ public class Spikes : MonoBehaviour
     [SerializeField] private float _damageCoefficientMultiplier = 1;
     [SerializeField] private bool _isSelfDestructable = false;
     [SerializeField] private float _selfDestroyingTime = 3;
+    public GameObject IgnoreObject { get; set; }
 
     private void Start()
     {
@@ -17,6 +18,8 @@ public class Spikes : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.transform.root.gameObject == IgnoreObject) return;
+
         if (Mathf.Abs(collision.relativeVelocity.magnitude) < _minSpeedForDamage) return;
 
         // To prevent caling on server

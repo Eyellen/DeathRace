@@ -17,6 +17,7 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
     private Collider _backPlateCollider;
 
     [SerializeField] private GameObject _brokenBackPlatePrefab;
+    private GameObject _brokenBackPlateInstance;
 
     public int MaxHealth => _maxHealth;
 
@@ -93,6 +94,7 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
 
         GameObject brokenBackPlate = Instantiate(_brokenBackPlatePrefab,
             _backPlateCollider.transform.position, _backPlateCollider.transform.rotation);
+        _brokenBackPlateInstance = brokenBackPlate;
 
         RpcDestruct();
 
@@ -109,6 +111,7 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
     private void RpcDestruct()
     {
         gameObject.GetComponent<CarBase>().SpeedLimit += SpeedBoost;
+        _brokenBackPlateInstance.GetComponent<Spikes>().IgnoreObject = gameObject;
 
         if (_backPlateCollider != null)
             Destroy(_backPlateCollider.gameObject);
