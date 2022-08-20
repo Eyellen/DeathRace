@@ -19,6 +19,7 @@ public class SpawnManager : NetworkBehaviour
     private int _spawnPositionIndex = 0;
 
     public System.Action OnLocalCarSpawned;
+    public System.Action<uint> OnLocalCarSpawnedIndex;
     public System.Action OnLocalCarDestroyed;
 
     private void Awake()
@@ -61,42 +62,6 @@ public class SpawnManager : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
-    private void CmdSpawn(GameObject carPrefab, GameObject ownerPlayer)
-    {
-#if UNITY_EDITOR || DEBUG_BUILD
-        if (_carPrefabs.Length <= 0)
-        {
-            Debug.LogError($"CarPrefabs in {nameof(SpawnManager)} doesn't contain {carPrefab}." +
-                    $"Posibly you didn't add {carPrefab} to CarPrefabs or you are trying to spawn wrong prefab.");
-            return;
-        }
-        for (int i = 0; i < _carPrefabs.Length; i++)
-        {
-            if (carPrefab == _carPrefabs[i]) break;
-
-            if (i + 1 == _carPrefabs.Length)
-            {
-                Debug.LogError($"CarPrefabs in {nameof(SpawnManager)} doesn't contain {carPrefab}." +
-                    $"Posibly you didn't add {carPrefab} to CarPrefabs or you are trying to spawn wrong prefab.");
-                return;
-            }
-        }
-#endif
-
-        Transform spawnPositionTransform = SpawnPositions[_spawnPositionIndex];
-
-        GameObject car = Instantiate(carPrefab,
-            spawnPositionTransform.position,
-            spawnPositionTransform.rotation);
-        NetworkServer.Spawn(car, ownerPlayer);
-
-        _spawnPositionIndex = (_spawnPositionIndex + 1) % SpawnPositions.Length;
-
-        NetworkConnection connection = ownerPlayer.GetComponent<Player>().connectionToClient;
-        TargetOnLocalCarSpawned(connection, car);
-    }
-
-    [Command(requiresAuthority = false)]
     private void CmdSpawn(uint carIndex, GameObject ownerPlayer)
     {
         if(carIndex >= _carPrefabs.Length)
@@ -120,14 +85,14 @@ public class SpawnManager : NetworkBehaviour
         _spawnPositionIndex = (_spawnPositionIndex + 1) % SpawnPositions.Length;
 
         NetworkConnection connection = ownerPlayer.GetComponent<Player>().connectionToClient;
-        TargetOnLocalCarSpawned(connection, car);
+        TargetOnLocalCarSpawned(connection, car, carIndex);
     }
 
     [TargetRpc]
-    private void TargetOnLocalCarSpawned(NetworkConnection target, GameObject car)
+    private void TargetOnLocalCarSpawned(NetworkConnection target, GameObject car, uint carIndex)
     {
         GameCanvas.Instance.SetActiveHUD(true);
-        StartCoroutine(OnLocalCarSpawnedCoroutine());
+        StartCoroutine(OnLocalCarSpawnedCoroutine(carIndex));
         //Player.LocalPlayer.Car = car;
         Player.LocalPlayer.CameraManager.SetThirdPersonCamera(car.transform);
     }
@@ -136,11 +101,12 @@ public class SpawnManager : NetworkBehaviour
     /// This method written to prevent errors that appear before car being spawned
     /// It waits 1 frame (till Car will be Instantiated) and then calls OnLocalCarSpawned
     /// </summary>
-    private IEnumerator OnLocalCarSpawnedCoroutine()
+    private IEnumerator OnLocalCarSpawnedCoroutine(uint carIndex)
     {
         yield return new WaitForEndOfFrame();
 
         OnLocalCarSpawned?.Invoke();
+        OnLocalCarSpawnedIndex?.Invoke(carIndex);
     }
 
     [TargetRpc]
