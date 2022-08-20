@@ -33,6 +33,14 @@ public class RocketLauncher : NetworkBehaviour
         }
     }
 
+    public bool IsReadyToShoot
+    {
+        get
+        {
+            return Time.time > _lastLaunchTime + _timeBetweenLaunches;
+        }
+    }
+
     void Start()
     {
         _thisTransform = GetComponent<Transform>();
@@ -73,7 +81,7 @@ public class RocketLauncher : NetworkBehaviour
     {
         if (!IsActivated) return;
 
-        if (Time.time < _lastLaunchTime + _timeBetweenLaunches) return;
+        if (!IsReadyToShoot) return;
         _lastLaunchTime = Time.time;
 
         for (int i = 0; i < _rockets.Length; i++)

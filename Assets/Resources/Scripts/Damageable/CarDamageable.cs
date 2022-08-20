@@ -19,9 +19,11 @@ public class CarDamageable : NetworkBehaviour, IDamageable<int>
     [SerializeField] private GameObject _destroyedCarPrefab;
     [SerializeField] private GameObject _explosionPrefab;
 
-    public int MaxHealth { get => _maxHealth; }
-    public int Health { get => _health; }
-    public float HealthRemainingRatio { get => (float)_health / _maxHealth; }
+    public int MaxHealth => _maxHealth;
+
+    public int CurrentHealth => _health;
+
+    public float HealthRatio => (float)_health / _maxHealth;
 
     private void Start()
     {

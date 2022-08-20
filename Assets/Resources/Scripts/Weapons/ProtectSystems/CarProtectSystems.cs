@@ -24,7 +24,7 @@ public class CarProtectSystems : NetworkBehaviour
     private int _maxSmokeCount = 5;
     private int _currentSmokeCount;
 
-    private bool _isSmokeReady= true;
+    public bool IsSmokeReady { get; private set; } = true;
 
     private IEnumerator _handleSmokeCoroutine;
 
@@ -54,7 +54,7 @@ public class CarProtectSystems : NetworkBehaviour
 
         if (!IsActivated) return;
 
-        if (PlayerInput.IsSmokePressed && _isSmokeReady)
+        if (PlayerInput.IsSmokePressed && IsSmokeReady)
         {
             _currentSmokeCount--;
             _handleSmokeCoroutine = HandleSmokeCoroutine(_smokeActionTime);
@@ -64,7 +64,7 @@ public class CarProtectSystems : NetworkBehaviour
 
     private IEnumerator HandleSmokeCoroutine(float seconds)
     {
-        _isSmokeReady = false;
+        IsSmokeReady = false;
         _protectionSmoke.Play();
         CmdPlayProtectionSmoke(true);
 
@@ -79,7 +79,7 @@ public class CarProtectSystems : NetworkBehaviour
     {
         yield return new WaitForSeconds(seconds);
 
-        _isSmokeReady = true;
+        IsSmokeReady = true;
     }
 
     [Command(requiresAuthority = false)]

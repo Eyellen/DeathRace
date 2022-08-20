@@ -8,6 +8,7 @@ public class CarSelectPreviewManager : MonoBehaviour
 
     public uint SelectedCarIndex { get; set; } = 0;
     [field: SerializeField] public GameObject[] PreviewCars { get; set; }
+    [field: SerializeField] private GameObject[] CarsInfo { get; set; }
 
     private void Start()
     {
@@ -34,16 +35,21 @@ public class CarSelectPreviewManager : MonoBehaviour
     public void ShowCar(uint carIndex)
     {
         PreviewCars[SelectedCarIndex].SetActive(false);
+        CarsInfo[SelectedCarIndex].SetActive(false);
 
         PreviewCars[carIndex].transform.position = transform.position + Vector3.up * 0.5f;
         PreviewCars[carIndex].transform.rotation = transform.rotation;
 
         PreviewCars[carIndex].SetActive(true);
+        CarsInfo[carIndex].SetActive(true);
     }
 
     public void HideCar(uint carIndex)
     {
         PreviewCars[carIndex].SetActive(false);
+        CarsInfo[carIndex].SetActive(false);
+
         PreviewCars[SelectedCarIndex].SetActive(true);
+        CarsInfo[SelectedCarIndex].SetActive(true);
     }
 }

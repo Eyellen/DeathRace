@@ -18,8 +18,11 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
 
     [SerializeField] private GameObject _brokenBackPlatePrefab;
 
-    public int Health { get => _health; }
-    public bool IsBroken { get => _isBroken; }
+    public int MaxHealth => _maxHealth;
+
+    public int CurrentHealth => _health;
+
+    public float HealthRatio => (float)_health / _maxHealth;
 
     [field: Tooltip("Speed boost that will be applied to car after droping BackPlate")]
     [field: SerializeField]
