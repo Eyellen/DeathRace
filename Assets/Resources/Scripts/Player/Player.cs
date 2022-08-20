@@ -12,6 +12,31 @@ public class Player : NetworkBehaviour
 
     public CameraManager CameraManager { get; private set; }
 
+    public static Player[] AllPlayers
+    {
+        get => FindObjectsOfType<Player>();
+    }
+
+    /// <summary>
+    /// Players that not spectating
+    /// </summary>
+    public static List<Player> ActivePlayers
+    {
+        get
+        {
+            Player[] allPlayers = AllPlayers;
+
+            List<Player> activePlayers = new List<Player>();
+            foreach (var player in allPlayers)
+            {
+                if (player.SelectedCarIndex == -1) continue;
+
+                activePlayers.Add(player);
+            }
+            return activePlayers;
+        }
+    }
+
     // Index of selected car, value -1 means that player is spectating
     [field: SyncVar]
     public int SelectedCarIndex { get; private set; } = 0;
