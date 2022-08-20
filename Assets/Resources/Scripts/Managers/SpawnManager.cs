@@ -21,6 +21,7 @@ public class SpawnManager : NetworkBehaviour
     public System.Action OnLocalCarSpawned;
     public System.Action<uint> OnLocalCarSpawnedIndex;
     public System.Action OnLocalCarDestroyed;
+    public System.Action OnLocalCarRemoved;
 
     private void Awake()
     {
@@ -129,7 +130,7 @@ public class SpawnManager : NetworkBehaviour
     /// <summary>
     /// Removes car without explosion effect and without leaving a DestroyedCar
     /// </summary>
-    public void RemoveCurrentCar()
+    public void RemoveLocalCar()
     {
         CmdRemoveCar(Player.LocalPlayer.Car);
     }
@@ -143,6 +144,13 @@ public class SpawnManager : NetworkBehaviour
     {
         _spawnedCarsStorage.Remove(car.GetComponent<CarInfo>().netId);
         NetworkServer.Destroy(car);
+        TargetOnLocalCarRemoved(car.GetComponent<NetworkIdentity>().connectionToClient);
+    }
+
+    [TargetRpc]
+    private void TargetOnLocalCarRemoved(NetworkConnection connection)
+    {
+        OnLocalCarRemoved?.Invoke();
     }
 
     [Server]
