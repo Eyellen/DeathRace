@@ -1203,7 +1203,7 @@ MonoBehaviour:
   syncInterval: 0.1
   _maxHealth: 1500
   _brokenBackPlatePrefab: {fileID: 2309082221795030665, guid: 39fb28818d448014c96c128b3e59fb73, type: 3}
-  <SpeedBoost>k__BackingField: 3
+  <SpeedBoost>k__BackingField: 1.5
   <RecoilForce>k__BackingField: 10
 --- !u!114 &2097122378246942681
 MonoBehaviour:
