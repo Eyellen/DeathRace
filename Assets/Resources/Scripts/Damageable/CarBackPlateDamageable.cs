@@ -17,7 +17,6 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
     private Collider _backPlateCollider;
 
     [SerializeField] private GameObject _brokenBackPlatePrefab;
-    private GameObject _brokenBackPlateInstance;
 
     public int MaxHealth => _maxHealth;
 
@@ -94,24 +93,21 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
 
         GameObject brokenBackPlate = Instantiate(_brokenBackPlatePrefab,
             _backPlateCollider.transform.position, _backPlateCollider.transform.rotation);
-        _brokenBackPlateInstance = brokenBackPlate;
-
-        RpcDestruct();
 
         GameObject ownerPlayer = gameObject.GetComponent<CarInfo>().Player.gameObject;
         NetworkServer.Spawn(brokenBackPlate, ownerPlayer);
 
-        // Applying recoil force
-        brokenBackPlate.GetComponent<Rigidbody>().AddForce(-brokenBackPlate.transform.right * recoilForce, ForceMode.VelocityChange);
-
+        RpcDestruct(brokenBackPlate, recoilForce);
         CmdSetBroken(true);
     }
 
     [ClientRpc]
-    private void RpcDestruct()
+    private void RpcDestruct(GameObject brokenBackPlate, float recoilForce)
     {
         gameObject.GetComponent<CarBase>().SpeedLimit += SpeedBoost;
-        _brokenBackPlateInstance.GetComponent<Spikes>().IgnoreObject = gameObject;
+        brokenBackPlate.GetComponent<Spikes>().IgnoreObject = gameObject;
+        // Applying recoil force
+        brokenBackPlate.GetComponent<Rigidbody>().AddForce(-brokenBackPlate.transform.right * recoilForce, ForceMode.VelocityChange);
 
         if (_backPlateCollider != null)
             Destroy(_backPlateCollider.gameObject);
