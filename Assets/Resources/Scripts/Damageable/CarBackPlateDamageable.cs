@@ -103,7 +103,11 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
     [ClientRpc]
     private void RpcDestruct(GameObject brokenBackPlate, float recoilForce)
     {
-        gameObject.GetComponent<CarBase>().SpeedLimit += SpeedBoost;
+        if (gameObject.TryGetComponent(out CarBase carBase))
+        {
+            carBase.SpeedLimit += SpeedBoost;
+        }
+
         brokenBackPlate.GetComponent<Spikes>().IgnoreObject = gameObject;
         // Applying recoil force
         brokenBackPlate.GetComponent<Rigidbody>().AddForce(-brokenBackPlate.transform.right * recoilForce, ForceMode.VelocityChange);
