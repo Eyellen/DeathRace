@@ -94,8 +94,7 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
         GameObject brokenBackPlate = Instantiate(_brokenBackPlatePrefab,
             _backPlateCollider.transform.position, _backPlateCollider.transform.rotation);
 
-        GameObject ownerPlayer = gameObject.GetComponent<CarInfo>().Player.gameObject;
-        NetworkServer.Spawn(brokenBackPlate, ownerPlayer);
+        NetworkServer.Spawn(brokenBackPlate);
 
         RpcDestruct(brokenBackPlate, recoilForce);
         CmdSetBroken(true);
