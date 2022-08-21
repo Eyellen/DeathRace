@@ -68,6 +68,7 @@ public class ThirdPersonCamera : CameraBase
             _lastMouseInputTime = Time.time;
         }
 
+        HandleOffsetMagnitude();
         HandleFollowing();
 
         HandleFieldOfView();
@@ -98,6 +99,15 @@ public class ThirdPersonCamera : CameraBase
         }
 
         _currentCameraOffset = _thisTransform.rotation * _cameraOffset;
+    }
+
+    private void HandleOffsetMagnitude()
+    {
+        if (!Physics.Linecast(Target.position, Target.position + _currentCameraOffset, out RaycastHit hitInfo)) return;
+
+        Vector3 newOffset = hitInfo.point - Target.position;
+
+        _currentCameraOffset = _currentCameraOffset.normalized * newOffset.magnitude;
     }
 
     private void HandleFollowing()
