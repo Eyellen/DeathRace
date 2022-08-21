@@ -48,11 +48,13 @@ public class Player : NetworkBehaviour
     public GameObject Car { get; set; }
 
     [field: SerializeField]
-    [field: SyncVar]
+    [field: SyncVar(hook = nameof(OnNameSyncedHook))]
     public string Username { get; private set; }
 
     public static Action<Player> OnPlayerJoin;
     public static Action<Player> OnPlayerExit;
+
+    public Action<string> OnNameSynced;
 
     public override void OnStartClient()
     {
@@ -91,5 +93,10 @@ public class Player : NetworkBehaviour
     public void CmdSetSelectedCarIndex(int carIndex)
     {
         SelectedCarIndex = carIndex;
+    }
+
+    public void OnNameSyncedHook(string oldName, string newName)
+    {
+        OnNameSynced?.Invoke(newName);
     }
 }
