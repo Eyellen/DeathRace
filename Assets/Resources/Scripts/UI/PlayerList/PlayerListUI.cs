@@ -8,7 +8,7 @@ public class PlayerListUI : MonoBehaviour
     [SerializeField] private GameObject _playerListContainer;
     [SerializeField] private GameObject _playerInfoBarTemplatePrefab;
 
-    private Dictionary<Player, GameObject> _playerInfoBars = new Dictionary<Player, GameObject>();
+    private Dictionary<Player, PlayerInfoBarUI> _playerInfoBars = new Dictionary<Player, PlayerInfoBarUI>();
 
     private void Start()
     {
@@ -20,12 +20,16 @@ public class PlayerListUI : MonoBehaviour
     private void AddPlayerToList(Player player)
     {
         GameObject playerInfoBar = Instantiate(_playerInfoBarTemplatePrefab, _playerListContainer.transform);
-        _playerInfoBars[player] = playerInfoBar;
+
+        PlayerInfoBarUI playerInfoBarComponent = playerInfoBar.GetComponent<PlayerInfoBarUI>();
+        _playerInfoBars[player] = playerInfoBarComponent;
+
+        playerInfoBarComponent.Player = player;
     }
 
     private void RemovePlayerFromList(Player player)
     {
-        Destroy(_playerInfoBars[player]);
+        Destroy(_playerInfoBars[player].gameObject);
         _playerInfoBars.Remove(player);
     }
 
