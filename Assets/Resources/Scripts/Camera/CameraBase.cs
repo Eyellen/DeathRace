@@ -22,6 +22,13 @@ public class CameraBase : NetworkBehaviour
     protected float XRotation { get => _xRotation; set => _xRotation = value; }
     protected float YRotation { get => _yRotation; set => _yRotation = value; }
 
+    [field: Header("Smooth Camera Settings")]
+    [field: SerializeField]
+    protected bool IsSmoothCamera { get; private set; }
+
+    [field: SerializeField]
+    private float SensitivitySmoothness { get; set; } = 2f;
+
     protected virtual void Awake()
     {
         _xRotation = transform.rotation.eulerAngles.y;
@@ -35,6 +42,10 @@ public class CameraBase : NetworkBehaviour
 
     protected virtual void LateUpdate()
     {
+        // Toggle Smooth Camera
+        if (Input.GetKeyDown(KeyCode.F2))
+            IsSmoothCamera = !IsSmoothCamera;
+
         HandleRotation();
     }
 
@@ -46,7 +57,8 @@ public class CameraBase : NetworkBehaviour
         _yRotation = Mathf.Clamp(_yRotation, -90f, 90f);
         Quaternion rotation = Quaternion.Euler(-_yRotation, _xRotation, 0);
 
-        _thisTransform.rotation = rotation;
+        _thisTransform.rotation = !IsSmoothCamera ? rotation :
+            Quaternion.Lerp(_thisTransform.rotation, rotation, Time.deltaTime * SensitivitySmoothness);
     }
 
     private void UpdateSensitivity()
