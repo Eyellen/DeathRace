@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class CarSelectUI : MonoBehaviour
 {
     [SerializeField] private Button _spawnButton;
-    [SerializeField] private Button _spectateButton;
 
     private void Start()
     {
@@ -16,10 +15,7 @@ public class CarSelectUI : MonoBehaviour
 
     private void Update()
     {
-        if (Player.LocalPlayer.SelectedCarIndex <= -1)
-            _spectateButton.interactable = false;
-        else
-            _spectateButton.interactable = true;
+        CheckIfSpawnIsAllowed();
 
         CursorManager.ShowCursor();
         PlayerInput.IsBlocked = true;
@@ -35,11 +31,6 @@ public class CarSelectUI : MonoBehaviour
     {
         CursorManager.HideCursor();
         PlayerInput.IsBlocked = false;
-    }
-
-    private void OnDestroy()
-    {
-        //GameModeBase.OnInitialized -= InitializeEvents;
     }
 
     public void SetActive(bool isActive)
@@ -69,7 +60,19 @@ public class CarSelectUI : MonoBehaviour
     public void CheckIfSpawnIsAllowed()
     {
         if ((GameMode)ServerData.GameModeIndex != GameMode.Free)
-            _spawnButton.interactable = !GameModeBase.Instance.IsGameOn;
+        {
+            if (Player.LocalPlayer.SelectedCarIndex <= -1)
+                _spawnButton.interactable = false;
+            else
+                _spawnButton.interactable = !GameModeBase.Instance.IsGameOn;
+        }
+        else
+        {
+            if (Player.LocalPlayer.SelectedCarIndex <= -1)
+                _spawnButton.interactable = false;
+            else
+                _spawnButton.interactable = true;
+        }
     }
 
     private void InitializeEvents()
