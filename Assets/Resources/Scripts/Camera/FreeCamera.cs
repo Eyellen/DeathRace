@@ -22,7 +22,7 @@ public class FreeCamera : CameraBase
     private Vector3 Destination { get; set; }
 
     [field: SerializeField]
-    public float SpeedSmoothness { get; set; } = 2f;
+    public float MovementSmoothness { get; set; } = 2f;
 
     protected override void LateUpdate()
     {
@@ -74,6 +74,6 @@ public class FreeCamera : CameraBase
         // Up/Down destination
         Destination += PlayerInput.UpDownAxis * _movementSpeed * Time.deltaTime * _speedMultiplier * _thisTransform.up;
 
-        _thisTransform.position = Vector3.Lerp(_thisTransform.position, Destination, Time.deltaTime * SpeedSmoothness);
+        _thisTransform.position = Vector3.Lerp(_thisTransform.position, Destination, Time.deltaTime * MovementSmoothness);
     }
 }
