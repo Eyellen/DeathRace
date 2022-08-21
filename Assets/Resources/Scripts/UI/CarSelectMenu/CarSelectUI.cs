@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CarSelectUI : MonoBehaviour
 {
     [SerializeField] private Button _spawnButton;
+    [SerializeField] private Button _spectateButton;
 
     private void Start()
     {
@@ -15,6 +16,11 @@ public class CarSelectUI : MonoBehaviour
 
     private void Update()
     {
+        if (Player.LocalPlayer.SelectedCarIndex <= -1)
+            _spectateButton.interactable = false;
+        else
+            _spectateButton.interactable = true;
+
         CursorManager.ShowCursor();
         PlayerInput.IsBlocked = true;
     }
