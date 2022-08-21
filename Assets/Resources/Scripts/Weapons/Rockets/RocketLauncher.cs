@@ -10,7 +10,6 @@ public class RocketLauncher : NetworkBehaviour
     [SerializeField] private GameObject[] _rockets;
     [SerializeField] private GameObject _launchedRocketPrefab;
     [SerializeField] private float _timeBetweenLaunches;
-    [SyncVar] private float _lastLaunchTime;
 
     private Vector3 _previousPosition;
     private Vector3 _currentPosition;
@@ -33,13 +32,8 @@ public class RocketLauncher : NetworkBehaviour
         }
     }
 
-    public bool IsReadyToShoot
-    {
-        get
-        {
-            return Time.time > _lastLaunchTime + _timeBetweenLaunches;
-        }
-    }
+    [field: SyncVar]
+    public bool IsReadyToShoot { get; private set; } = true;
 
     void Start()
     {
@@ -82,7 +76,8 @@ public class RocketLauncher : NetworkBehaviour
         if (!IsActivated) return;
 
         if (!IsReadyToShoot) return;
-        _lastLaunchTime = Time.time;
+        IsReadyToShoot = false;
+        StartCoroutine(HandleCooldownCoroutine(_timeBetweenLaunches));
 
         for (int i = 0; i < _rockets.Length; i++)
         {
@@ -97,6 +92,13 @@ public class RocketLauncher : NetworkBehaviour
 
             return;
         }
+    }
+
+    private IEnumerator HandleCooldownCoroutine(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+
+        IsReadyToShoot = true;
     }
 
     [ClientRpc]
