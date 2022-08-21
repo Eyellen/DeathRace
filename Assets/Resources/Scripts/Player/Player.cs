@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +15,8 @@ public class Player : NetworkBehaviour
 
     public static Player[] AllPlayers
     {
-        get => FindObjectsOfType<Player>();
+        //get => FindObjectsOfType<Player>();
+        get => PlayerListManager.Instance.AllPlayers.ToArray();
     }
 
     /// <summary>
@@ -49,6 +51,9 @@ public class Player : NetworkBehaviour
     [field: SyncVar]
     public string Username { get; private set; }
 
+    public static Action<Player> OnPlayerJoin;
+    public static Action<Player> OnPlayerExit;
+
     public override void OnStartClient()
     {
         CameraTransform = transform.Find("Camera");
@@ -64,6 +69,16 @@ public class Player : NetworkBehaviour
         {
             CameraTransform.gameObject.SetActive(false);
         }
+
+        OnPlayerJoin?.Invoke(this);
+    }
+
+    private void OnDestroy()
+    {
+        OnPlayerExit?.Invoke(this);
+
+        OnPlayerJoin = null;
+        OnPlayerExit = null;
     }
 
     [Command]
