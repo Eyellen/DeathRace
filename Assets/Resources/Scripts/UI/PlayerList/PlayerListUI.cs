@@ -5,41 +5,37 @@ using TMPro;
 
 public class PlayerListUI : MonoBehaviour
 {
-    [SerializeField] private GameObject _playerListContent;
-
+    [SerializeField] private GameObject _playerListContainer;
     [SerializeField] private GameObject _playerInfoBarTemplatePrefab;
+
+    private Dictionary<Player, GameObject> _playerInfoBars = new Dictionary<Player, GameObject>();
 
     private void Start()
     {
-        //InitializePlayerList();
-    }
-
-    private void OnEnable()
-    {
         InitializePlayerList();
+        PlayerListManager.Instance.OnPlayerAddedToList += AddPlayerToList;
+        PlayerListManager.Instance.OnPlayerRemovedFromList += RemovePlayerFromList;
     }
 
-    private void OnDisable()
+    private void AddPlayerToList(Player player)
     {
-        ClearPlayerList();
+        GameObject playerInfoBar = Instantiate(_playerInfoBarTemplatePrefab, _playerListContainer.transform);
+        _playerInfoBars[player] = playerInfoBar;
+    }
+
+    private void RemovePlayerFromList(Player player)
+    {
+        Destroy(_playerInfoBars[player]);
+        _playerInfoBars.Remove(player);
     }
 
     private void InitializePlayerList()
     {
-        Player[] players = FindObjectsOfType<Player>();
+        Player[] allPlayers = PlayerListManager.Instance.AllPlayers.ToArray();
 
-        foreach (var player in players)
+        foreach (var player in allPlayers)
         {
-            var playerInfoBar = Instantiate(_playerInfoBarTemplatePrefab, _playerListContent.transform);
-            playerInfoBar.transform.Find("Username").GetComponent<TextMeshProUGUI>().text = player.Username;
-        }
-    }
-
-    private void ClearPlayerList()
-    {
-        for (int i = _playerListContent.transform.childCount - 1; i >= 0; i--)
-        {
-            Destroy(_playerListContent.transform.GetChild(i).gameObject);
+            AddPlayerToList(player);
         }
     }
 }
