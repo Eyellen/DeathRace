@@ -16,6 +16,12 @@ public class CameraBase : NetworkBehaviour
     protected Vector2 _sensitivity = new Vector2(1, 1);
     protected const float _sensitivityMultiplier = 6;
 
+    private float _yMaxRotation = -90;
+    private float _yMinRotation = 90;
+
+    protected virtual float yMaxRotation { get => _yMaxRotation; set => _yMaxRotation = value; }
+    protected virtual float yMinRotation { get => _yMinRotation; set => _yMinRotation = value; }
+
     private float _xRotation;
     private float _yRotation;
 
@@ -54,7 +60,7 @@ public class CameraBase : NetworkBehaviour
         _xRotation += PlayerInput.MouseHorizontalAxis * _sensitivity.x;
         _yRotation += PlayerInput.MouseVerticalAxis * _sensitivity.y;
 
-        _yRotation = Mathf.Clamp(_yRotation, -90f, 90f);
+        _yRotation = Mathf.Clamp(_yRotation, yMaxRotation, yMinRotation);
         Quaternion rotation = Quaternion.Euler(-_yRotation, _xRotation, 0);
 
         _thisTransform.rotation = !IsSmoothCamera ? rotation :

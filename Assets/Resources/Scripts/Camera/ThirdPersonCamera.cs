@@ -20,6 +20,13 @@ public class ThirdPersonCamera : CameraBase
     }
     private Rigidbody _targetRigidbody;
 
+    private float _yMaxRotation = -70;
+    private float _yMinRotation = 10;
+
+    protected override float yMaxRotation { get => _yMaxRotation; set => _yMaxRotation = value; }
+    protected override float yMinRotation { get => _yMinRotation; set => _yMinRotation = value; }
+
+
     [SerializeField]
     private Vector3 _cameraOffset = new Vector3(0, 1, -5);
     private Vector3 _currentCameraOffset;
@@ -103,7 +110,7 @@ public class ThirdPersonCamera : CameraBase
 
     private void HandleOffsetMagnitude()
     {
-        if (!Physics.Linecast(Target.position, Target.position + _currentCameraOffset, out RaycastHit hitInfo)) return;
+        if (!Physics.SphereCast(Target.position, radius: 0.15f, _currentCameraOffset, out RaycastHit hitInfo, _currentCameraOffset.magnitude)) return;
 
         Vector3 newOffset = hitInfo.point - Target.position;
 
