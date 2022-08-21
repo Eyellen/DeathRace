@@ -478,6 +478,7 @@ GameObject:
   - component: {fileID: 5996774493556513180}
   - component: {fileID: 5996774493556513181}
   - component: {fileID: 5996774493556513182}
+  - component: {fileID: 894152148473746900}
   m_Layer: 5
   m_Name: PlayerInfoBarTemplate
   m_TagString: Untagged
@@ -591,3 +592,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5996774493556513178}
   m_CullTransparentMesh: 1
+--- !u!114 &894152148473746900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5996774493556513178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c354dd9984f8aef4a967587f76dbd2ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _usernameText: {fileID: 5996774493338903993}
+  _lapsText: {fileID: 1280323862}
+  _killsText: {fileID: 132407027}
