@@ -10,7 +10,7 @@ public class RocketLauncher : NetworkBehaviour
     [SerializeField] private GameObject[] _rockets;
     [SerializeField] private GameObject _launchedRocketPrefab;
     [SerializeField] private float _timeBetweenLaunches;
-    private float _lastLaunchTime;
+    [SyncVar] private float _lastLaunchTime;
 
     private Vector3 _previousPosition;
     private Vector3 _currentPosition;

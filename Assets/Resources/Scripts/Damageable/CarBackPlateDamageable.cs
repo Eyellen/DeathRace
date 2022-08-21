@@ -24,12 +24,27 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
 
     public float HealthRatio => (float)_health / _maxHealth;
 
+    [field: Tooltip("Speed boost that will be applied to car after droping BackPlate")]
+    [field: SerializeField]
+    public float SpeedBoost { get; private set; } = 3f;
+
+    [field: SerializeField]
+    public float RecoilForce { get; private set; } = 10f;
+
     private void Start()
     {
         CmdSetHealth(_maxHealth);
         _backPlateCollider = transform.Find("Body/BackPlate").GetComponent<Collider>();
 
         CheckIfBackPlateBroken();
+    }
+
+    private void Update()
+    {
+        if (!hasAuthority) return;
+
+        if (PlayerInput.IsDropBackPlatePressed)
+            DropBackPlate();
     }
 
     public void Damage(int damage, Collider collider)
@@ -43,7 +58,7 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
         if (_health > 0) return;
 
         _isBroken = true; // To prevent errors on Client while _isBroken getting synced on Server and Client
-        CmdDestruct(Player.LocalPlayer.gameObject);
+        CmdDestructWrapper();
     }
 
     public void Damage01(float coefficient, Collider collider)
@@ -63,23 +78,40 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
         _isBroken = isBroken;
     }
 
-    [Command(requiresAuthority = false)]
-    private void CmdDestruct(GameObject ownerPlayer)
+    private void CmdDestructWrapper(float recoilForce = 0)
     {
+        CmdDestruct(recoilForce);
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdDestruct(float recoilForce)
+    {
+        _health = 0;
+        _isBroken = true;
+
         if (_backPlateCollider == null) return;
 
-        GameObject brokenBackPlate = Instantiate(_brokenBackPlatePrefab, _backPlateCollider.transform.position, _backPlateCollider.transform.rotation);
+        GameObject brokenBackPlate = Instantiate(_brokenBackPlatePrefab,
+            _backPlateCollider.transform.position, _backPlateCollider.transform.rotation);
 
-        RpcDestruct();
+        NetworkServer.Spawn(brokenBackPlate);
 
-        NetworkServer.Spawn(brokenBackPlate, ownerPlayer);
-
+        RpcDestruct(brokenBackPlate, recoilForce);
         CmdSetBroken(true);
     }
 
     [ClientRpc]
-    private void RpcDestruct()
+    private void RpcDestruct(GameObject brokenBackPlate, float recoilForce)
     {
+        if (gameObject.TryGetComponent(out CarBase carBase))
+        {
+            carBase.SpeedLimit += SpeedBoost;
+        }
+
+        brokenBackPlate.GetComponent<Spikes>().IgnoreObject = gameObject;
+        // Applying recoil force
+        brokenBackPlate.GetComponent<Rigidbody>().AddForce(-brokenBackPlate.transform.right * recoilForce, ForceMode.VelocityChange);
+
         if (_backPlateCollider != null)
             Destroy(_backPlateCollider.gameObject);
     }
@@ -98,5 +130,15 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
         if (!_isBroken) return;
 
         Destroy(_backPlateCollider.gameObject);
+    }
+
+    private void DestroySelf()
+    {
+        Damage01(1, _backPlateCollider);
+    }
+
+    private void DropBackPlate()
+    {
+        CmdDestructWrapper(RecoilForce);
     }
 }
