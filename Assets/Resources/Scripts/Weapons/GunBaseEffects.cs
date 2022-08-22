@@ -23,7 +23,7 @@ public class GunBaseEffects : MonoBehaviour
     void Start()
     {
         _isShotfirePlaying = new bool[_shotfireParticles.Length];
-        _layer = 1 << LayerMask.NameToLayer("Default");
+        _layer = 1 << LayerMask.NameToLayer("Ignore Raycast");
         _gunScript.OnLocalGunShoot += SpawnBulletTracer;
     }
 

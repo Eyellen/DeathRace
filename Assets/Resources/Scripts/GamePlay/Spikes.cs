@@ -37,7 +37,7 @@ public class Spikes : MonoBehaviour
         float coefficient = (Mathf.Abs(collision.relativeVelocity.magnitude) - _minSpeedForDamage) / (25 - _minSpeedForDamage) * _damageCoefficientMultiplier;
         foreach (var damageable in damageables)
         {
-            damageable.Damage01(coefficient, collision.collider);
+            damageable.Damage01(coefficient, collision.collider, null);
         }
 
         if (_isSelfDestructable)

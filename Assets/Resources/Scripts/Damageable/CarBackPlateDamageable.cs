@@ -24,6 +24,9 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
 
     public float HealthRatio => (float)_health / _maxHealth;
 
+    [field: SyncVar]
+    private Player LastDamagedByPlayer { get; set; }
+
     [field: Tooltip("Speed boost that will be applied to car after droping BackPlate")]
     [field: SerializeField]
     public float SpeedBoost { get; private set; } = 3f;
@@ -47,13 +50,14 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
             DropBackPlate();
     }
 
-    public void Damage(int damage, Collider collider)
+    public void Damage(int damage, Collider toCollider, Player byPlayer)
     {
-        if (collider != _backPlateCollider) return;
+        if (toCollider != _backPlateCollider) return;
 
         if (_health <= 0 && _isBroken) return;
 
         CmdSetHealth(_health -= damage);
+        CmdSetDamagedBy(byPlayer);
 
         if (_health > 0) return;
 
@@ -61,9 +65,15 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
         CmdDestructWrapper();
     }
 
-    public void Damage01(float coefficient, Collider collider)
+    public void Damage01(float coefficient, Collider toCollider, Player byPlayer)
     {
-        Damage((int)(_maxHealth * coefficient), collider);
+        Damage((int)(_maxHealth * coefficient), toCollider, byPlayer);
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdSetDamagedBy(Player damagedBy)
+    {
+        LastDamagedByPlayer = damagedBy;
     }
 
     [Command(requiresAuthority = false)]
@@ -134,7 +144,7 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
 
     private void DestroySelf()
     {
-        Damage01(1, _backPlateCollider);
+        Damage01(1, _backPlateCollider, Player.LocalPlayer);
     }
 
     private void DropBackPlate()

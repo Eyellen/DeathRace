@@ -70,7 +70,7 @@ public class GunBase : NetworkBehaviour
 
     private void InitializeGunBase()
     {
-        _layer = 1 << LayerMask.NameToLayer("Default");
+        _layer = 1 << LayerMask.NameToLayer("Ignore Raycast");
         _currentBulletsCount = MaxAmmoSupply;
     }
 
@@ -116,7 +116,7 @@ public class GunBase : NetworkBehaviour
 
             foreach (IDamageable<int> damageable in damageables)
             {
-                damageable.Damage(Damage, hitInfo.collider);
+                damageable.Damage(Damage, hitInfo.collider, Player.LocalPlayer);
             }
         }
     }
