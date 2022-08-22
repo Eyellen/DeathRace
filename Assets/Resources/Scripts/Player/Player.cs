@@ -82,8 +82,14 @@ public class Player : NetworkBehaviour
     {
         OnPlayerExit?.Invoke(this);
 
-        OnPlayerJoin = null;
-        OnPlayerExit = null;
+        // Setting null to static events to prevent error
+        // But setting only if general count of players is null
+        // Otherwise it will cause issues on existing Player instances
+        if(PlayerListManager.Instance.AllPlayers.Count <= 0)
+        {
+            OnPlayerJoin = null;
+            OnPlayerExit = null;
+        }
     }
 
     [Command]
