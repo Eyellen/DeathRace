@@ -22,6 +22,7 @@ public class Rocket : NetworkBehaviour
     private int _layer;
 
     #region Properties
+    public Player LaunchedByPlayer { get; set; }
     public float Speed { get { return _speed; } set { _speed = value; } }
     #endregion
 
@@ -35,7 +36,7 @@ public class Rocket : NetworkBehaviour
 
     private void Start()
     {
-        _layer = 1 << LayerMask.NameToLayer("Default");
+        _layer = 1 << LayerMask.NameToLayer("Ignore Raycast");
 
         _thisTransform = GetComponent<Transform>();
 
@@ -116,7 +117,7 @@ public class Rocket : NetworkBehaviour
 
         foreach (IDamageable<int> damageable in damageables)
         {
-            damageable.Damage(_maxDamage, hitInfo.collider);
+            damageable.Damage(_maxDamage, hitInfo.collider, LaunchedByPlayer);
         }
 
         //if (!hitInfo.transform.TryGetComponent(out IDamageable<int> damageable)) return;
@@ -129,6 +130,7 @@ public class Rocket : NetworkBehaviour
     {
         GameObject explosionObject = Instantiate(_explosionPrefab, transform.position, transform.rotation);
         Explosion explosion = explosionObject.GetComponent<Explosion>();
+        explosion.CausedByPlayer = LaunchedByPlayer;
         explosion.ExplosionRadius = _impactRadius;
         explosion.ExplosionForce = _explosionForce;
         explosion.MinDamage = _minDamage;

@@ -10,6 +10,9 @@ public class PlayerListManager : NetworkBehaviour
 
     public List<Player> AllPlayers { get; private set; } = new List<Player>();
 
+    public Action<Player> OnPlayerAddedToList;
+    public Action<Player> OnPlayerRemovedFromList;
+
     private void Awake()
     {
         InitializeInstance();
@@ -28,10 +31,12 @@ public class PlayerListManager : NetworkBehaviour
     private void AddPlayerToList(Player player)
     {
         AllPlayers.Add(player);
+        OnPlayerAddedToList?.Invoke(player);
     }
 
     private void RemovePlayerFromList(Player player)
     {
         AllPlayers.Remove(player);
+        OnPlayerRemovedFromList?.Invoke(player);
     }
 }

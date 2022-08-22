@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 5944202229551015831}
   - component: {fileID: 6284035195998470130}
   - component: {fileID: 1551789609281405929}
+  - component: {fileID: 8160436911006177282}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -151,8 +152,6 @@ MonoBehaviour:
   syncInterval: 0.1
   _debugging: 0
   _sensitivity: {x: 1, y: 1}
-  <yMaxRotation>k__BackingField: -90
-  <yMinRotation>k__BackingField: 90
   <IsSmoothCamera>k__BackingField: 0
   <SensitivitySmoothness>k__BackingField: 2
   _movementSpeed: 20
@@ -187,3 +186,17 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   <Username>k__BackingField: 
+--- !u!114 &8160436911006177282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6284035195998470136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ced273bff2dec5a498d24070038a3d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1

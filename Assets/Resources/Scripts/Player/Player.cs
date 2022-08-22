@@ -13,6 +13,8 @@ public class Player : NetworkBehaviour
 
     public CameraManager CameraManager { get; private set; }
 
+    public PlayerSessionStats SessionStats { get; private set; }
+
     public static Player[] AllPlayers
     {
         //get => FindObjectsOfType<Player>();
@@ -48,16 +50,19 @@ public class Player : NetworkBehaviour
     public GameObject Car { get; set; }
 
     [field: SerializeField]
-    [field: SyncVar]
+    [field: SyncVar(hook = nameof(OnNameSyncedHook))]
     public string Username { get; private set; }
 
     public static Action<Player> OnPlayerJoin;
     public static Action<Player> OnPlayerExit;
 
+    public Action<string> OnNameSynced;
+
     public override void OnStartClient()
     {
         CameraTransform = transform.Find("Camera");
         CameraManager = GetComponent<CameraManager>();
+        SessionStats = GetComponent<PlayerSessionStats>();
 
         if (isLocalPlayer)
         {
@@ -77,8 +82,14 @@ public class Player : NetworkBehaviour
     {
         OnPlayerExit?.Invoke(this);
 
-        OnPlayerJoin = null;
-        OnPlayerExit = null;
+        // Setting null to static events to prevent error
+        // But setting only if general count of players is null
+        // Otherwise it will cause issues on existing Player instances
+        if(PlayerListManager.Instance.AllPlayers.Count <= 0)
+        {
+            OnPlayerJoin = null;
+            OnPlayerExit = null;
+        }
     }
 
     [Command]
@@ -91,5 +102,10 @@ public class Player : NetworkBehaviour
     public void CmdSetSelectedCarIndex(int carIndex)
     {
         SelectedCarIndex = carIndex;
+    }
+
+    public void OnNameSyncedHook(string oldName, string newName)
+    {
+        OnNameSynced?.Invoke(newName);
     }
 }

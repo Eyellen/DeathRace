@@ -67,11 +67,11 @@ public class RocketLauncher : NetworkBehaviour
         if (!IsActivated) return;
 
         if (PlayerInput.IsRightActionPressed)
-            CmdLaunch(_currentMovingSpeed);
+            CmdLaunch(_currentMovingSpeed, Player.LocalPlayer);
     }
 
     [Command(requiresAuthority = false)]
-    private void CmdLaunch(float rocketSpeed)
+    private void CmdLaunch(float rocketSpeed, Player launchedByPlayer)
     {
         if (!IsActivated) return;
 
@@ -85,6 +85,7 @@ public class RocketLauncher : NetworkBehaviour
 
             GameObject launchedRocket = Instantiate(_launchedRocketPrefab, _rockets[i].transform.position, _rockets[i].transform.rotation);
             //launchedRocket.GetComponent<Rocket>().Speed += _currentMovingSpeed;
+            launchedRocket.GetComponent<Rocket>().LaunchedByPlayer = launchedByPlayer;
             launchedRocket.GetComponent<Rocket>().Speed += rocketSpeed;
             NetworkServer.Spawn(launchedRocket);
 
