@@ -34,4 +34,9 @@ public class PlayerInfoBarUI : MonoBehaviour
     {
         Username = newName;
     }
+
+    private void Update()
+    {
+        LapsCompleted = _player.SessionStats.LapsCompleted;
+    }
 }
