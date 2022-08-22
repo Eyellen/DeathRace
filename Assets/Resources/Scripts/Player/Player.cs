@@ -13,6 +13,8 @@ public class Player : NetworkBehaviour
 
     public CameraManager CameraManager { get; private set; }
 
+    public PlayerSessionStats SessionStats { get; private set; }
+
     public static Player[] AllPlayers
     {
         //get => FindObjectsOfType<Player>();
@@ -60,6 +62,7 @@ public class Player : NetworkBehaviour
     {
         CameraTransform = transform.Find("Camera");
         CameraManager = GetComponent<CameraManager>();
+        SessionStats = GetComponent<PlayerSessionStats>();
 
         if (isLocalPlayer)
         {
