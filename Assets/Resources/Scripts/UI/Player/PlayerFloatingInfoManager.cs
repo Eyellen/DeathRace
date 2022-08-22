@@ -57,7 +57,7 @@ public class PlayerFloatingInfoManager : NetworkBehaviour
         }
 
         if (netIdentity.hasAuthority)
-            CmdSetUsername(Username = SettingsSaveSystem.CachedSave.userData.Username);
+            CmdSetUsername(Username = SettingsUser.Username);
 
         InitializeFloatingInfo();
     }
