@@ -8,6 +8,9 @@ public class PlayerListUI : MonoBehaviour
     [SerializeField] private GameObject _playerListContainer;
     [SerializeField] private GameObject _playerInfoBarTemplatePrefab;
 
+    [SerializeField] private TextMeshProUGUI _gameModeText;
+    [SerializeField] private TextMeshProUGUI _gameModeInfoText;
+
     private Dictionary<Player, PlayerInfoBarUI> _playerInfoBars = new Dictionary<Player, PlayerInfoBarUI>();
 
     private void Start()
@@ -15,6 +18,33 @@ public class PlayerListUI : MonoBehaviour
         InitializePlayerList();
         PlayerListManager.Instance.OnPlayerAddedToList += AddPlayerToList;
         PlayerListManager.Instance.OnPlayerRemovedFromList += RemovePlayerFromList;
+        AsignGameModeInfo();
+    }
+
+    private void AsignGameModeInfo()
+    {
+        switch (GameManager.Instance.CurrentGameMode)
+        {
+            case GameMode.Free:
+                {
+                    _gameModeText.text = "Free Mode";
+                    _gameModeInfoText.text = string.Empty;
+                    break;
+                }
+            case GameMode.Race:
+                {
+                    _gameModeText.text = "Race Mode";
+                    RaceModeManager raceModeManager = GameModeBase.Instance as RaceModeManager;
+                    _gameModeInfoText.text = $"Laps to win: {raceModeManager.LapsToWin}\t" +
+                        $"Tiles activate on lap: {raceModeManager.ActivateTilesOnLap}\n" +
+                        $"Tiles cooldown: {raceModeManager.TilesCooldown} seconds";
+                    break;
+                }
+            default:
+                {
+                    break;
+                }
+        }
     }
 
     private void AddPlayerToList(Player player)
