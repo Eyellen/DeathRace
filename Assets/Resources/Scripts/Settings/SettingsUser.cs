@@ -4,10 +4,10 @@ using UnityEngine;
 
 public static class SettingsUser
 {
-    private static string s_username;
+    private static string s_username = "Driver";
 
     private static bool s_isSensitivitySplit;
-    private static Vector2 s_sensitivity;
+    private static Vector2 s_sensitivity = new Vector2(0.2f, 0.2f);
 
     public static string Username { get => s_username; }
     public static bool IsSensitivitySplit { get => s_isSensitivitySplit; }

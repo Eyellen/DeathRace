@@ -33,6 +33,12 @@ public class SettingsUserUI : MonoBehaviour
 
     public void SetUsername(string username)
     {
+        if(!UsernameRequirements.CheckIfNameIsAppropriate(username))
+        {
+            string defaultName = "Driver";
+            _usernameField.text = defaultName;
+            return;
+        }
         SettingsUser.SetUsername(username);
         RefreshOptions();
     }
