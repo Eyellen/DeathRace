@@ -25,8 +25,11 @@ public class PlayerInfoBarUI : MonoBehaviour
     public int LapsCompleted { get => int.Parse(_usernameText.text); private set => _lapsText.text = value.ToString(); }
     public int Kills { get => int.Parse(_killsText.text); private set => _killsText.text = value.ToString(); }
 
+    private IEnumerator _updateCoroutine;
+
     private void Start()
     {
+        UpdateAllFields();
         Player.OnNameSynced += UpdateUsername;
     }
 
@@ -35,8 +38,36 @@ public class PlayerInfoBarUI : MonoBehaviour
         Username = newName;
     }
 
-    private void Update()
+    private void OnEnable()
     {
+        if (_updateCoroutine != null)
+            StopCoroutine(_updateCoroutine);
+        _updateCoroutine = UpdateCoroutine();
+        StartCoroutine(_updateCoroutine);
+    }
+
+    private void OnDisable()
+    {
+        if (_updateCoroutine != null)
+            StopCoroutine(_updateCoroutine);
+    }
+
+    private IEnumerator UpdateCoroutine()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(0.2f);
+
+            UpdateAllFields();
+
+            yield return null;
+        }
+    }
+
+    private void UpdateAllFields()
+    {
+        Username = _player.Username;
         LapsCompleted = _player.SessionStats.LapsCompleted;
+        Kills = _player.SessionStats.Kills;
     }
 }
