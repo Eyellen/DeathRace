@@ -70,7 +70,7 @@ public class GunBase : NetworkBehaviour
 
     private void InitializeGunBase()
     {
-        _layer = 1 << LayerMask.NameToLayer("Ignore Raycast");
+        _layer = ~0; // Everything layer
         _currentBulletsCount = MaxAmmoSupply;
     }
 

@@ -12,13 +12,9 @@ public class ThirdPersonCamera : CameraBase
     public Transform Target
     {
         get => _target;
-        set
-        {
-            _target = value;
-            _targetRigidbody = _target.GetComponent<Rigidbody>();
-        }
+        set => _target = value;
     }
-    private Rigidbody _targetRigidbody;
+    public Rigidbody TargetRigidbody { get; set; }
 
     private float _yMaxRotation = -70;
     private float _yMinRotation = 10;
@@ -28,7 +24,7 @@ public class ThirdPersonCamera : CameraBase
 
 
     [SerializeField]
-    private Vector3 _cameraOffset = new Vector3(0, 1, -5);
+    private Vector3 _cameraOffset = new Vector3(0, 0.4f, -5);
     private Vector3 _currentCameraOffset;
 
     [SerializeField]
@@ -39,6 +35,8 @@ public class ThirdPersonCamera : CameraBase
 
     [SerializeField]
     private float _maxMovementSpeed = 25;
+
+    private int _layer;
 
     [field: Header("Auto Camera Settings")]
     [SerializeField]
@@ -55,6 +53,8 @@ public class ThirdPersonCamera : CameraBase
     protected override void Awake()
     {
         base.Awake();
+
+        _layer = 1 << LayerMask.NameToLayer("Car");
 
         _camera = GetComponentInChildren<Camera>();
     }
@@ -96,7 +96,7 @@ public class ThirdPersonCamera : CameraBase
 
         // Would be good to implement state machine here
         if (_lastMouseInputTime + _switchToAutoCameraAfterSeconds > Time.time ||
-            Mathf.Abs(_targetRigidbody.velocity.magnitude) < 1f)
+            Mathf.Abs(TargetRigidbody.velocity.magnitude) < 1f)
         {
             base.HandleRotation();
         }
@@ -110,7 +110,8 @@ public class ThirdPersonCamera : CameraBase
 
     private void HandleOffsetMagnitude()
     {
-        if (!Physics.SphereCast(Target.position, radius: 0.15f, _currentCameraOffset, out RaycastHit hitInfo, _currentCameraOffset.magnitude)) return;
+        if (!Physics.SphereCast(Target.position, radius: 0.2f, _currentCameraOffset, out RaycastHit hitInfo, 
+            _currentCameraOffset.magnitude, ~_layer, QueryTriggerInteraction.Ignore)) return;
 
         Vector3 newOffset = hitInfo.point - Target.position;
 
@@ -147,6 +148,6 @@ public class ThirdPersonCamera : CameraBase
     private void HandleFieldOfView()
     {
         _camera.fieldOfView = Mathf.Lerp(_minSpeedFov, _maxSpeedFov,
-            Mathf.SmoothStep(0, 1, Mathf.Abs(_targetRigidbody.velocity.magnitude) / _maxMovementSpeed));
+            Mathf.SmoothStep(0, 1, Mathf.Abs(TargetRigidbody.velocity.magnitude) / _maxMovementSpeed));
     }
 }
