@@ -36,7 +36,7 @@ public class Rocket : NetworkBehaviour
 
     private void Start()
     {
-        _layer = 1 << LayerMask.NameToLayer("Ignore Raycast");
+        _layer = ~0; // Everything layer
 
         _thisTransform = GetComponent<Transform>();
 
