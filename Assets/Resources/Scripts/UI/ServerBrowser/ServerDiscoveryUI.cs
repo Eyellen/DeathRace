@@ -74,6 +74,8 @@ public class ServerDiscoveryUI : MonoBehaviour
     {
         if (SelectedServerUri == null) return;
 
+        LoadingScreenManager.Instance.Enable();
+
         _networkDiscovery.StopDiscovery();
         InitializeServerDataForConnection();
         NetworkManager.singleton.StartClient(SelectedServerUri);
