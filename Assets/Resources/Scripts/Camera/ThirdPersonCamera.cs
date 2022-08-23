@@ -114,7 +114,8 @@ public class ThirdPersonCamera : CameraBase
 
     private void HandleOffsetMagnitude()
     {
-        if (!Physics.SphereCast(Target.position, radius: 0.15f, _currentCameraOffset, out RaycastHit hitInfo, _currentCameraOffset.magnitude, ~_layer)) return;
+        if (!Physics.SphereCast(Target.position, radius: 0.15f, _currentCameraOffset, out RaycastHit hitInfo, 
+            _currentCameraOffset.magnitude, ~_layer, QueryTriggerInteraction.Ignore)) return;
 
         Vector3 newOffset = hitInfo.point - Target.position;
 
