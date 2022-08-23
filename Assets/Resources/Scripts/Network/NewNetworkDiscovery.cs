@@ -1,5 +1,6 @@
 using System;
 using System.Net;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using Mirror;
@@ -169,4 +170,17 @@ public class NewNetworkDiscovery : NetworkDiscoveryBase<DiscoveryRequest, Discov
     }
 
     #endregion
+
+    public new void AdvertiseServer()
+    {
+        StartCoroutine(AdvertiseServerCoroutine());
+    }
+
+    public IEnumerator AdvertiseServerCoroutine()
+    {
+        while (NetworkServer.isLoadingScene)
+            yield return null;
+
+        base.AdvertiseServer();
+    }
 }
