@@ -16,6 +16,7 @@ public class ServerHostUI : MonoBehaviour
 
     public void Host()
     {
+        LoadingScreenManager.Instance.Enable();
         _networkManager.StartHost();
         _networkDiscovery.AdvertiseServer();
     }

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class LoadingScreen : MonoBehaviour
+public class LoadingScreenManager : MonoBehaviour
 {
-    public static LoadingScreen Instance { get; private set; }
+    public static LoadingScreenManager Instance { get; private set; }
 
+    [SerializeField] private GameObject _content;
     [SerializeField] private TextMeshProUGUI _loadingText;
     private string _loadingDots = ".";
 
@@ -15,21 +16,6 @@ public class LoadingScreen : MonoBehaviour
     private void Start()
     {
         InitializeInstance();
-        Disable();
-    }
-
-    private void OnEnable()
-    {
-        if (_handleLoadingEffectCoroutine != null)
-            StopCoroutine(_handleLoadingEffectCoroutine);
-        _handleLoadingEffectCoroutine = HandleLoadingEffectCoroutine();
-        StartCoroutine(_handleLoadingEffectCoroutine);
-    }
-
-    private void OnDisable()
-    {
-        if (_handleLoadingEffectCoroutine != null)
-            StopCoroutine(_handleLoadingEffectCoroutine);
     }
 
     private void InitializeInstance()
@@ -42,12 +28,20 @@ public class LoadingScreen : MonoBehaviour
 
     public void Enable()
     {
-        gameObject.SetActive(true);
+        _content.SetActive(true);
+
+        if (_handleLoadingEffectCoroutine != null)
+            StopCoroutine(_handleLoadingEffectCoroutine);
+        _handleLoadingEffectCoroutine = HandleLoadingEffectCoroutine();
+        StartCoroutine(_handleLoadingEffectCoroutine);
     }
 
     public void Disable()
     {
-        gameObject.SetActive(false);
+        _content.SetActive(false);
+
+        if (_handleLoadingEffectCoroutine != null)
+            StopCoroutine(_handleLoadingEffectCoroutine);
     }
 
     private IEnumerator HandleLoadingEffectCoroutine()
