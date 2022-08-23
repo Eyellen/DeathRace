@@ -33,6 +33,11 @@ public class CarDamageable : NetworkBehaviour, IDamageable<int>
     /// </summary>
     public Action<GameObject, Player> OnCarDestroyedByPlayer = (GameObject car, Player byPlayer) =>
     {
+        // Assigning kills
+
+        // No need to assign kills if nobody destroyed this car
+        if (byPlayer == null) return;
+
         PlayerSessionStats sessionStats = byPlayer.gameObject.GetComponent<PlayerSessionStats>();
 
         // Decrement kills score if destroying self
