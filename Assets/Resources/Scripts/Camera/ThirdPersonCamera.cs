@@ -40,6 +40,8 @@ public class ThirdPersonCamera : CameraBase
     [SerializeField]
     private float _maxMovementSpeed = 25;
 
+    private int _layer;
+
     [field: Header("Auto Camera Settings")]
     [SerializeField]
     private float _mouseInactiveThreshold = 0.05f;
@@ -55,6 +57,8 @@ public class ThirdPersonCamera : CameraBase
     protected override void Awake()
     {
         base.Awake();
+
+        _layer = 1 << LayerMask.NameToLayer("Car");
 
         _camera = GetComponentInChildren<Camera>();
     }
@@ -110,7 +114,7 @@ public class ThirdPersonCamera : CameraBase
 
     private void HandleOffsetMagnitude()
     {
-        if (!Physics.SphereCast(Target.position, radius: 0.15f, _currentCameraOffset, out RaycastHit hitInfo, _currentCameraOffset.magnitude)) return;
+        if (!Physics.SphereCast(Target.position, radius: 0.15f, _currentCameraOffset, out RaycastHit hitInfo, _currentCameraOffset.magnitude, ~_layer)) return;
 
         Vector3 newOffset = hitInfo.point - Target.position;
 
