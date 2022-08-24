@@ -24,6 +24,8 @@ public static class PlayerInput
     public static bool IsSmokePressed { get => CheckIfButtonsBlocked(Input.GetKeyDown(KeyCode.X)); }
     public static bool IsDropBackPlatePressed { get => CheckIfButtonsBlocked(Input.GetKeyDown(KeyCode.Z)); }
 
+    public static bool IsChatPressed { get => CheckIfButtonsBlocked(Input.GetKeyDown(KeyCode.Y)); }
+
     // Floats
     public static float MouseHorizontalAxis { get => CheckIfNouseAxisBlocked(Input.GetAxisRaw("Mouse X")); }
     public static float MouseVerticalAxis { get => CheckIfNouseAxisBlocked(Input.GetAxisRaw("Mouse Y")); }
