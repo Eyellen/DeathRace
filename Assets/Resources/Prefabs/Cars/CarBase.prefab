@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2974427048378616844}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Weapons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2119994687969783370}
   - component: {fileID: 6329059665935048476}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AudioSources
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 75694376131068076}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DippedBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2791432954134695550}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CentreOfMass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4413178943547255025}
   - component: {fileID: 4260343938603016053}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EngineSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -281,7 +281,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8222764389388500412}
   - component: {fileID: 291192481012067170}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -326,7 +326,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2645103181245539214}
   - component: {fileID: 2463188075098037529}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RightBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,7 +418,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8337862991311975545}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AudioSources
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -450,7 +450,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9093456413801376787}
   - component: {fileID: 2598934982852119508}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WheelSlipSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -576,7 +576,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4941167625447042880}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -609,7 +609,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1769861777077012191}
   - component: {fileID: 5163734374452872788}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LeftBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -701,7 +701,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 867246045196898228}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FrontAxle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -732,7 +732,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1865345937230226068}
   - component: {fileID: 2284489223766639573}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ParticleSystems
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -776,7 +776,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6551831581887840944}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CameraAnchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -806,7 +806,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6337824850333824756}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HighBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -839,7 +839,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8373357255698842027}
   - component: {fileID: 6845418465829570272}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RightBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -932,7 +932,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7233962492931216131}
   - component: {fileID: 6027474470980764015}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ShootSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1085,7 +1085,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8606705896235550131}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RearAxle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1116,7 +1116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3479035317790920117}
   - component: {fileID: 3926409950765566894}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LeftBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1208,7 +1208,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4713154825217886514}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ProtectionSystems
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1239,7 +1239,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9099919895647167251}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wheels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1286,7 +1286,7 @@ GameObject:
   - component: {fileID: 4867852099582534852}
   - component: {fileID: 1724214071986387385}
   - component: {fileID: 6360386080209210518}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CarBase
   m_TagString: Car
   m_Icon: {fileID: 0}
@@ -1695,7 +1695,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9099919897771748776}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1729,6 +1729,10 @@ PrefabInstance:
     - target: {fileID: 1175654309150684864, guid: 6e0e142f1c713814ebb98249f3d1cfd9, type: 3}
       propertyPath: m_Name
       value: ProtectionSmoke
+      objectReference: {fileID: 0}
+    - target: {fileID: 1175654309150684864, guid: 6e0e142f1c713814ebb98249f3d1cfd9, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2190781367932454464, guid: 6e0e142f1c713814ebb98249f3d1cfd9, type: 3}
       propertyPath: m_RootOrder
