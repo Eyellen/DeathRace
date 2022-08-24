@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6750574525723655259}
   - component: {fileID: 6750574525723655262}
   - component: {fileID: 6750574525723655257}
-  - component: {fileID: 6750574525723655256}
+  - component: {fileID: 8650538231331273753}
   m_Layer: 5
   m_Name: ChatMessage
   m_TagString: Untagged
@@ -66,8 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<color="red">Driver_01</color>: What are you waiting for ? Start the game
-    Im tired of waiting'
+  m_text: '<color="red">name</color>: text'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -136,7 +135,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &6750574525723655256
+--- !u!114 &8650538231331273753
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
