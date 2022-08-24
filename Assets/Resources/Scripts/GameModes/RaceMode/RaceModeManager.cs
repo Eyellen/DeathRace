@@ -96,6 +96,8 @@ public class RaceModeManager : GameModeBase
         // No need to call here because it's being called in base method
         //RpcStartGame();
 
+        MessageManager.Instance.RpcShowBottomMessage("Get Ready");
+
         return true;
     }
 
@@ -105,6 +107,9 @@ public class RaceModeManager : GameModeBase
         base.RpcStartGame();
 
         CheckPoints[0].transform.parent.gameObject.SetActive(true);
+
+        PlayerInput.IsButtonsBlocked = true;
+        StartCoroutine(UnblockPlayersInputCoroutine(inSeconds: 3));
     }
 
     [Server]
@@ -311,5 +316,13 @@ public class RaceModeManager : GameModeBase
             tile.ResetTile();
         }
         IsTilesActivated = false;
+    }
+
+    private IEnumerator UnblockPlayersInputCoroutine(float inSeconds)
+    {
+        yield return new WaitForSeconds(inSeconds);
+
+        PlayerInput.IsButtonsBlocked = false;
+        MessageManager.Instance.ShowBottomMessage("Start!", 2);
     }
 }
