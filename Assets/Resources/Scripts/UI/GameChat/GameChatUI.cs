@@ -45,6 +45,7 @@ public class GameChatUI : NetworkBehaviour
             if (_hideChatWindowCoroutine != null)
                 StopCoroutine(_hideChatWindowCoroutine);
 
+            SetActiveInputField(true);
             _isInputFieldActive = true;
             _chatWindow.SetActive(true);
             _chatInputField.ActivateInputField();
@@ -55,6 +56,7 @@ public class GameChatUI : NetworkBehaviour
             _isInputFieldActive = false;
             _chatInputField.DeactivateInputField();
             PlayerInput.IsButtonsBlocked = false;
+            SetActiveInputField(false);
 
             // Hide chat coroutine
             if (_hideChatWindowCoroutine != null)
@@ -73,12 +75,21 @@ public class GameChatUI : NetworkBehaviour
 
     public void SendChatMessage(string msg)
     {
-        if (msg == string.Empty) return;
-
         _isInputFieldActive = false;
 
         _chatInputField.DeactivateInputField();
         PlayerInput.IsButtonsBlocked = false;
+
+        SetActiveInputField(false);
+
+        if (msg == string.Empty)
+        {
+            if (_hideChatWindowCoroutine != null)
+                StopCoroutine(_hideChatWindowCoroutine);
+            _hideChatWindowCoroutine = HideChatWindowCoroutine(_hideChatInSeconds);
+            StartCoroutine(_hideChatWindowCoroutine);
+            return;
+        }
 
         CmdSendChatMessage(Player.LocalPlayer.Username, msg);
         _chatInputField.text = string.Empty;
@@ -127,5 +138,10 @@ public class GameChatUI : NetworkBehaviour
         {
             Destroy(_chatContent.transform.GetChild(0).gameObject);
         }
+    }
+
+    private void SetActiveInputField(bool isActive)
+    {
+        _chatInputField.gameObject.SetActive(isActive);
     }
 }
