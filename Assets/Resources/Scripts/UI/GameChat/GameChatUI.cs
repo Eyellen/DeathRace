@@ -125,7 +125,7 @@ public class GameChatUI : NetworkBehaviour
     {
         if (_chatContent.transform.childCount > _messageBuffer)
         {
-            Destroy(_chatContent.transform.GetChild(0));
+            Destroy(_chatContent.transform.GetChild(0).gameObject);
         }
     }
 }
