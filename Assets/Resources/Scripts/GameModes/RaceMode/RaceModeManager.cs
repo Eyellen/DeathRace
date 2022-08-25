@@ -12,8 +12,11 @@ public class RaceModeManager : GameModeBase
     private readonly SyncDictionary<CarInfo, int> _playersCompletedLaps = new SyncDictionary<CarInfo, int>();
 
     [field: SerializeField]
+    [field: SyncVar]
     public int LapsToWin { get; private set; } = 1;
+    [field: SyncVar]
     public int ActivateTilesOnLap { get; private set; }
+    [field: SyncVar]
     public int TilesCooldown { get; private set; }
 
     private bool IsTilesActivated;
