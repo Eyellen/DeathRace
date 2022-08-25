@@ -17,7 +17,7 @@ public class GameCanvas : MonoBehaviour
     {
         InitializeInstance();
         //CursorManager.HideCursor();
-        _gameChat.enabled = true;
+        StartCoroutine(EnableChatCoroutine());
     }
 
     private void InitializeInstance()
@@ -75,6 +75,19 @@ public class GameCanvas : MonoBehaviour
         foreach (var objectToHide in _objectsToHide)
         {
             objectToHide.SetActive(isActive);
+        }
+    }
+
+    private IEnumerator EnableChatCoroutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+
+            _gameChat.gameObject.SetActive(true);
+            _gameChat.enabled = true;
+
+            yield return null;
         }
     }
 }
