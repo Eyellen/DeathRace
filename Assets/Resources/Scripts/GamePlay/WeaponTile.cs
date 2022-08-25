@@ -5,7 +5,7 @@ using Mirror;
 
 public class WeaponTile : TileBase
 {
-    protected override void OnCarExit(GameObject car)
+    protected override void OnCarEnter(GameObject car)
     {
         CmdActivateWeapons(car);
     }

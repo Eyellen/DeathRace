@@ -25,16 +25,14 @@ public class PlayerFloatingInfoManager : NetworkBehaviour
         _thisTransform = GetComponent<Transform>();
         _cameraTransform = Camera.main.transform;
         _camera = Camera.main;
-        _canvas = GameObject.Find("Canvas/PlayerFloatingInfos");
 
-        if (netIdentity.hasAuthority)
-            CmdSetUsername(Username = SettingsSaveSystem.CachedSave.userData.Username);
-
-        InitializeFloatingInfo();
+        StartCoroutine(InitializeCanvasCoroutine());
     }
 
     private void Update()
     {
+        if (_canvas == null || _playerFloatingInfo == null) return;
+
         if(!_isShowOnSelf && isLocalPlayer)
         {
             HideFloatingInfo();
@@ -49,6 +47,21 @@ public class PlayerFloatingInfoManager : NetworkBehaviour
         Destroy(_playerFloatingInfo);
     }
 
+    private IEnumerator InitializeCanvasCoroutine()
+    {
+        while (_canvas == null)
+        {
+            _canvas = GameObject.Find("Canvas/PlayerFloatingInfos");
+
+            yield return null;
+        }
+
+        if (netIdentity.hasAuthority)
+            CmdSetUsername(Username = Player.LocalPlayer.Username);
+
+        InitializeFloatingInfo();
+    }
+
     private void CheckIfNeedToShowOrHide()
     {
         Vector3 player = _camera.WorldToViewportPoint(_thisTransform.position);
@@ -59,6 +72,14 @@ public class PlayerFloatingInfoManager : NetworkBehaviour
             HideFloatingInfo();
             return;
         }
+
+        // To check if there is some object between player and camera
+        if (Physics.Linecast(_cameraTransform.position, _thisTransform.position + Vector3.up * _verticalOffset))
+        {
+            HideFloatingInfo();
+            return;
+        }
+
         ShowFloatingInfo();
     }
 
@@ -101,7 +122,7 @@ public class PlayerFloatingInfoManager : NetworkBehaviour
         else
         {
             Debug.LogWarning("Username is empty, Username set value to Player.");
-            Username = "Player";
+            Username = "Driver";
         }
     }
 }

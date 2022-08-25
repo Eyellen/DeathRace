@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8391472485386244346}
   - component: {fileID: 1607937850206090772}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 42632515052574245}
   - component: {fileID: 3096973531422279522}
   - component: {fileID: 3602950305313614882}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TileBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}

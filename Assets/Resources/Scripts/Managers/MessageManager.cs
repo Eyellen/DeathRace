@@ -9,7 +9,7 @@ public class MessageManager : NetworkBehaviour
     public static MessageManager Instance { get; private set; }
 
     [SerializeField] private TextMeshProUGUI _topMessageBar;
-    [SerializeField] private TextMeshProUGUI _bottonMessageBar;
+    [SerializeField] private TextMeshProUGUI _bottomMessageBar;
 
     private void Awake()
     {
@@ -30,6 +30,7 @@ public class MessageManager : NetworkBehaviour
         }
     }
 
+    #region TopMessage
     public void ShowTopMessage(string msg)
     {
         _topMessageBar.text = msg;
@@ -97,11 +98,27 @@ public class MessageManager : NetworkBehaviour
     {
         HideTopMessageSmoothly();
     }
+    #endregion
 
+
+    #region BottomMessage
     public void ShowBottomMessage(string msg)
     {
-        _bottonMessageBar.text = msg;
-        _bottonMessageBar.gameObject.SetActive(true);
+        _bottomMessageBar.text = msg;
+        _bottomMessageBar.gameObject.SetActive(true);
+    }
+
+    public void ShowBottomMessage(string msg, float seconds)
+    {
+        StartCoroutine(ShowBottomMessageCoroutine(msg, seconds));
+    }
+
+    private IEnumerator ShowBottomMessageCoroutine(string msg, float seconds)
+    {
+        ShowBottomMessage(msg);
+        yield return new WaitForSeconds(seconds);
+        //HideBottomMessage();
+        HideBottomMessageSmoothly();
     }
 
     [ClientRpc]
@@ -110,9 +127,35 @@ public class MessageManager : NetworkBehaviour
         ShowBottomMessage(msg);
     }
 
+    [ClientRpc]
+    public void RpcShowBottomMessage(string msg, float seconds)
+    {
+        ShowBottomMessage(msg, seconds);
+    }
+
     public void HideBottomMessage()
     {
-        _bottonMessageBar.gameObject.SetActive(false);
+        _bottomMessageBar.gameObject.SetActive(false);
+    }
+
+    public void HideBottomMessageSmoothly()
+    {
+        StartCoroutine(HideBottomMessageCoroutine());
+    }
+
+    private IEnumerator HideBottomMessageCoroutine()
+    {
+        float initialAlpha = _bottomMessageBar.alpha;
+
+        while (_bottomMessageBar.alpha > 0)
+        {
+            _bottomMessageBar.alpha -= Time.deltaTime;
+
+            yield return null;
+        }
+
+        _bottomMessageBar.gameObject.SetActive(false);
+        _bottomMessageBar.alpha = initialAlpha;
     }
 
     [ClientRpc]
@@ -121,10 +164,18 @@ public class MessageManager : NetworkBehaviour
         HideBottomMessage();
     }
 
+    [ClientRpc]
+    public void RpcHideBottomMessageSmoothly()
+    {
+        HideBottomMessageSmoothly();
+    }
+    #endregion
+
+
     public void HideAllMessages()
     {
         _topMessageBar.gameObject.SetActive(false);
-        _bottonMessageBar.gameObject.SetActive(false);
+        _bottomMessageBar.gameObject.SetActive(false);
     }
 
     [ClientRpc]

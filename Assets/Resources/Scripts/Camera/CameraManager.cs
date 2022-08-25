@@ -85,13 +85,14 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    public void SetThirdPersonCamera(Transform target)
+    public void SetThirdPersonCamera(Transform car)
     {
         if (_setFreeCameraCoroutine != null)
             StopCoroutine(_setFreeCameraCoroutine);
 
         CameraMode = CameraMode.ThirdPerson;
-        ((ThirdPersonCamera)_currentCameraScript).Target = target;
+        ((ThirdPersonCamera)_currentCameraScript).Target = car.transform.Find("CameraAnchor");
+        ((ThirdPersonCamera)_currentCameraScript).TargetRigidbody = car.GetComponent<Rigidbody>();
     }
 
     public void SetFreeCamera()

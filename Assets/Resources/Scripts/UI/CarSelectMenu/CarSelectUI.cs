@@ -15,6 +15,8 @@ public class CarSelectUI : MonoBehaviour
 
     private void Update()
     {
+        CheckIfSpawnIsAllowed();
+
         CursorManager.ShowCursor();
         PlayerInput.IsBlocked = true;
     }
@@ -31,11 +33,6 @@ public class CarSelectUI : MonoBehaviour
         PlayerInput.IsBlocked = false;
     }
 
-    private void OnDestroy()
-    {
-        //GameModeBase.OnInitialized -= InitializeEvents;
-    }
-
     public void SetActive(bool isActive)
     {
         gameObject.SetActive(isActive);
@@ -45,7 +42,7 @@ public class CarSelectUI : MonoBehaviour
     {
         if (Player.LocalPlayer.Car != null)
         {
-            SpawnManager.Instance.RemoveCurrentCar();
+            SpawnManager.Instance.RemoveLocalCar();
         }
 
         SpawnManager.Instance.SpawnLocalPlayer();
@@ -63,7 +60,19 @@ public class CarSelectUI : MonoBehaviour
     public void CheckIfSpawnIsAllowed()
     {
         if ((GameMode)ServerData.GameModeIndex != GameMode.Free)
-            _spawnButton.interactable = !GameModeBase.Instance.IsGameOn;
+        {
+            if (Player.LocalPlayer.SelectedCarIndex <= -1)
+                _spawnButton.interactable = false;
+            else
+                _spawnButton.interactable = !GameModeBase.Instance.IsGameOn;
+        }
+        else
+        {
+            if (Player.LocalPlayer.SelectedCarIndex <= -1)
+                _spawnButton.interactable = false;
+            else
+                _spawnButton.interactable = true;
+        }
     }
 
     private void InitializeEvents()

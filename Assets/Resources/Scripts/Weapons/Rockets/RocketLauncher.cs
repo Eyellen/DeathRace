@@ -10,7 +10,6 @@ public class RocketLauncher : NetworkBehaviour
     [SerializeField] private GameObject[] _rockets;
     [SerializeField] private GameObject _launchedRocketPrefab;
     [SerializeField] private float _timeBetweenLaunches;
-    private float _lastLaunchTime;
 
     private Vector3 _previousPosition;
     private Vector3 _currentPosition;
@@ -19,6 +18,22 @@ public class RocketLauncher : NetworkBehaviour
     [field: SerializeField]
     [field: SyncVar]
     public bool IsActivated { get; set; }
+
+    public bool IsRocketsRanOut
+    {
+        get
+        {
+            foreach (var rocket in _rockets)
+            {
+                if (rocket != null) return false;
+            }
+
+            return true;
+        }
+    }
+
+    [field: SyncVar]
+    public bool IsReadyToShoot { get; private set; } = true;
 
     void Start()
     {
@@ -52,16 +67,17 @@ public class RocketLauncher : NetworkBehaviour
         if (!IsActivated) return;
 
         if (PlayerInput.IsRightActionPressed)
-            CmdLaunch(_currentMovingSpeed);
+            CmdLaunch(_currentMovingSpeed, Player.LocalPlayer);
     }
 
     [Command(requiresAuthority = false)]
-    private void CmdLaunch(float rocketSpeed)
+    private void CmdLaunch(float rocketSpeed, Player launchedByPlayer)
     {
         if (!IsActivated) return;
 
-        if (Time.time < _lastLaunchTime + _timeBetweenLaunches) return;
-        _lastLaunchTime = Time.time;
+        if (!IsReadyToShoot) return;
+        IsReadyToShoot = false;
+        StartCoroutine(HandleCooldownCoroutine(_timeBetweenLaunches));
 
         for (int i = 0; i < _rockets.Length; i++)
         {
@@ -69,6 +85,7 @@ public class RocketLauncher : NetworkBehaviour
 
             GameObject launchedRocket = Instantiate(_launchedRocketPrefab, _rockets[i].transform.position, _rockets[i].transform.rotation);
             //launchedRocket.GetComponent<Rocket>().Speed += _currentMovingSpeed;
+            launchedRocket.GetComponent<Rocket>().LaunchedByPlayer = launchedByPlayer;
             launchedRocket.GetComponent<Rocket>().Speed += rocketSpeed;
             NetworkServer.Spawn(launchedRocket);
 
@@ -76,6 +93,13 @@ public class RocketLauncher : NetworkBehaviour
 
             return;
         }
+    }
+
+    private IEnumerator HandleCooldownCoroutine(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+
+        IsReadyToShoot = true;
     }
 
     [ClientRpc]

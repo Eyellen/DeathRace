@@ -9,7 +9,7 @@ public class RaceModeManager : GameModeBase
     public CheckPoint[] CheckPoints { get; private set; }
 
     // Completed laps of each player by their car's netId
-    private readonly SyncDictionary<uint, int> _playersCompletedLaps = new SyncDictionary<uint, int>();
+    private readonly SyncDictionary<CarInfo, int> _playersCompletedLaps = new SyncDictionary<CarInfo, int>();
 
     [field: SerializeField]
     public int LapsToWin { get; private set; } = 1;
@@ -96,6 +96,8 @@ public class RaceModeManager : GameModeBase
         // No need to call here because it's being called in base method
         //RpcStartGame();
 
+        MessageManager.Instance.RpcShowBottomMessage("Get Ready");
+
         return true;
     }
 
@@ -105,6 +107,9 @@ public class RaceModeManager : GameModeBase
         base.RpcStartGame();
 
         CheckPoints[0].transform.parent.gameObject.SetActive(true);
+
+        PlayerInput.IsButtonsBlocked = true;
+        StartCoroutine(UnblockPlayersInputCoroutine(inSeconds: 3));
     }
 
     [Server]
@@ -155,7 +160,7 @@ public class RaceModeManager : GameModeBase
         {
             if(CheckPoints[CheckPoints.Length - 1].IsPassed)
             {
-                CmdSetLapsCompleted(Player.LocalPlayer.Car.GetComponent<NetworkIdentity>().netId);
+                CmdSetLapsCompleted(Player.LocalPlayer.Car.GetComponent<CarInfo>());
                 ResetAllCheckPoints();
             }
 
@@ -172,16 +177,16 @@ public class RaceModeManager : GameModeBase
     }
 
     [Command(requiresAuthority = false)]
-    private void CmdSetLapsCompleted(uint netId)
+    private void CmdSetLapsCompleted(CarInfo carInfo)
     {
-        _playersCompletedLaps[netId]++;
+        _playersCompletedLaps[carInfo]++;
+        carInfo.Player.SessionStats.CmdSetLapsCompleted(_playersCompletedLaps[carInfo]);
 
         if (!IsTilesActivated &&
-            _playersCompletedLaps[netId] == ActivateTilesOnLap)
+            _playersCompletedLaps[carInfo] == ActivateTilesOnLap)
             SetActiveAllTiles(true);
 
-
-        if (_playersCompletedLaps[netId] >= LapsToWin)
+        if (_playersCompletedLaps[carInfo] >= LapsToWin)
             StopGame();
     }
 
@@ -197,24 +202,17 @@ public class RaceModeManager : GameModeBase
     private void InitializePlayersCompletedLapsDictionary()
     {
         _playersCompletedLaps.Clear();
-
-        // Looking for Players cars netIds
-        CarBase[] cars = FindObjectsOfType<CarBase>();
-        uint[] netIds = new uint[cars.Length];
-        for (int i = 0; i < netIds.Length; i++)
-        {
-            netIds[i] = cars[i].netId;
-        }
-
+        
 #if UNITY_EDITOR
         Debug.Log("Initializing players completed laps dictionary");
 #endif
-        foreach (var netId in netIds)
+        CarInfo[] carInfos = FindObjectsOfType<CarInfo>();
+        foreach (var carInfo in carInfos)
         {
             // Initializing every players completed laps count by 0
-            _playersCompletedLaps[netId] = 0;
+            _playersCompletedLaps[carInfo] = 0;
 #if UNITY_EDITOR
-            Debug.Log($"Car NetId: {netId} | Laps: {_playersCompletedLaps[netId]}");
+            Debug.Log($"Car NetId: {netId} | Laps: {_playersCompletedLaps[carInfo]}");
 #endif
         }
     }
@@ -246,29 +244,23 @@ public class RaceModeManager : GameModeBase
             }
         }
 
-        uint? winnersNetId = null;
+        CarInfo winnerCarInfo = null;
         int maxScore = 0;
         foreach (var playerScore in _playersCompletedLaps)
         {
             if (playerScore.Value <= maxScore) continue;
 
             maxScore = playerScore.Value;
-            winnersNetId = playerScore.Key;
+            winnerCarInfo = playerScore.Key;
         }
 
-        if (winnersNetId == null)
+        if (winnerCarInfo == null)
         {
             MessageManager.Instance.RpcShowTopMessage("Round Draw");
         }
         else
         {
-            foreach (var car in SpawnManager.Instance.SpawnedCars)
-            {
-                if (car.Key != winnersNetId) continue;
-
-                MessageManager.Instance.RpcShowTopMessage($"{car.Value.GetComponent<CarInfo>().Player.Username} Won The Game");
-                break;
-            }
+            MessageManager.Instance.RpcShowTopMessage($"{winnerCarInfo.Player.Username} Won The Game");
         }
     }
 
@@ -324,5 +316,13 @@ public class RaceModeManager : GameModeBase
             tile.ResetTile();
         }
         IsTilesActivated = false;
+    }
+
+    private IEnumerator UnblockPlayersInputCoroutine(float inSeconds)
+    {
+        yield return new WaitForSeconds(inSeconds);
+
+        PlayerInput.IsButtonsBlocked = false;
+        MessageManager.Instance.ShowBottomMessage("Start!", 2);
     }
 }

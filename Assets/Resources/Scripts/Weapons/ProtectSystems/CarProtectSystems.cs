@@ -5,30 +5,42 @@ using Mirror;
 
 public class CarProtectSystems : NetworkBehaviour
 {
-    [SerializeField]
-    private ParticleSystem _protectionSmoke;
-
-    [SerializeField]
-    private float _actionTime = 3;
-
-    [SerializeField]
-    private float _cooldown = 20;
-
-    [SerializeField]
-    private int _maxCount = 5;
-    private int _currentCount;
-
-    private bool _isReady= true;
-
+    [field: Header("Common")]
     [field: SerializeField]
     [field: SyncVar]
     public bool IsActivated { get; set; }
 
+    [Header("Smoke part")]
+    [SerializeField]
+    private ParticleSystem _protectionSmoke;
+
+    [SerializeField]
+    private float _smokeActionTime = 3;
+
+    [SerializeField]
+    private float _smokeCooldown = 20;
+
+    [SerializeField]
+    private int _maxSmokeCount = 5;
+    private int _currentSmokeCount;
+
+    public bool IsSmokeReady { get; private set; } = true;
+
     private IEnumerator _handleSmokeCoroutine;
+
+    public bool IsSmokeRanOut
+    {
+        get
+        {
+            if (_currentSmokeCount <= 0) return true;
+
+            return false;
+        }
+    }
 
     private void Start()
     {
-        _currentCount = _maxCount;
+        _currentSmokeCount = _maxSmokeCount;
     }
 
     private void Update()
@@ -42,17 +54,17 @@ public class CarProtectSystems : NetworkBehaviour
 
         if (!IsActivated) return;
 
-        if (PlayerInput.IsSmokePressed && _isReady)
+        if (PlayerInput.IsSmokePressed && IsSmokeReady)
         {
-            _currentCount--;
-            _handleSmokeCoroutine = HandleSmokeCoroutine(_actionTime);
+            _currentSmokeCount--;
+            _handleSmokeCoroutine = HandleSmokeCoroutine(_smokeActionTime);
             StartCoroutine(_handleSmokeCoroutine);
         }
     }
 
     private IEnumerator HandleSmokeCoroutine(float seconds)
     {
-        _isReady = false;
+        IsSmokeReady = false;
         _protectionSmoke.Play();
         CmdPlayProtectionSmoke(true);
 
@@ -60,14 +72,14 @@ public class CarProtectSystems : NetworkBehaviour
 
         _protectionSmoke.Stop();
         CmdPlayProtectionSmoke(false);
-        StartCoroutine(HandleCooldownCoroutine(_cooldown));
+        StartCoroutine(HandleCooldownCoroutine(_smokeCooldown));
     }
 
     private IEnumerator HandleCooldownCoroutine(float seconds)
     {
         yield return new WaitForSeconds(seconds);
 
-        _isReady = true;
+        IsSmokeReady = true;
     }
 
     [Command(requiresAuthority = false)]

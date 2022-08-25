@@ -31,7 +31,7 @@ public class GunBase : NetworkBehaviour
 
     [field: SyncVar] public bool IsShooting { get; protected set; }
 
-    private bool IsAmmoRunOut
+    public bool IsAmmoRunOut
     {
         get
         {
@@ -70,7 +70,7 @@ public class GunBase : NetworkBehaviour
 
     private void InitializeGunBase()
     {
-        _layer = 1 << LayerMask.NameToLayer("Default");
+        _layer = ~0; // Everything layer
         _currentBulletsCount = MaxAmmoSupply;
     }
 
@@ -116,7 +116,7 @@ public class GunBase : NetworkBehaviour
 
             foreach (IDamageable<int> damageable in damageables)
             {
-                damageable.Damage(Damage, hitInfo.collider);
+                damageable.Damage(Damage, hitInfo.collider, Player.LocalPlayer);
             }
         }
     }

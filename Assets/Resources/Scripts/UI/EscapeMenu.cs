@@ -14,6 +14,8 @@ public class EscapeMenu : MonoBehaviour
     {
         if ((GameMode)ServerData.GameModeIndex != GameMode.Free)
             GameModeBase.OnInitialized += InitializeRestartButton;
+        else
+            InitializeRestartButton();
 
         gameObject.SetActive(false);
     }
@@ -49,11 +51,19 @@ public class EscapeMenu : MonoBehaviour
 
     private void InitializeRestartButton()
     {
-        if(NetworkServer.active)
+        if (NetworkServer.active)
         {
-            _restartButton.onClick.AddListener(() => GameModeBase.Instance.RestartGame());
-            GameModeBase.Instance.OnGameStarted += () => _restartButton.interactable = true;
-            GameModeBase.Instance.OnGameEnded += () => _restartButton.interactable = false;
+            if ((GameMode)ServerData.GameModeIndex == GameMode.Free)
+            {
+                _restartButton.interactable = true;
+                _restartButton.onClick.AddListener(() => GameManager.Instance.ClearScene());
+            }
+            else
+            {
+                _restartButton.onClick.AddListener(() => GameModeBase.Instance.RestartGame());
+                GameModeBase.Instance.OnGameStarted += () => _restartButton.interactable = true;
+                GameModeBase.Instance.OnGameEnded += () => _restartButton.interactable = false;
+            }
         }
     }
 }

@@ -88,14 +88,14 @@ public class GameModeBase : NetworkBehaviour
     protected virtual void ServerUpdate()
     {
         // Starting game by button
-        if (Input.GetKeyDown(KeyCode.P) && SpawnManager.Instance.SpawnedCars.Count >= 2)
+        if (PlayerInput.IsStartGamePressed && Player.ActivePlayers.Count >= 2)
         {
             StartCoroutine(StartGameCoroutine(3));
         }
 
         // Start game if Host is spectating and there is at least 2 not spectating players
         if (Player.LocalPlayer.SelectedCarIndex == -1 &&
-            SpawnManager.Instance.SpawnedCars.Count >= 2)
+            Player.ActivePlayers.Count >= 2)
         {
             StartCoroutine(StartGameCoroutine(3));
         }

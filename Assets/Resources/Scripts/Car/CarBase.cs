@@ -22,7 +22,7 @@ public class CarBase : NetworkBehaviour
 
     #region Properties
     public float CurrentSpeed { get => _currentSpeed; }
-    public float SpeedLimit { get => _speedLimit; }
+    public float SpeedLimit { get => _speedLimit; set => _speedLimit = value; }
     [field: SyncVar] public bool IsGasing { get; private set; }
     public bool IsGrounded
     {
@@ -95,13 +95,11 @@ public class CarBase : NetworkBehaviour
     private void Update()
     {
         // Respawn
-        if (Input.GetKeyDown(KeyCode.R))
+        if (PlayerInput.IsRespawnPressed)
         {
             _rigidbody.velocity = Vector3.zero;
             _thisTransform.rotation = Quaternion.Euler(0, 0, 0);
-            _thisTransform.position = 
-                SpawnManager.Instance.SpawnPositions[Random.Range(0, 
-                SpawnManager.Instance.SpawnPositions.Length - 1)].transform.position;
+            _thisTransform.position = new Vector3(_thisTransform.position.x, 1, _thisTransform.position.z);
         }
 
         // Speed

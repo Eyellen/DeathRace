@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 3824286183520734986}
   - component: {fileID: 5504649014330071795}
   - component: {fileID: 3446662326044965567}
-  m_Layer: 0
+  - component: {fileID: 8361625862175812411}
+  m_Layer: 9
   m_Name: Broken Back Plate
   m_TagString: BackPlate
   m_Icon: {fileID: 0}
@@ -101,6 +102,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8361625862175812411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2309082221795030665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b1a9939eaedc1046926a77d2d63846a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minSpeedForDamage: 5
+  _damageCoefficientMultiplier: 0.5
+  _isSelfDestructable: 1
+  _selfDestroyingTime: 3
 --- !u!1001 &4497488831225156601
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -152,9 +169,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1640426704611700577, guid: 5aa5e4bbe77e6744e9131349261f387d, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5aa5e4bbe77e6744e9131349261f387d, type: 3}
       propertyPath: m_Name
       value: Lid
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5aa5e4bbe77e6744e9131349261f387d, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5aa5e4bbe77e6744e9131349261f387d, type: 3}
