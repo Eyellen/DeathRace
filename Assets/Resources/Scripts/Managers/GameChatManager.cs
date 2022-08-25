@@ -5,19 +5,22 @@ using UnityEngine.UI;
 using Mirror;
 using TMPro;
 
-public class GameChatUI : NetworkBehaviour
+public class GameChatManager : NetworkBehaviour
 {
+    public static GameChatManager Instance { get; private set; }
+
     [Header("Window")]
     [SerializeField] private GameObject _chatWindow;
     [Header("Input Field")]
     [SerializeField] private TMP_InputField _chatInputField;
-    private bool _isInputFieldActive;
+    public bool IsInputFieldActive { get; private set; }
+    public bool IsInputFieldVisible { get => _chatInputField.gameObject.activeSelf; }
 
     [Header("ChatContent")]
     [SerializeField] private GameObject _chatMessagePrefab;
     [SerializeField] private GameObject _chatContent;
     private RectTransform _chatContentTransform;
-    [SerializeField] private ScrollRect _chatContentScrollrect;
+    [SerializeField] private ScrollRect _chatScrollrect;
 
     [Header("Settings")]
     [SerializeField] private float _hideChatInSeconds = 5f;
@@ -26,6 +29,11 @@ public class GameChatUI : NetworkBehaviour
 
     private IEnumerator _hideChatWindowCoroutine;
 
+    private void Awake()
+    {
+        InitializeInstance();
+    }
+
     private void Start()
     {
         _chatContentTransform = _chatContent.GetComponent<RectTransform>();
@@ -33,37 +41,56 @@ public class GameChatUI : NetworkBehaviour
 
     private void Update()
     {
-        if(_isInputFieldActive)
+        if(IsInputFieldActive)
         {
             float scrollValue = Input.mouseScrollDelta.y;
-            _chatContentScrollrect.verticalNormalizedPosition += scrollValue * _scrollbarSensitivity / _chatContentTransform.rect.height;
+            _chatScrollrect.verticalNormalizedPosition += scrollValue * _scrollbarSensitivity / _chatContentTransform.rect.height;
         }
 
         if (PlayerInput.IsChatPressed)
         {
-            // Stop hiding coroutine if chat has been opened
-            if (_hideChatWindowCoroutine != null)
-                StopCoroutine(_hideChatWindowCoroutine);
-
-            SetActiveInputField(true);
-            _isInputFieldActive = true;
-            _chatWindow.SetActive(true);
-            _chatInputField.ActivateInputField();
-            PlayerInput.IsButtonsBlocked = true;
+            OpenChat();
         }
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (PlayerInput.IsEscapePressed)
         {
-            _isInputFieldActive = false;
-            _chatInputField.DeactivateInputField();
-            PlayerInput.IsButtonsBlocked = false;
-            SetActiveInputField(false);
-
-            // Hide chat coroutine
-            if (_hideChatWindowCoroutine != null)
-                StopCoroutine(_hideChatWindowCoroutine);
-            _hideChatWindowCoroutine = HideChatWindowCoroutine(_hideChatInSeconds);
-            StartCoroutine(_hideChatWindowCoroutine);
+            CloseChat();
         }
+    }
+
+    public void OpenChat()
+    {
+        // Stop hiding coroutine if chat has been opened
+        if (_hideChatWindowCoroutine != null)
+            StopCoroutine(_hideChatWindowCoroutine);
+
+        SetActiveInputField(true);
+        StartCoroutine(UpdateScrollValueCoroutine());
+        IsInputFieldActive = true;
+        _chatWindow.SetActive(true);
+        _chatInputField.ActivateInputField();
+        PlayerInput.IsButtonsBlocked = true;
+    }
+
+    public void CloseChat()
+    {
+        IsInputFieldActive = false;
+        _chatInputField.DeactivateInputField();
+        PlayerInput.IsButtonsBlocked = false;
+        SetActiveInputField(false);
+
+        // Hide chat coroutine
+        if (_hideChatWindowCoroutine != null)
+            StopCoroutine(_hideChatWindowCoroutine);
+        _hideChatWindowCoroutine = HideChatWindowCoroutine(_hideChatInSeconds);
+        StartCoroutine(_hideChatWindowCoroutine);
+    }
+
+    private void InitializeInstance()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
     }
 
     private IEnumerator HideChatWindowCoroutine(float inSeconds)
@@ -75,12 +102,19 @@ public class GameChatUI : NetworkBehaviour
 
     public void SendChatMessage(string msg)
     {
-        _isInputFieldActive = false;
+        IsInputFieldActive = false;
 
         _chatInputField.DeactivateInputField();
         PlayerInput.IsButtonsBlocked = false;
 
         SetActiveInputField(false);
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            _chatInputField.DeactivateInputField();
+            _chatInputField.text = string.Empty;
+            return;
+        }
 
         if (msg == string.Empty)
         {
@@ -107,13 +141,13 @@ public class GameChatUI : NetworkBehaviour
         GameObject message = Instantiate(_chatMessagePrefab, _chatContent.transform);
 
         TextMeshProUGUI messageText = message.GetComponent<TextMeshProUGUI>();
-        messageText.text = $"<color=\"red\">{from}</color>: {msg}";
+        messageText.text = $"<color=#4DD581>{from}</color>: {msg}";
 
         _chatWindow.SetActive(true);
-        if(!_isInputFieldActive)
-            StartCoroutine(UpdateScrollValue());
+        if(!IsInputFieldActive)
+            StartCoroutine(UpdateScrollValueCoroutine());
 
-        if (!_isInputFieldActive)
+        if (!IsInputFieldActive)
         {
             if (_hideChatWindowCoroutine != null)
                 StopCoroutine(_hideChatWindowCoroutine);
@@ -124,12 +158,12 @@ public class GameChatUI : NetworkBehaviour
         CheckIfNeedToDeleteMessage();
     }
 
-    private IEnumerator UpdateScrollValue()
+    private IEnumerator UpdateScrollValueCoroutine()
     {
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
 
-        _chatContentScrollrect.verticalNormalizedPosition = 0;
+        _chatScrollrect.verticalNormalizedPosition = 0;
     }
 
     private void CheckIfNeedToDeleteMessage()

@@ -88,7 +88,7 @@ public class GameModeBase : NetworkBehaviour
     protected virtual void ServerUpdate()
     {
         // Starting game by button
-        if (Input.GetKeyDown(KeyCode.P) && Player.ActivePlayers.Count >= 2)
+        if (PlayerInput.IsStartGamePressed && Player.ActivePlayers.Count >= 2)
         {
             StartCoroutine(StartGameCoroutine(3));
         }

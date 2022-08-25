@@ -95,7 +95,7 @@ public class CarBase : NetworkBehaviour
     private void Update()
     {
         // Respawn
-        if (Input.GetKeyDown(KeyCode.R))
+        if (PlayerInput.IsRespawnPressed)
         {
             _rigidbody.velocity = Vector3.zero;
             _thisTransform.rotation = Quaternion.Euler(0, 0, 0);

@@ -6,7 +6,7 @@ public class GameCanvas : MonoBehaviour
 {
     public static GameCanvas Instance { get; private set; }
 
-    [SerializeField] private EscapeMenu _escapeMenu;
+    [SerializeField] public EscapeMenu EscapeMenu;
     [SerializeField] private CarSelectUI _carSelectMenu;
     [SerializeField] private GameObject _playerList;
 
@@ -42,7 +42,7 @@ public class GameCanvas : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            _escapeMenu.SetActive(!_escapeMenu.gameObject.activeSelf);
+            EscapeMenu.SetActive(!EscapeMenu.gameObject.activeSelf);
         }
         if(Input.GetKeyDown(KeyCode.N))
         {
