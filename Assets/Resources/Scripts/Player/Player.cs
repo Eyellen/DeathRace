@@ -75,7 +75,7 @@ public class Player : NetworkBehaviour
             CameraTransform.gameObject.SetActive(false);
         }
 
-        OnPlayerJoin?.Invoke(this);
+        StartCoroutine(OnPlayerJoinedCoroutine());
     }
 
     private void OnDestroy()
@@ -107,5 +107,13 @@ public class Player : NetworkBehaviour
     public void OnNameSyncedHook(string oldName, string newName)
     {
         OnNameSynced?.Invoke(newName);
+    }
+
+    private IEnumerator OnPlayerJoinedCoroutine()
+    {
+        while (Username == null || Username == string.Empty)
+            yield return null;
+
+        OnPlayerJoin?.Invoke(this);
     }
 }

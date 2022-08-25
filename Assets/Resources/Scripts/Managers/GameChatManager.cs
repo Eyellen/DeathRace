@@ -31,6 +31,7 @@ public class GameChatManager : NetworkBehaviour
 
     private void Awake()
     {
+        StartCoroutine(InitializeEvents());
         InitializeInstance();
     }
 
@@ -177,5 +178,25 @@ public class GameChatManager : NetworkBehaviour
     private void SetActiveInputField(bool isActive)
     {
         _chatInputField.gameObject.SetActive(isActive);
+    }
+
+    [ServerCallback]
+    private IEnumerator InitializeEvents()
+    {
+        while (PlayerListManager.Instance == null)
+            yield return null;
+
+        PlayerListManager.Instance.OnPlayerAddedToList += OnPlayerJoined;
+        PlayerListManager.Instance.OnPlayerRemovedFromList += OnPlayerLeft;
+    }
+
+    private void OnPlayerJoined(Player player)
+    {
+        CmdSendChatMessage("<color=#C1C1C1>Server</color>", $"{player.Username} joined the server");
+    }
+
+    private void OnPlayerLeft(Player player)
+    {
+        CmdSendChatMessage("<color=#C1C1C1>Server</color>", $"{player.Username} left the server");
     }
 }
