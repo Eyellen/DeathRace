@@ -6,7 +6,8 @@ public class GameCanvas : MonoBehaviour
 {
     public static GameCanvas Instance { get; private set; }
 
-    [SerializeField] public EscapeMenu EscapeMenu;
+    [SerializeField] private GameChatManager _gameChat;
+    [field: SerializeField] public EscapeMenu EscapeMenu { get; private set; }
     [SerializeField] private CarSelectUI _carSelectMenu;
     [SerializeField] private GameObject _playerList;
 
@@ -16,6 +17,7 @@ public class GameCanvas : MonoBehaviour
     {
         InitializeInstance();
         //CursorManager.HideCursor();
+        _gameChat.enabled = true;
     }
 
     private void InitializeInstance()
