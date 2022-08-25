@@ -58,6 +58,8 @@ public class Player : NetworkBehaviour
 
     public Action<string> OnNameSynced;
 
+    public Action<string> OnNameUpdated;
+
     public override void OnStartClient()
     {
         CameraTransform = transform.Find("Camera");
@@ -75,7 +77,7 @@ public class Player : NetworkBehaviour
             CameraTransform.gameObject.SetActive(false);
         }
 
-        OnPlayerJoin?.Invoke(this);
+        StartCoroutine(OnPlayerJoinedCoroutine());
     }
 
     private void OnDestroy()
@@ -95,7 +97,19 @@ public class Player : NetworkBehaviour
     [Command]
     private void CmdSetUsername(string username)
     {
+        List<string> otherPlayersNames = new List<string>();
+        //Debug.Log("All usernames");
+        foreach (var player in AllPlayers)
+        {
+            otherPlayersNames.Add(player.Username);
+            //Debug.Log(player.Username);
+        }
+
+        username = ServerUsernameRequirements.CheckIfNameIsUnique(username, otherPlayersNames.ToArray());
+        //Debug.Log(username);
+
         Username = username;
+        OnNameUpdated?.Invoke(username);
     }
 
     [Command]
@@ -107,5 +121,13 @@ public class Player : NetworkBehaviour
     public void OnNameSyncedHook(string oldName, string newName)
     {
         OnNameSynced?.Invoke(newName);
+    }
+
+    private IEnumerator OnPlayerJoinedCoroutine()
+    {
+        while (Username == null || Username == string.Empty)
+            yield return null;
+
+        OnPlayerJoin?.Invoke(this);
     }
 }

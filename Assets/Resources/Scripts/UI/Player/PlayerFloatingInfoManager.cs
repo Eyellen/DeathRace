@@ -57,7 +57,7 @@ public class PlayerFloatingInfoManager : NetworkBehaviour
         }
 
         if (netIdentity.hasAuthority)
-            CmdSetUsername(Username = SettingsUser.Username);
+            CmdSetUsername(Username = Player.LocalPlayer.Username);
 
         InitializeFloatingInfo();
     }
@@ -122,7 +122,7 @@ public class PlayerFloatingInfoManager : NetworkBehaviour
         else
         {
             Debug.LogWarning("Username is empty, Username set value to Player.");
-            Username = "Player";
+            Username = "Driver";
         }
     }
 }

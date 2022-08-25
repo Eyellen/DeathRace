@@ -5,11 +5,11 @@ using Mirror;
 
 public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
 {
-    [SerializeField]
     private int _maxHealth;
 
+    [SerializeField]
     [SyncVar]
-    private int _health;
+    private int _currentHealth;
 
     [SyncVar]
     private bool _isBroken;
@@ -20,9 +20,9 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
 
     public int MaxHealth => _maxHealth;
 
-    public int CurrentHealth => _health;
+    public int CurrentHealth => _currentHealth;
 
-    public float HealthRatio => (float)_health / _maxHealth;
+    public float HealthRatio => (float)_currentHealth / _maxHealth;
 
     [field: SyncVar]
     private Player LastDamagedByPlayer { get; set; }
@@ -36,7 +36,7 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
 
     private void Start()
     {
-        CmdSetHealth(_maxHealth);
+        _maxHealth = _currentHealth;
         _backPlateCollider = transform.Find("Body/BackPlate").GetComponent<Collider>();
 
         CheckIfBackPlateBroken();
@@ -54,12 +54,12 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
     {
         if (toCollider != _backPlateCollider) return;
 
-        if (_health <= 0 && _isBroken) return;
+        if (_currentHealth <= 0 && _isBroken) return;
 
-        CmdSetHealth(_health -= damage);
+        CmdSetHealth(_currentHealth -= damage);
         CmdSetDamagedBy(byPlayer);
 
-        if (_health > 0) return;
+        if (_currentHealth > 0) return;
 
         _isBroken = true; // To prevent errors on Client while _isBroken getting synced on Server and Client
         CmdDestructWrapper();
@@ -79,7 +79,7 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
     [Command(requiresAuthority = false)]
     private void CmdSetHealth(int health)
     {
-        _health = health;
+        _currentHealth = health;
     }
 
     [Command(requiresAuthority = false)]
@@ -96,7 +96,7 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
     [Command(requiresAuthority = false)]
     private void CmdDestruct(float recoilForce)
     {
-        _health = 0;
+        _currentHealth = 0;
         _isBroken = true;
 
         if (_backPlateCollider == null) return;
@@ -128,10 +128,10 @@ public class CarBackPlateDamageable : NetworkBehaviour, IDamageable<int>
 
     public void Initialize(CarBackPlateDamageable other)
     {
-        this._health = other._health;
+        this._currentHealth = other._currentHealth;
         this._isBroken = other._isBroken;
 
-        CmdSetHealth(other._health);
+        CmdSetHealth(other._currentHealth);
         CmdSetBroken(other._isBroken);
     }
 
