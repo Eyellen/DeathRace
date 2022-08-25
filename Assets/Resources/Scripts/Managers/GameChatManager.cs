@@ -14,7 +14,6 @@ public class GameChatManager : NetworkBehaviour
     [Header("Input Field")]
     [SerializeField] private TMP_InputField _chatInputField;
     public bool IsInputFieldActive { get; private set; }
-    public bool IsInputFieldVisible { get => _chatInputField.gameObject.activeSelf; }
 
     [Header("ChatContent")]
     [SerializeField] private GameObject _chatMessagePrefab;
