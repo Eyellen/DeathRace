@@ -24,4 +24,9 @@ public class CreditsUI : MonoBehaviour
     {
         Process.Start("https://github.com/Eyellen/DeathRace/tree/main");
     }
+
+    public void DiscordLink()
+    {
+        Process.Start("https://discord.gg/2ZdEVNKAC6");
+    }
 }
