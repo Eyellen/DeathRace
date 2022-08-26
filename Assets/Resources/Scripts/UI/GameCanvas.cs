@@ -35,6 +35,8 @@ public class GameCanvas : MonoBehaviour
 
     void HandleInput()
     {
+        if (_gameChat.IsInputFieldActive) return;
+
         if (_carSelectMenu.gameObject.activeSelf &&
             Input.GetKeyDown(KeyCode.Escape))
         {
