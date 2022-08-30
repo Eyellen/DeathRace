@@ -34,7 +34,6 @@ public class PlayerSessionStats : NetworkBehaviour
             yield return null;
 
         GameModeBase.Instance.OnGameStarted += CmdResetAllStats;
-        GameModeBase.Instance.OnGameEnded += CmdResetAllStats;
     }
 
     [ServerCallback]
