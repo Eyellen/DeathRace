@@ -13,7 +13,6 @@ public class RaceModeManager : GameModeBase
 
     [field: SyncVar]
     [field: SerializeField]
-    [field: SyncVar]
     public int LapsToWin { get; private set; } = 1;
     [field: SyncVar]
     public int ActivateTilesOnLap { get; private set; }
