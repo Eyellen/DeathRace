@@ -34,4 +34,11 @@ public class DestroyedCar : NetworkBehaviour
         Vector3 impactPoint = transform.position + new Vector3(x, 0, z);
         _rigidbody.AddForceAtPosition(Vector3.up * _explosionForce, impactPoint, ForceMode.VelocityChange);
     }
+
+    [TargetRpc]
+    public void TargetOnDestroyedCarSpawned(NetworkConnection target)
+    {
+        Player.LocalPlayer.GetComponent<CameraManager>().SetThirdPersonCamera(transform);
+        Player.LocalPlayer.GetComponent<CameraManager>().SetFreeCamera(seconds: 2);
+    }
 }

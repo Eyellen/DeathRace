@@ -4,75 +4,150 @@ using UnityEngine;
 
 public class ThirdPersonCamera : CameraBase
 {
-    [SerializeField]
+    [field: Header("Third Person Camera Settings")]
+    private Camera _camera;
+
     private Transform _target;
+    [SerializeField]
+    public Transform Target
+    {
+        get => _target;
+        set => _target = value;
+    }
+    public Rigidbody TargetRigidbody { get; set; }
+
+    private float _yMaxRotation = -70;
+    private float _yMinRotation = 10;
+
+    protected override float yMaxRotation { get => _yMaxRotation; set => _yMaxRotation = value; }
+    protected override float yMinRotation { get => _yMinRotation; set => _yMinRotation = value; }
+
 
     [SerializeField]
-    private Vector3 _cameraOffset = new Vector3(0, 1, -5);
-
+    private Vector3 _cameraOffset = new Vector3(0, 0.4f, -5);
     private Vector3 _currentCameraOffset;
+
+    [SerializeField]
+    private float _minSpeedFov = 60;
+
+    [SerializeField]
+    private float _maxSpeedFov = 70;
+
+    [SerializeField]
+    private float _maxMovementSpeed = 25;
+
+    private int _layer;
+
+    [field: Header("Auto Camera Settings")]
+    [SerializeField]
+    private float _mouseInactiveThreshold = 0.05f;
+
+    [SerializeField]
+    private float _switchToAutoCameraAfterSeconds = 3f;
+
+    [SerializeField]
+    private float _autoCameraLookSmoothness = 2;
+
+    private float _lastMouseInputTime;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        _layer = 1 << LayerMask.NameToLayer("Car");
+
+        _camera = GetComponentInChildren<Camera>();
+    }
 
     protected override void LateUpdate()
     {
         base.LateUpdate();
 
-        if (_target == null)
-            FindTarget();
+        if (Target == null)
+        {
+            GetComponent<CameraManager>().SetFreeCamera();
+            return;
+        }
 
+        if (Mathf.Abs(PlayerInput.MouseHorizontalAxis) >= _mouseInactiveThreshold &&
+            Mathf.Abs(PlayerInput.MouseVerticalAxis) >= _mouseInactiveThreshold)
+        {
+            _lastMouseInputTime = Time.time;
+        }
+
+        HandleOffsetMagnitude();
         HandleFollowing();
+
+        HandleFieldOfView();
     }
 
     protected override void HandleRotation()
     {
-        base.HandleRotation();
+        if (PlayerInput.IsBackViewHolding)
+        {
+            HandleBackView();
+            _currentCameraOffset = _thisTransform.rotation * _cameraOffset;
+            return;
+        }
+        if(PlayerInput.IsReleasedBackView)
+        {
+            _thisTransform.rotation = Quaternion.Euler(20, Target.rotation.eulerAngles.y, 0);
+        }
 
-        _currentCameraOffset = _cameraTransform.rotation * _cameraOffset;
+        // Would be good to implement state machine here
+        if (_lastMouseInputTime + _switchToAutoCameraAfterSeconds > Time.time ||
+            Mathf.Abs(TargetRigidbody.velocity.magnitude) < 1f)
+        {
+            base.HandleRotation();
+        }
+        else
+        {
+            HandleAutoCamera();
+        }
+
+        _currentCameraOffset = _thisTransform.rotation * _cameraOffset;
+    }
+
+    private void HandleOffsetMagnitude()
+    {
+        if (!Physics.SphereCast(Target.position, radius: 0.2f, _currentCameraOffset, out RaycastHit hitInfo, 
+            _currentCameraOffset.magnitude, ~_layer, QueryTriggerInteraction.Ignore)) return;
+
+        Vector3 newOffset = hitInfo.point - Target.position;
+
+        _currentCameraOffset = _currentCameraOffset.normalized * newOffset.magnitude;
     }
 
     private void HandleFollowing()
     {
-#if UNITY_EDITOR || DEBUG_BUILD
-        if (!_target)
-        {
-            if (_debugging)
-            {
-                Debug.LogWarning("Camera doesn't have target.");
-            }
-            return;
-        }
-#else
-        if (!_target) return;
-#endif
-
-        _cameraTransform.position = _target.position + _currentCameraOffset;
+        _thisTransform.position = Target.position + _currentCameraOffset;
 
 #if UNITY_EDITOR || DEBUG_BUILD
         if (_debugging)
         {
-            Debug.DrawLine(_target.position, _target.position + _currentCameraOffset);
+            Debug.DrawLine(Target.position, Target.position + _currentCameraOffset);
         }
 #endif
     }
 
-    private void FindTarget()
+    private void HandleAutoCamera()
     {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        _thisTransform.rotation = Quaternion.Lerp(_thisTransform.rotation,
+            Quaternion.Euler(20, Target.rotation.eulerAngles.y, 0),
+            Time.deltaTime * _autoCameraLookSmoothness);
 
-        foreach (var player in players)
-        {
-            if (!player.TryGetComponent(out CarBase carBase))
-            {
-#if UNITY_EDITOR
-                Debug.LogError("Trying to GetComponent<CarBase> on object that doesnt contain it. " +
-                    "Most likely you forgot to disable \"Player\" tag on Destroyed Car");
-#endif
-                continue;
-            }
+        XRotation = _thisTransform.rotation.eulerAngles.y;
+        YRotation = -_thisTransform.rotation.eulerAngles.x;
+    }
 
-            if (!carBase.isLocalPlayer) continue;
+    private void HandleBackView()
+    {
+        _thisTransform.rotation = Quaternion.Euler(20, Target.rotation.eulerAngles.y + 180, 0);
+    }
 
-            _target = player.transform;
-            break;
-        }
+    private void HandleFieldOfView()
+    {
+        _camera.fieldOfView = Mathf.Lerp(_minSpeedFov, _maxSpeedFov,
+            Mathf.SmoothStep(0, 1, Mathf.Abs(TargetRigidbody.velocity.magnitude) / _maxMovementSpeed));
     }
 }

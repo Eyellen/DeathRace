@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Car
+  - DestroyedCar
+  - BackPlate
+  - SpawnPosition
   layers:
   - Default
   - TransparentFX
@@ -12,9 +16,9 @@ TagManager:
   - Water
   - UI
   - Damageable
-  - 
-  - 
-  - 
+  - Tile
+  - Background
+  - Car
   - 
   - 
   - 

@@ -72,13 +72,17 @@ PrefabInstance:
       propertyPath: m_AssetId
       value: f3cd09dbca0e5444e83c93d9f5ac54b0
       objectReference: {fileID: 0}
+    - target: {fileID: 1220517809418572108, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1555319263119888152, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
       propertyPath: m_Name
       value: Destroyed Porsche911
       objectReference: {fileID: 0}
     - target: {fileID: 1555319263119888152, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: DestroyedCar
       objectReference: {fileID: 0}
     - target: {fileID: 1555319263119888153, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
       propertyPath: m_RootOrder
@@ -124,6 +128,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3408802195026076762, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3473350399416231170, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -136,6 +144,10 @@ PrefabInstance:
       propertyPath: _gunScript
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5123994522794560315, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5392499648290325123, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -143,6 +155,10 @@ PrefabInstance:
     - target: {fileID: 5575978833937630564, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.792
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666994774851872239, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
+      propertyPath: clientAuthority
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7181935854139962093, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
       propertyPath: m_IsActive
@@ -166,6 +182,11 @@ PrefabInstance:
     - {fileID: 3390957799796103318, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
     - {fileID: 4326169736065324038, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
     - {fileID: 8388183656856160463, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
+    - {fileID: 6171738282231219868, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
+    - {fileID: 7375242835334580009, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
+    - {fileID: 3988255556934331856, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
+    - {fileID: 4763269969695313378, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
+    - {fileID: 3717813024510314380, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5e8211567f42ab847a54b42ba5ab2112, type: 3}
 --- !u!1 &628293207204756241 stripped
 GameObject:

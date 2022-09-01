@@ -10,18 +10,37 @@ public class CameraBase : NetworkBehaviour
     protected bool _debugging = false;
 #endif
 
-    protected Transform _cameraTransform;
+    protected Transform _thisTransform;
 
     [SerializeField]
     protected Vector2 _sensitivity = new Vector2(1, 1);
     protected const float _sensitivityMultiplier = 6;
 
+    private float _yMaxRotation = -90;
+    private float _yMinRotation = 90;
+
+    protected virtual float yMaxRotation { get => _yMaxRotation; set => _yMaxRotation = value; }
+    protected virtual float yMinRotation { get => _yMinRotation; set => _yMinRotation = value; }
+
     private float _xRotation;
     private float _yRotation;
 
+    protected float XRotation { get => _xRotation; set => _xRotation = value; }
+    protected float YRotation { get => _yRotation; set => _yRotation = value; }
+
+    [field: Header("Smooth Camera Settings")]
+    [field: SerializeField]
+    protected bool IsSmoothCamera { get; private set; }
+
+    [field: SerializeField]
+    private float SensitivitySmoothness { get; set; } = 2f;
+
     protected virtual void Awake()
     {
-        _cameraTransform = GetComponent<Transform>();
+        _xRotation = transform.rotation.eulerAngles.y;
+        _yRotation = -transform.rotation.eulerAngles.x;
+
+        _thisTransform = GetComponent<Transform>();
 
         UpdateSensitivity();
         SettingsUser.OnSensitivityChanged += UpdateSensitivity;
@@ -29,6 +48,10 @@ public class CameraBase : NetworkBehaviour
 
     protected virtual void LateUpdate()
     {
+        // Toggle Smooth Camera
+        if (Input.GetKeyDown(KeyCode.F2))
+            IsSmoothCamera = !IsSmoothCamera;
+
         HandleRotation();
     }
 
@@ -37,10 +60,11 @@ public class CameraBase : NetworkBehaviour
         _xRotation += PlayerInput.MouseHorizontalAxis * _sensitivity.x;
         _yRotation += PlayerInput.MouseVerticalAxis * _sensitivity.y;
 
-        _yRotation = Mathf.Clamp(_yRotation, -90f, 90f);
+        _yRotation = Mathf.Clamp(_yRotation, yMaxRotation, yMinRotation);
         Quaternion rotation = Quaternion.Euler(-_yRotation, _xRotation, 0);
 
-        _cameraTransform.rotation = rotation;
+        _thisTransform.rotation = !IsSmoothCamera ? rotation :
+            Quaternion.Lerp(_thisTransform.rotation, rotation, Time.deltaTime * SensitivitySmoothness);
     }
 
     private void UpdateSensitivity()

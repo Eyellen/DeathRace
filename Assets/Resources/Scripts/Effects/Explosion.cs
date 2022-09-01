@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class Explosion : MonoBehaviour
+public class Explosion : NetworkBehaviour
 {
     [SerializeField] private float _explosionRadius;
     [SerializeField] private float _explosionForce;
@@ -10,6 +11,7 @@ public class Explosion : MonoBehaviour
     [SerializeField] private float _maxDamage;
 
     #region Properties
+    public Player CausedByPlayer { get; set; }
     public float ExplosionRadius { get { return _explosionRadius; } set { _explosionRadius = value; } }
     public float ExplosionForce { get { return _explosionForce; } set { _explosionForce = value; } }
     public float MinDamage { get { return _minDamage; } set { _minDamage = value; } }
@@ -40,6 +42,7 @@ public class Explosion : MonoBehaviour
         rigidbody.AddExplosionForce(_explosionForce, transform.position, _explosionRadius);
     }
 
+    [ServerCallback]
     private void ApplyDamage(Collider collider)
     {
         if (collider == ExceptionObjectCollider) return;
@@ -54,7 +57,7 @@ public class Explosion : MonoBehaviour
 
         foreach (IDamageable<int> damageable in damageables)
         {
-            damageable.Damage((int)(_maxDamage * coefficient), collider);
+            damageable.Damage((int)(_maxDamage * coefficient), collider, CausedByPlayer);
         }
     }
 }

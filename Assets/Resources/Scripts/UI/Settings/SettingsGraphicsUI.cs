@@ -38,9 +38,18 @@ public class SettingsGraphicsUI : MonoBehaviour
         int currentResolutionIndex = 0;
         for (int i = 0; i < resolutions.Length; i++)
         {
-            if (resolutions[i].width == Screen.currentResolution.width &&
-                resolutions[i].height == Screen.currentResolution.height)
-                currentResolutionIndex = i;
+            if (SettingsGraphics.CurrentResolution != null)
+            {
+                if (resolutions[i].width == SettingsGraphics.CurrentResolution.Width &&
+                    resolutions[i].height == SettingsGraphics.CurrentResolution.Height)
+                    currentResolutionIndex = i;
+            }
+            else
+            {
+                if (resolutions[i].width == Screen.currentResolution.width &&
+                    resolutions[i].height == Screen.currentResolution.height)
+                    currentResolutionIndex = i;
+            }
 
             options.Add($"{resolutions[i].width}x{resolutions[i].height}");
         }

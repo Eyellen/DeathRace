@@ -11,6 +11,10 @@ public class CameraManager : MonoBehaviour
 
     private CameraBase _currentCameraScript;
 
+    public CameraBase CurrentCameraScript { get => _currentCameraScript; }
+
+    private IEnumerator _setFreeCameraCoroutine;
+
     public CameraMode CameraMode
     {
         get => _cameraMode;
@@ -29,18 +33,6 @@ public class CameraManager : MonoBehaviour
         _camera = gameObject;
 
         Initialize();
-    }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            CameraMode = CameraMode.Free;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            CameraMode = CameraMode.ThirdPerson;
-        }
     }
 
     private void CameraModeChanged(CameraMode cameraMode)
@@ -91,5 +83,35 @@ public class CameraManager : MonoBehaviour
                     break;
                 }
         }
+    }
+
+    public void SetThirdPersonCamera(Transform car)
+    {
+        if (_setFreeCameraCoroutine != null)
+            StopCoroutine(_setFreeCameraCoroutine);
+
+        CameraMode = CameraMode.ThirdPerson;
+        ((ThirdPersonCamera)_currentCameraScript).Target = car.transform.Find("CameraAnchor");
+        ((ThirdPersonCamera)_currentCameraScript).TargetRigidbody = car.GetComponent<Rigidbody>();
+    }
+
+    public void SetFreeCamera()
+    {
+        CameraMode = CameraMode.Free;
+    }
+
+    public void SetFreeCamera(float seconds)
+    {
+        if (_setFreeCameraCoroutine != null)
+            StopCoroutine(_setFreeCameraCoroutine);
+
+        _setFreeCameraCoroutine = SetFreeCameraCoroutine(seconds);
+        StartCoroutine(_setFreeCameraCoroutine);
+    }
+
+    private IEnumerator SetFreeCameraCoroutine(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        CameraMode = CameraMode.Free;
     }
 }

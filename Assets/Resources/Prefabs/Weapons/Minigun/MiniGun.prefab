@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5576367049758862708}
-  - component: {fileID: 7187299551496955583}
   m_Layer: 0
   m_Name: MiniGun
   m_TagString: Untagged
@@ -35,23 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7187299551496955583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 860878727297938523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5078c46a1236cde4e9fa261e8d336b88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _minigunScript: {fileID: 0}
-  _shotPoint: {fileID: 6740435417063793444}
-  _shotfireParticles: {fileID: 7933506863390197865}
-  _bulletTracerPrefab: {fileID: 4671762997982137765, guid: cdc0810c1b79f7544a0220c368c4962d, type: 3}
-  _bulletHitEffectPrefab: {fileID: 8727484934170051341, guid: b3cdbeee282f12d4fb619bda0c0fb072, type: 3}
 --- !u!1 &2439263790725017268
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,10 +279,5 @@ PrefabInstance:
 --- !u!4 &4761133522747391093 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7261668132239437172, guid: d77fd4767bfb6c349b3d7c20773182e6, type: 3}
-  m_PrefabInstance: {fileID: 2797950361785602305}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &7933506863390197865 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5245896912973273448, guid: d77fd4767bfb6c349b3d7c20773182e6, type: 3}
   m_PrefabInstance: {fileID: 2797950361785602305}
   m_PrefabAsset: {fileID: 0}
