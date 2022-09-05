@@ -11,8 +11,8 @@ public class RaceModeManager : GameModeBase
     // Completed laps of each player by their car's netId
     private readonly SyncDictionary<CarInfo, int> _playersCompletedLaps = new SyncDictionary<CarInfo, int>();
 
-    [field: SerializeField]
     [field: SyncVar]
+    [field: SerializeField]
     public int LapsToWin { get; private set; } = 1;
     [field: SyncVar]
     public int ActivateTilesOnLap { get; private set; }

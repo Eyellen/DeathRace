@@ -176,7 +176,7 @@ public class SpawnManager : NetworkBehaviour
 
         foreach (var car in cars)
         {
-            NetworkServer.Destroy(car);
+            CmdRemoveCar(car);
         }
     }
 

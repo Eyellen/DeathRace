@@ -3,7 +3,7 @@
  ![DeathRace_00](https://user-images.githubusercontent.com/83500523/184396202-543ee64f-a9e6-4f34-aefd-94a9d6953143.jpg)
 
 # Summary
-This is fan project made by Happiness Dream Team, our very first game.
+This is fan project made by Happiness Dream Team in 3 month, our very first game.
 This is multiplayer racing game with shooter elements. It is base on movie "Death Race".
 The game has only 2 game modes: Race mode and Free mode.
 In Free mode you're free to do whatever you want.

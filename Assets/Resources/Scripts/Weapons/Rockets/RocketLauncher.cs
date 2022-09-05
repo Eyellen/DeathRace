@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class RocketLauncher : NetworkBehaviour
+public class RocketLauncher : NetworkBehaviour, IActivatable
 {
     private Transform _thisTransform;
 
