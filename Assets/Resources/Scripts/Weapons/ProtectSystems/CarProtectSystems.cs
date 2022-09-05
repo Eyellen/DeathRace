@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class CarProtectSystems : NetworkBehaviour
+public class CarProtectSystems : NetworkBehaviour, IActivatable
 {
     [field: Header("Common")]
     [field: SerializeField]

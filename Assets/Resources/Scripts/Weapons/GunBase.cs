@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class GunBase : NetworkBehaviour
+public class GunBase : NetworkBehaviour, IActivatable
 {
 #if UNITY_EDITOR || DEBUG_BUILD
     [Header("Debugging")]
